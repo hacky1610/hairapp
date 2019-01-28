@@ -46,7 +46,12 @@ jobs:
     inputs:
       SonarQube: 'SonarQube Hair'
       projectKey: 'hacky1610_hairapp'
-      extraProperties: 'sonar.verbose=true'
+      extraProperties: |
+     # Additional properties that will be passed to the scanner, 
+     # Put one key=value per line, example:
+     # sonar.exclusions=**/*.bin
+     sonar.projectBaseDir=D:\a\1\
+     sonar.sources=s
 
   - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
     displayName: 'Run Code Analysis'
