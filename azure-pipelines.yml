@@ -22,6 +22,15 @@ jobs:
   - task: NuGetCommand@2
     inputs:
       restoreSolution: '**/*.sln'
+      
+  - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
+    displayName: 'Prepare analysis on SonarQube'
+    inputs:
+      SonarQube: 'SonarQube Hair'
+      projectKey: 'hacky1610_hairapp'
+      extraProperties: |
+         sonar.projectBaseDir=D:\a\1\
+         sonar.sources=s
 
   - task: XamarinAndroid@1
     inputs:
@@ -41,14 +50,7 @@ jobs:
       projects: '**/*test.csproj'
       arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-  - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
-    displayName: 'Prepare analysis on SonarQube'
-    inputs:
-      SonarQube: 'SonarQube Hair'
-      projectKey: 'hacky1610_hairapp'
-      extraProperties: |
-         sonar.projectBaseDir=D:\a\1\
-         sonar.sources=s
+
 
   - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
     displayName: 'Run Code Analysis'
