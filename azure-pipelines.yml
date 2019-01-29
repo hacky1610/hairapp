@@ -57,7 +57,8 @@ jobs:
 
   - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
     displayName: 'Run Code Analysis'
-    extraProperties: |
+    inputs:
+      extraProperties: |
          sonar.projectBaseDir=D:\a\1\
          sonar.login="2f64293c5814c5083e17392c178f0f963ad54ae9"	
 
