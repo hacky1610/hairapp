@@ -31,6 +31,9 @@ jobs:
       extraProperties: |
          sonar.projectBaseDir=D:\a\1\
          sonar.sources=s
+         sonar.organization=hacky1610-github
+         sonar.host.url=https://sonarcloud.io
+         sonar.login=2f64293c5814c5083e17392c178f0f963ad54ae9
 
   - task: XamarinAndroid@1
     inputs:
@@ -54,6 +57,9 @@ jobs:
 
   - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
     displayName: 'Run Code Analysis'
+    extraProperties: |
+         sonar.projectBaseDir=D:\a\1\
+         sonar.login="2f64293c5814c5083e17392c178f0f963ad54ae9"	
 
 
 
