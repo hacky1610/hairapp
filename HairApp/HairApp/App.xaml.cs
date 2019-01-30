@@ -13,7 +13,7 @@ namespace HairApp
         {
             InitializeComponent();
 
-            App.BL = new HairAppBl.HairAppBl(new ConsoleLogger());
+            App.BL = new HairAppBl.HairAppBl(new ConsoleLogger(),Application.Current.Resources);
             var logger = new HairAppBl.ConsoleLogger();
 
             MainPage = new NavigationPage( new MainPage());

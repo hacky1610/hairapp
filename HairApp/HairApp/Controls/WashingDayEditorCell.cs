@@ -11,7 +11,7 @@ namespace HairApp.Controls
     /// </summary>
     public class ListButton : Button { }
 
-    class WashingDayEditorCell : ViewCell
+    public class WashingDayEditorCell : ViewCell
     {
         ImageButton editButton;
         ImageButton deleteButton;
@@ -25,11 +25,13 @@ namespace HairApp.Controls
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> MovedUp;
         public event EventHandler<EventArgs> MovedDown;
+        private HairAppBl.Interfaces.IHairBl mHairBl;
 
         public RoutineDefinition Routine { get; set; }
 
-        public WashingDayEditorCell(RoutineDefinition routine)
+        public WashingDayEditorCell(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairbl)
         {
+            this.mHairBl = hairbl;
             this.Routine = routine;
             text = new Label
             {
@@ -79,10 +81,10 @@ namespace HairApp.Controls
 
             var frame = new Frame
             {
-                Style = (Style)Application.Current.Resources["RoutineFrame"],
+                Style = (Style)hairbl.Resources["RoutineFrame"],
                 Content = new StackLayout
                 {
-                    Style = (Style)Application.Current.Resources["RoutineContent"],
+                    Style = (Style)hairbl.Resources["RoutineContent"],
                     Orientation = StackOrientation.Horizontal,
 
                     Children = {
@@ -105,7 +107,7 @@ namespace HairApp.Controls
         {
             return new ImageButton
             {
-                Style = (Style)Application.Current.Resources["RoutineButton"],
+                Style = (Style)mHairBl.Resources["RoutineButton"],
                 HorizontalOptions = LayoutOptions.EndAndExpand,
                 Source = image
 

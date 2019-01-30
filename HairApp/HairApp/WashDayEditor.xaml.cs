@@ -49,7 +49,7 @@ namespace HairApp
             this.mRoutineListControls.Clear();
             foreach (var r in this.mWashingDayEditorController.GetRoutineDefinitions())
             {
-                var c = new Controls.WashingDayEditorCell(r);
+                var c = new Controls.WashingDayEditorCell(r,App.BL);
                 c.Removed += Routine_Removed;
                 c.MovedDown += Routine_MovedDown;
                 c.MovedUp += Routine_MovedUp;

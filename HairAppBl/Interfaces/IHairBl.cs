@@ -11,5 +11,7 @@ namespace HairAppBl.Interfaces
             get;
             set;
         }
+
+        IDictionary<string, object> Resources { get; set; }
     }
 }
