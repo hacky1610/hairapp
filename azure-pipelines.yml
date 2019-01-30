@@ -24,13 +24,15 @@ jobs:
       restoreSolution: '**/*.sln'
       
   - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
-    displayName: 'Fake'
+    displayName: 'Prepare analysis on SonarQube'
     inputs:
-      SonarQube: 'Foo'
-      projectKey: 'Foo2'
-		 
-  - script: D:\a\_tasks\SonarQubePrepare_15b84ca1-b62f-4a2a-a403-89b77a063157\4.5.1\classic-sonar-scanner-msbuild\SonarScanner.MSBuild.exe begin /k:"hacky1610_hairapp" /d:sonar.organization="hacky1610-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="2f64293c5814c5083e17392c178f0f963ad54ae9"
-    displayName: 'SQ'
+      SonarQube: 'SonarQube Hair'
+      projectKey: 'hacky1610_hairapp'
+      extraProperties: |
+         sonar.projectBaseDir=D:\a\1\
+         sonar.organization=hacky1610-github
+         sonar.host.url=https://sonarcloud.io
+         sonar.login=2f64293c5814c5083e17392c178f0f963ad54ae9
 
   - task: XamarinAndroid@1
     inputs:
@@ -49,9 +51,19 @@ jobs:
       command: test
       projects: '**/*test.csproj'
       arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
-	
-  - script: D:\a\_tasks\SonarQubePrepare_15b84ca1-b62f-4a2a-a403-89b77a063157\4.5.1\classic-sonar-scanner-msbuild\SonarScanner.MSBuild.exe end /d:sonar.login="2f64293c5814c5083e17392c178f0f963ad54ae9"
-    displayName: 'SQ Analyse'
+
+
+
+  - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
+    displayName: 'Run Code Analysis'
+    inputs:
+      extraProperties: |
+         sonar.projectBaseDir=D:\a\1\
+         sonar.login="2f64293c5814c5083e17392c178f0f963ad54ae9"	
+
+
+
+
 
   - task: AndroidSigning@3
     inputs:

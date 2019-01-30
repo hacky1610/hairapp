@@ -6,11 +6,6 @@ namespace HairAppBl.Tests
 {
     public class WashingDayTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void ControllerCanBeLoaded()
         {
