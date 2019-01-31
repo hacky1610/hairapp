@@ -95,6 +95,10 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\HairAppBl\HairAppBl.csproj">
+      <Project>{dc652f9d-f91a-498e-a7ef-b56a619eb8ec}</Project>
+      <Name>HairAppBl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HairApp\HairApp.csproj">
       <Project>{C3B1B2BC-D9F6-4C98-831D-66089A995174}</Project>
       <Name>HairApp</Name>
