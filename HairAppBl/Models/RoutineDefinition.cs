@@ -12,7 +12,7 @@ namespace HairAppBl.Models
         public string Type { get; set; }
         public string Description { get; set; }
 
-        public static List<string> RoutineTypes = new List<string>() {"Prepoo","HotOilTreatment"};
+        public static readonly  List<string> RoutineTypes = new List<string>() {"Prepoo","HotOilTreatment"};
 
 
 
