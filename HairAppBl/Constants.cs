@@ -4,7 +4,9 @@ namespace HairAppBl
 {
     public class Constants
     {
-        public string Foo {
-            get => "Hello"; set { } }
+        public string Foo 
+        {
+            get => "Hello";
+        }
     }
 }
