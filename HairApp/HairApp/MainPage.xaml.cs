@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using HairAppBl;
-using Plugin.Notifications;
 
 namespace HairApp
 {
