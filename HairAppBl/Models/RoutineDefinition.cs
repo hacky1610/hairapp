@@ -12,11 +12,6 @@ namespace HairAppBl.Models
         public string Type { get; set; }
         public string Description { get; set; }
 
-        public static readonly  List<string> RoutineTypes = new List<string>() {"Prepoo","HotOilTreatment"};
-
-
-
-
         public static RoutineDefinition Create(string name, string id, string type, string description)
         {
             var r = new RoutineDefinition();

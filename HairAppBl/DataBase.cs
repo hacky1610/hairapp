@@ -1,18 +1,18 @@
-﻿using SQLite;
+﻿using HairAppBl.Interfaces;
+using SQLite;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace HairAppBl
 {
-    public class DataBase
+    public class DataBase:Interfaces.IDataBase
     {
         static DataBase mInstance;
-        public readonly SQLiteAsyncConnection database;
 
         public DataBase(string dbPath)
         {
-            database = new SQLiteAsyncConnection(dbPath);
+            DB = new SQLiteAsyncConnection(dbPath);
         }
 
         public static DataBase Instance
@@ -22,13 +22,13 @@ namespace HairAppBl
                 if (mInstance == null)
                 {
                     mInstance = new DataBase(
-                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HairDb.db3"));
+                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MyHairDb.db3"));
                 }
                 return mInstance;
             }
         }
 
-
+        public SQLiteAsyncConnection DB { get; set; }
     }
 
 

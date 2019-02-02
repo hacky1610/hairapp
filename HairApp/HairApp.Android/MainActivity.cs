@@ -24,11 +24,11 @@ namespace HairApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-            Remind(DateTime.Now, "Foo", "Bar");
+            InitAlarms(DateTime.Now, "Foo", "Bar");
         }
 
 
-        public void Remind(DateTime dateTime, string title, string message)
+        public void InitAlarms(DateTime dateTime, string title, string message)
         {
             Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
             alarmIntent.PutExtra("message", message);
@@ -36,8 +36,7 @@ namespace HairApp.Droid
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() + 5 * 1000, 5000, pendingIntent);
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() + 1000 * 20, 60000 * 60 * 6, pendingIntent);
+            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() + 2000 , 60001, pendingIntent);
         }
 
         public override void OnBackPressed()

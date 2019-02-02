@@ -23,7 +23,7 @@ namespace HairAppBl.Tests
             dic.Add("RoutineFrame", null); 
             dic.Add("RoutineContent", null);
             dic.Add("RoutineButton", null);
-            var wde = new HairApp.Controls.WashingDayEditorCell(r,hbl);
+            new HairApp.Controls.WashingDayEditorCell(r,hbl);
         }
 
        

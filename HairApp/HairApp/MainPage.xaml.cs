@@ -28,16 +28,8 @@ namespace HairApp
         {
             App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            var t = new HairAppBl.Models.WashingDayInstance();
-            t.ID = "Bat1";
-            t.Comment = "Foo";
-            t.Day = DateTime.Now;
-            var table = new DbTable<HairAppBl.Models.WashingDayInstance>(DataBase.Instance);
-            await table.SaveItemAsync(t);
-
-
-            var t2 = await table.GetItemsAsync();
-
+            var ac = new HairAppBl.Controller.AlarmController( HairAppBl.DataBase.Instance);
+            ac.FillDb();
 
             Navigation.PushAsync(new WashDayEditor());
         }

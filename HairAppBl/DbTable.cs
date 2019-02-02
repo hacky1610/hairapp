@@ -9,9 +9,9 @@ namespace HairAppBl
 {
     public class DbTable<T> where T : new()
     {
-        DataBase mDb;
+        Interfaces.IDataBase mDb;
 
-        public DbTable(DataBase db) 
+        public DbTable(Interfaces.IDataBase db) 
         {
             this.mDb = db;
             CreateTable();
@@ -19,17 +19,17 @@ namespace HairAppBl
 
         private void CreateTable() 
         {
-            mDb.database.CreateTableAsync<T>().Wait();
+            mDb.DB.CreateTableAsync<T>().Wait();
         }
 
         public Task<List<T>> GetItemsAsync()
         {
-            return mDb.database.Table<T>().ToListAsync();
+            return mDb.DB.Table<T>().ToListAsync();
         }
 
         public Task<List<T>> GetItemsNotDoneAsync()
         {
-            return mDb.database.QueryAsync<T>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            return mDb.DB.QueryAsync<T>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
         }
 
         //public Task<T> GetItemAsync(int id)
@@ -47,13 +47,13 @@ namespace HairAppBl
             }
             else
             {*/
-                return mDb.database.InsertAsync(item);
+                return mDb.DB.InsertAsync(item);
             //}
         }
 
         public Task<int> DeleteItemAsync(T item)
         {
-            return mDb.database.DeleteAsync(item);
+            return mDb.DB.DeleteAsync(item);
         }
     }
 

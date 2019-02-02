@@ -7,11 +7,11 @@ namespace HairAppBl.Controller
 {
     public class WashingDayEditorController
     {
-        WashingDayDefinition mWashingDay;
+        readonly WashingDayDefinition mWashingDay;
         public WashingDayEditorController(WashingDayDefinition wd)
         {
             if(wd == null)
-                throw new ArgumentNullException("WashingDay is null");
+                throw new ArgumentNullException("wd");
 
             this.mWashingDay = wd;
             FillUnusedDefitions();
@@ -35,9 +35,7 @@ namespace HairAppBl.Controller
         public void AddRoutine(RoutineDefinition routine)
         {
             if(routine == null)
-                throw new ArgumentNullException("Routine is null");
-            //if(this.mWashingDay.Routines.ContainsKey(routine.ID))
-            //    throw new ArgumentException($"Routine {routine.Name} was already added");
+                throw new ArgumentNullException("routine");
             if(routine.ID == string.Empty)
                 throw new ArgumentException($"Routine ID is empty");
 
@@ -50,8 +48,6 @@ namespace HairAppBl.Controller
         {
             if (routine == null)
                 throw new ArgumentNullException("Routine is null");
-            //if(this.mWashingDay.Routines.ContainsKey(routine.ID))
-            //    throw new ArgumentException($"Routine {routine.Name} was already added");
             if (routine.ID == string.Empty)
                 throw new ArgumentException($"Routine ID is empty");
 

@@ -49,7 +49,7 @@ namespace HairApp.Droid
             notificationManager.CreateNotificationChannel(channel);
         }
 
-        async void  ButtonOnClick(Context context)
+        void  ButtonOnClick(Context context)
         {
 
             // Pass the current button press count value to the next activity:
@@ -69,16 +69,15 @@ namespace HairApp.Droid
             // Create the PendingIntent with the back stack:
             var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
-            var table = new DbTable<HairAppBl.Models.WashingDayInstance>(DataBase.Instance);
 
-
-            var results = await table.GetItemsAsync();
+            var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
+            var res = alarmController.GetWashDay();
 
             // Build the notification:
             var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                           .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
                           .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
-                          .SetContentTitle(results[0].Comment) // Set the title
+                          .SetContentTitle("Foo") // Set the title
                           .SetNumber(1) // Display the count in the Content Info
                           .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
                           .SetContentText($"The button has been clicked {1} times."); // the message to display.

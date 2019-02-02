@@ -10,7 +10,7 @@ namespace HairAppBl.Tests
         public void ControllerCanBeLoaded()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd);
+            new WashingDayEditorController(wd);
             Assert.Pass();
         }
 
@@ -49,7 +49,7 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd);
            
-            Assert.Throws<System.ArgumentNullException>(delegate { wdc.AddRoutine(null); ; });
+            Assert.Throws<System.ArgumentNullException>(delegate { wdc.AddRoutine(null); });
         }
 
         [Test]
@@ -58,7 +58,6 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd);
             var unused = wdc.GetUnusedRoutines();
-            var countBefore = unused.Count;
             var r = unused[0];
             wdc.AddRoutine(r);
             wdc.AddRoutine(unused[0]);
@@ -73,7 +72,6 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd);
             var unused = wdc.GetUnusedRoutines();
-            var countBefore = unused.Count;
             wdc.AddRoutine(unused[0]);
             wdc.AddRoutine(unused[0]);
             var r = unused[0];
