@@ -9,7 +9,7 @@ namespace HairAppBl
 {
     public class DbTable<T> where T : new()
     {
-        Interfaces.IDataBase mDb;
+        readonly Interfaces.IDataBase mDb;
 
         public DbTable(Interfaces.IDataBase db) 
         {

@@ -16,6 +16,7 @@ namespace HairApp.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -24,7 +25,17 @@ namespace HairApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            CheckForNotify(savedInstanceState);
+
             InitAlarms(DateTime.Now, "Foo", "Bar");
+        }
+
+        private void CheckForNotify(Bundle bundle)
+        {
+            var id = Intent.GetStringExtra("washday_id");
+            if (id != null)
+                App.BL.Logger.WriteLine("Notify was clicked");
         }
 
 

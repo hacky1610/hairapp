@@ -54,7 +54,7 @@ namespace HairApp.Droid
 
             // Pass the current button press count value to the next activity:
             var valuesForActivity = new Bundle();
-            valuesForActivity.PutInt(WASHDAY_ID, 2);
+            valuesForActivity.PutString(WASHDAY_ID, "WashDay ID");
 
             // When the user clicks the notification, SecondActivity will start up.
             var resultIntent = new Intent(context, typeof(MainActivity));
@@ -73,7 +73,7 @@ namespace HairApp.Droid
             var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
             var res = alarmController.GetWashDay();
             var title = "Time to care your hair";
-            var text = $"Routine of today {res.Name}";
+            var text = $"Routine of today: Conditioning";
 
             // Build the notification:
             var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -86,7 +86,7 @@ namespace HairApp.Droid
 
             // Finally, publish the notification:
             var notificationManager = NotificationManagerCompat.From(context);
-            notificationManager.Notify(res.Day.Millisecond, builder.Build());
+            notificationManager.Notify(DateTime.Now.Millisecond, builder.Build());
 
             // Increment the button press count:
         }
