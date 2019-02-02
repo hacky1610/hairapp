@@ -17,6 +17,7 @@ namespace HairApp
             var logger = new HairAppBl.ConsoleLogger();
 
             MainPage = new NavigationPage( new MainPage());
+
         }
 
         public static HairAppBl.Interfaces.IHairBl BL { get; set; }

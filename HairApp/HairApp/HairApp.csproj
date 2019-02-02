@@ -31,4 +31,10 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="WashDayInstance.xaml.cs">
+      <DependentUpon>WashDayInstance.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

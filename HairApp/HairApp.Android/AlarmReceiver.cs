@@ -20,7 +20,7 @@ namespace HairApp.Droid
     {
         static readonly int NOTIFICATION_ID = 1000;
         static readonly string CHANNEL_ID = "location_notification";
-        internal static readonly string COUNT_KEY = "count";
+        internal static readonly string WASHDAY_ID = "washday_id";
 
         public override void OnReceive(Context context, Intent intent)
         {
@@ -54,7 +54,7 @@ namespace HairApp.Droid
 
             // Pass the current button press count value to the next activity:
             var valuesForActivity = new Bundle();
-            valuesForActivity.PutInt(COUNT_KEY, 2);
+            valuesForActivity.PutInt(WASHDAY_ID, 2);
 
             // When the user clicks the notification, SecondActivity will start up.
             var resultIntent = new Intent(context, typeof(MainActivity));
@@ -72,19 +72,21 @@ namespace HairApp.Droid
 
             var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
             var res = alarmController.GetWashDay();
+            var title = "Time to care your hair";
+            var text = $"Routine of today {res.Name}";
 
             // Build the notification:
             var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                           .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
                           .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
-                          .SetContentTitle("Foo") // Set the title
+                          .SetContentTitle(title) // Set the title
                           .SetNumber(1) // Display the count in the Content Info
                           .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
-                          .SetContentText($"The button has been clicked {1} times."); // the message to display.
+                          .SetContentText(text); // the message to display.
 
             // Finally, publish the notification:
             var notificationManager = NotificationManagerCompat.From(context);
-            notificationManager.Notify(NOTIFICATION_ID, builder.Build());
+            notificationManager.Notify(res.Day.Millisecond, builder.Build());
 
             // Increment the button press count:
         }

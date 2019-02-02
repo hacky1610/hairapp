@@ -33,6 +33,7 @@ namespace HairAppBl.Controller
             var table = new DbTable<Models.WashingDayInstance>(mDB);
 
             var t = new Models.WashingDayInstance();
+            t.Name = "Conditioning";
             t.ID = "2";
             t.Comment = "A new comment";
             t.Day = DateTime.Now;

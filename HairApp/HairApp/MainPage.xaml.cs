@@ -17,19 +17,23 @@ namespace HairApp
             InitializeComponent();
             
             ChangeScreen.Clicked += ChangeScreen_Clicked;
+            Init.Clicked += Init_Clicked;
 
-            Application.Current.Properties["Foo"] = "Bar";
+            
 
-      
+        }
 
+        private void Init_Clicked(object sender, EventArgs e)
+        {
+            var ac = new HairAppBl.Controller.AlarmController(HairAppBl.DataBase.Instance);
+            ac.FillDb();
         }
 
         private async void ChangeScreen_Clicked(object sender, EventArgs e)
         {
             App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            var ac = new HairAppBl.Controller.AlarmController( HairAppBl.DataBase.Instance);
-            ac.FillDb();
+      
 
             Navigation.PushAsync(new WashDayEditor());
         }
