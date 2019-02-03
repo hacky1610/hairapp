@@ -52,9 +52,17 @@ namespace HairApp.Droid
         void  ButtonOnClick(Context context)
         {
 
+            var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
+            var res = alarmController.GetWashDay();
+            var title = "Time to care your hair";
+            var text = $"Routine of today: Conditioning";
+
+            if (res == null)
+                return;
+
             // Pass the current button press count value to the next activity:
             var valuesForActivity = new Bundle();
-            valuesForActivity.PutString(WASHDAY_ID, "WashDay ID");
+            valuesForActivity.PutString(WASHDAY_ID, res.WashDayID);
 
             // When the user clicks the notification, SecondActivity will start up.
             var resultIntent = new Intent(context, typeof(MainActivity));
@@ -70,10 +78,7 @@ namespace HairApp.Droid
             var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
 
-            var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
-            var res = alarmController.GetWashDay();
-            var title = "Time to care your hair";
-            var text = $"Routine of today: Conditioning";
+            
 
             // Build the notification:
             var builder = new NotificationCompat.Builder(context, CHANNEL_ID)

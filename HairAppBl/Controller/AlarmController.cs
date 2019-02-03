@@ -14,9 +14,9 @@ namespace HairAppBl.Controller
          
         }
 
-        public  Models.WashingDayInstance GetWashDay()
+        public  Models.WashingDayDBInstance GetWashDay()
         {
-            var table = new DbTable<Models.WashingDayInstance>(mDB);
+            var table = new DbTable<Models.WashingDayDBInstance>(mDB);
             var allDays = table.GetItemsAsync();
             allDays.Wait();
             var today = DateTime.Now;

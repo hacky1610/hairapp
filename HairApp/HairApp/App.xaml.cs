@@ -24,6 +24,11 @@ namespace HairApp
 
         }
 
+        public INavigation GetNavigation()
+        {
+            return MainPage.Navigation;
+        }
+
         public static HairAppBl.Interfaces.IHairBl BL { get; set; }
         public static HairAppBl.Controller.MainSessionController MainSession { get; set; }
 

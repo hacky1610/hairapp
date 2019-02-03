@@ -14,6 +14,7 @@ namespace HairApp.Droid
     [Activity(Label = "HairApp", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        App myApp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
 
@@ -24,7 +25,8 @@ namespace HairApp.Droid
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            myApp = new App();
+            LoadApplication(myApp);
 
             CheckForNotify(savedInstanceState);
 
@@ -35,7 +37,10 @@ namespace HairApp.Droid
         {
             var id = Intent.GetStringExtra("washday_id");
             if (id != null)
-                App.BL.Logger.WriteLine("Notify was clicked");
+            {
+                var day =  App.MainSession.GetWashingDayById(id);
+                myApp.GetNavigation().PushAsync(new WashDayInstance(day));
+            }
         }
 
 

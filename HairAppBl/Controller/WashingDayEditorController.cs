@@ -100,19 +100,38 @@ namespace HairAppBl.Controller
         public void SaveInstances()
         {
 
-            var instances = new List<WashingDayInstance>
+            var instances = new List<WashingDayDBInstance>
             {
-                new WashingDayInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
-                new WashingDayInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
-                new WashingDayInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now)
+                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
+                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
+                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now)
             };
 
-            var table = new DbTable<WashingDayInstance>(DataBase.Instance);
+            var table = new DbTable<WashingDayDBInstance>(DataBase.Instance);
             table.ExecQuery($"DELETE * FROM WashingDayInstance WHERE WashDayID = '{GetModel().ID}'").Wait();
 
             table.SaveItemsAsync(instances).Wait();
 
 
+        }
+
+        private List<RoutineInstance> GetRoutineInstances()
+        {
+            var routines = new List<RoutineInstance>();
+            foreach(var routine in GetRoutineDefinitions())
+            {
+                var r = new RoutineInstance();
+                r.Name = routine.Name;
+                routines.Add(r);
+            }
+            return routines;
+        }
+
+        public WashingDayInstance GetWashingDayInstance()
+        {
+            var instance = new WashingDayInstance();
+
+            return instance;
         }
 
 

@@ -18,15 +18,12 @@ namespace HairApp
 	{
         private WashingDayEditorController mWashingDayEditorController;
         private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
-		public WashDayInstance()
+		public WashDayInstance(WashingDayDefinition def)
 		{
 			InitializeComponent ();
-
-            
        
-            var washingDayDefinition = new WashingDayDefinition();
+            var washingDayDefinition = def;
             this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition,App.MainSession.GetAllDefinitions());
-            //RefreshList();
         }
 
         

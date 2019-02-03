@@ -51,6 +51,16 @@ namespace HairAppBl.Controller
             return MainSession.WashingDays;
         }
 
+        public WashingDayDefinition GetWashingDayById(string id)
+        {
+            foreach(var day in MainSession.WashingDays)
+            {
+                if (day.ID == id)
+                    return day;
+            }
+            return null;
+        }
+
         public void Init()
         {
             MainSession = new MainSession();
