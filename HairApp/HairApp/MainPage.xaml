@@ -11,7 +11,11 @@
            VerticalOptions="CenterAndExpand" />
         <Button Text="Init" x:Name="Init"/>
 
-       <Button Text="ChangeScreen" x:Name="ChangeScreen"/>
+        <StackLayout HeightRequest="120">
+            <ImageButton  x:Name="ChangeScreen"/>
+            <ImageButton  x:Name="OpenWashDayOverview"  />
+
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

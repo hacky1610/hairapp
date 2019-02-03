@@ -5,8 +5,15 @@
     <StackLayout Style="{StaticResource PageContent}">
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />
-            <StackLayout x:Name="RoutineList">
-            </StackLayout>
-            <Button Text="Add routine" x:Name="AddRoutine"/>
+        <Entry x:Name="WashDayNameEntry"></Entry>
+        <StackLayout x:Name="RoutineList">
+        </StackLayout>
+        <Button Text="Add routine" x:Name="AddRoutine"/>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" x:Name="CancelButton"/>
+            <Button Text="OK" x:Name="OKButton"/>
+        </StackLayout>
+        
         </StackLayout>
 </ContentPage>

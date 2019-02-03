@@ -8,15 +8,14 @@ namespace HairAppBl.Models
     {
         public string Name { get; set; }
         public string ID { get; set; }
-        public List<RoutineDefinition> Routines { get; set; }
+        public List<string> Routines { get; set; }
         public DateTime Created { get; set; }
 
-        public List<RoutineDefinition> UnusedDefitions { get; set; }
 
         public WashingDayDefinition()
         {
-            Routines = new List<RoutineDefinition>();
-            UnusedDefitions = new List<RoutineDefinition>();
+            Routines = new List<string>();
+            Name = "Care day";
  
         }
 

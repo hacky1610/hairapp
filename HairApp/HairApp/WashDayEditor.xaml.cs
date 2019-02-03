@@ -18,16 +18,37 @@ namespace HairApp
 	{
         private WashingDayEditorController mWashingDayEditorController;
         private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
-		public WashDayEditor ()
+        public event EventHandler<WashDayEditorEventArgs> OkClicked;
+        private Boolean mCreate; 
+
+
+        public WashDayEditor (WashingDayDefinition def,Boolean create)
 		{
 			InitializeComponent ();
        
-            var washingDayDefinition = new WashingDayDefinition();
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition);
+            var washingDayDefinition =def;
+            this.mCreate = create;
+            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions());
             RefreshList();
+
+            this.WashDayNameEntry.Text = def.Name;
             this.AddRoutine.Clicked += AddRoutine_Clicked;
+            this.OKButton.Clicked += OKButton_Clicked;
+            this.CancelButton.Clicked += CancelButton_Clicked;
         }
 
+        private void CancelButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+
+        }
+
+        private void OKButton_Clicked(object sender, EventArgs e)
+        {
+            mWashingDayEditorController.SaveInstances();
+            Navigation.PopAsync();
+            OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
+        }
 
         private void AddRoutine_Clicked(object sender, EventArgs e)
         {
@@ -47,7 +68,7 @@ namespace HairApp
         {
             this.RoutineList.Children.Clear();
             this.mRoutineListControls.Clear();
-            foreach (var r in this.mWashingDayEditorController.GetRoutineDefinitions())
+            foreach (var r in mWashingDayEditorController.GetRoutineDefinitions())
             {
                 var c = new Controls.WashingDayEditorCell(r,App.BL);
                 c.Removed += Routine_Removed;
@@ -90,6 +111,18 @@ namespace HairApp
             var item = ((WashingDayEditorCell)sender);
             this.mWashingDayEditorController.RemoveRoutine(item.Routine);
             RefreshList();
+        }
+
+        public class WashDayEditorEventArgs:EventArgs
+        {
+            public Boolean Created { get; set; }
+            public WashingDayDefinition Definition { get; set; }
+
+            public WashDayEditorEventArgs(WashingDayDefinition def, Boolean create)
+            {
+                this.Definition = def;
+                this.Created = create;
+            }
         }
     }
 }

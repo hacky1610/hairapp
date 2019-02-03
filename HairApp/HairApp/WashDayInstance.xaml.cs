@@ -25,7 +25,7 @@ namespace HairApp
             
        
             var washingDayDefinition = new WashingDayDefinition();
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition);
+            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition,App.MainSession.GetAllDefinitions());
             //RefreshList();
         }
 

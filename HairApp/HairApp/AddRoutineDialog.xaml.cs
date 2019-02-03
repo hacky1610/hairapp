@@ -26,7 +26,7 @@ namespace HairApp
             this.mWashingDayEditorController = controller;
             InitializeComponent();
             var list = new List<RoutineCellObject>();
-            foreach(var routine in controller.GetUnusedRoutines())
+            foreach(var routine in controller.GetUnusedRoutineDefinitions())
             {
                 var routineObject = new RoutineCellObject(routine);
                 routineObject.Selected += RoutineObject_Selected;

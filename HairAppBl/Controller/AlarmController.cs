@@ -27,25 +27,5 @@ namespace HairAppBl.Controller
             }
             return null;
         }
-
-        public void FillDb()
-        {
-            var table = new DbTable<Models.WashingDayInstance>(mDB);
-
-            var t = new Models.WashingDayInstance();
-            t.Name = "Conditioning";
-            t.ID = "2";
-            t.Comment = "A new comment";
-            t.Day = DateTime.Now;
-
-            table.SaveItemAsync(t).Wait();
-
-            var t1 = new Models.WashingDayInstance();
-            t1.ID = "3";
-            t1.Comment = "A new comment";
-            t1.Day = DateTime.Now.AddDays(2);
-            table.SaveItemAsync(t1).Wait();
-
-        }
     }
 }

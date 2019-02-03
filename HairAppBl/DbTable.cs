@@ -32,23 +32,28 @@ namespace HairAppBl
             return mDb.DB.QueryAsync<T>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
         }
 
-        //public Task<T> GetItemAsync(int id)
-        //{
-        //    return mDb.database.Table<T>().Where(i => i.ID == id).FirstOrDefaultAsync();
-        //}
+        public AsyncTableQuery<T> GetFoo()
+        {
+            return mDb.DB.Table<T>();
+        }
 
-  
+        public Task<List<T>> ExecQuery(string queryString)
+        {
+            return mDb.DB.QueryAsync<T>(queryString);
+        }
+
+   
+
+
 
         public Task<int> SaveItemAsync(T item)
         {
-           /* if (item.ID != 0)
-            {
-                return database.UpdateAsync(item);
-            }
-            else
-            {*/
-                return mDb.DB.InsertAsync(item);
-            //}
+            return mDb.DB.InsertAsync(item);
+        }
+
+        public Task<int> SaveItemsAsync(List<T> items)
+        {
+            return mDb.DB.InsertAllAsync(items);
         }
 
         public Task<int> DeleteItemAsync(T item)

@@ -14,6 +14,10 @@ namespace HairApp
             InitializeComponent();
 
             App.BL = new HairAppBl.HairAppBl(new ConsoleLogger(),Application.Current.Resources);
+            App.MainSession = new HairAppBl.Controller.MainSessionController(Current.Properties);
+            HairAppBl.Controller.Session.Register(App.MainSession);
+            HairAppBl.Controller.Session.Restore();
+
             var logger = new HairAppBl.ConsoleLogger();
 
             MainPage = new NavigationPage( new MainPage());
@@ -21,15 +25,16 @@ namespace HairApp
         }
 
         public static HairAppBl.Interfaces.IHairBl BL { get; set; }
+        public static HairAppBl.Controller.MainSessionController MainSession { get; set; }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+    
         }
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            HairAppBl.Controller.Session.Save();
         }
 
         protected override void OnResume()
