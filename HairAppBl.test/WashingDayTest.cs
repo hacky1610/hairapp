@@ -11,12 +11,12 @@ namespace HairAppBl.Tests
         public void Setup()
         {
             allRoutines = new System.Collections.Generic.List<RoutineDefinition>();
-            allRoutines.Add(RoutineDefinition.Create("Wash", "wash", "", "));
-            allRoutines.Add(RoutineDefinition.Create("Creme", "Creme", "", "));
-            allRoutines.Add(RoutineDefinition.Create("Cut", "cut", "", "));
-            allRoutines.Add(RoutineDefinition.Create("DoSomething", "dosomething", "", "));
-            allRoutines.Add(RoutineDefinition.Create("Foo", "bar", "", "));
-            allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", "));
+            allRoutines.Add(RoutineDefinition.Create("Wash", "wash", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Creme", "Creme", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Cut", "cut", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("DoSomething", "dosomething", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Foo", "bar", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", ""));
         }
 
         [Test]
