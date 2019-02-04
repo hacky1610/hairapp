@@ -41,6 +41,19 @@ namespace HairAppBl.Tests
             var r = allRoutines[0];
             wdc.AddRoutine(r);
             Assert.True(wdc.GetRoutineDefinitions().Contains(r));
+            Assert.False(wdc.GetUnusedRoutineDefinitions().Contains(r));
+        }
+        
+         [Test]
+        public void RoutineCanBeRemoved()
+        {
+             WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            var r = allRoutines[0];
+            wdc.AddRoutine(r);
+            wdc.RemoveRoutine(r);
+            Assert.False(wdc.GetRoutineDefinitions().Contains(r));
+            Assert.True(wdc.GetUnusedRoutineDefinitions().Contains(r));
         }
 
      
