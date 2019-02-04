@@ -66,12 +66,18 @@ namespace HairAppBl.Tests
             wdc.AddRoutine(allRoutines[2]);
             wdc.AddRoutine(allRoutines[4]);
             wdc.AddRoutine(allRoutines[3]);
+            
+            string sortOrder = "";
+            foreach(var item in wdc.GetRoutineDefinitions())
+            {
+                sortOrder += item.Name;
+            }
 
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], allRoutines[5]);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], allRoutines[1]);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[2], allRoutines[2]);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[3], allRoutines[4]);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[4], allRoutines[3]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], allRoutines[5],sortOrder);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], allRoutines[1],sortOrder);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[2], allRoutines[2],sortOrder);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[3], allRoutines[4],sortOrder);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[4], allRoutines[3],sortOrder);
         }
 
      
