@@ -78,12 +78,21 @@ namespace HairAppBl.Controller
         public List<RoutineDefinition> GetRoutineDefinitions()
         {
             var tempList = new List<RoutineDefinition>();
-            foreach(var r in mAllRoutines)
+            foreach(var r in this.mWashingDay.Routines)
             {
-                if (this.mWashingDay.Routines.Contains(r.ID))
-                    tempList.Add(r);
+                 tempList.Add(GetRoutineById(r));
             }
             return tempList;
+        }
+
+        private RoutineDefinition GetRoutineById(string id )
+        {
+            foreach (var r in this.mAllRoutines)
+            {
+                if (r.ID == id)
+                    return r;
+            }
+            return null;
         }
 
         public List<RoutineDefinition> GetUnusedRoutineDefinitions()
