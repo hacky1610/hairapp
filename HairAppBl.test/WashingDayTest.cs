@@ -56,27 +56,24 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
             var unused = wdc.GetUnusedRoutineDefinitions();
-            var r = unused[0];
-            wdc.AddRoutine(r);
             wdc.AddRoutine(unused[0]);
-            wdc.AddRoutine(unused[0]);
-            wdc.MoveDown(r);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], r);
+            wdc.AddRoutine(unused[1]);
+            wdc.AddRoutine(unused[2]);
+            wdc.MoveDown(unused[0]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], unused[0]);
         }
 
         [Test]
         public void MoveUp()
         {
-            WashingDayDefinition wd = new WashingDayDefinition();
+                       WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
-            var unused = allRoutines;
+            var unused = wdc.GetUnusedRoutineDefinitions();
             wdc.AddRoutine(unused[0]);
-            wdc.AddRoutine(unused[0]);
-            var r = unused[0];
-
-            wdc.AddRoutine(r);
-            wdc.MoveUp(r);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], r);
+            wdc.AddRoutine(unused[1]);
+            wdc.AddRoutine(unused[2]);
+            wdc.MoveUp(unused[1]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], unused[0]);
         }
 
 
