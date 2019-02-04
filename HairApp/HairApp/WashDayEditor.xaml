@@ -6,6 +6,14 @@
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />
         <Entry x:Name="WashDayNameEntry"></Entry>
+        <StackLayout Orientation="Horizontal">
+            <Label>Every</Label>
+            <Entry></Entry>
+            <Label>Weeks</Label>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label>Every</Label>
+        </StackLayout>
         <StackLayout x:Name="RoutineList">
         </StackLayout>
         <Button Text="Add routine" x:Name="AddRoutine"/>

@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using HairAppBl.Models;
 using HairAppBl.Controller;
+using System;
+using System.Collections.Generic;
 
 namespace HairAppBl.Tests
 {
@@ -117,6 +119,103 @@ namespace HairAppBl.Tests
             wdc.MoveUp(unused[1]);
             Assert.AreEqual(wdc.GetRoutineDefinitions()[0], unused[1]);
         }
+
+        [Test]
+        public void GetNextWeekDay_OneDayBefore()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            var d = new DateTime(2019, 2, 4);
+            var res = wdc.GetNextWeekDay(d, DayOfWeek.Tuesday);
+            Assert.AreEqual(res.Day, 5);
+        }
+
+        [Test]
+        public void GetNextWeekDay_CurrentDay()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            var d = new DateTime(2019, 2, 4);
+            var res = wdc.GetNextWeekDay(d, DayOfWeek.Monday);
+            Assert.AreEqual(res.Day, 4);
+        }
+
+        [Test]
+        public void GetScheduledDays_CheckDefault()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            var res = wdc.GetScheduledDays();
+
+            Assert.AreEqual(res[0].DayOfWeek, DayOfWeek.Monday);
+            Assert.AreEqual(res[1].DayOfWeek, DayOfWeek.Monday);
+        }
+
+        [Test]
+        public void GetScheduledDays_CheckOtherWeekDay()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
+            {
+                DayOfWeek.Sunday
+            };
+      
+            var res = wdc.GetScheduledDays();
+
+            Assert.AreEqual(res[0].DayOfWeek, DayOfWeek.Sunday);
+            Assert.AreEqual(res[1].DayOfWeek, DayOfWeek.Sunday);
+        }
+
+        [Test]
+        public void GetScheduledDays_Period2()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            wdc.GetModel().Scheduled.WeeklyPeriod.Period = 2;
+            wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 5);
+
+            var res = wdc.GetScheduledDays();
+
+            Assert.True(WashingDayEditorController.IsSameDay(res[0],new DateTime(2019,2,11)));
+            Assert.True(WashingDayEditorController.IsSameDay(res[1],new DateTime(2019,2,25)));
+        }
+
+        [Test]
+        public void GetScheduledDays_Period2_twoDays()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
+            {
+                DayOfWeek.Sunday,
+                DayOfWeek.Thursday
+            };
+            wdc.GetModel().Scheduled.WeeklyPeriod.Period = 2;
+            wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 5);
+
+            var res = wdc.GetScheduledDays();
+
+
+            Assert.True(ContainsDay(res, new DateTime(2019, 2, 7)));
+            Assert.True(ContainsDay(res, new DateTime(2019, 2, 10)));
+            Assert.True(ContainsDay(res, new DateTime(2019, 2,21)));
+            Assert.True(ContainsDay(res, new DateTime(2019, 2, 24)));
+        }
+
+        private bool ContainsDay(List<DateTime> days, DateTime day)
+        {
+            foreach(var d in days)
+            {
+                if (WashingDayEditorController.IsSameDay(d, day))
+                    return true;
+            }
+            return false;
+        }
+
+
+
+
 
 
     }

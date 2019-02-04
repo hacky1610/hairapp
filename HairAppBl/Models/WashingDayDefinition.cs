@@ -10,12 +10,15 @@ namespace HairAppBl.Models
         public string ID { get; set; }
         public List<string> Routines { get; set; }
         public DateTime Created { get; set; }
+        public ScheduleDefinition Scheduled { get; set; }
 
 
         public WashingDayDefinition()
         {
             Routines = new List<string>();
+            Created = DateTime.Now;
             Name = "Care day";
+            Scheduled = new ScheduleDefinition();
  
         }
 
