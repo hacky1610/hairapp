@@ -55,6 +55,24 @@ namespace HairAppBl.Tests
             Assert.False(wdc.GetRoutineDefinitions().Contains(r));
             Assert.True(wdc.GetUnusedRoutineDefinitions().Contains(r));
         }
+        
+         [Test]
+        public void RoutineCanBeAdded_Order_is_correct()
+        {
+             WashingDayDefinition wd = new WashingDayDefinition();
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            wdc.AddRoutine(allRoutines[5]);
+            wdc.AddRoutine(allRoutines[1]);
+            wdc.AddRoutine(allRoutines[2]);
+            wdc.AddRoutine(allRoutines[4]);
+            wdc.AddRoutine(allRoutines[3]);
+
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], allRoutines[5]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[1], allRoutines[1]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[2], allRoutines[2]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[3], allRoutines[4]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[4], allRoutines[3]);
+        }
 
      
 
@@ -91,7 +109,7 @@ namespace HairAppBl.Tests
             wdc.AddRoutine(unused[1]);
             wdc.AddRoutine(unused[2]);
             wdc.MoveUp(unused[1]);
-            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], unused[0]);
+            Assert.AreEqual(wdc.GetRoutineDefinitions()[0], unused[1]);
         }
 
 
