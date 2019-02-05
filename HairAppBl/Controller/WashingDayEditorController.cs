@@ -17,7 +17,7 @@ namespace HairAppBl.Controller
 
             this.mWashingDay = wd;
             this.mAllRoutines = allroutines;
-            this.mScheduleController = new ScheduleController(wd.Schedule);
+            this.mScheduleController = new ScheduleController(wd.Scheduled);
         }
 
         public WashingDayDefinition GetModel()
