@@ -149,5 +149,12 @@ namespace HairAppBl.Controller
         {
             return mScheduleController.GetScheduledDays();
         }
+        
+        
+        public ScheduleController  GetScheduleController()
+        {
+            return mScheduleController;
+        }
+          
     }
 }
