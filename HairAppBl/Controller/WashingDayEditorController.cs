@@ -108,20 +108,13 @@ namespace HairAppBl.Controller
             return tempList;
         }
 
-        public void SaveInstances()
+        public void SaveInstances(string id)
         {
 
-            var instances = new List<WashingDayDBInstance>
-            {
-                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
-                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now),
-                new WashingDayDBInstance(GetModel().ID, Guid.NewGuid().ToString(), DateTime.Now)
-            };
-
-            var table = new DbTable<WashingDayDBInstance>(DataBase.Instance);
-            table.ExecQuery($"DELETE * FROM WashingDayInstance WHERE WashDayID = '{GetModel().ID}'").Wait();
-
-            table.SaveItemsAsync(instances).Wait();
+            var table = new DbTable<ScheduleSqlDefinition>(DataBase.Instance);
+            //table.ExecQuery($"DELETE * FROM ScheduleSqlDefinition WHERE ID = '{id}'").Wait();
+            var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id);
+           table.SaveItemAsync(sqlItem).Wait();
 
 
         }

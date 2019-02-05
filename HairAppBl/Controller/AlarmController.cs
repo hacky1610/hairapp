@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HairAppBl.Interfaces;
+using HairAppBl.Models;
 
 namespace HairAppBl.Controller
 {
@@ -14,18 +15,23 @@ namespace HairAppBl.Controller
          
         }
 
-        public  Models.WashingDayDBInstance GetWashDay()
+        public  List<string> GetWashDays()
         {
-            var table = new DbTable<Models.WashingDayDBInstance>(mDB);
-            var allDays = table.GetItemsAsync();
-            allDays.Wait();
-            var today = DateTime.Now;
-            foreach(var day in allDays.Result)
+            List<string> wdId = new List<string>();
+            var table = new DbTable<ScheduleSqlDefinition>(DataBase.Instance);
+            var allSchedules = table.GetItemsAsync();
+            allSchedules.Wait();
+            foreach(var schedule in allSchedules.Result)
             {
-                if (day.Day.Year == today.Year && day.Day.Month == today.Month && day.Day.Day == today.Day)
-                    return day;
+                var s = schedule.GetDefinition();
+                var controller = new ScheduleController(s);
+                if(controller.IsCareDay(DateTime.Now))
+                {
+                    wdId.Add(schedule.ID);
+                }
             }
-            return null;
+            return wdId;
+           
         }
     }
 }

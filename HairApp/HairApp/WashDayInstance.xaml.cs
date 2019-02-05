@@ -17,13 +17,14 @@ namespace HairApp
 	public partial class WashDayInstance : ContentPage
 	{
         private WashingDayEditorController mWashingDayEditorController;
-        private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
-		public WashDayInstance(WashingDayDefinition def)
+        private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
+        private HairAppBl.Models.WashingDayInstance mInstance;
+        public WashDayInstance(HairAppBl.Models.WashingDayInstance instance)
 		{
 			InitializeComponent ();
        
-            var washingDayDefinition = def;
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition,App.MainSession.GetAllDefinitions());
+            mInstance =  instance;
+            RefreshList();
         }
 
         
@@ -32,9 +33,9 @@ namespace HairApp
         {
             this.RoutineList.Children.Clear();
             this.mRoutineListControls.Clear();
-            foreach (var r in this.mWashingDayEditorController.GetRoutineDefinitions())
+            foreach (var r in mInstance.Routines)
             {
-                var c = new Controls.WashingDayEditorCell(r,App.BL);
+                var c = new Controls.RoutineInstanceCell(r,App.BL);
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
             }

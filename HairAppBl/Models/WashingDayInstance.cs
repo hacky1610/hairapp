@@ -7,16 +7,19 @@ namespace HairAppBl.Models
     public class WashingDayInstance : WashingDayDBInstance
     {
 
-        readonly List<RoutineInstance> Routines;
+        public readonly List<RoutineInstance> Routines;
         public WashingDayInstance():base()
         {
             Routines = new List<RoutineInstance>();
         }
 
-        public WashingDayInstance(string wdID, string id,DateTime date, List<RoutineInstance> routines):base(wdID,id,date)
+        public WashingDayInstance(string wdID, string id,DateTime date, List<RoutineDefinition> routines):base(wdID,id,date)
         {
-            
-            Routines = routines;
+            Routines = new List<RoutineInstance>();
+            foreach (var r in routines)
+            {
+                Routines.Add(new RoutineInstance(r.Name));
+            }
         }
 
 

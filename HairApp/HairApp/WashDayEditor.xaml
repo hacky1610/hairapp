@@ -9,11 +9,17 @@
         <Entry x:Name="WashDayNameEntry"></Entry>
         <StackLayout Orientation="Horizontal">
             <Label>Every</Label>
-            <Entry></Entry>
+            <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
             <Label>Weeks</Label>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <controls:CheckBox Checked="True" DefaultText="Foo"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Monday" x:Name="mCheckBoxMonday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Tuesday" x:Name="mCheckBoxTuesday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Wednesday" x:Name="mCheckBoxWednesday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Thursday" x:Name="mCheckBoxThursday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Friday" x:Name="mCheckBoxFriday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Saturday" x:Name="mCheckBoxSaturday"></controls:CheckBox>
+            <controls:CheckBox Checked="False" DefaultText="Sunday" x:Name="mCheckBoxSunday"></controls:CheckBox>
         </StackLayout>
         <StackLayout x:Name="RoutineList">
         </StackLayout>
