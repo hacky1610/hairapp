@@ -197,21 +197,12 @@ namespace HairAppBl.Tests
             var res = wdc.GetScheduledDays();
 
 
-            Assert.True(ContainsDay(res, new DateTime(2019, 2, 7)));
-            Assert.True(ContainsDay(res, new DateTime(2019, 2, 10)));
-            Assert.True(ContainsDay(res, new DateTime(2019, 2,21)));
-            Assert.True(ContainsDay(res, new DateTime(2019, 2, 24)));
+            Assert.True(ScheduleController.ContainsDay(res, new DateTime(2019, 2, 7)));
+            Assert.True(ScheduleController.ContainsDay(res, new DateTime(2019, 2, 10)));
+            Assert.True(ScheduleController.ContainsDay(res, new DateTime(2019, 2,21)));
+            Assert.True(ScheduleController.ContainsDay(res, new DateTime(2019, 2, 24)));
         }
 
-        private bool ContainsDay(List<DateTime> days, DateTime day)
-        {
-            foreach(var d in days)
-            {
-                if (ScheduleController.IsSameDay(d, day))
-                    return true;
-            }
-            return false;
-        }
 
 
 
