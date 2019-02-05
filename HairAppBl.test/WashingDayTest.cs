@@ -164,7 +164,7 @@ namespace HairAppBl.Tests
             var res = wdc.GetScheduledDays();
 
             Assert.AreEqual(DayOfWeek.Sunday, res[0].DayOfWeek);
-            Assert.AreEqualDayOfWeek.Sunday , res[1].DayOfWeek );
+            Assert.AreEqual(DayOfWeek.Sunday, res[1].DayOfWeek);
         }
 
         [Test]
