@@ -7,7 +7,7 @@ namespace HairAppBl.Controller
 {
     public class AlarmController
     {
-        private IDataBase mDB; 
+        private readonly IDataBase mDB; 
         public AlarmController(IDataBase dataBase)
         {
             this.mDB = dataBase;

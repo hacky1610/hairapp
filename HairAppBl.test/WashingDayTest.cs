@@ -127,7 +127,7 @@ namespace HairAppBl.Tests
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
             var res = wdc.GetNextWeekDay(d, DayOfWeek.Tuesday);
-            Assert.AreEqual(res.Day, 5);
+            Assert.AreEqual(5, res.Day);
         }
 
         [Test]
@@ -137,7 +137,7 @@ namespace HairAppBl.Tests
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
             var res = wdc.GetNextWeekDay(d, DayOfWeek.Monday);
-            Assert.AreEqual(res.Day, 4);
+            Assert.AreEqual(4, res.Day);
         }
 
         [Test]
@@ -147,8 +147,8 @@ namespace HairAppBl.Tests
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var res = wdc.GetScheduledDays();
 
-            Assert.AreEqual(res[0].DayOfWeek, DayOfWeek.Monday);
-            Assert.AreEqual(res[1].DayOfWeek, DayOfWeek.Monday);
+            Assert.AreEqual(DayOfWeek.Monday, res[0].DayOfWeek );
+            Assert.AreEqual(DayOfWeek.Monday, res[1].DayOfWeek);
         }
 
         [Test]
@@ -163,8 +163,8 @@ namespace HairAppBl.Tests
       
             var res = wdc.GetScheduledDays();
 
-            Assert.AreEqual(res[0].DayOfWeek, DayOfWeek.Sunday);
-            Assert.AreEqual(res[1].DayOfWeek, DayOfWeek.Sunday);
+            Assert.AreEqual(DayOfWeek.Sunday, res[0].DayOfWeek);
+            Assert.AreEqualDayOfWeek.Sunday , res[1].DayOfWeek );
         }
 
         [Test]

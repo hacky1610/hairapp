@@ -28,12 +28,12 @@ namespace HairApp.Droid
             myApp = new App();
             LoadApplication(myApp);
 
-            CheckForNotify(savedInstanceState);
+            CheckForNotify();
 
             InitAlarms(DateTime.Now, "Foo", "Bar");
         }
 
-        private void CheckForNotify(Bundle bundle)
+        private void CheckForNotify()
         {
             var id = Intent.GetStringExtra("washday_id");
             if (id != null)

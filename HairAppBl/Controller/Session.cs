@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HairAppBl.Controller
 {
-    public class Session
+    public static class Session
     {
         static List<Interfaces.ISession> sessions = new List<Interfaces.ISession>();
 
