@@ -55,7 +55,7 @@ namespace HairApp.Droid
 
             try
             {
-                 title =  App.MainSession.GetAllWashingDays().Count.ToString();
+                title = App.Current.Properties.ToString();
             }
             catch(Exception e)
             {

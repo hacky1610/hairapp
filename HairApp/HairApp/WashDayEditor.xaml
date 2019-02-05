@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="HairApp.WashDayEditor">
     <StackLayout Style="{StaticResource PageContent}">
         <Label Text="Define your Care Day"
@@ -12,7 +13,7 @@
             <Label>Weeks</Label>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Label>Every</Label>
+            <controls:CheckBox Checked="True" DefaultText="Foo"></controls:CheckBox>
         </StackLayout>
         <StackLayout x:Name="RoutineList">
         </StackLayout>
