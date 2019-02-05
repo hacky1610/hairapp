@@ -18,8 +18,7 @@ namespace HairApp.Droid
     [BroadcastReceiver]
     public class AlarmReceiver : BroadcastReceiver
     {
-        static readonly int NOTIFICATION_ID = 1000;
-        static readonly string CHANNEL_ID = "location_notification";
+        static readonly string CHANNEL_ID = "hairapp_notification";
         internal static readonly string WASHDAY_ID = "washday_id";
 
         public override void OnReceive(Context context, Intent intent)
