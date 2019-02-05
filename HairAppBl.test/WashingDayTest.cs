@@ -257,7 +257,7 @@ namespace HairAppBl.Tests
             var controller = wdc.GetScheduleController();
 
 
-            Assert.AreEqual(2,controller.Time2NextCareDay(new DateTime(2019, 2, 6)));
+            Assert.AreEqual(2,controller.Time2NextCareDay(new DateTime(2019, 2, 5)));
         }
         
         [Test]
@@ -276,7 +276,7 @@ namespace HairAppBl.Tests
             var controller = wdc.GetScheduleController();
 
 
-            Assert.AreEqual(2,controller.Time2NextCareDay(new DateTime(2019, 2, 7)));
+            Assert.AreEqual(0,controller.Time2NextCareDay(new DateTime(2019, 2, 7)));
         }
 
 
