@@ -7,7 +7,7 @@ namespace HairAppBl.Models
     public class WashingDayInstance : WashingDayDBInstance
     {
 
-        List<RoutineInstance> Routines;
+        readonly List<RoutineInstance> Routines;
         public WashingDayInstance():base()
         {
             Routines = new List<RoutineInstance>();

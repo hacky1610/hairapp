@@ -35,7 +35,15 @@ namespace HairApp
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;
+	    
+	    InitFields();
         }
+	
+	private void InitFields()
+	{
+		var schedule = mWashingDayEditorController.GetModel().Scheduled;
+		
+	}
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
