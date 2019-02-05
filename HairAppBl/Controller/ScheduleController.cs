@@ -7,28 +7,27 @@ namespace HairAppBl.Controller
 {
     public class ScheduleController
     {
-        readonly WashingDayDefinition mWashingDay;
-        public ScheduleController(WashingDayDefinition wd)
+        readonly ScheduleDefinition mSchedule;
+        public ScheduleController(ScheduleDefinition sd)
         {
-            if(wd == null)
-                throw new ArgumentNullException("wd");
+            if(sd == null)
+                throw new ArgumentNullException("sd");
 
-            this.mWashingDay = wd;
+            this.mSchedule = sd;
         }
 
         public List<DateTime> GetScheduledDays()
         {
             var days = new List<DateTime>();
-            var schedule = mWashingDay.Scheduled;
-            if(schedule.Type == ScheduleDefinition.ScheduleType.Weekly)
+            if(mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
             {
-                foreach(var d in schedule.WeeklyPeriod.WeekDays)
+                foreach(var d in mSchedule.WeeklyPeriod.WeekDays)
                 {
-                    var start = GetNextWeekDay(schedule.StartDate,d);
-                    for (int i = 0; i < (50 / schedule.WeeklyPeriod.Period) ; i++)
+                    var start = GetNextWeekDay(mSchedule.StartDate,d);
+                    for (int i = 0; i < (50 / mSchedule.WeeklyPeriod.Period) ; i++)
                     {
                         days.Add(start);
-                        start = start.AddDays(7 * schedule.WeeklyPeriod.Period);
+                        start = start.AddDays(7 * mSchedule.WeeklyPeriod.Period);
                     }
 
                 }
