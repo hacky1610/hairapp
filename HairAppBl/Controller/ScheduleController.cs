@@ -44,6 +44,19 @@ namespace HairAppBl.Controller
             
         }
         
+        public int Time2NextCareDay(DateTime currentDay)
+        {
+            int diffDays = Int32.MaxValue;
+            foreach(var d in GetScheduledDays())
+            {
+               var diffTimeSpan =  d.Subtract (currentDay);
+               if(diffTimeSpan.Days > 0 && diffTimeSpan.Days < diffDays)
+                    diffDays = diffTimeSpan.Days;
+            }
+            return diffDays;
+            
+        }
+        
         
         public static Boolean ContainsDay(List<DateTime> days, DateTime day)
         {
