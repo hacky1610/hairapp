@@ -207,7 +207,7 @@ namespace HairAppBl.Tests
         {
             foreach(var d in days)
             {
-                if (WashingDayEditorController.IsSameDay(d, day))
+                if (ScheduleController.IsSameDay(d, day))
                     return true;
             }
             return false;
