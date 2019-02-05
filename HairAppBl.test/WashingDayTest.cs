@@ -223,7 +223,7 @@ namespace HairAppBl.Tests
         }
         
          [Test]
-        public void IsCareDay_TodayIsCareDay()
+        public void IsCareDay_TodayIsNoCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
