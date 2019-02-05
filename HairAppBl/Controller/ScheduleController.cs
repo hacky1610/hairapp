@@ -50,7 +50,7 @@ namespace HairAppBl.Controller
             foreach(var d in GetScheduledDays())
             {
                var diffTimeSpan =  d.Subtract (currentDay);
-               if(diffTimeSpan.Days > 0 && diffTimeSpan.Days < diffDays)
+               if(diffTimeSpan.Days >= 0 && diffTimeSpan.Days < diffDays)
                     diffDays = diffTimeSpan.Days;
             }
             return diffDays;
