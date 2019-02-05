@@ -126,7 +126,7 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
-            var res = wdc.GetNextWeekDay(d, DayOfWeek.Tuesday);
+            var res = ScheduleController.GetNextWeekDay(d, DayOfWeek.Tuesday);
             Assert.AreEqual(5, res.Day);
         }
 
@@ -136,7 +136,7 @@ namespace HairAppBl.Tests
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
-            var res = wdc.GetNextWeekDay(d, DayOfWeek.Monday);
+            var res = ScheduleController.GetNextWeekDay(d, DayOfWeek.Monday);
             Assert.AreEqual(4, res.Day);
         }
 
@@ -177,8 +177,8 @@ namespace HairAppBl.Tests
 
             var res = wdc.GetScheduledDays();
 
-            Assert.True(WashingDayEditorController.IsSameDay(res[0],new DateTime(2019,2,11)));
-            Assert.True(WashingDayEditorController.IsSameDay(res[1],new DateTime(2019,2,25)));
+            Assert.True(ScheduleController.IsSameDay(res[0],new DateTime(2019,2,11)));
+            Assert.True(ScheduleController.IsSameDay(res[1],new DateTime(2019,2,25)));
         }
 
         [Test]

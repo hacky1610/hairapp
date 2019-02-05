@@ -38,7 +38,7 @@ namespace HairAppBl.Controller
             return days;
         }
 
-        public DateTime GetNextWeekDay(DateTime d, DayOfWeek day)
+        public static DateTime GetNextWeekDay(DateTime d, DayOfWeek day)
         {
             DateTime date = d;
             if (date.DayOfWeek == day)
