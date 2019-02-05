@@ -13,9 +13,9 @@ namespace HairAppBl.Tests
         [Test]
         public void Init()
         {
-            MainSessionController c = new MainSessionController(new Dictionary<string, string>());
+            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
             c.Init();
-            Assert.NotNull(c.MainSession);
+            Assert.True(c.GetAllDefinitions().Count > 0);
         }
 
 
