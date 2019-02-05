@@ -144,5 +144,10 @@ namespace HairAppBl.Controller
 
             return instance;
         }
+        
+         public List<DateTime> GetScheduledDays()
+        {
+            return mScheduleController.GetScheduledDays();
+        }
     }
 }
