@@ -36,6 +36,24 @@ namespace HairAppBl.Controller
 
             return days;
         }
+        
+        public Boolean IsCareDay(DateTime currentDay)
+        {
+            
+            return ScheduleController.ContainsDay(GetScheduledDays(),currentDay);
+            
+        }
+        
+        
+        public static Boolean ContainsDay(List<DateTime> days, DateTime day)
+        {
+            foreach(var d in days)
+            {
+                if (ScheduleController.IsSameDay(d, day))
+                    return true;
+            }
+            return false;
+        }
 
         public static DateTime GetNextWeekDay(DateTime d, DayOfWeek day)
         {
