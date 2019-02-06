@@ -20,7 +20,7 @@ namespace HairAppBl.Tests
         
         
         [Test]
-        public void Init()
+        public void GetWashingDayById_GetIsWorking()
         {
             MainSessionController c = new MainSessionController(new Dictionary<string, object>());
             c.Init();
@@ -33,7 +33,7 @@ namespace HairAppBl.Tests
         }
         
         [Test]
-        public void Init()
+        public void Restore_IsWorking()
         {
             MainSessionController c = new MainSessionController(new Dictionary<string, object>());
             c.Init();
