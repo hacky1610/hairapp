@@ -30,6 +30,11 @@ namespace HairApp.Droid
 
             CheckForNotify();
 
+            App.InitAlarms += App_InitAlarms;
+        }
+
+        private void App_InitAlarms(object sender, EventArgs e)
+        {
             InitAlarms(DateTime.Now, "Foo", "Bar");
         }
 
@@ -54,7 +59,12 @@ namespace HairApp.Droid
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() , 60001 * 60 * 5, pendingIntent);
+            var s = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8,0,0,new TimeSpan());
+            var morgen = s.AddDays(1);
+
+            //alarmManager.SetRepeating(AlarmType.RtcWakeup, morgen.ToUnixTimeMilliseconds() , 60001 * 60 , pendingIntent);
+            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 60 * 5, pendingIntent);
+
         }
 
         public override void OnBackPressed()

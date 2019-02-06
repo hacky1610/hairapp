@@ -12,7 +12,7 @@ namespace HairAppBl.Tests
         [Test]
         public void ControllerCanBeLoaded()
         {
-            AlarmController ac = new AlarmController(null);
+            AlarmController ac = new AlarmController();
             var days = ac.GetWashDays();
             Assert.NotNull(days);
         }

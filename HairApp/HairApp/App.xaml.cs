@@ -9,6 +9,8 @@ namespace HairApp
 {
     public partial class App : Application
     {
+        public static event EventHandler<EventArgs> InitAlarms;
+
         public App()
         {
             InitializeComponent();
@@ -35,6 +37,11 @@ namespace HairApp
         protected override void OnStart()
         {
     
+        }
+
+        public static void SendInitAlarms()
+        {
+            InitAlarms(null, new EventArgs());
         }
 
         protected override void OnSleep()

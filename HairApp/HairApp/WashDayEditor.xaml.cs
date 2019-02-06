@@ -115,8 +115,8 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID);
             SaveFields();
+            mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID);
             Navigation.PopAsync();
             OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
         }

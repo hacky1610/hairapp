@@ -20,14 +20,19 @@ namespace HairApp
 
             OpenWashDayOverview.Source = "calendar.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
+            InitAlarms.Clicked += InitAlarms_Clicked;
 
 
 
         }
 
+        private void InitAlarms_Clicked(object sender, EventArgs e)
+        {
+            App.SendInitAlarms();
+        }
+
         private void Init_Clicked(object sender, EventArgs e)
         {
-            var ac = new HairAppBl.Controller.AlarmController(HairAppBl.DataBase.Instance);
             App.MainSession.Init();
 
         }

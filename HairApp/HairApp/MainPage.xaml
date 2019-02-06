@@ -10,6 +10,7 @@
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
         <Button Text="Init" x:Name="Init"/>
+        <Button Text="Init Alarms" x:Name="InitAlarms"/>
 
         <StackLayout HeightRequest="120">
             <ImageButton  x:Name="ChangeScreen"/>

@@ -12,7 +12,7 @@
             <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
             <Label>Weeks</Label>
         </StackLayout>
-        <StackLayout Orientation="Horizontal">
+        <FlexLayout >
             <controls:CheckBox Checked="False" DefaultText="Monday" x:Name="mCheckBoxMonday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Tuesday" x:Name="mCheckBoxTuesday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Wednesday" x:Name="mCheckBoxWednesday"></controls:CheckBox>
@@ -20,7 +20,7 @@
             <controls:CheckBox Checked="False" DefaultText="Friday" x:Name="mCheckBoxFriday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Saturday" x:Name="mCheckBoxSaturday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Sunday" x:Name="mCheckBoxSunday"></controls:CheckBox>
-        </StackLayout>
+        </FlexLayout>
         <StackLayout x:Name="RoutineList">
         </StackLayout>
         <Button Text="Add routine" x:Name="AddRoutine"/>

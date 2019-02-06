@@ -51,7 +51,7 @@ namespace HairApp.Droid
         void  ButtonOnClick(Context context)
         {
 
-            var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
+            var alarmController = new HairAppBl.Controller.AlarmController();
             var washdays = alarmController.GetWashDays();
 
             if (washdays.Count == 0)
