@@ -14,5 +14,10 @@ namespace HairAppBl.Models
             Checked = false;
         }
 
+        public RoutineInstance(string name):base()
+        {
+            Name = name;
+        }
+
     }
 }

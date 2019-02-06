@@ -50,26 +50,24 @@ namespace HairApp.Droid
 
         void  ButtonOnClick(Context context)
         {
-            var title = "foo";
-
-            try
-            {
-                 title =  App.MainSession.GetAllWashingDays().Count.ToString();
-            }
-            catch(Exception e)
-            {
-                title = e.Message;
-            }
 
             var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
-            var res = alarmController.GetWashDay();
-            var text = $"Routine of today: Conditioning";
+            var washdays = alarmController.GetWashDays();
 
-        
+            if (washdays.Count == 0)
+                return;
+
+            var text = $"Routine of today: Conditioning";
+            foreach (var wd in washdays)
+                SendNotify(context, wd, "Time for Hair Care", text);
+        }
+
+        private void SendNotify(Context context,string washDayId,string title, string content)
+        {
 
             // Pass the current button press count value to the next activity:
             var valuesForActivity = new Bundle();
-            valuesForActivity.PutString(WASHDAY_ID, "foo");
+            valuesForActivity.PutString(WASHDAY_ID, washDayId);
 
             // When the user clicks the notification, SecondActivity will start up.
             var resultIntent = new Intent(context, typeof(MainActivity));
@@ -85,7 +83,7 @@ namespace HairApp.Droid
             var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
             var props = App.Current.Properties;
-            
+
 
             // Build the notification:
             var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -94,13 +92,11 @@ namespace HairApp.Droid
                           .SetContentTitle(title) // Set the title
                           .SetNumber(1) // Display the count in the Content Info
                           .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
-                          .SetContentText(text); // the message to display.
+                          .SetContentText(content); // the message to display.
 
             // Finally, publish the notification:
             var notificationManager = NotificationManagerCompat.From(context);
             notificationManager.Notify(DateTime.Now.Millisecond, builder.Build());
-
-            // Increment the button press count:
         }
 
     }

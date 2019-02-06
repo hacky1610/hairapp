@@ -22,7 +22,7 @@ namespace HairAppBl
                 if (mInstance == null)
                 {
                     mInstance = new DataBase(
-                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HairDbV0.2.db3"));
+                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HairDbV0.3.db3"));
                 }
                 return mInstance;
             }

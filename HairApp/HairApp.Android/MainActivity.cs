@@ -39,7 +39,9 @@ namespace HairApp.Droid
             if (id != null)
             {
                 var day =  App.MainSession.GetWashingDayById(id);
-                myApp.GetNavigation().PushAsync(new WashDayInstance(day));
+                var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions());
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
+                myApp.GetNavigation().PushAsync(new WashDayInstance(wdInstance));
             }
         }
 
@@ -52,7 +54,7 @@ namespace HairApp.Droid
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() , 60001, pendingIntent);
+            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime() , 60001 * 60 * 5, pendingIntent);
         }
 
         public override void OnBackPressed()

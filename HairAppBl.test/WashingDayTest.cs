@@ -223,7 +223,7 @@ namespace HairAppBl.Tests
         }
         
          [Test]
-        public void IsCareDay_TodayIsCareDay()
+        public void IsCareDay_TodayIsNoCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
@@ -276,7 +276,7 @@ namespace HairAppBl.Tests
             var controller = wdc.GetScheduleController();
 
 
-            Assert.AreEqual(2,controller.Time2NextCareDay(new DateTime(2019, 2, 7)));
+            Assert.AreEqual(0,controller.Time2NextCareDay(new DateTime(2019, 2, 7)));
         }
 
 

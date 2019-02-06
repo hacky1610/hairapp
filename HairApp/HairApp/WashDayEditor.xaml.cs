@@ -36,14 +36,76 @@ namespace HairApp
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;
 	    
-	    InitFields();
+	        InitFields();
         }
 	
-	private void InitFields()
-	{
-		var schedule = mWashingDayEditorController.GetModel().Scheduled;
+	    private void InitFields()
+	    {
+		    var schedule = mWashingDayEditorController.GetModel().Scheduled;
+
+            foreach (var d in schedule.WeeklyPeriod.WeekDays)
+                setWeekDay(d);
+
+            mEntryWeeklyPeriod.Text = schedule.WeeklyPeriod.Period.ToString() ;
 		
-	}
+	    }
+
+        private void SaveFields()
+        {
+            var schedule = mWashingDayEditorController.GetModel().Scheduled;
+
+            schedule.WeeklyPeriod.WeekDays = getWeekDays();
+            schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.Text);
+        }
+
+        private void setWeekDay(DayOfWeek day)
+        {
+            switch (day)
+            {
+                case DayOfWeek.Friday:
+                    this.mCheckBoxFriday.Checked = true;
+                    break;
+                case DayOfWeek.Monday:
+                    this.mCheckBoxMonday.Checked = true;
+                    break;
+                case DayOfWeek.Saturday:
+                    this.mCheckBoxSaturday.Checked = true;
+                    break;
+                case DayOfWeek.Sunday:
+                    this.mCheckBoxSunday.Checked = true;
+                    break;
+                case DayOfWeek.Thursday:
+                    this.mCheckBoxThursday.Checked = true;
+                    break;
+                case DayOfWeek.Tuesday:
+                    this.mCheckBoxTuesday.Checked = true;
+                    break;
+                case DayOfWeek.Wednesday:
+                    this.mCheckBoxWednesday.Checked = true;
+                    break;
+            }
+        }
+
+        private List<DayOfWeek> getWeekDays()
+        {
+            var days = new List<DayOfWeek>();
+            if (this.mCheckBoxFriday.Checked)
+                days.Add(DayOfWeek.Friday);
+            if (this.mCheckBoxMonday.Checked)
+                days.Add(DayOfWeek.Monday);
+            if (this.mCheckBoxTuesday.Checked)
+                days.Add(DayOfWeek.Tuesday);
+            if (this.mCheckBoxWednesday.Checked)
+                days.Add(DayOfWeek.Wednesday);
+            if (this.mCheckBoxThursday.Checked)
+                days.Add(DayOfWeek.Thursday);
+            if (this.mCheckBoxSaturday.Checked)
+                days.Add(DayOfWeek.Saturday);
+            if (this.mCheckBoxSunday.Checked)
+                days.Add(DayOfWeek.Sunday);
+            return days;
+
+        }
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
@@ -53,7 +115,8 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            mWashingDayEditorController.SaveInstances();
+            mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID);
+            SaveFields();
             Navigation.PopAsync();
             OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
         }
