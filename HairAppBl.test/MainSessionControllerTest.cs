@@ -27,7 +27,7 @@ namespace HairAppBl.Tests
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();
             wdd.ID = "Foo";
-            days.Add(new WashingDayDefinition());
+            days.Add(wdd);
              
             Assert.AreEqual(wdd,c.GetWashingDayById("Foo"));
         }
@@ -40,7 +40,7 @@ namespace HairAppBl.Tests
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();
             wdd.ID = "Foo";
-            days.Add(new WashingDayDefinition());
+            days.Add(wdd);
             
             c.Save();
             c.GetAllWashingDays().Clear();
