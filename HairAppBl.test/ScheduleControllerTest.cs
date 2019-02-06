@@ -13,8 +13,6 @@ namespace HairAppBl.Tests
         [Test]
         public void GetNextWeekDay_OneDayBefore()
         {
-            WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
             var res = ScheduleController.GetNextWeekDay(d, DayOfWeek.Tuesday);
             Assert.AreEqual(5, res.Day);
@@ -23,8 +21,6 @@ namespace HairAppBl.Tests
         [Test]
         public void GetNextWeekDay_CurrentDay()
         {
-            WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
             var d = new DateTime(2019, 2, 4);
             var res = ScheduleController.GetNextWeekDay(d, DayOfWeek.Monday);
             Assert.AreEqual(4, res.Day);
