@@ -24,10 +24,22 @@ namespace HairAppBl.Models
 
         public enum ScheduleType
         {
+            Dayly,
             Weekly,
             Monthly
+            Yearly,
         }
-
+        
+        
+        public class Dayly
+        {
+            public int Period { get; set; }
+            public Dayly()
+            {
+                Period = 1;   
+            }
+         }
+        
         public class Weekly
         {
             public int Period { get; set; }
