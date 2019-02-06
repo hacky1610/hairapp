@@ -9,16 +9,19 @@ namespace HairAppBl.Models
         public DateTime StartDate{ get; set; }
         public ScheduleType Type{ get; set; }
 
+        public Dayly DaylyPeriod { get; set; }
         public Weekly WeeklyPeriod { get; set; }
         public Monthly MonthlyPeriod { get; set; }
-
+        public Yearly YearlyPeriod { get; set; }
 
         public ScheduleDefinition()
         {
             StartDate = DateTime.Now;
             Type = ScheduleType.Weekly;
+            DaylyPeriod = new Dayly();
             WeeklyPeriod = new Weekly();
             MonthlyPeriod = new Monthly();
+            YearlyPeriod = new Yearly();
         }
 
 
@@ -26,7 +29,7 @@ namespace HairAppBl.Models
         {
             Dayly,
             Weekly,
-            Monthly
+            Monthly,
             Yearly,
         }
         
@@ -78,6 +81,12 @@ namespace HairAppBl.Models
                 Last
             }
         }
+        
+          public class Yearly
+        {
+            public int Period { get; set; }
+           
+         }
 
     }
 }
