@@ -12,13 +12,18 @@ namespace HairApp.Controls
 
     public class RoutineInstanceCell : ViewCell
     {
-        Label text;
+        private Label text;
+        private XLabs.Forms.Controls.CheckBox mCheckBox;
         private HairAppBl.Interfaces.IHairBl mHairBl;
-
+        private RoutineInstance mRoutine;
 
         public RoutineInstanceCell(RoutineInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
+            mRoutine = instance;
+
+            mCheckBox = new XLabs.Forms.Controls.CheckBox();
+            mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
 
             text = new Label
             {
@@ -53,6 +58,11 @@ namespace HairApp.Controls
             View = frame;
 
 
+        }
+
+        private void MCheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
+        {
+            mRoutine.Checked = e.Value;
         }
 
         private ImageButton GetButton(string image)

@@ -14,6 +14,7 @@ namespace HairApp
 	public partial class AddRoutineDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
         private WashingDayEditorController mWashingDayEditorController;
+        private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
 
         public AddRoutineDialog()
         {
@@ -25,16 +26,16 @@ namespace HairApp
         {
             this.mWashingDayEditorController = controller;
             InitializeComponent();
-            var list = new List<RoutineCellObject>();
             foreach(var routine in controller.GetUnusedRoutineDefinitions())
             {
                 var routineObject = new RoutineCellObject(routine);
-                routineObject.Selected += RoutineObject_Selected;
-                list.Add(routineObject);
+                mRoutines.Add(routineObject);
             }
 
-            this.RoutineList.ItemsSource = list ;
+            this.RoutineList.ItemsSource = mRoutines;
             this.RoutineList.ItemTemplate = new DataTemplate(typeof(Controls.AddRoutineCell)); // has context actions defined
+
+            AddButton.Clicked += AddButton_Clicked;
 
             // Using ItemTapped
             //this.RoutineList.ItemTapped += async (sender, e) => {
@@ -50,12 +51,18 @@ namespace HairApp
 
         }
 
-        private async void RoutineObject_Selected(object sender, EventArgs e)
+        private void AddButton_Clicked(object sender, EventArgs e)
         {
-            this.mWashingDayEditorController.AddRoutine(((RoutineCellObject)sender).RoutineObject);
+            foreach(var r in mRoutines)
+            {
+                if(r.Checked)
+                    this.mWashingDayEditorController.AddRoutine(r.RoutineObject);
+            }
             // Close the last PopupPage int the PopupStack
-            await Navigation.PopPopupAsync();
+           Navigation.PopPopupAsync();
         }
+
+
 
         protected override void OnAppearing()
         {
@@ -134,8 +141,8 @@ namespace HairApp
     {
         public string Name { get; set; }
         public HairAppBl.Models.RoutineDefinition RoutineObject { get; set; }
+        public Boolean Checked { get; set; }
 
-        public event EventHandler<EventArgs> Selected;
 
         public RoutineCellObject(HairAppBl.Models.RoutineDefinition routine)
         {
@@ -143,9 +150,6 @@ namespace HairApp
             RoutineObject = routine;
         }
 
-        public void Select()
-        {
-            Selected(this, new EventArgs());
-        }
+
     }
 }

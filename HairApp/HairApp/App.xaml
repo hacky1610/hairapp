@@ -30,6 +30,14 @@
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="HeightRequest" Value="20" />
             </Style>
+            
+            <!--Frame-->
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="OutlineColor" Value="Orange" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="Padding" Value="5,5,5,5" />
+            </Style>
 
 
         </ResourceDictionary>

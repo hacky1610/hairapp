@@ -6,30 +6,48 @@
     <StackLayout Style="{StaticResource PageContent}">
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />
-        <Entry x:Name="WashDayNameEntry"></Entry>
-        <StackLayout Orientation="Horizontal">
-            <Label>Every</Label>
-            <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
-            <Label>Weeks</Label>
-        </StackLayout>
-        <FlexLayout Wrap="Wrap"
-                        JustifyContent="SpaceAround"  >
-            <controls:CheckBox Checked="False" DefaultText="Monday" x:Name="mCheckBoxMonday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Tuesday" x:Name="mCheckBoxTuesday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Wednesday" x:Name="mCheckBoxWednesday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Thursday" x:Name="mCheckBoxThursday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Friday" x:Name="mCheckBoxFriday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Saturday" x:Name="mCheckBoxSaturday"></controls:CheckBox>
-            <controls:CheckBox Checked="False" DefaultText="Sunday" x:Name="mCheckBoxSunday"></controls:CheckBox>
-        </FlexLayout>
-        <StackLayout x:Name="RoutineList">
-        </StackLayout>
-        <Button Text="Add routine" x:Name="AddRoutine"/>
+        <ScrollView>
+            <StackLayout>
+                <Entry x:Name="WashDayNameEntry"></Entry>
 
-        <StackLayout Orientation="Horizontal">
-            <Button Text="Cancel" x:Name="CancelButton"/>
-            <Button Text="OK" x:Name="OKButton"/>
-        </StackLayout>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical">
+                    <Label Text="Schedule"></Label>
+                        <DatePicker></DatePicker>
+                    <StackLayout Orientation="Horizontal">
+                        <Label>Every</Label>
+                        <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
+                        <Label>Weeks</Label>
+                    </StackLayout>
+                    <FlexLayout Wrap="Wrap"
+                        JustifyContent="SpaceAround"  >
+                        <controls:CheckBox Checked="False" DefaultText="Monday" x:Name="mCheckBoxMonday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Tuesday" x:Name="mCheckBoxTuesday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Wednesday" x:Name="mCheckBoxWednesday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Thursday" x:Name="mCheckBoxThursday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Friday" x:Name="mCheckBoxFriday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Saturday" x:Name="mCheckBoxSaturday"></controls:CheckBox>
+                        <controls:CheckBox Checked="False" DefaultText="Sunday" x:Name="mCheckBoxSunday"></controls:CheckBox>
+                    </FlexLayout>
+                </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Schedule"></Label>
+                        <StackLayout x:Name="RoutineList">
+                        </StackLayout>
+                        <Button Text="Add routine" x:Name="AddRoutine"/>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" x:Name="CancelButton"/>
+                    <Button Text="OK" x:Name="OKButton"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
         
-        </StackLayout>
+    </StackLayout>
 </ContentPage>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using XLabs.Forms;
 
 namespace HairApp.Controls
 {
@@ -12,8 +13,20 @@ namespace HairApp.Controls
     class AddRoutineCell : ViewCell
     {
         RoutineCellObject cellObject;
+        XLabs.Forms.Controls.CheckBox mCheckBox;
+        public Boolean Checked
+        {
+            get
+            {
+                return mCheckBox.Checked;
+            }
+        }
+
         public AddRoutineCell()
         {
+            mCheckBox = new XLabs.Forms.Controls.CheckBox();
+            mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
+
             var label1 = new Label
             {
                 Text = "Label 1",
@@ -22,8 +35,6 @@ namespace HairApp.Controls
             };
             label1.SetBinding(Label.TextProperty, new Binding("Name"));
 
-            Tapped += AddRoutineCell_Tapped;
-
             View = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -31,17 +42,16 @@ namespace HairApp.Controls
                 Padding = new Thickness(15, 5, 5, 15),
                 Children = {
                     new StackLayout {
-                        Orientation = StackOrientation.Vertical,
-                        Children = { label1 }
+                        Orientation = StackOrientation.Horizontal,
+                        Children = { mCheckBox, label1 }
                     },
                 }
             };
         }
 
-        private void AddRoutineCell_Tapped(object sender, EventArgs e)
+        private void MCheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
         {
-            this.cellObject.Select();
-            
+            cellObject.Checked = e.Value;
         }
 
         protected override void OnBindingContextChanged()

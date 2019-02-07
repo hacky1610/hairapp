@@ -62,8 +62,8 @@ namespace HairApp.Droid
             var s = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8,0,0,new TimeSpan());
             var morgen = s.AddDays(1);
 
-            //alarmManager.SetRepeating(AlarmType.RtcWakeup, morgen.ToUnixTimeMilliseconds() , 60001 * 60 , pendingIntent);
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 60 * 5, pendingIntent);
+            alarmManager.SetRepeating(AlarmType.RtcWakeup, morgen.ToUnixTimeMilliseconds() , 60001 * 60 , pendingIntent);
+            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 60 * 5, pendingIntent);
 
         }
 
