@@ -9,5 +9,7 @@ namespace HairAppBl.Interfaces
         void Call(string value);
         void WriteLine(object value);
         void Error(string value);
+        string ReadLog();
+        void Clear();
     }
 }

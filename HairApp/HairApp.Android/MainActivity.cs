@@ -73,11 +73,6 @@ namespace HairApp.Droid
             {
                 HairApp.App.BL.Logger.WriteLine("Backpressed of Popup");
             }
-            else
-            {
-                HairApp.App.BL.Logger.WriteLine("Normal Backpressed");
-
-            }
         }
     }
 }

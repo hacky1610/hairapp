@@ -15,7 +15,7 @@ namespace HairApp
         {
             InitializeComponent();
 
-            App.BL = new HairAppBl.HairAppBl(new ConsoleLogger(),Application.Current.Resources);
+            App.BL = new HairAppBl.HairAppBl(new FileLogger(),Application.Current.Resources);
             App.MainSession = new HairAppBl.Controller.MainSessionController(Current.Properties);
             HairAppBl.Controller.Session.Register(App.MainSession);
             HairAppBl.Controller.Session.Restore();

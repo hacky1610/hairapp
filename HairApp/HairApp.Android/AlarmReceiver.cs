@@ -23,6 +23,7 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
+            App.BL.Logger.Call("AlarmReceiver OnRecieve");
             CreateNotificationChannel(context);
             ButtonOnClick(context);
         }
@@ -55,7 +56,12 @@ namespace HairApp.Droid
             var washdays = alarmController.GetWashDays();
 
             if (washdays.Count == 0)
+            {
+                App.BL.Logger.WriteLine("Today is no washing day");
                 return;
+            }
+            App.BL.Logger.WriteLine("Today is washday. Send notify");
+
 
             var text = $"Routine of today: Conditioning";
             foreach (var wd in washdays)

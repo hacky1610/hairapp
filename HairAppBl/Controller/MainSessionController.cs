@@ -51,6 +51,19 @@ namespace HairAppBl.Controller
             return MainSession.WashingDays;
         }
 
+        public int TimeToNextCareDay()
+        {
+            var diff = Int32.MaxValue;
+            foreach(var d in MainSession.WashingDays)
+            {
+                var c = new ScheduleController(d.Scheduled);
+                var t = c.Time2NextCareDay(DateTime.Now);
+                if (t < diff)
+                    diff = t;
+            }
+            return diff;
+        }
+
         public WashingDayDefinition GetWashingDayById(string id)
         {
             foreach(var day in MainSession.WashingDays)

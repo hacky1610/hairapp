@@ -21,8 +21,15 @@ namespace HairApp
             OpenWashDayOverview.Source = "calendar.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
             InitAlarms.Clicked += InitAlarms_Clicked;
+            ShowLog.Clicked += ShowLog_Clicked;
 
+            TimeToNextCareDay.Text = App.MainSession.TimeToNextCareDay().ToString();
 
+        }
+
+        private void ShowLog_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new LogView(App.BL.Logger));
 
         }
 

@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="WashDayOverview.xaml.cs">
       <DependentUpon>WashDayOverview.xaml</DependentUpon>
     </Compile>

@@ -12,7 +12,8 @@
             <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
             <Label>Weeks</Label>
         </StackLayout>
-        <FlexLayout >
+        <FlexLayout Wrap="Wrap"
+                        JustifyContent="SpaceAround"  >
             <controls:CheckBox Checked="False" DefaultText="Monday" x:Name="mCheckBoxMonday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Tuesday" x:Name="mCheckBoxTuesday"></controls:CheckBox>
             <controls:CheckBox Checked="False" DefaultText="Wednesday" x:Name="mCheckBoxWednesday"></controls:CheckBox>
