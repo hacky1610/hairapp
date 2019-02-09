@@ -15,6 +15,9 @@ namespace HairApp
     {
         private WashingDayEditorController mWashingDayEditorController;
         private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
+        private HairAppBl.Interfaces.IHairBl mHairbl;
+             
+
 
         public AddRoutineDialog()
         {
@@ -22,9 +25,10 @@ namespace HairApp
 
         }
 
-        public AddRoutineDialog(WashingDayEditorController controller)
+        public AddRoutineDialog(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mWashingDayEditorController = controller;
+            mHairbl =  hairbl;
             InitializeComponent();
             foreach(var routine in controller.GetUnusedRoutineDefinitions())
             {
@@ -32,22 +36,8 @@ namespace HairApp
                 mRoutines.Add(routineObject);
             }
 
-            this.RoutineList.ItemsSource = mRoutines;
-            this.RoutineList.ItemTemplate = new DataTemplate(typeof(Controls.AddRoutineCell)); // has context actions defined
-
+            RefreshList();
             AddButton.Clicked += AddButton_Clicked;
-
-            // Using ItemTapped
-            //this.RoutineList.ItemTapped += async (sender, e) => {
-            //    await DisplayAlert("Tapped", e.Item + " row was tapped", "OK");
-            //};
-
-            // If using ItemSelected
-            //			listView.ItemSelected += (sender, e) => {
-            //				if (e.SelectedItem == null) return;
-            //				Debug.WriteLine("Selected: " + e.SelectedItem);
-            //				((ListView)sender).SelectedItem = null; // de-select the row
-            //			};
 
         }
 
@@ -60,6 +50,16 @@ namespace HairApp
             }
             // Close the last PopupPage int the PopupStack
            Navigation.PopPopupAsync();
+        }
+
+        private void RefreshList()
+        {
+            this.RoutineList.Children.Clear();
+            foreach (var r in mRoutines)
+            {
+                var c = new Controls.AddRoutineCell(r,mHairbl);
+                this.RoutineList.Children.Add(c.View);
+            }
         }
 
 
@@ -137,7 +137,7 @@ namespace HairApp
         }
     }
     
-    class RoutineCellObject
+    public class RoutineCellObject
     {
         public string Name { get; set; }
         public HairAppBl.Models.RoutineDefinition RoutineObject { get; set; }

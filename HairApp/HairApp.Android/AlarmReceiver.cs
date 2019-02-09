@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Support.V4.App;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using HairAppBl;
+using System.IO;
 
 namespace HairApp.Droid
 {
@@ -23,9 +24,21 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
-            App.BL.Logger.Call("AlarmReceiver OnRecieve");
+            //WriteLog("Foo");
+            //App.BL.Logger.Call("AlarmReceiver OnRecieve");
+
             CreateNotificationChannel(context);
-            ButtonOnClick(context);
+            SendNotify(context, "foo", "bar", "saf");
+            //ButtonOnClick(context);
+        }
+
+        private void WriteLog(string value)
+        {
+            var mLogfilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
+            using (var file = File.AppendText(mLogfilePath))
+            {
+                file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
+            }
         }
 
         void CreateNotificationChannel(Context context)
@@ -68,7 +81,7 @@ namespace HairApp.Droid
                 SendNotify(context, wd, "Time for Hair Care", text);
         }
 
-        private void SendNotify(Context context,string washDayId,string title, string content)
+        private static void SendNotify(Context context,string washDayId,string title, string content)
         {
 
             // Pass the current button press count value to the next activity:

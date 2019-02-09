@@ -26,11 +26,11 @@
         BackgroundColor="Default">
         <StackLayout 
         VerticalOptions="Center" 
-        HorizontalOptions="Center" 
+        HorizontalOptions="Fill" 
         >
             <Label Text="Choose a routine" Style="{StaticResource Heading}"/>
-            <ListView ItemsSource="" x:Name="RoutineList" >
-            </ListView>
+            <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
+            </StackLayout>
             <Button x:Name="AddButton" Text="Add"></Button>
         </StackLayout>
     </Frame>

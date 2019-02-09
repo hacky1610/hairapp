@@ -13,7 +13,7 @@
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Orientation="Vertical">
                     <Label Text="Schedule"></Label>
-                        <DatePicker></DatePicker>
+                        <DatePicker x:Name="StartDatePicker"></DatePicker>
                     <StackLayout Orientation="Horizontal">
                         <Label>Every</Label>
                         <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
@@ -34,7 +34,7 @@
 
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Orientation="Vertical">
-                        <Label Text="Schedule"></Label>
+                        <Label Text="Routines"></Label>
                         <StackLayout x:Name="RoutineList">
                         </StackLayout>
                         <Button Text="Add routine" x:Name="AddRoutine"/>
