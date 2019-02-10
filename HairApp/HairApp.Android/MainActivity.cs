@@ -65,7 +65,7 @@ namespace HairApp.Droid
             var notifyTimeInInMilliseconds = utcTime.AddSeconds(-epochDif).Ticks / 10000;
 
             //alarmManager.SetRepeating(AlarmType.RtcWakeup, notifyTimeInInMilliseconds, 60001 * 60 , pendingIntent);
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 , pendingIntent);
+            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
 
         }
 
