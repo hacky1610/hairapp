@@ -8,12 +8,14 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label x:Name="TimeToNextCareDay" Text="" 
+        <StackLayout>
+            <Label x:Name="TimeToNextCareDay" Text="" 
            HorizontalOptions="Center"/>
-        <Button Text="ShowLog" x:Name="ShowLog"/>
-
-        <Button Text="Init" x:Name="Init"/>
-        <Button Text="Init Alarms" x:Name="InitAlarms"/>
+            <Button x:Name="OpenCareDay"></Button>
+        </StackLayout>
+        
+        <Button x:Name="TestPage" Text="Test" 
+           HorizontalOptions="End"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />

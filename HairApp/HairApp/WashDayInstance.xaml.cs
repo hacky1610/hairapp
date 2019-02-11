@@ -31,7 +31,7 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync().Wait();
+            Navigation.PopAsync();
         }
 
         private void RefreshList()

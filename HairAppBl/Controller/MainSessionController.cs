@@ -64,6 +64,28 @@ namespace HairAppBl.Controller
             return diff;
         }
 
+        public CommingDays NextDay()
+        {
+            var diff = new CommingDays();
+
+            foreach (var d in MainSession.WashingDays)
+            {
+                var c = new ScheduleController(d.Scheduled);
+                var t = c.Time2NextCareDay(DateTime.Now);
+                if (t <= diff.Time2Wait)
+                {
+                    diff.Time2Wait = t;
+                    diff.Days = new List<WashingDayDefinition> { d };
+                }
+                else if (t == diff.Time2Wait)
+                {
+                    diff.Time2Wait = t;
+                    diff.Days.Add(d);
+                }
+            }
+            return diff;
+        }
+
         public WashingDayDefinition GetWashingDayById(string id)
         {
             foreach(var day in MainSession.WashingDays)
@@ -90,5 +112,25 @@ namespace HairAppBl.Controller
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Rinses", "Rinses", "", "Please use Rinses"));
             MainSession.Initialized = true;
         }
+
+        public class CommingDays
+        {
+            public int Time2Wait { get; set; }
+            public List<Models.WashingDayDefinition> Days { get; set; }
+
+            public CommingDays()
+            {
+                Days = new List<WashingDayDefinition>();
+                Time2Wait = Int32.MaxValue;
+            }
+
+            public CommingDays(List<WashingDayDefinition> days, int time):this()
+            {
+                Days = days;
+                Time2Wait = time;
+            }
+        }
+
+
     }
 }
