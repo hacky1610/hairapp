@@ -8,8 +8,9 @@
                 Style="{StaticResource Heading}" />
         <ScrollView>
             <StackLayout>
-                <Entry x:Name="WashDayNameEntry"></Entry>
-
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Entry x:Name="WashDayNameEntry"></Entry>
+                </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Orientation="Vertical">
                     <Label Text="Schedule"></Label>
@@ -41,13 +42,13 @@
                     </StackLayout>
                 </Frame>
 
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Cancel" x:Name="CancelButton"/>
-                    <Button Text="OK" x:Name="OKButton"/>
-                </StackLayout>
+            
 
             </StackLayout>
         </ScrollView>
-        
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" x:Name="CancelButton" />
+            <Button Text="OK" x:Name="OKButton"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

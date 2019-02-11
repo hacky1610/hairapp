@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HairApp"
              x:Class="HairApp.MainPage">
+    
+    
 
     <StackLayout>
         <!-- Place new controls here -->
@@ -12,12 +14,23 @@
 
         <Button Text="Init" x:Name="Init"/>
         <Button Text="Init Alarms" x:Name="InitAlarms"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <StackLayout HeightRequest="120">
-            <ImageButton  x:Name="ChangeScreen"/>
-            <ImageButton  x:Name="OpenWashDayOverview"  />
+            
+            <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0"/>
+            <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" />
+        </Grid>
+      
 
-        </StackLayout>
+
     </StackLayout>
 
 </ContentPage>

@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <Style x:Key="PageContent" TargetType="StackLayout">
                 <Setter Property="Padding" Value="20,20,20,20" />
+                <Setter Property="BackgroundColor" Value="LightGray" />
             </Style>
 
             <Style x:Key="Heading" TargetType="Label">
@@ -40,7 +41,7 @@
 
             <!--Frame-->
             <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="OutlineColor" Value="Orange" />
+                <Setter Property="OutlineColor" Value="White" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="Padding" Value="5,5,5,5" />

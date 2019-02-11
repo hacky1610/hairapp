@@ -43,9 +43,9 @@ namespace HairAppBl.Controller
             }
         }
 
-        public  List<string> GetWashDays()
+        public  List<ScheduleSqlDefinition> GetWashDays()
         {
-            List<string> wdId = new List<string>();
+            List<ScheduleSqlDefinition> wdId = new List<ScheduleSqlDefinition>();
             Dictionary<string, ScheduleSqlDefinition> list = Load();
 
             foreach (var schedule in list.Values)
@@ -54,7 +54,7 @@ namespace HairAppBl.Controller
                 var controller = new ScheduleController(s);
                 if(controller.IsCareDay(DateTime.Now))
                 {
-                    wdId.Add(schedule.ID);
+                    wdId.Add(schedule);
                 }
             }
             return wdId;

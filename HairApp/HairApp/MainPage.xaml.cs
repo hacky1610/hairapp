@@ -18,8 +18,10 @@ namespace HairApp
 
             Init.Clicked += Init_Clicked;
 
-            OpenWashDayOverview.Source = "calendar.png";
+            OpenWashDayOverview.Source = "edit.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
+            ShowCalendar.Source = "calendar.png";
+
             InitAlarms.Clicked += InitAlarms_Clicked;
             ShowLog.Clicked += ShowLog_Clicked;
 

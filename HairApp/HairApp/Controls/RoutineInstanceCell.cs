@@ -12,29 +12,40 @@ namespace HairApp.Controls
 
     public class RoutineInstanceCell : ViewCell
     {
-        private Label text;
         private XLabs.Forms.Controls.CheckBox mCheckBox;
         private HairAppBl.Interfaces.IHairBl mHairBl;
         private RoutineInstance mRoutine;
+        private Editor mComment;
 
         public RoutineInstanceCell(RoutineInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
         {
-            this.mHairBl = hairbl;
             mRoutine = instance;
+            mHairBl = hairbl;
 
             mCheckBox = new XLabs.Forms.Controls.CheckBox();
             mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
 
-            text = new Label
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                mCheckBox.Checked = !mCheckBox.Checked;
+            };
+
+            var commentButton = GetButton("comment.png");
+            commentButton.Clicked += (sender, e) =>
+            {
+                mComment.IsVisible = true;
+            };
+
+            var label1 = new Label
             {
                 Text = instance.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
 
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (s, e) => {
-                Select();
+            mComment= new Editor
+            {
+                IsVisible = false
             };
 
             var frame = new Frame
@@ -42,16 +53,19 @@ namespace HairApp.Controls
                 Style = (Style)hairbl.Resources["RoutineFrame"],
                 Content = new StackLayout
                 {
-                    Style = (Style)hairbl.Resources["RoutineContent"],
-                    Orientation = StackOrientation.Horizontal,
+                    Orientation = StackOrientation.Vertical,
+                    Children =
+                    {
+                        new StackLayout
+                        {
+                               Style = (Style)hairbl.Resources["RoutineContent"],
+                             Orientation = StackOrientation.Horizontal,
 
-                    Children = {
-                    new StackLayout {
-                        Orientation = StackOrientation.Vertical,
-                        Children = { text }
-                    },
-
-                }
+                             Children = { mCheckBox, label1 ,commentButton}
+                        },
+                        mComment
+                    }
+                 
                 }
             };
             frame.GestureRecognizers.Add(tapGestureRecognizer);

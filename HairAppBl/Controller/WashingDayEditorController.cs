@@ -109,9 +109,9 @@ namespace HairAppBl.Controller
             return tempList;
         }
 
-        public void SaveInstances(string id)
+        public void SaveInstances(string id,string name)
         {
-            var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id);
+            var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id,name);
             var am = new AlarmController();
             am.SaveWashDay(sqlItem);
 

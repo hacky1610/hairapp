@@ -8,13 +8,15 @@ namespace HairAppBl.Models
     public class ScheduleSqlDefinition
     {
         public string ID { get; set; }
+        public string Name { get; set; }
         public ScheduleDefinition Value { get; set; }
 
         public ScheduleSqlDefinition() { }
 
-        public ScheduleSqlDefinition(ScheduleDefinition def, string washdayId)
+        public ScheduleSqlDefinition(ScheduleDefinition def, string washdayId, string name)
         {
             ID = washdayId;
+            Name = name;
             Value = def;
         }
 

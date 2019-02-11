@@ -73,9 +73,11 @@ namespace HairApp.Droid
             //App.BL.Logger.WriteLine("Today is washday. Send notify");
 
 
-            var text = $"Routine of today: Conditioning";
             foreach (var wd in washdays)
-                SendNotify(context, wd, "Time for Hair Care", text);
+            {
+                SendNotify(context, wd.ID, "Time for Hair Care", $"Today is: {wd.Name}");
+
+            }
         }
 
         private static void SendNotify(Context context,string washDayId,string title, string content)
