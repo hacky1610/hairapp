@@ -26,16 +26,11 @@ namespace HairAppBl.Controller
 
         public T Load<T>()
         {
-            try
-            {
-                List<string> wdId = new List<string>();
-                var json = File.ReadAllText(dbFile);
-                return (T) JsonConvert.DeserializeObject(json, typeof(T));
-            }
-            catch (Exception e)
-            {
-                return default(T);
-            }
+           
+              List<string> wdId = new List<string>();
+              var json = File.ReadAllText(dbFile);
+              return (T) JsonConvert.DeserializeObject(json, typeof(T));
+          
         }
     }
  }
