@@ -1,7 +1,9 @@
-﻿using System;
+﻿using HairAppBl.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using XLabs.Forms;
 
 namespace HairApp.Controls
 {
@@ -9,45 +11,57 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    class AddRoutineCell : ViewCell
+    public class AddRoutineCell : ViewCell
     {
         RoutineCellObject cellObject;
-        public AddRoutineCell()
+        XLabs.Forms.Controls.CheckBox mCheckBox;
+        public Boolean Checked
         {
+            get
+            {
+                return mCheckBox.Checked;
+            }
+        }
+
+        public AddRoutineCell(RoutineCellObject rcObject, HairAppBl.Interfaces.IHairBl hairbl)
+        {
+            cellObject = rcObject;
+            
+            mCheckBox = new XLabs.Forms.Controls.CheckBox();
+            mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
+
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                mCheckBox.Checked = !mCheckBox.Checked;
+            };
+
             var label1 = new Label
             {
-                Text = "Label 1",
+                Text = rcObject.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
-            label1.SetBinding(Label.TextProperty, new Binding("Name"));
 
-            Tapped += AddRoutineCell_Tapped;
+                var frame = new Frame
+                {
+                    Style = (Style)hairbl.Resources["RoutineFrame"],
+                    Content = new StackLayout
+                    {
+                        Style = (Style)hairbl.Resources["RoutineContent"],
+                        Orientation = StackOrientation.Horizontal,
 
-            View = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                Padding = new Thickness(15, 5, 5, 15),
-                Children = {
-                    new StackLayout {
-                        Orientation = StackOrientation.Vertical,
-                        Children = { label1 }
-                    },
-                }
-            };
+                        Children = { mCheckBox,label1 }
+                    }
+                 };
+            frame.GestureRecognizers.Add(tapGestureRecognizer);
+            View = frame;
+
         }
 
-        private void AddRoutineCell_Tapped(object sender, EventArgs e)
+        private void MCheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
         {
-            this.cellObject.Select();
-            
+            cellObject.Checked = e.Value;
         }
 
-        protected override void OnBindingContextChanged()
-        {
-            cellObject = (RoutineCellObject)this.BindingContext;
-            base.OnBindingContextChanged();
-        }
     }
 }

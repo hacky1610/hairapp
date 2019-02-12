@@ -17,12 +17,13 @@ namespace HairApp
 	public partial class WashDayOverview : ContentPage
 	{
         List<WashingDayDefinition> mWashingDays;
+        HairAppBl.Interfaces.IHairBl mHairbl;
 
-        public WashDayOverview(List<WashingDayDefinition> washingDays)
+        public WashDayOverview(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl  hairbl)
 		{
 			InitializeComponent ();
             mWashingDays = washingDays;
-       
+            mHairbl = hairbl;       
             var washingDayDefinition = new WashingDayDefinition();
             RefreshList();
             AddWashday.Clicked += AddWashday_Clicked;
@@ -32,7 +33,7 @@ namespace HairApp
         {
             var def = new WashingDayDefinition();
             def.ID = Guid.NewGuid().ToString();
-            var editor = new WashDayEditor(def,true);
+            var editor = new WashDayEditor(def,true,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
 
@@ -60,7 +61,7 @@ namespace HairApp
         private void WashDay_Edited(object sender, EventArgs e)
         {
             var item = ((WashingDayCell)sender);
-            var editor = new WashDayEditor(item.WashingDayDefinition, false);
+            var editor = new WashDayEditor(item.WashingDayDefinition, false,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
         }

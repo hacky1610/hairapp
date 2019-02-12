@@ -19,19 +19,20 @@ namespace HairApp
         private WashingDayEditorController mWashingDayEditorController;
         private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
         public event EventHandler<WashDayEditorEventArgs> OkClicked;
-        private Boolean mCreate; 
+        private Boolean mCreate;
+        HairAppBl.Interfaces.IHairBl mHairbl;
 
 
-        public WashDayEditor (WashingDayDefinition def,Boolean create)
+        public WashDayEditor (WashingDayDefinition def,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 		{
 			InitializeComponent ();
+            mHairbl = hairbl;
        
             var washingDayDefinition =def;
             this.mCreate = create;
             this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions());
             RefreshList();
 
-            this.WashDayNameEntry.Text = def.Name;
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;
@@ -41,7 +42,14 @@ namespace HairApp
 	
 	    private void InitFields()
 	    {
-		    var schedule = mWashingDayEditorController.GetModel().Scheduled;
+            this.WashDayNameEntry.Placeholder = "Title";
+            this.WashDayNameEntry.Text = mWashingDayEditorController.GetModel().Name;
+
+            this.StartDatePicker.MinimumDate = DateTime.Now;
+
+            var schedule = mWashingDayEditorController.GetModel().Scheduled;
+
+            this.StartDatePicker.Date = schedule.StartDate;
 
             foreach (var d in schedule.WeeklyPeriod.WeekDays)
                 setWeekDay(d);
@@ -54,8 +62,10 @@ namespace HairApp
         {
             var schedule = mWashingDayEditorController.GetModel().Scheduled;
 
+            mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
             schedule.WeeklyPeriod.WeekDays = getWeekDays();
             schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.Text);
+            schedule.StartDate = StartDatePicker.Date;
         }
 
         private void setWeekDay(DayOfWeek day)
@@ -115,15 +125,15 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID);
             SaveFields();
+            mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID, mWashingDayEditorController.GetModel().Name);
             Navigation.PopAsync();
             OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
         }
 
         private void AddRoutine_Clicked(object sender, EventArgs e)
         {
-            var diaog = new AddRoutineDialog(this.mWashingDayEditorController);
+            var diaog = new AddRoutineDialog(this.mWashingDayEditorController,mHairbl);
             diaog.Disappearing += Diaog_Disappearing;
             // Open a PopupPage
             Navigation.PushPopupAsync(diaog);

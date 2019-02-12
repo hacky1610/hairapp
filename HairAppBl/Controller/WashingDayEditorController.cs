@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using HairAppBl.Models;
 
@@ -108,14 +109,11 @@ namespace HairAppBl.Controller
             return tempList;
         }
 
-        public void SaveInstances(string id)
+        public void SaveInstances(string id,string name)
         {
-
-            var table = new DbTable<ScheduleSqlDefinition>(DataBase.Instance);
-            //table.ExecQuery($"DELETE * FROM ScheduleSqlDefinition WHERE ID = '{id}'").Wait();
-            var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id);
-           table.SaveItemAsync(sqlItem).Wait();
-
+            var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id,name);
+            var am = new AlarmController();
+            am.SaveWashDay(sqlItem);
 
         }
 

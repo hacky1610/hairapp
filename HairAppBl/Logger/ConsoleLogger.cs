@@ -20,5 +20,15 @@ namespace HairAppBl
         {
             System.Diagnostics.Debug.Fail(value);
         }
+
+        public string ReadLog()
+        {
+            return String.Empty;
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

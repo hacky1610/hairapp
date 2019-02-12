@@ -24,10 +24,15 @@ namespace HairApp
 			InitializeComponent ();
        
             mInstance =  instance;
+
+            OKButton.Clicked += OKButton_Clicked;
             RefreshList();
         }
 
-        
+        private void OKButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
 
         private void RefreshList()
         {

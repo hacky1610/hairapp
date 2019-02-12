@@ -14,6 +14,10 @@ namespace HairApp
 	public partial class AddRoutineDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
         private WashingDayEditorController mWashingDayEditorController;
+        private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
+        private HairAppBl.Interfaces.IHairBl mHairbl;
+             
+
 
         public AddRoutineDialog()
         {
@@ -21,41 +25,44 @@ namespace HairApp
 
         }
 
-        public AddRoutineDialog(WashingDayEditorController controller)
+        public AddRoutineDialog(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mWashingDayEditorController = controller;
+            mHairbl =  hairbl;
             InitializeComponent();
-            var list = new List<RoutineCellObject>();
             foreach(var routine in controller.GetUnusedRoutineDefinitions())
             {
                 var routineObject = new RoutineCellObject(routine);
-                routineObject.Selected += RoutineObject_Selected;
-                list.Add(routineObject);
+                mRoutines.Add(routineObject);
             }
 
-            this.RoutineList.ItemsSource = list ;
-            this.RoutineList.ItemTemplate = new DataTemplate(typeof(Controls.AddRoutineCell)); // has context actions defined
-
-            // Using ItemTapped
-            //this.RoutineList.ItemTapped += async (sender, e) => {
-            //    await DisplayAlert("Tapped", e.Item + " row was tapped", "OK");
-            //};
-
-            // If using ItemSelected
-            //			listView.ItemSelected += (sender, e) => {
-            //				if (e.SelectedItem == null) return;
-            //				Debug.WriteLine("Selected: " + e.SelectedItem);
-            //				((ListView)sender).SelectedItem = null; // de-select the row
-            //			};
+            RefreshList();
+            AddButton.Clicked += AddButton_Clicked;
 
         }
 
-        private async void RoutineObject_Selected(object sender, EventArgs e)
+        private void AddButton_Clicked(object sender, EventArgs e)
         {
-            this.mWashingDayEditorController.AddRoutine(((RoutineCellObject)sender).RoutineObject);
+            foreach(var r in mRoutines)
+            {
+                if(r.Checked)
+                    this.mWashingDayEditorController.AddRoutine(r.RoutineObject);
+            }
             // Close the last PopupPage int the PopupStack
-            await Navigation.PopPopupAsync();
+           Navigation.PopPopupAsync();
         }
+
+        private void RefreshList()
+        {
+            this.RoutineList.Children.Clear();
+            foreach (var r in mRoutines)
+            {
+                var c = new Controls.AddRoutineCell(r,mHairbl);
+                this.RoutineList.Children.Add(c.View);
+            }
+        }
+
+
 
         protected override void OnAppearing()
         {
@@ -130,12 +137,12 @@ namespace HairApp
         }
     }
     
-    class RoutineCellObject
+    public class RoutineCellObject
     {
         public string Name { get; set; }
         public HairAppBl.Models.RoutineDefinition RoutineObject { get; set; }
+        public Boolean Checked { get; set; }
 
-        public event EventHandler<EventArgs> Selected;
 
         public RoutineCellObject(HairAppBl.Models.RoutineDefinition routine)
         {
@@ -143,9 +150,6 @@ namespace HairApp
             RoutineObject = routine;
         }
 
-        public void Select()
-        {
-            Selected(this, new EventArgs());
-        }
+
     }
 }

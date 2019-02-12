@@ -23,14 +23,15 @@
         Margin="40, 40, 40, 40"
         Padding="5,5,5,5"
         CornerRadius="10"
-        BackgroundColor="Gray">
+        BackgroundColor="Default">
         <StackLayout 
         VerticalOptions="Center" 
-        HorizontalOptions="Center" 
+        HorizontalOptions="Fill" 
         >
             <Label Text="Choose a routine" Style="{StaticResource Heading}"/>
-            <ListView ItemsSource="" x:Name="RoutineList" >
-            </ListView>
+            <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
+            </StackLayout>
+            <Button x:Name="AddButton" Text="Add"></Button>
         </StackLayout>
     </Frame>
  

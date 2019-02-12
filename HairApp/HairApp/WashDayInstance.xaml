@@ -7,5 +7,9 @@
                 Style="{StaticResource Heading}" />
             <StackLayout x:Name="RoutineList">
             </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" x:Name="CancelButton" />
+            <Button Text="Save" x:Name="OKButton"/>
         </StackLayout>
+    </StackLayout>
 </ContentPage>

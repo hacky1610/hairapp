@@ -9,11 +9,13 @@ namespace HairApp
 {
     public partial class App : Application
     {
+        public static event EventHandler<EventArgs> InitAlarms;
+
         public App()
         {
             InitializeComponent();
 
-            App.BL = new HairAppBl.HairAppBl(new ConsoleLogger(),Application.Current.Resources);
+            App.BL = new HairAppBl.HairAppBl(new FileLogger(),Application.Current.Resources);
             App.MainSession = new HairAppBl.Controller.MainSessionController(Current.Properties);
             HairAppBl.Controller.Session.Register(App.MainSession);
             HairAppBl.Controller.Session.Restore();
@@ -35,6 +37,11 @@ namespace HairApp
         protected override void OnStart()
         {
     
+        }
+
+        public static void SendInitAlarms()
+        {
+            InitAlarms(null, new EventArgs());
         }
 
         protected override void OnSleep()

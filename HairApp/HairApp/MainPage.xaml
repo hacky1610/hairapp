@@ -3,19 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HairApp"
              x:Class="HairApp.MainPage">
+    
+    
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label x:Name="foo" Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-        <Button Text="Init" x:Name="Init"/>
-
-        <StackLayout HeightRequest="120">
-            <ImageButton  x:Name="ChangeScreen"/>
-            <ImageButton  x:Name="OpenWashDayOverview"  />
-
+        <StackLayout>
+            <Label x:Name="TimeToNextCareDay" Text="" 
+           HorizontalOptions="Center"/>
+            <Button x:Name="OpenCareDay"></Button>
         </StackLayout>
+        
+        <Button x:Name="TestPage" Text="Test" 
+           HorizontalOptions="End"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            
+            <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0"/>
+            <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" />
+        </Grid>
+      
+
+
     </StackLayout>
 
 </ContentPage>

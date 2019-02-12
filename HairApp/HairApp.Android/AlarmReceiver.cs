@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Support.V4.App;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using HairAppBl;
+using System.IO;
 
 namespace HairApp.Droid
 {
@@ -23,8 +24,18 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
-            CreateNotificationChannel(context);
+
+           CreateNotificationChannel(context);
             ButtonOnClick(context);
+        }
+
+        private static void WriteLog(string value)
+        {
+            var mLogfilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
+            using (var file = File.AppendText(mLogfilePath))
+            {
+                file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
+            }
         }
 
         void CreateNotificationChannel(Context context)
@@ -51,52 +62,64 @@ namespace HairApp.Droid
         void  ButtonOnClick(Context context)
         {
 
-            var alarmController = new HairAppBl.Controller.AlarmController(DataBase.Instance);
+            var alarmController = new HairAppBl.Controller.AlarmController();
             var washdays = alarmController.GetWashDays();
 
             if (washdays.Count == 0)
+            {
+                //App.BL.Logger.WriteLine("Today is no washing day");
                 return;
+            }
+            //App.BL.Logger.WriteLine("Today is washday. Send notify");
 
-            var text = $"Routine of today: Conditioning";
+
             foreach (var wd in washdays)
-                SendNotify(context, wd, "Time for Hair Care", text);
+            {
+                SendNotify(context, wd.ID, "Time for Hair Care", $"Today is: {wd.Name}");
+
+            }
         }
 
-        private void SendNotify(Context context,string washDayId,string title, string content)
+        private static void SendNotify(Context context,string washDayId,string title, string content)
         {
 
-            // Pass the current button press count value to the next activity:
-            var valuesForActivity = new Bundle();
-            valuesForActivity.PutString(WASHDAY_ID, washDayId);
+            try
+            {
+                // Pass the current button press count value to the next activity:
+                var valuesForActivity = new Bundle();
+                valuesForActivity.PutString(WASHDAY_ID, washDayId);
 
-            // When the user clicks the notification, SecondActivity will start up.
-            var resultIntent = new Intent(context, typeof(MainActivity));
+                // When the user clicks the notification, SecondActivity will start up.
+                var resultIntent = new Intent(context, typeof(MainActivity));
 
-            // Pass some values to SecondActivity:
-            resultIntent.PutExtras(valuesForActivity);
+                // Pass some values to SecondActivity:
+                resultIntent.PutExtras(valuesForActivity);
 
-            // Construct a back stack for cross-task navigation:
-            var stackBuilder = TaskStackBuilder.Create(context);
-            stackBuilder.AddNextIntent(resultIntent);
+                // Construct a back stack for cross-task navigation:
+                var stackBuilder = TaskStackBuilder.Create(context);
+                stackBuilder.AddNextIntent(resultIntent);
 
-            // Create the PendingIntent with the back stack:
-            var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
+                // Create the PendingIntent with the back stack:
+                var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
-            var props = App.Current.Properties;
+                // Build the notification:
+                var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                              .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
+                              .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
+                              .SetContentTitle(title) // Set the title
+                              .SetNumber(1) // Display the count in the Content Info
+                              .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
+                              .SetContentText(content); // the message to display.
 
-
-            // Build the notification:
-            var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                          .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
-                          .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
-                          .SetContentTitle(title) // Set the title
-                          .SetNumber(1) // Display the count in the Content Info
-                          .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
-                          .SetContentText(content); // the message to display.
-
-            // Finally, publish the notification:
-            var notificationManager = NotificationManagerCompat.From(context);
-            notificationManager.Notify(DateTime.Now.Millisecond, builder.Build());
+                // Finally, publish the notification:
+                var notificationManager = NotificationManagerCompat.From(context);
+                notificationManager.Notify(DateTime.Now.Millisecond, builder.Build());
+            }
+            catch (Exception e)
+            {
+                WriteLog(e.StackTrace);
+            }
+          
         }
 
     }

@@ -17,7 +17,6 @@ namespace HairAppBl.Models
         {
             Routines = new List<string>();
             Created = DateTime.Now;
-            Name = "Care day";
             Scheduled = new ScheduleDefinition();
  
         }
