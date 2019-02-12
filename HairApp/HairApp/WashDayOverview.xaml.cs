@@ -18,12 +18,14 @@ namespace HairApp
 	{
         List<WashingDayDefinition> mWashingDays;
         HairAppBl.Interfaces.IHairBl mHairbl;
+	AlarmController mAlarmController;
 
-        public WashDayOverview(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl  hairbl)
-		{
-			InitializeComponent ();
+        public WashDayOverview(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl  hairbl, AlarmController ac)
+	{
+	    InitializeComponent ();
             mWashingDays = washingDays;
             mHairbl = hairbl;       
+	    mAlarmController = ac;
             var washingDayDefinition = new WashingDayDefinition();
             RefreshList();
             AddWashday.Clicked += AddWashday_Clicked;
@@ -32,8 +34,9 @@ namespace HairApp
         private void AddWashday_Clicked(object sender, EventArgs e)
         {
             var def = new WashingDayDefinition();
-            def.ID = Guid.NewGuid().ToString();
-            var editor = new WashDayEditor(def,true,mHairbl);
+	    def.ID = Guid.NewGuid().ToString();
+	     var contr = new HairAppBl.Controller.WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);                           
+            var editor = new WashDayEditor(contr,true,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
 
@@ -61,7 +64,8 @@ namespace HairApp
         private void WashDay_Edited(object sender, EventArgs e)
         {
             var item = ((WashingDayCell)sender);
-            var editor = new WashDayEditor(item.WashingDayDefinition, false,mHairbl);
+	    var contr = new HairAppBl.Controller.WashingDayEditorController(item.WashingDayDefinition, App.MainSession.GetAllDefinitions(), this.mAlarmController);               
+            var editor = new WashDayEditor(contr, false,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
         }
