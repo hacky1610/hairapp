@@ -82,7 +82,7 @@ namespace HairApp
         {
             App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL));
+            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL,this.mAlarmController));
         }
 
     }
