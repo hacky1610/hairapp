@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using HairAppBl;
+using HairAppBl.Controller;
 
 namespace HairApp
 {
