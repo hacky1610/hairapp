@@ -11,7 +11,8 @@ namespace HairAppBl.Controller
         readonly WashingDayDefinition mWashingDay;
         readonly ScheduleController mScheduleController;
         readonly List<RoutineDefinition> mAllRoutines;
-        public WashingDayEditorController(WashingDayDefinition wd, List<RoutineDefinition> allroutines)
+        readonly AlarmController mAlarmController;
+        public WashingDayEditorController(WashingDayDefinition wd, List<RoutineDefinition> allroutines,AlarmController ac)
         {
             if(wd == null)
                 throw new ArgumentNullException("wd");
@@ -19,6 +20,7 @@ namespace HairAppBl.Controller
             this.mWashingDay = wd;
             this.mAllRoutines = allroutines;
             this.mScheduleController = new ScheduleController(wd.Scheduled);
+            this.mAlarmController = ac;
         }
 
         public WashingDayDefinition GetModel()
@@ -112,8 +114,7 @@ namespace HairAppBl.Controller
         public void SaveInstances(string id,string name)
         {
             var sqlItem = new ScheduleSqlDefinition(mWashingDay.Scheduled,id,name);
-            var am = new AlarmController();
-            am.SaveWashDay(sqlItem);
+            mAlarmController.SaveWashDay(sqlItem);
 
         }
 

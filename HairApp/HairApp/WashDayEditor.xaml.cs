@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
@@ -23,21 +24,21 @@ namespace HairApp
         HairAppBl.Interfaces.IHairBl mHairbl;
 
 
-        public WashDayEditor (WashingDayDefinition def,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
-		{
-			InitializeComponent ();
+        public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
+	{
+	    InitializeComponent ();
             mHairbl = hairbl;
        
-            var washingDayDefinition =def;
             this.mCreate = create;
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions());
+
+            this.mWashingDayEditorController = wdController;
             RefreshList();
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;
 	    
-	        InitFields();
+	    InitFields();
         }
 	
 	    private void InitFields()
