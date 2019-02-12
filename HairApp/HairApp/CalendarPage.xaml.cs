@@ -17,7 +17,6 @@ namespace HairApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CalendarPage : ContentPage
 	{
-        HairAppBl.Interfaces.IHairBl mHairbl;
         Dictionary<DateTime, List<HairAppBl.Models.WashingDayDefinition>> mFutureDays;
 
         public CalendarPage(Dictionary<DateTime, List<HairAppBl.Models.WashingDayDefinition>> futureDays)

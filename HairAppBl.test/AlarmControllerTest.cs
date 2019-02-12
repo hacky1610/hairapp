@@ -13,12 +13,16 @@ namespace HairAppBl.Tests
         [Test]
         public void ControllerCanBeLoaded()
         {
-            AlarmController ac = new AlarmController(null);
+            var dbMock = new Moq.Mock<Interfaces.IDataBase>();
+            
+            AlarmController ac = new AlarmController(dbMock.Object);
             var days = ac.GetWashDays();
             Assert.NotNull(days);
         }
 
-     
+ 
+
+
 
 
 

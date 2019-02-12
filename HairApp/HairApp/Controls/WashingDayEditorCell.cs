@@ -20,8 +20,6 @@ namespace HairApp.Controls
         StackLayout buttonGroup;
         Label text;
         
-        public event EventHandler<EventArgs> Selected;
-        public event EventHandler<EventArgs> DeSelected;
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> MovedUp;
         public event EventHandler<EventArgs> MovedDown;

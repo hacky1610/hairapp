@@ -16,7 +16,6 @@ namespace HairApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WashDayInstance : ContentPage
 	{
-        private WashingDayEditorController mWashingDayEditorController;
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
         private HairAppBl.Models.WashingDayInstance mInstance;
         public WashDayInstance(HairAppBl.Models.WashingDayInstance instance)
