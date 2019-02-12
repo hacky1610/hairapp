@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace HairAppBl.Controller
 {
-  public class FileDB
+  public class FileDB:IDataBase
     {
         private readonly String dbFile;
 
