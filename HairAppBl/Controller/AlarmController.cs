@@ -10,10 +10,10 @@ namespace HairAppBl.Controller
 {
     public class AlarmController
     {
-        private readonly String dbFile;
-        public AlarmController()
+        private readonly IDataBase database;
+        public AlarmController(IDataBase db)
         {
-            this.dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json");
+            this.database = db
         }
 
         public void SaveWashDay(ScheduleSqlDefinition def)
@@ -24,18 +24,15 @@ namespace HairAppBl.Controller
                 list.Remove(def.ID);
             list.Add(def.ID, def);
              
-            string json = JsonConvert.SerializeObject(list);
-            File.WriteAllText(dbFile, json);
+            db.Save(list);
         }
 
 
         public Dictionary<string, ScheduleSqlDefinition> Load()
         {
             try
-            {
-                List<string> wdId = new List<string>();
-                var json = File.ReadAllText(dbFile);
-                return (Dictionary<string, ScheduleSqlDefinition>)JsonConvert.DeserializeObject(json, typeof(Dictionary<string, ScheduleSqlDefinition>));
+            {               
+                return db.Load<Dictionary<string, ScheduleSqlDefinition>>();
             }
             catch(Exception e)
             {
