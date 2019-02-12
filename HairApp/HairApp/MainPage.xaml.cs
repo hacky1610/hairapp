@@ -20,10 +20,16 @@ namespace HairApp
             OpenWashDayOverview.Source = "edit.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
             ShowCalendar.Source = "calendar.png";
-         
-
 
             TestPage.Clicked += TestPage_Clicked;
+
+            ShowCalendar.Clicked += ShowCalendar_Clicked;
+
+        }
+
+        private void ShowCalendar_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CalendarPage(App.MainSession.GetFutureDays()));
 
         }
 

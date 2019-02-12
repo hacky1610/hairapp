@@ -25,6 +25,7 @@ namespace HairApp.Droid
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            XamForms.Controls.Droid.Calendar.Init();
             myApp = new App();
             LoadApplication(myApp);
 

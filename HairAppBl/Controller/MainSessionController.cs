@@ -64,6 +64,18 @@ namespace HairAppBl.Controller
             return diff;
         }
 
+        public Dictionary<DateTime, List<Models.WashingDayDefinition>> GetFutureDays()
+        {
+            var c = new FutureDayListController();
+            foreach (var d in MainSession.WashingDays)
+            {
+                var scheduleController = new ScheduleController(d.Scheduled);
+                c.Add(d,scheduleController.GetScheduledDays());
+            }
+            return c.GetAllDays();
+
+        }
+
         public CommingDays NextDay()
         {
             var diff = new CommingDays();
