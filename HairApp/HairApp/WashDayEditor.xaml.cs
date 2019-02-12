@@ -30,7 +30,8 @@ namespace HairApp
        
             var washingDayDefinition =def;
             this.mCreate = create;
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions());
+	    var ac = new AlarmController(new FileDB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json");));
+            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions(),ac);
             RefreshList();
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
