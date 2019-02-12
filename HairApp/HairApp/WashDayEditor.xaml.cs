@@ -24,23 +24,21 @@ namespace HairApp
         HairAppBl.Interfaces.IHairBl mHairbl;
 
 
-        public WashDayEditor (WashingDayDefinition def,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 	{
-		InitializeComponent ();
+	    InitializeComponent ();
             mHairbl = hairbl;
        
-            var washingDayDefinition =def;
             this.mCreate = create;
-	    var fileDb = new FileDB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json"));
-	    var ac = new AlarmController(fileDb);
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions(),ac);
+
+            this.mWashingDayEditorController = wdController;
             RefreshList();
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;
 	    
-	        InitFields();
+	    InitFields();
         }
 	
 	    private void InitFields()
