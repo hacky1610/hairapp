@@ -8,6 +8,7 @@ namespace HairAppBl.Tests
 {
     public class AlarmControllerTest
     {
+
     
         [Test]
         public void ControllerCanBeLoaded()

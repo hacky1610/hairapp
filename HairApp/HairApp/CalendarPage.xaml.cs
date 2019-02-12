@@ -18,49 +18,67 @@ namespace HairApp
 	public partial class CalendarPage : ContentPage
 	{
         HairAppBl.Interfaces.IHairBl mHairbl;
-
+        Dictionary<DateTime, List<HairAppBl.Models.WashingDayDefinition>> mFutureDays;
 
         public CalendarPage(Dictionary<DateTime, List<HairAppBl.Models.WashingDayDefinition>> futureDays)
 		{
 			InitializeComponent();
+            mFutureDays = futureDays;
             var cal = new Calendar
             {
-                BorderColor = Color.Pink,
+                BorderColor = Color.White,
                 BorderWidth = 3,
-                BackgroundColor = Color.Pink,
+                BackgroundColor = Color.White,
                 StartDay = DayOfWeek.Monday,
                 StartDate = DateTime.Now,
-                 
-            };
+                SelectedBorderColor = Color.Black,
+                SelectedBackgroundColor = Color.Gray
 
-            foreach(var day in futureDays)
+            };
+            cal.SpecialDates.Clear();
+
+            foreach (var day in futureDays)
             {
+                var pattern = new BackgroundPattern(1);
+                pattern.Pattern = new List<Pattern>();
+                float height = 1.0f;
+                foreach(var i in day.Value)
+                {
+
+                    pattern.Pattern.Add(new Pattern() { WidthPercent = 1f, HightPercent = height/day.Value.Count, Color = i.ItemColor });
+                }
+
                 var specialDate = new SpecialDate(day.Key)
                 {
                     BackgroundColor = Color.Blue,
                     Selectable = true,
+                    BackgroundPattern = pattern,
                 };
                 cal.SpecialDates.Add(specialDate);
             }
 
-            cal.SpecialDates.Add(new SpecialDate(DateTime.Now.AddDays(2)) {
-                BackgroundColor = Color.Blue,
-                Selectable = true,
-                BackgroundPattern = new BackgroundPattern(1)
-                {
-                    Pattern = new List<Pattern>
-                            {
-                                new Pattern{ WidthPercent = 1f, HightPercent = 0.25f, Color = Color.Red},
-                                new Pattern{ WidthPercent = 1f, HightPercent = 0.25f, Color = Color.Purple},
-                                new Pattern{ WidthPercent = 1f, HightPercent = 0.25f, Color = Color.Green},
-                                new Pattern{ WidthPercent = 1f, HightPercent = 0.25f, Color = Color.Yellow}
-                            }
-                }
-            });
+            cal.DateClicked += Cal_DateClicked;
             CalendarFrame.Content = cal;
         }
 
-    
+        private void Cal_DateClicked(object sender, DateTimeEventArgs e)
+        {
+            RefreshList(e.DateTime);
+        }
 
+        private void RefreshList(DateTime date)
+        {
+            this.Washdaylist.Children.Clear();
+            if (mFutureDays.ContainsKey(date))
+            {
+                foreach (var d in mFutureDays[date])
+                {
+                    var c = new Controls.WashingDayCell(d, App.BL);
+                    this.Washdaylist.Children.Add(c.View);
+                }
+            }
+
+           
+        }
     }
 }

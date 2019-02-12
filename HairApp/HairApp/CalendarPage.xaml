@@ -4,6 +4,13 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="HairApp.CalendarPage">
     <StackLayout Style="{StaticResource PageContent}">
-        <ScrollView x:Name="CalendarFrame"></ScrollView>
+        <ScrollView >
+            <StackLayout>
+                <ContentView x:Name="CalendarFrame"></ContentView>
+                <StackLayout x:Name="Washdaylist">
+                </StackLayout>
+            </StackLayout>
+           
+        </ScrollView>
     </StackLayout>
 </ContentPage>
