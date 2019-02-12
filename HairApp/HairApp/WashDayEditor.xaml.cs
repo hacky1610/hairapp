@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
@@ -24,13 +25,15 @@ namespace HairApp
 
 
         public WashDayEditor (WashingDayDefinition def,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
-		{
-			InitializeComponent ();
+	{
+		InitializeComponent ();
             mHairbl = hairbl;
        
             var washingDayDefinition =def;
             this.mCreate = create;
-            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions());
+	    var fileDb = new FileDB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json"));
+	    var ac = new AlarmController(fileDb);
+            this.mWashingDayEditorController = new WashingDayEditorController(washingDayDefinition, App.MainSession.GetAllDefinitions(),ac);
             RefreshList();
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;

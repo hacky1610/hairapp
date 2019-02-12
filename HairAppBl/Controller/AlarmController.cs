@@ -13,7 +13,7 @@ namespace HairAppBl.Controller
         private readonly IDataBase database;
         public AlarmController(IDataBase db)
         {
-            this.database = db
+            this.database = db;
         }
 
         public void SaveWashDay(ScheduleSqlDefinition def)
@@ -24,7 +24,7 @@ namespace HairAppBl.Controller
                 list.Remove(def.ID);
             list.Add(def.ID, def);
              
-            db.Save(list);
+             this.database.Save(list);
         }
 
 
@@ -32,7 +32,7 @@ namespace HairAppBl.Controller
         {
             try
             {               
-                return db.Load<Dictionary<string, ScheduleSqlDefinition>>();
+                return  this.database.Load<Dictionary<string, ScheduleSqlDefinition>>();
             }
             catch(Exception e)
             {
