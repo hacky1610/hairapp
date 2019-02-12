@@ -13,6 +13,7 @@ using Android.Support.V4.App;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using HairAppBl;
 using System.IO;
+using HairAppBl.Controller;
 
 namespace HairApp.Droid
 {
@@ -61,8 +62,8 @@ namespace HairApp.Droid
 
         void  ButtonOnClick(Context context)
         {
-
-            var alarmController = new HairAppBl.Controller.AlarmController();
+            var fileDb = new FileDB(Constants.SchedulesStorageFile);
+            var alarmController = new HairAppBl.Controller.AlarmController(fileDb);
             var washdays = alarmController.GetWashDays();
 
             if (washdays.Count == 0)

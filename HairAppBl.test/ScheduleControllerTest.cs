@@ -8,8 +8,19 @@ namespace HairAppBl.Tests
 {
     public class ScheduleControllerTest
     {
-    
-      
+        System.Collections.Generic.List<RoutineDefinition> allRoutines;
+        [SetUp]
+        public void Setup()
+        {
+            allRoutines = new System.Collections.Generic.List<RoutineDefinition>();
+            allRoutines.Add(RoutineDefinition.Create("Wash", "wash", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Creme", "Creme", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Cut", "cut", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("DoSomething", "dosomething", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Foo", "bar", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", ""));
+        }
+
         [Test]
         public void GetNextWeekDay_OneDayBefore()
         {
@@ -30,7 +41,8 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_CheckDefault()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             var res = wdc.GetScheduledDays();
 
             Assert.AreEqual(DayOfWeek.Monday, res[0].DayOfWeek );
@@ -41,7 +53,9 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_CheckOtherWeekDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday
@@ -57,7 +71,9 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_Period2()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.Period = 2;
             wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 5);
 
@@ -71,7 +87,9 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_Period2_twoDays()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday,
@@ -93,7 +111,9 @@ namespace HairAppBl.Tests
         public void IsCareDay_TodayIsCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday,
@@ -112,7 +132,9 @@ namespace HairAppBl.Tests
         public void IsCareDay_TodayIsNoCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday,
@@ -131,7 +153,9 @@ namespace HairAppBl.Tests
         public void Time2CareDay_is2()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday,
@@ -150,7 +174,9 @@ namespace HairAppBl.Tests
         public void Time2CareDay_is0()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
             {
                 DayOfWeek.Sunday,

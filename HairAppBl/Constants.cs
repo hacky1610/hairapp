@@ -1,12 +1,13 @@
 ﻿using System;
+using System.IO;
 
 namespace HairAppBl
 {
     public class Constants
     {
-        public string Foo 
+        public static string SchedulesStorageFile 
         {
-            get => "Hello";
+            get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json");
         }
     }
 }

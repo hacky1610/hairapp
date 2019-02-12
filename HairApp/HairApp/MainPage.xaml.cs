@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using HairAppBl;
+using HairAppBl.Controller;
 
 namespace HairApp
 {
     public partial class MainPage : ContentPage
     {
-
+        private AlarmController mAlarmController;
         public MainPage()
         {
             App.BL.Logger.Call("MainPage");
@@ -24,6 +25,9 @@ namespace HairApp
             TestPage.Clicked += TestPage_Clicked;
 
             ShowCalendar.Clicked += ShowCalendar_Clicked;
+
+            var fileDb = new FileDB(Constants.SchedulesStorageFile);
+            this.mAlarmController = new AlarmController(fileDb);
 
         }
 
@@ -72,7 +76,7 @@ namespace HairApp
         private void OpenCareDayCommand(string id)
         {
             var day = App.MainSession.GetWashingDayById(id);
-            var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions());
+            var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
             var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
              Navigation.PushAsync(new WashDayInstance(wdInstance));
         }
@@ -86,7 +90,7 @@ namespace HairApp
         {
             App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL));
+            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL,mAlarmController));
         }
 
     }

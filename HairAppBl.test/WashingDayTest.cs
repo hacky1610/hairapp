@@ -25,21 +25,26 @@ namespace HairAppBl.Tests
         public void ControllerCanBeLoaded()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            new WashingDayEditorController(wd, allRoutines);
+            AlarmController ac = new AlarmController(null);
+            new WashingDayEditorController(wd, allRoutines,ac);
             Assert.Pass();
         }
 
         [Test]
         public void ControllerConstructorCheckNullArgument()
         {
-            Assert.Throws<System.ArgumentNullException>(delegate { new WashingDayEditorController(null,allRoutines); });
+            AlarmController ac = new AlarmController(null);
+
+            Assert.Throws<System.ArgumentNullException>(delegate { new WashingDayEditorController(null,allRoutines,ac); });
         }
 
         [Test]
         public void RoutineCanBeAdded()
         {
              WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
             var r = allRoutines[0];
             wdc.AddRoutine(r);
             Assert.True(wdc.GetRoutineDefinitions().Contains(r));
@@ -50,7 +55,9 @@ namespace HairAppBl.Tests
         public void RoutineCanBeRemoved()
         {
              WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
             var r = allRoutines[0];
             wdc.AddRoutine(r);
             wdc.RemoveRoutine(r);
@@ -62,7 +69,9 @@ namespace HairAppBl.Tests
         public void RoutineCanBeAdded_Order_is_correct()
         {
              WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
             wdc.AddRoutine(allRoutines[5]);
             wdc.AddRoutine(allRoutines[1]);
             wdc.AddRoutine(allRoutines[2]);
@@ -88,8 +97,9 @@ namespace HairAppBl.Tests
         public void AddRoutine_CheckNullArgument()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
            
             Assert.Throws<System.ArgumentNullException>(delegate { wdc.AddRoutine(null); });
         }
@@ -98,7 +108,9 @@ namespace HairAppBl.Tests
         public void MoveDown()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
             var unused = wdc.GetUnusedRoutineDefinitions();
             wdc.AddRoutine(unused[0]);
             wdc.AddRoutine(unused[1]);
@@ -111,7 +123,9 @@ namespace HairAppBl.Tests
         public void MoveUp()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines);
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd,allRoutines,ac);
             var unused = wdc.GetUnusedRoutineDefinitions();
             wdc.AddRoutine(unused[0]);
             wdc.AddRoutine(unused[1]);

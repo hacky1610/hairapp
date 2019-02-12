@@ -8,6 +8,8 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using System.Globalization;
+using HairAppBl.Controller;
+using HairAppBl;
 
 namespace HairApp.Droid
 {
@@ -45,7 +47,9 @@ namespace HairApp.Droid
             if (id != null)
             {
                 var day =  App.MainSession.GetWashingDayById(id);
-                var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions());
+                var fileDb = new FileDB(Constants.SchedulesStorageFile);
+                var alarmController = new HairAppBl.Controller.AlarmController(fileDb);
+                var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
                 var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
                 myApp.GetNavigation().PushAsync(new WashDayInstance(wdInstance));
             }
