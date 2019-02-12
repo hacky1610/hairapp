@@ -13,7 +13,7 @@ namespace HairAppBl.Controller
         private readonly IDataBase database;
         public AlarmController(IDataBase db)
         {
-            this.database = db
+            this.database = db;
         }
 
         public void SaveWashDay(ScheduleSqlDefinition def)
