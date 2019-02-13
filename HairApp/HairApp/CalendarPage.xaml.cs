@@ -22,6 +22,11 @@ namespace HairApp
         public CalendarPage(Dictionary<DateTime, List<HairAppBl.Models.WashingDayDefinition>> futureDays)
 		{
 			InitializeComponent();
+
+            var navi = new Controls.NavigationControl("Home", "");
+            NavigationContainer.Content = navi.View;
+            navi.LeftButton.Clicked += LeftButton_Clicked; ;
+
             mFutureDays = futureDays;
             var cal = new Calendar
             {
@@ -58,6 +63,11 @@ namespace HairApp
 
             cal.DateClicked += Cal_DateClicked;
             CalendarFrame.Content = cal;
+        }
+
+        private void LeftButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
 
         private void Cal_DateClicked(object sender, DateTimeEventArgs e)

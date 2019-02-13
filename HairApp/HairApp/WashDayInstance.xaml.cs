@@ -24,11 +24,20 @@ namespace HairApp
        
             mInstance =  instance;
 
-            OKButton.Clicked += OKButton_Clicked;
+            var saveClose = new Controls.NavigationControl("Cancel", "Save");
+            SaveButtonContainer.Content = saveClose.View;
+
+            saveClose.RightButton.Clicked += OKButton_Clicked;
+            saveClose.LeftButton.Clicked += CancelButton_Clicked;
             RefreshList();
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
+
+        private void CancelButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }

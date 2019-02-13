@@ -11,25 +11,25 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    public class SaveCancelControl : ViewCell
+    public class NavigationControl : ViewCell
     {
 
-        public readonly Button OkButton;
-        public readonly Button CancelButton;
-        public SaveCancelControl()
+        public readonly Button LeftButton;
+        public readonly Button RightButton;
+        public NavigationControl(string leftButtonText,string rightButtonText)
         {
             var grid = new Grid();
-            grid.BackgroundColor = Color.LightGray;
+            grid.BackgroundColor = Color.FromHex("E56D0D");
             grid.HorizontalOptions = LayoutOptions.FillAndExpand;
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            OkButton = new Button { Text = "Save", HorizontalOptions = LayoutOptions.Fill , BackgroundColor = Color.Transparent};
-            CancelButton = new Button { Text = "Cancel", HorizontalOptions = LayoutOptions.Fill, BackgroundColor = Color.Transparent };
+            LeftButton = new Button { Text = leftButtonText, HorizontalOptions = LayoutOptions.Fill , BackgroundColor = Color.Transparent};
+            RightButton = new Button { Text = rightButtonText, HorizontalOptions = LayoutOptions.Fill, BackgroundColor = Color.Transparent };
 
-            grid.Children.Add(CancelButton, 0, 0);
-            grid.Children.Add(OkButton, 1, 0);
+            grid.Children.Add(LeftButton, 0, 0);
+            grid.Children.Add(RightButton, 1, 0);
             View = grid;
 
         }
