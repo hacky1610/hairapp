@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="XamForms.Controls.Calendar" Version="1.1.1" />
     <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
   </ItemGroup>
 
@@ -35,6 +36,9 @@
   <ItemGroup>
     <Compile Update="LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>

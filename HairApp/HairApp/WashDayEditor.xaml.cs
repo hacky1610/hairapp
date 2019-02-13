@@ -34,6 +34,9 @@ namespace HairApp
             this.mWashingDayEditorController = wdController;
             RefreshList();
 
+            var saveClose = new Controls.SaveCancelControl();
+            SaveButtonContainer.Content = saveClose.View;
+
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             this.OKButton.Clicked += OKButton_Clicked;
             this.CancelButton.Clicked += CancelButton_Clicked;

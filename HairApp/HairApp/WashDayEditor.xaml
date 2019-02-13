@@ -2,8 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             x:Class="HairApp.WashDayEditor">
+             x:Class="HairApp.WashDayEditor"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout>
+        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"  />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+                <Button Text="Cancel" x:Name="CancelButton" Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" BackgroundColor="Transparent"/>
+                <Button Text="Save" x:Name="OKButton" Grid.Row="0" Grid.Column="1" HorizontalOptions="Fill" BackgroundColor="Transparent"/>
+        </Grid>
+        <ContentView x:Name="SaveButtonContainer">
+            
+        </ContentView>
     <StackLayout Style="{StaticResource PageContent}">
+      
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />
         <ScrollView>
@@ -46,9 +65,7 @@
 
             </StackLayout>
         </ScrollView>
-        <StackLayout Orientation="Horizontal">
-            <Button Text="Cancel" x:Name="CancelButton" />
-            <Button Text="OK" x:Name="OKButton"/>
-        </StackLayout>
+       
+    </StackLayout>
     </StackLayout>
 </ContentPage>
