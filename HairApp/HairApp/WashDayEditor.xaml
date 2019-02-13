@@ -5,23 +5,9 @@
              x:Class="HairApp.WashDayEditor"
              NavigationPage.HasNavigationBar="false">
     <StackLayout>
-        <Grid HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"  >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"  />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <ContentView x:Name="SaveButtonContainer"/>
 
-
-                <Button Text="Cancel" x:Name="CancelButton" Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" BackgroundColor="Transparent"/>
-                <Button Text="Save" x:Name="OKButton" Grid.Row="0" Grid.Column="1" HorizontalOptions="Fill" BackgroundColor="Transparent"/>
-        </Grid>
-        <ContentView x:Name="SaveButtonContainer">
-            
-        </ContentView>
-    <StackLayout Style="{StaticResource PageContent}">
+        <StackLayout Style="{StaticResource PageContent}">
       
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />

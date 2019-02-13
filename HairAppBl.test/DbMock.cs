@@ -10,7 +10,7 @@ namespace HairAppBl.Controller
 {
   public class DbMock:IDataBase
     {
-        private readonly String database;
+        private  String database;
 
         public DbMock()
         {

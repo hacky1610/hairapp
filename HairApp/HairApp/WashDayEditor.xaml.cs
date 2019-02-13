@@ -38,8 +38,8 @@ namespace HairApp
             SaveButtonContainer.Content = saveClose.View;
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
-            this.OKButton.Clicked += OKButton_Clicked;
-            this.CancelButton.Clicked += CancelButton_Clicked;
+            saveClose.OkButton.Clicked += OKButton_Clicked;
+            saveClose.CancelButton.Clicked += CancelButton_Clicked;
 	    
 	    InitFields();
         }

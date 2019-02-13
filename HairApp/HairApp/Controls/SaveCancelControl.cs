@@ -14,15 +14,16 @@ namespace HairApp.Controls
     public class SaveCancelControl : ViewCell
     {
 
-        Button OkButton;
-        Button CancelButton;
+        public readonly Button OkButton;
+        public readonly Button CancelButton;
         public SaveCancelControl()
         {
             var grid = new Grid();
+            grid.BackgroundColor = Color.LightGray;
             grid.HorizontalOptions = LayoutOptions.FillAndExpand;
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto});
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto});
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
             OkButton = new Button { Text = "Save", HorizontalOptions = LayoutOptions.Fill , BackgroundColor = Color.Transparent};
             CancelButton = new Button { Text = "Cancel", HorizontalOptions = LayoutOptions.Fill, BackgroundColor = Color.Transparent };
