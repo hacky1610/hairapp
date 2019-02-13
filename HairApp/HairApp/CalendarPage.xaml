@@ -11,8 +11,17 @@
             <ScrollView >
                 <StackLayout>
                     <ContentView x:Name="CalendarFrame"></ContentView>
-                    <StackLayout x:Name="Washdaylist">
+                    <StackLayout x:Name="PlanedWashDaysContainer" IsVisible="False">
+                        <Label Text="Planed Care Days"></Label>
+                        <StackLayout x:Name="PlanedWashDays">
+                        </StackLayout>
                     </StackLayout>
+                    <StackLayout x:Name="DoneWashDaysContainer" IsVisible="False">
+                        <Label Text="Finished Care Days"></Label>
+                        <StackLayout x:Name="DoneWashDays">
+                        </StackLayout>
+                    </StackLayout>
+
                 </StackLayout>
 
             </ScrollView>

@@ -17,12 +17,16 @@ namespace HairApp
 	public partial class WashDayInstance : ContentPage
 	{
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
-        private HairAppBl.Models.WashingDayInstance mInstance;
-        public WashDayInstance(HairAppBl.Models.WashingDayInstance instance)
+        private WashingDayInstance mInstance;
+        private WashingDayDefinition mDefinition;
+        public event EventHandler<WashDayInstanceEventArgs> OkClicked;
+
+        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
 		{
 			InitializeComponent ();
        
             mInstance =  instance;
+            mDefinition = definition;
 
             var saveClose = new Controls.NavigationControl("Cancel", "Save");
             SaveButtonContainer.Content = saveClose.View;
@@ -34,6 +38,7 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
+            mDefinition.Instances.Add(mInstance);
             Navigation.PopAsync();
         }
 
@@ -51,6 +56,18 @@ namespace HairApp
                 var c = new Controls.RoutineInstanceCell(r,App.BL);
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
+            }
+        }
+
+        public class WashDayInstanceEventArgs : EventArgs
+        {
+            public Boolean Created { get; set; }
+            public WashingDayInstance Instance { get; set; }
+
+            public WashDayInstanceEventArgs(WashingDayInstance instance, Boolean create)
+            {
+                this.Instance = instance;
+                this.Created = create;
             }
         }
 

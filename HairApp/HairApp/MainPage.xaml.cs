@@ -33,7 +33,7 @@ namespace HairApp
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession.GetFutureDays()));
+            Navigation.PushAsync(new CalendarPage(App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
 
         }
 
@@ -76,9 +76,17 @@ namespace HairApp
         private void OpenCareDayCommand(string id)
         {
             var day = App.MainSession.GetWashingDayById(id);
-            var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
-            var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
-             Navigation.PushAsync(new WashDayInstance(wdInstance));
+            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
+            var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions());
+            var instancePage = new WashDayInstance(day,wdInstance);
+            instancePage.OkClicked += InstancePage_OkClicked;
+
+            Navigation.PushAsync(instancePage);
+        }
+
+        private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void TestPage_Clicked(object sender, EventArgs e)

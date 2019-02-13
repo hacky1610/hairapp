@@ -66,11 +66,26 @@ namespace HairAppBl.Controller
 
         public Dictionary<DateTime, List<Models.WashingDayDefinition>> GetFutureDays()
         {
-            var c = new FutureDayListController();
+            var c = new FutureDayListController<WashingDayDefinition>();
             foreach (var d in MainSession.WashingDays)
             {
                 var scheduleController = new ScheduleController(d.Scheduled);
-                c.Add(d,scheduleController.GetScheduledDays());
+                c.AddMultiple(d,scheduleController.GetScheduledDays());
+            }
+            return c.GetAllDays();
+
+        }
+
+        public Dictionary<DateTime, List<Models.WashingDayInstance>> GetInstances()
+        {
+            var c = new FutureDayListController<WashingDayInstance>();
+            foreach (var d in MainSession.WashingDays)
+            {
+                foreach(var i in d.Instances)
+                {
+                    c.Add(i, i.Day);
+                }
+               
             }
             return c.GetAllDays();
 

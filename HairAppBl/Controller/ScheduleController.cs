@@ -84,5 +84,10 @@ namespace HairAppBl.Controller
         {
             return ((x.Year == y.Year) && (x.Month == y.Month) && (x.Day == y.Day));
         }
+
+        public static DateTime GetToday()
+        {
+            return new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+        }
     }
 }

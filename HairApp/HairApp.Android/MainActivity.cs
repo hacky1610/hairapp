@@ -48,10 +48,11 @@ namespace HairApp.Droid
             {
                 var day =  App.MainSession.GetWashingDayById(id);
                 var fileDb = new FileDB(Constants.SchedulesStorageFile);
-                var alarmController = new HairAppBl.Controller.AlarmController(fileDb);
-                var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
-                myApp.GetNavigation().PushAsync(new WashDayInstance(wdInstance));
+                var alarmController = new AlarmController(fileDb);
+
+                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions());
+                myApp.GetNavigation().PushAsync(new WashDayInstance(day,wdInstance));
             }
         }
 
