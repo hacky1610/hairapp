@@ -14,7 +14,6 @@ namespace HairAppBl.Controller
 
         public DbMock()
         {
-            this.dbFile = file;
         }
 
         public void Save(Object o)
