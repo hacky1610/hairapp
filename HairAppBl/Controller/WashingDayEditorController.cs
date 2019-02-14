@@ -100,6 +100,17 @@ namespace HairAppBl.Controller
             return null;
         }
 
+        public WashingDayInstance GetWashingDayInstance(DateTime date)
+        {
+            foreach(var i in mWashingDay.Instances)
+            {
+                if (ScheduleController.IsSameDay(date, i.Day))
+                    return i;
+            }
+
+            return new WashingDayInstance(mWashingDay.ID, Guid.NewGuid().ToString(), date, GetRoutineDefinitions());
+        }
+
         public List<RoutineDefinition> GetUnusedRoutineDefinitions()
         {
             var tempList = new List<RoutineDefinition>();
@@ -130,12 +141,7 @@ namespace HairAppBl.Controller
             return routines;
         }
 
-        public WashingDayInstance GetWashingDayInstance()
-        {
-            var instance = new WashingDayInstance();
-
-            return instance;
-        }
+  
         
          public List<DateTime> GetScheduledDays()
         {

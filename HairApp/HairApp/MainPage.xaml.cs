@@ -21,8 +21,9 @@ namespace HairApp
             OpenWashDayOverview.Source = "edit.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
             ShowCalendar.Source = "calendar.png";
+            OpenStatistic.Source = "chart.png";
 
-            TestPage.Clicked += TestPage_Clicked;
+            //TestPage.Clicked += TestPage_Clicked;
 
             ShowCalendar.Clicked += ShowCalendar_Clicked;
 
@@ -53,10 +54,12 @@ namespace HairApp
                     OpenCareDay.Text = $"Lets do {timeToNexDay.Days[0].Name}";
                     OpenCareDay.Command = new Command<string>(OpenCareDayCommand);
                     OpenCareDay.CommandParameter = timeToNexDay.Days[0].ID;
+                    ValsImage.Source = "caredaytoday.jpg";
 
                 }
                 else
                 {
+                    ValsImage.Source = "caredaysoon.jpg";
                     TimeToNextCareDay.Text = $"Next care day {timeToNexDay.Days[0].Name} is in {timeToNexDay.Time2Wait} days";
                 }
             }
@@ -77,12 +80,14 @@ namespace HairApp
         {
             var day = App.MainSession.GetWashingDayById(id);
             var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
-            var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions());
+            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
+
             var instancePage = new WashDayInstance(day,wdInstance);
             instancePage.OkClicked += InstancePage_OkClicked;
 
             Navigation.PushAsync(instancePage);
         }
+
 
         private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
         {

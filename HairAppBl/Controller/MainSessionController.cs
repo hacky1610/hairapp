@@ -98,7 +98,7 @@ namespace HairAppBl.Controller
             foreach (var d in MainSession.WashingDays)
             {
                 var c = new ScheduleController(d.Scheduled);
-                var t = c.Time2NextCareDay(DateTime.Now);
+                var t = c.Time2NextCareDay(ScheduleController.GetToday());
                 if (t <= diff.Time2Wait)
                 {
                     diff.Time2Wait = t;

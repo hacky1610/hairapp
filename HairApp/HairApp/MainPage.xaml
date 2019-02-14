@@ -9,29 +9,37 @@
 
     <StackLayout>
         <!-- Place new controls here -->
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
         <StackLayout>
             <Label x:Name="TimeToNextCareDay" Text="" 
-           HorizontalOptions="Center"/>
+           HorizontalOptions="Center" FontSize="Medium"/>
+                <Image x:Name="ValsImage"></Image>
             <Button x:Name="OpenCareDay"></Button>
-        </StackLayout>
+                <!--<Button x:Name="TestPage" Text="Test" 
+           HorizontalOptions="End"/>-->
+            </StackLayout>
         
-        <Button x:Name="TestPage" Text="Test" 
-           HorizontalOptions="End"/>
-        <Grid>
+ 
+        </Frame>
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="End" >
+           
+            <Grid VerticalOptions="End" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            
-            <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0"/>
-            <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" />
-        </Grid>
-      
+
+                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
+                <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
+                <ImageButton  x:Name="OpenStatistic" Grid.Row="0" Grid.Column="2" Style="{StaticResource HomeButton}"/>
+
+            </Grid>
+        </Frame>
 
 
     </StackLayout>

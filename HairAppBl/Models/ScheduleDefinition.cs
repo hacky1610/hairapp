@@ -51,9 +51,7 @@ namespace HairAppBl.Models
             public Weekly()
             {
                 Period = 1;
-                WeekDays = new List<DayOfWeek>{
-                    DayOfWeek.Monday
-                };
+                WeekDays = new List<DayOfWeek>();
             }
 
         }
