@@ -57,7 +57,20 @@ namespace HairAppBl.Controller
             
         }
         
-        
+        public String GetSchedule()
+        {
+            if(mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
+            {
+                var days = String.Empty;
+                foreach (var d in mSchedule.WeeklyPeriod.WeekDays)
+                    days += $" {d},";
+                days.TrimEnd(',');
+                return $"Every{days} each {mSchedule.WeeklyPeriod.Period} week.";
+
+            }
+            return "";
+        }
+
         public static Boolean ContainsDay(List<DateTime> days, DateTime day)
         {
             foreach(var d in days)

@@ -25,6 +25,7 @@ namespace HairApp.Controls
 
             mCheckBox = new XLabs.Forms.Controls.CheckBox();
             mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
+            mCheckBox.Checked = instance.Checked;
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += (s, e) => {

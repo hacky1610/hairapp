@@ -90,7 +90,7 @@ namespace HairAppBl.Controller
             return tempList;
         }
 
-        private RoutineDefinition GetRoutineById(string id )
+        public RoutineDefinition GetRoutineById(string id )
         {
             foreach (var r in this.mAllRoutines)
             {
@@ -152,6 +152,11 @@ namespace HairAppBl.Controller
         public ScheduleController  GetScheduleController()
         {
             return mScheduleController;
+        }
+
+        public String GetSchedule()
+        {
+           return mScheduleController.GetSchedule();
         }
           
     }

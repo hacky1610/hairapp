@@ -35,10 +35,11 @@ namespace HairApp
         private void InitFields()
         {
             //Description
+            DescriptionFrame.IsVisible = false;
             if (!string.IsNullOrEmpty(mDefinition.Description))
             {
                 Description.Text = mDefinition.Description;
-                Description.IsVisible = true;
+                DescriptionFrame.IsVisible = true;
             }
 
             //Save close
@@ -50,6 +51,27 @@ namespace HairApp
 
             RefreshList();
 
+            //Needed Time
+            UsedTime.Time = mInstance.NeededTime;
+
+            //Comment
+            AddComment.Clicked += AddComment_Clicked;
+            Comment.Text = mInstance.Comment;
+            CommentFrame.IsVisible = false;
+            if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
+            
+
+        }
+
+        private void AddComment_Clicked(object sender, EventArgs e)
+        {
+            ShowComment();
+        }
+
+        private void ShowComment()
+        {
+            AddComment.IsVisible = false;
+            CommentFrame.IsVisible = true;
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
@@ -59,6 +81,9 @@ namespace HairApp
                 mDefinition.Instances.Add(mInstance);
                 mInstance.Saved = true;
             }
+
+            mInstance.Comment = Comment.Text;
+            mInstance.NeededTime = UsedTime.Time;
 
             Navigation.PopAsync();
         }

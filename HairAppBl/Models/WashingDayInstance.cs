@@ -9,9 +9,10 @@ namespace HairAppBl.Models
 
         public readonly List<RoutineInstance> Routines;
         public readonly String WashDayId;
-        public readonly String Comment;
+        public  String Comment;
         public readonly String Description;
         public  Boolean Saved;
+        public  TimeSpan NeededTime;
         public WashingDayInstance():base()
         {
             Routines = new List<RoutineInstance>();
@@ -22,6 +23,7 @@ namespace HairAppBl.Models
             Routines = new List<RoutineInstance>();
             Description = desc;
             Saved = false;
+            NeededTime = new TimeSpan();
             foreach (var r in routines)
             {
                 Routines.Add(new RoutineInstance(r.Name,r.Description));

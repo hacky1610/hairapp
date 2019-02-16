@@ -12,23 +12,27 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    public class WashingDayDefinitionCalendarCell : ViewCell
+    public class WashingDayInstanceCalendarCell : ViewCell
     {
         Label text;
+        
         private HairAppBl.Interfaces.IHairBl mHairBl;
-        public WashingDayEditorController WdController { get; set; }
+        private readonly WashingDayInstance Instance;
+        private readonly WashingDayDefinition Definition;
         private StackLayout mDetailsFrame;
-        public event EventHandler<WashingDayCellEventArgs> Edited;
+        public event EventHandler<WashingDayCellEventArgs> Openclicked;
 
-        public WashingDayDefinitionCalendarCell(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl)
+
+
+        public WashingDayInstanceCalendarCell(WashingDayInstance instance,WashingDayDefinition def, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
-            this.WdController = controller;
-            var def = WdController.GetModel();
+            this.Instance = instance;
+            this.Definition = def;
 
             text = new Label
             {
-                Text = def.Name,
+                Text = Definition.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
@@ -40,45 +44,46 @@ namespace HairApp.Controls
                 mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
             };
 
-            var descriptionLabel = Common.GetCalendarDetailsRow("description.png", new Label
+            var commentLabel = Common.GetCalendarDetailsRow("comment.png",new Label
             {
-                Text = def.Description,
+                Text = instance.Comment,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                IsVisible = !String.IsNullOrWhiteSpace(def.Description)
             },hairbl);
+            commentLabel.IsVisible = !String.IsNullOrWhiteSpace(instance.Comment);
 
-            var scheduleLabel = Common.GetCalendarDetailsRow("schedule.png", new Label
+            var showMore = new Button
             {
-                Text = WdController.GetSchedule(),
-                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-            }, hairbl);
-
-            var editButton = new Button
-            {
-                Text = "edit",
+                Text = "show more",
                 BackgroundColor = Color.Transparent,
                 TextColor = Color.Blue
             };
-            editButton.Clicked += EditButton_Clicked;
+            showMore.Clicked += ShowMoreButton_Clicked;
 
             var routineList = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
             };
 
-            var listContainer = Common.GetCalendarDetailsRow("list.png",routineList, hairbl);
-
-            foreach (var r in def.Routines)
+            foreach (var r in instance.Routines)
             {
-                routineList.Children.Add(new Label { Text = WdController.GetRoutineById(r).Name });
+                var check = new XLabs.Forms.Controls.CheckBox();
+                check.Checked = r.Checked;
+                check.IsEnabled = false;
+                var row = new StackLayout { Orientation = StackOrientation.Horizontal };
+                row.Children.Add(check);
+                row.Children.Add(new Label { Text = r.Name });
+                routineList.Children.Add(row);
             }
+
+            var routineFrame = Common.GetCalendarDetailsRow("list.png", routineList, hairbl);
+            var neededTime = Common.GetCalendarDetailsRow("time.png", new Label { Text = $"{instance.NeededTime.TotalMinutes} minutes"}, hairbl);
 
             mDetailsFrame = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
                 Style = (Style)hairbl.Resources["DetailsFrame"],
                 IsVisible = false,
-                Children = { descriptionLabel,scheduleLabel, listContainer , editButton}
+                Children = { commentLabel, routineFrame, neededTime, showMore}
             };
 
            
@@ -109,9 +114,9 @@ namespace HairApp.Controls
               
         }
 
-        private void EditButton_Clicked(object sender, EventArgs e)
+        private void ShowMoreButton_Clicked(object sender, EventArgs e)
         {
-            Edited(this, new WashingDayCellEventArgs(WdController));
+            Openclicked(this, new WashingDayCellEventArgs(Instance, Definition));
         }
 
         private ImageButton GetButton(string image)
@@ -127,11 +132,13 @@ namespace HairApp.Controls
 
         public class WashingDayCellEventArgs : EventArgs
         {
-            public readonly WashingDayEditorController Controller;
+            public readonly WashingDayInstance Instance;
+            public readonly WashingDayDefinition Definition;
 
-            public WashingDayCellEventArgs(WashingDayEditorController controller)
+            public WashingDayCellEventArgs(WashingDayInstance instance, WashingDayDefinition definition )
             {
-                this.Controller = controller;
+                this.Definition = definition;
+                this.Instance = instance;
             }
         }
 

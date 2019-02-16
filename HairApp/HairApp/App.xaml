@@ -53,7 +53,7 @@
 
             <!--Frame-->
             <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="OutlineColor" Value="White" />
+                <Setter Property="OutlineColor" Value="Black" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="Padding" Value="5,5,5,5" />
@@ -92,8 +92,23 @@
             </Style>
 
             <Style x:Key="DetailsFrame" TargetType="StackLayout">
-                <Setter Property="Margin" Value="20,0,0,0" />
+                <Setter Property="Margin" Value="10,0,10,0" />
             </Style>
+            
+            <!--Calendar-->
+            <Style x:Key="CalendarDetailsFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="Padding" Value="5,5,5,5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"
+                        />
+            </Style>
+
+            <Style x:Key="CalendarDetailsImage" TargetType="Image">
+                <Setter Property="HeightRequest" Value="30" />
+            </Style>
+
+            
 
 
 

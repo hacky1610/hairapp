@@ -10,11 +10,27 @@
 
             <Label Text="Do you care day"
                 Style="{StaticResource Heading}" />
+            <Frame x:Name="DescriptionFrame" Style="{StaticResource FrameStyle}">
             <Label x:Name="Description"
                 Style="{StaticResource InstanceDescription}" />
-            <StackLayout x:Name="RoutineList">
+            </Frame>
+              
+                <StackLayout x:Name="RoutineList">
+                   
+                </StackLayout>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label>Needed time</Label>
+                        <TimePicker x:Name="UsedTime" />
+                    </StackLayout>
+                </Frame>
+                <Button x:Name="AddComment" Text="Add comment" Style="{StaticResource AddDescriptionButton}"/>
+                <Frame  x:Name="CommentFrame" Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Editor x:Name="Comment" HeightRequest="150"/>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-        </StackLayout>
         </ScrollView>
 
     </StackLayout>

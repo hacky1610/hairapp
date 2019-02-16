@@ -11,6 +11,7 @@ using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
 using XamForms.Controls;
+using static HairApp.Controls.WashingDayDefinitionCalendarCell;
 
 namespace HairApp
 {
@@ -31,6 +32,8 @@ namespace HairApp
 
             mFutureDays = futureDays;
             mInstances = instances;
+            mMainSessionController = controller;
+
             var cal = new Calendar
             {
                 BorderColor = Color.White,
@@ -113,7 +116,9 @@ namespace HairApp
                 PlanedWashDaysContainer.IsVisible = true;
                 foreach (var d in mFutureDays[date])
                 {
-                    var c = new WashingDayDefinitionCalendarCell(d, App.BL);
+                    var wdController = new HairAppBl.Controller.WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
+                    var c = new WashingDayDefinitionCalendarCell(wdController, App.BL);
+                    c.Edited += WashingDayEdited;
                     this.PlanedWashDays.Children.Add(c.View);
                 }
             }
@@ -126,11 +131,22 @@ namespace HairApp
                 foreach (var d in mInstances[date])
                 {
                     var def = mMainSessionController.GetWashingDayById(d.WashDayID);
-                    var c = new WashingDayInstanceCell(d,def.Name, App.BL);
+                    var c = new WashingDayInstanceCalendarCell(d,def, App.BL);
+                    c.Openclicked += C_Openclicked;
                     this.DoneWashDays.Children.Add(c.View);
                 }
             }
+        }
 
+        private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)
+        {
+            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance));
+
+        }
+
+        private void WashingDayEdited(object sender, WashingDayCellEventArgs e)
+        {
+            Navigation.PushAsync(new WashDayEditor(e.Controller, false, App.BL));
 
         }
     }
