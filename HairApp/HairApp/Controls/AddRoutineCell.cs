@@ -44,7 +44,7 @@ namespace HairApp.Controls
 
                 var frame = new Frame
                 {
-                    Style = (Style)hairbl.Resources["RoutineFrame"],
+                    Style = (Style)hairbl.Resources["RoutineFrameSelect"],
                     Content = new StackLayout
                     {
                         Style = (Style)hairbl.Resources["RoutineContent"],

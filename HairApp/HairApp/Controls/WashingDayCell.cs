@@ -27,6 +27,7 @@ namespace HairApp.Controls
         {
             this.mHairBl = hairbl;
             this.WashingDayDefinition = def;
+
             text = new Label
             {
                 Text = WashingDayDefinition.Name,

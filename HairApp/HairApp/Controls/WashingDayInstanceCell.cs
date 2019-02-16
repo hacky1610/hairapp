@@ -23,13 +23,13 @@ namespace HairApp.Controls
         public WashingDayInstance WashingDayInstance{ get; set; }
 
 
-        public WashingDayInstanceCell(WashingDayInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashingDayInstanceCell(WashingDayInstance instance,string name, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
             this.WashingDayInstance = instance;
             text = new Label
             {
-                Text = "Name",
+                Text = name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };

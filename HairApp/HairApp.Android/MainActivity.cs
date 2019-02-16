@@ -51,8 +51,9 @@ namespace HairApp.Droid
                 var alarmController = new AlarmController(fileDb);
 
                 var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions());
-                myApp.GetNavigation().PushAsync(new WashDayInstance(day,wdInstance));
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(),day.Description);
+                myApp.MainPage.Navigation.PushAsync(new WashDayInstance(day,wdInstance));
+                
             }
         }
 
@@ -70,8 +71,8 @@ namespace HairApp.Droid
             var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
             var notifyTimeInInMilliseconds = utcTime.AddSeconds(-epochDif).Ticks / 10000;
 
-            alarmManager.SetRepeating(AlarmType.RtcWakeup, notifyTimeInInMilliseconds, 60001 * 60 , pendingIntent);
-            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
+            //alarmManager.SetRepeating(AlarmType.RtcWakeup, notifyTimeInInMilliseconds, 60001 * 60 , pendingIntent);
+            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
 
         }
 

@@ -8,6 +8,7 @@ namespace HairAppBl.Models
     public class WashingDayDefinition
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public string ID { get; set; }
         public List<string> Routines { get; set; }
         public List<WashingDayInstance> Instances { get; set; }

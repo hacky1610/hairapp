@@ -4,19 +4,23 @@
              xmlns:local="clr-namespace:HairApp"
              x:Class="HairApp.MainPage"
              NavigationPage.HasNavigationBar="false">
-    
-    
 
-    <StackLayout>
-        <!-- Place new controls here -->
+
+
+    <StackLayout Style="{StaticResource PageContent}">
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
+                <Label x:Name="Title" Text="Vals Hair App" 
+           VerticalOptions="Start" FontSize="Large"/>
+
+        </Frame>
         <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
         <StackLayout>
             <Label x:Name="TimeToNextCareDay" Text="" 
            HorizontalOptions="Center" FontSize="Medium"/>
                 <Image x:Name="ValsImage"></Image>
             <Button x:Name="OpenCareDay"></Button>
-                <!--<Button x:Name="TestPage" Text="Test" 
-           HorizontalOptions="End"/>-->
+                <Button x:Name="TestPage" Text="Test" 
+           HorizontalOptions="End"/>
             </StackLayout>
         
  

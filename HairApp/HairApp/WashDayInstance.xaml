@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HairApp.WashDayInstance"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout>
+    <StackLayout Style="{StaticResource Page}">
         <ContentView x:Name="SaveButtonContainer"/>
-        <StackLayout Style="{StaticResource PageContent}">
+        <ScrollView Style="{StaticResource ScrollPageContent}">        
+            <StackLayout Style="{StaticResource PageContent}" >
 
             <Label Text="Do you care day"
                 Style="{StaticResource Heading}" />
+            <Label x:Name="Description"
+                Style="{StaticResource InstanceDescription}" />
             <StackLayout x:Name="RoutineList">
             </StackLayout>
         </StackLayout>
+        </ScrollView>
+
     </StackLayout>
  
 </ContentPage>

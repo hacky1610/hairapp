@@ -25,13 +25,12 @@ namespace HairApp
 
 
         public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
-	{
-	    InitializeComponent ();
+	    {
+	        InitializeComponent ();
             mHairbl = hairbl;
-       
             this.mCreate = create;
-
             this.mWashingDayEditorController = wdController;
+
             RefreshList();
 
             var saveClose = new Controls.NavigationControl("Cancel","Save");
@@ -41,35 +40,84 @@ namespace HairApp
             saveClose.RightButton.Clicked += OKButton_Clicked;
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
 	    
-	    InitFields();
+	        InitFields();
         }
 	
 	    private void InitFields()
 	    {
+            var model = mWashingDayEditorController.GetModel();
+
+            //Title
             this.WashDayNameEntry.Placeholder = "Title";
             this.WashDayNameEntry.Text = mWashingDayEditorController.GetModel().Name;
 
-            this.StartDatePicker.MinimumDate = DateTime.Now;
+            //Description
+            this.Description.Placeholder = "Description";
+            this.AddDescription.Clicked += AddDescription_Clicked;
+            if(!String.IsNullOrWhiteSpace(model.Description))
+            {
+                AddDescription.IsVisible = false;
+                Description.IsVisible = true;
+                Description.Text = model.Description;
+            }
 
-            var schedule = mWashingDayEditorController.GetModel().Scheduled;
+            //Schedule
+            this.StartDatePicker.MinimumDate = DateTime.Now;
+            var schedule = model.Scheduled;
 
             this.StartDatePicker.Date = schedule.StartDate;
 
             foreach (var d in schedule.WeeklyPeriod.WeekDays)
                 setWeekDay(d);
 
-            mEntryWeeklyPeriod.Text = schedule.WeeklyPeriod.Period.ToString() ;
-		
-	    }
+            if (!schedule.WeeklyPeriod.WeekDays.Any())
+                setWeekDay(DayOfWeek.Monday);
 
-        private void SaveFields()
+            mEntryWeeklyPeriod.Items.Add("1");
+            mEntryWeeklyPeriod.Items.Add("2");
+            mEntryWeeklyPeriod.Items.Add("3");
+            mEntryWeeklyPeriod.Items.Add("4");
+            mEntryWeeklyPeriod.Items.Add("5");
+
+            mEntryWeeklyPeriod.SelectedIndex = schedule.WeeklyPeriod.Period + 1;
+
+        }
+
+        private void AddDescription_Clicked(object sender, EventArgs e)
         {
+            ShowDescription();
+        }
+
+        private void ShowDescription()
+        {
+            AddDescription.IsVisible = false;
+            Description.IsVisible = true;
+        }
+
+        private bool SaveFields()
+        {
+            if (String.IsNullOrWhiteSpace(WashDayNameEntry.Text))
+            {
+                DisplayAlert("Something is missing ", "You forgot to enter a title", "OK");
+                WashDayNameEntry.Focus();
+                return false;
+            }
+
+
+            //Title
+            mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
+
+            //Description
+            mWashingDayEditorController.GetModel().Description = Description.Text;
+
+            //Schedule
             var schedule = mWashingDayEditorController.GetModel().Scheduled;
 
-            mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
             schedule.WeeklyPeriod.WeekDays = getWeekDays();
-            schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.Text);
+            schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.SelectedItem);
             schedule.StartDate = StartDatePicker.Date;
+
+            return true;
         }
 
         private void setWeekDay(DayOfWeek day)
@@ -129,7 +177,8 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            SaveFields();
+            if (!SaveFields())
+                return;
             mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID, mWashingDayEditorController.GetModel().Name);
             Navigation.PopAsync();
             OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));

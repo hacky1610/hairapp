@@ -4,17 +4,21 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="HairApp.WashDayEditor"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout>
-        <ContentView x:Name="SaveButtonContainer"/>
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="SaveButtonContainer" />
 
-        <StackLayout Style="{StaticResource PageContent}">
+        <StackLayout Style="{StaticResource PageContent}" >
       
         <Label Text="Define your Care Day"
                 Style="{StaticResource Heading}" />
         <ScrollView>
             <StackLayout>
                 <Frame Style="{StaticResource FrameStyle}">
-                    <Entry x:Name="WashDayNameEntry"></Entry>
+                        <StackLayout>
+                            <Entry x:Name="WashDayNameEntry"/>
+                            <Button x:Name="AddDescription" Text="Add description" Style="{StaticResource AddDescriptionButton}"/>
+                            <Editor x:Name="Description" HeightRequest="150" Style="{StaticResource DescriptiontSection}"/>
+                        </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Orientation="Vertical">
@@ -22,7 +26,7 @@
                         <DatePicker x:Name="StartDatePicker"></DatePicker>
                     <StackLayout Orientation="Horizontal">
                         <Label>Every</Label>
-                        <Entry x:Name="mEntryWeeklyPeriod" Keyboard="Numeric"></Entry>
+                                <Picker  x:Name="mEntryWeeklyPeriod"  Style="{StaticResource PeriodPicker}"></Picker>
                         <Label>Weeks</Label>
                     </StackLayout>
                     <FlexLayout Wrap="Wrap"

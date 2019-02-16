@@ -21,6 +21,7 @@ namespace HairApp.Controls
             var grid = new Grid();
             grid.BackgroundColor = Color.FromHex("E56D0D");
             grid.HorizontalOptions = LayoutOptions.FillAndExpand;
+            
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });

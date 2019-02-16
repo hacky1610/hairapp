@@ -108,7 +108,7 @@ namespace HairAppBl.Controller
                     return i;
             }
 
-            return new WashingDayInstance(mWashingDay.ID, Guid.NewGuid().ToString(), date, GetRoutineDefinitions());
+            return new WashingDayInstance(mWashingDay.ID, Guid.NewGuid().ToString(), date, GetRoutineDefinitions(), mWashingDay.Description);
         }
 
         public List<RoutineDefinition> GetUnusedRoutineDefinitions()

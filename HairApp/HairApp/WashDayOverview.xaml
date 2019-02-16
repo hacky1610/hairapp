@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HairApp.WashDayOverview"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout>
-        <ContentView x:Name="NavigationContainer"/>
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="NavigationContainer" Margin="0,0,0,0"/>
         <StackLayout Style="{StaticResource PageContent}">
 
             <Label Text="All Care days"

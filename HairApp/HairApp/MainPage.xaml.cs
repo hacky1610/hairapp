@@ -23,7 +23,7 @@ namespace HairApp
             ShowCalendar.Source = "calendar.png";
             OpenStatistic.Source = "chart.png";
 
-            //TestPage.Clicked += TestPage_Clicked;
+            TestPage.Clicked += TestPage_Clicked;
 
             ShowCalendar.Clicked += ShowCalendar_Clicked;
 
@@ -34,7 +34,7 @@ namespace HairApp
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
+            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
 
         }
 

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="HairApp.CalendarPage"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout>
+    <StackLayout Style="{StaticResource Page}">
         <ContentView x:Name="NavigationContainer"/>
         <StackLayout Style="{StaticResource PageContent}">
 

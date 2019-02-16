@@ -20,6 +20,7 @@ namespace HairApp
         private WashingDayInstance mInstance;
         private WashingDayDefinition mDefinition;
         public event EventHandler<WashDayInstanceEventArgs> OkClicked;
+        private bool mCreate;
 
         public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
 		{
@@ -28,17 +29,37 @@ namespace HairApp
             mInstance =  instance;
             mDefinition = definition;
 
+            InitFields();
+        }
+
+        private void InitFields()
+        {
+            //Description
+            if (!string.IsNullOrEmpty(mDefinition.Description))
+            {
+                Description.Text = mDefinition.Description;
+                Description.IsVisible = true;
+            }
+
+            //Save close
             var saveClose = new Controls.NavigationControl("Cancel", "Save");
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
+
             RefreshList();
+
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            mDefinition.Instances.Add(mInstance);
+            if (!mInstance.Saved)
+            {
+                mDefinition.Instances.Add(mInstance);
+                mInstance.Saved = true;
+            }
+
             Navigation.PopAsync();
         }
 

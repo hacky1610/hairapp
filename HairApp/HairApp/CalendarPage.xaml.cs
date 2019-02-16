@@ -19,8 +19,9 @@ namespace HairApp
 	{
         Dictionary<DateTime, List<WashingDayDefinition>> mFutureDays;
         Dictionary<DateTime, List<WashingDayInstance>> mInstances;
+        MainSessionController mMainSessionController;
 
-        public CalendarPage(Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances)
+        public CalendarPage(MainSessionController controller, Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances)
 		{
 			InitializeComponent();
 
@@ -112,7 +113,7 @@ namespace HairApp
                 PlanedWashDaysContainer.IsVisible = true;
                 foreach (var d in mFutureDays[date])
                 {
-                    var c = new WashingDayCell(d, App.BL);
+                    var c = new WashingDayDefinitionCalendarCell(d, App.BL);
                     this.PlanedWashDays.Children.Add(c.View);
                 }
             }
@@ -124,7 +125,8 @@ namespace HairApp
                 DoneWashDaysContainer.IsVisible = true;
                 foreach (var d in mInstances[date])
                 {
-                    var c = new WashingDayInstanceCell(d, App.BL);
+                    var def = mMainSessionController.GetWashingDayById(d.WashDayID);
+                    var c = new WashingDayInstanceCell(d,def.Name, App.BL);
                     this.DoneWashDays.Children.Add(c.View);
                 }
             }
