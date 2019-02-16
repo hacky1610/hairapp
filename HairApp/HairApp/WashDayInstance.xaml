@@ -30,6 +30,15 @@
                         <Editor x:Name="Comment" HeightRequest="150"/>
                     </StackLayout>
                 </Frame>
+
+                <Frame  Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Button x:Name="TakePicture" Text="Take Pic"></Button>
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout x:Name="PictureList"  Orientation="Horizontal"></StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
 

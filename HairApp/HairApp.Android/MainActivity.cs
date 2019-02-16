@@ -10,6 +10,7 @@ using Android.Content;
 using System.Globalization;
 using HairAppBl.Controller;
 using HairAppBl;
+using Plugin.CurrentActivity;
 
 namespace HairApp.Droid
 {
@@ -31,6 +32,9 @@ namespace HairApp.Droid
             myApp = new App();
             LoadApplication(myApp);
 
+            //Media
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             CheckForNotify();
 
             App.InitAlarms += App_InitAlarms;
@@ -39,6 +43,11 @@ namespace HairApp.Droid
         private void App_InitAlarms(object sender, EventArgs e)
         {
             InitAlarms(DateTime.Now, "Foo", "Bar");
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         private void CheckForNotify()

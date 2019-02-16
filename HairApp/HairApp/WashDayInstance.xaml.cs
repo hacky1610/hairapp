@@ -10,6 +10,8 @@ using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
+using Plugin.Media.Abstractions;
+using Plugin.Media;
 
 namespace HairApp
 {
@@ -59,8 +61,27 @@ namespace HairApp
             Comment.Text = mInstance.Comment;
             CommentFrame.IsVisible = false;
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
-            
 
+            //Take pic
+
+            TakePicture.Clicked += TakePicture_Clicked;
+
+        }
+
+        private async void TakePicture_Clicked(object sender, EventArgs e)
+        {
+            var c = new Controller.CameraController();
+            var file = await c.TakePhoto();
+            var picView = new Image { HeightRequest = 100};
+
+            picView.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
+
+            PictureList.Children.Add(picView);
         }
 
         private void AddComment_Clicked(object sender, EventArgs e)
