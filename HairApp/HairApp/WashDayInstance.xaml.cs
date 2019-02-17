@@ -63,23 +63,34 @@ namespace HairApp
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
             //Take pic
+            var takePicButton = new ImageButton { Source = "camera.png", HeightRequest = 70 };
+            takePicButton.Clicked += TakePicture_Clicked;
+            PictureList.Children.Add(takePicButton);
 
-            TakePicture.Clicked += TakePicture_Clicked;
-
+            foreach (var pic in mInstance.Pictures)
+                AddPicToAlbum(ImageSource.FromFile(pic.Path));
         }
+
 
         private async void TakePicture_Clicked(object sender, EventArgs e)
         {
             var c = new Controller.CameraController();
             var file = await c.TakePhoto();
-            var picView = new Image { HeightRequest = 100};
-
-            picView.Source = ImageSource.FromStream(() =>
+            mInstance.Pictures.Add(new Picture(file.Path));
+            AddPicToAlbum(ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
                 file.Dispose();
                 return stream;
-            });
+            }));
+        }
+
+        private void AddPicToAlbum(ImageSource source)
+        {
+            var picView = new Image { HeightRequest = 100 , Margin = new Thickness(10,10,10,10)};
+
+
+            picView.Source = source;
 
             PictureList.Children.Add(picView);
         }

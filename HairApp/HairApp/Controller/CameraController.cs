@@ -34,13 +34,13 @@ namespace HairApp.Controller
 
             return await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                Directory = "Test",
+                Directory = "HairApp",
                 SaveToAlbum = true,
                 CompressionQuality = 75,
                 CustomPhotoSize = 50,
                 PhotoSize = PhotoSize.MaxWidthHeight,
                 MaxWidthHeight = 2000,
-                DefaultCamera = CameraDevice.Front
+                DefaultCamera = CameraDevice.Rear
             });
         }
     }

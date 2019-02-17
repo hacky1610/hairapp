@@ -24,19 +24,20 @@
                         <TimePicker x:Name="UsedTime" />
                     </StackLayout>
                 </Frame>
+              
+
+                <Frame  Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label>Pictures</Label>
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout x:Name="PictureList"  Orientation="Horizontal" BackgroundColor="LightGray" Padding="5,5,5,5"></StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
                 <Button x:Name="AddComment" Text="Add comment" Style="{StaticResource AddDescriptionButton}"/>
                 <Frame  x:Name="CommentFrame" Style="{StaticResource FrameStyle}">
                     <StackLayout>
                         <Editor x:Name="Comment" HeightRequest="150"/>
-                    </StackLayout>
-                </Frame>
-
-                <Frame  Style="{StaticResource FrameStyle}">
-                    <StackLayout>
-                        <Button x:Name="TakePicture" Text="Take Pic"></Button>
-                        <ScrollView Orientation="Horizontal">
-                            <StackLayout x:Name="PictureList"  Orientation="Horizontal"></StackLayout>
-                        </ScrollView>
                     </StackLayout>
                 </Frame>
             </StackLayout>

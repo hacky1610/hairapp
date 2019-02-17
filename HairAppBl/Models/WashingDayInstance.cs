@@ -8,6 +8,7 @@ namespace HairAppBl.Models
     {
 
         public readonly List<RoutineInstance> Routines;
+        public readonly List<Picture> Pictures;
         public readonly String WashDayId;
         public  String Comment;
         public readonly String Description;
@@ -21,6 +22,7 @@ namespace HairAppBl.Models
         public WashingDayInstance(string wdID, string id,DateTime date, List<RoutineDefinition> routines,string desc):base(wdID,id,date)
         {
             Routines = new List<RoutineInstance>();
+            Pictures = new List<Picture>();
             Description = desc;
             Saved = false;
             NeededTime = new TimeSpan();

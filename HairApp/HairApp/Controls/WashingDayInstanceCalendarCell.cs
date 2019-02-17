@@ -51,6 +51,16 @@ namespace HairApp.Controls
             },hairbl);
             commentLabel.IsVisible = !String.IsNullOrWhiteSpace(instance.Comment);
 
+            var picContainer = new ScrollView { Orientation = ScrollOrientation.Horizontal };
+            var picListView = new StackLayout { Orientation = StackOrientation.Vertical };
+            picContainer.Content = picListView;
+
+            foreach (var pic in instance.Pictures)
+                picListView.Children.Add(new Image { HeightRequest = 60, Source = ImageSource.FromFile(pic.Path) });
+
+            var pictureList = Common.GetCalendarDetailsRow("camera.png", picContainer, hairbl);
+            pictureList.IsVisible = instance.Pictures.Count > 0;
+
             var showMore = new Button
             {
                 Text = "show more",
@@ -83,7 +93,7 @@ namespace HairApp.Controls
                 Orientation = StackOrientation.Vertical,
                 Style = (Style)hairbl.Resources["DetailsFrame"],
                 IsVisible = false,
-                Children = { commentLabel, routineFrame, neededTime, showMore}
+                Children = { commentLabel, routineFrame, neededTime,pictureList, showMore}
             };
 
            
