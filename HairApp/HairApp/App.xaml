@@ -81,10 +81,23 @@
             </Style>
 
             <Style x:Key="PeriodPicker" TargetType="Picker">
-                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="Margin" Value="0,-17,0,0" />
             </Style>
 
-            
+            <Style x:Key="TypeSelection" TargetType="Picker">
+                <Setter Property="Margin" Value="0,-12,0,0" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="OpenTypeSelection" TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="10" />
+                <Setter Property="Margin" Value="0,-2,5,0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+
+
+
 
             <!--Instance-->
             <Style x:Key="InstanceDescription" TargetType="Label">

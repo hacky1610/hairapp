@@ -62,6 +62,7 @@ namespace HairApp
             CommentFrame.IsVisible = false;
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
+
             //Take pic
             var takePicButton = new ImageButton { Source = "camera.png", HeightRequest = 70 };
             takePicButton.Clicked += TakePicture_Clicked;

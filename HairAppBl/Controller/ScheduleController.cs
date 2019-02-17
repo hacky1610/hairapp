@@ -19,7 +19,16 @@ namespace HairAppBl.Controller
         public List<DateTime> GetScheduledDays()
         {
             var days = new List<DateTime>();
-            if(mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
+            if (mSchedule.Type == ScheduleDefinition.ScheduleType.Dayly)
+            {
+                var start = mSchedule.StartDate;
+                for (int i = 0; i < 200; i++)
+                {
+                    days.Add(start);
+                    start = start.AddDays( mSchedule.DaylyPeriod.Period);
+                }
+            }
+            else if (mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
             {
                 foreach(var d in mSchedule.WeeklyPeriod.WeekDays)
                 {
@@ -59,7 +68,11 @@ namespace HairAppBl.Controller
         
         public String GetSchedule()
         {
-            if(mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
+            if (mSchedule.Type == ScheduleDefinition.ScheduleType.Dayly)
+            {
+                return $"Every {mSchedule.DaylyPeriod.Period} days.";
+            }
+            else if (mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
             {
                 var days = String.Empty;
                 foreach (var d in mSchedule.WeeklyPeriod.WeekDays)
@@ -101,6 +114,16 @@ namespace HairAppBl.Controller
         public static DateTime GetToday()
         {
             return new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+        }
+
+        public static List<ScheduleDefinition.ScheduleTypeObject> CreateScheduleTypeList()
+        {
+            var typeList = new List<ScheduleDefinition.ScheduleTypeObject>();
+            typeList.Add(new ScheduleDefinition.ScheduleTypeObject(ScheduleDefinition.ScheduleType.Dayly, "Daily"));
+            typeList.Add(new ScheduleDefinition.ScheduleTypeObject(ScheduleDefinition.ScheduleType.Weekly, "Weekly"));
+            typeList.Add(new ScheduleDefinition.ScheduleTypeObject(ScheduleDefinition.ScheduleType.Monthly, "Monthly"));
+            typeList.Add(new ScheduleDefinition.ScheduleTypeObject(ScheduleDefinition.ScheduleType.Yearly, "Yearly"));
+            return typeList;
         }
     }
 }
