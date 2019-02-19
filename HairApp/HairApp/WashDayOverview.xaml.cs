@@ -21,14 +21,23 @@ namespace HairApp
 	AlarmController mAlarmController;
 
         public WashDayOverview(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl  hairbl, AlarmController ac)
-	{
-	    InitializeComponent ();
+	    {
+	        InitializeComponent ();
             mWashingDays = washingDays;
             mHairbl = hairbl;       
-	    mAlarmController = ac;
+	         mAlarmController = ac;
             var washingDayDefinition = new WashingDayDefinition();
             RefreshList();
             AddWashday.Clicked += AddWashday_Clicked;
+
+            var navi = new Controls.NavigationControl("Home", "");
+            NavigationContainer.Content = navi.View;
+            navi.LeftButton.Clicked += LeftButton_Clicked;
+        }
+
+        private void LeftButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
 
         private void AddWashday_Clicked(object sender, EventArgs e)

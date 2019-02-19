@@ -2,15 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             x:Class="HairApp.CalendarPage">
-    <StackLayout Style="{StaticResource PageContent}">
-        <ScrollView >
-            <StackLayout>
-                <ContentView x:Name="CalendarFrame"></ContentView>
-                <StackLayout x:Name="Washdaylist">
+             x:Class="HairApp.CalendarPage"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="NavigationContainer"/>
+        <StackLayout Style="{StaticResource PageContent}">
+
+            <ScrollView >
+                <StackLayout>
+                    <ContentView x:Name="CalendarFrame"></ContentView>
+                    <StackLayout x:Name="PlanedWashDaysContainer" IsVisible="False">
+                        <Label Text="Planed Care Days"></Label>
+                        <StackLayout x:Name="PlanedWashDays">
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="DoneWashDaysContainer" IsVisible="False">
+                        <Label Text="Finished Care Days"></Label>
+                        <StackLayout x:Name="DoneWashDays">
+                        </StackLayout>
+                    </StackLayout>
+
                 </StackLayout>
-            </StackLayout>
-           
-        </ScrollView>
+
+            </ScrollView>
+        </StackLayout>
     </StackLayout>
+   
 </ContentPage>

@@ -1,15 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HairApp.WashDayInstance">
-    <StackLayout Style="{StaticResource PageContent}">
-        <Label Text="Do you care day"
+             x:Class="HairApp.WashDayInstance"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="SaveButtonContainer"/>
+        <ScrollView Style="{StaticResource ScrollPageContent}">        
+            <StackLayout Style="{StaticResource PageContent}" >
+
+            <Label Text="Do you care day"
                 Style="{StaticResource Heading}" />
-            <StackLayout x:Name="RoutineList">
+            <Frame x:Name="DescriptionFrame" Style="{StaticResource FrameStyle}">
+            <Label x:Name="Description"
+                Style="{StaticResource InstanceDescription}" />
+            </Frame>
+              
+                <StackLayout x:Name="RoutineList">
+                   
+                </StackLayout>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label>Needed time</Label>
+                        <TimePicker x:Name="UsedTime" />
+                    </StackLayout>
+                </Frame>
+              
+
+                <Frame  Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label>Pictures</Label>
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout x:Name="PictureList"  Orientation="Horizontal" BackgroundColor="LightGray" Padding="5,5,5,5"></StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
+                <Button x:Name="AddComment" Text="Add comment" Style="{StaticResource AddDescriptionButton}"/>
+                <Frame  x:Name="CommentFrame" Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Editor x:Name="Comment" HeightRequest="150"/>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Button Text="Cancel" x:Name="CancelButton" />
-            <Button Text="Save" x:Name="OKButton"/>
-        </StackLayout>
+        </ScrollView>
+
     </StackLayout>
+ 
 </ContentPage>

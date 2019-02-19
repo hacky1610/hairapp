@@ -8,15 +8,19 @@ namespace HairAppBl.Models
     {
         public Boolean Checked { get; set; }
         public string Name { get; set; }
+        public string Comment { get; set; }
+        public string Description { get; set; }
 
         public RoutineInstance()
         {
             Checked = false;
         }
 
-        public RoutineInstance(string name):base()
+        public RoutineInstance(string name,string desrption):base()
         {
             Name = name;
+            Description = desrption;
+
         }
 
     }

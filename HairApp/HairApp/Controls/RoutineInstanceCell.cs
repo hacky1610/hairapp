@@ -16,6 +16,7 @@ namespace HairApp.Controls
         private HairAppBl.Interfaces.IHairBl mHairBl;
         private RoutineInstance mRoutine;
         private Editor mComment;
+        private StackLayout mDetailsFrame;
 
         public RoutineInstanceCell(RoutineInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
         {
@@ -24,28 +25,48 @@ namespace HairApp.Controls
 
             mCheckBox = new XLabs.Forms.Controls.CheckBox();
             mCheckBox.CheckedChanged += MCheckBox_CheckedChanged;
+            mCheckBox.Checked = instance.Checked;
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += (s, e) => {
-                mCheckBox.Checked = !mCheckBox.Checked;
+                ShowMore();
             };
 
             var commentButton = GetButton("comment.png");
             commentButton.Clicked += (sender, e) =>
             {
-                mComment.IsVisible = true;
+                mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
             };
 
-            var label1 = new Label
+            var nameLabel = new Label
             {
                 Text = instance.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
 
-            mComment= new Editor
+            var descriptionLabel = new Label
             {
-                IsVisible = false
+                Text = instance.Description,
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                FontAttributes = FontAttributes.Bold,
+                IsVisible = !String.IsNullOrWhiteSpace(instance.Description)
+            };
+
+
+            mComment = new Editor
+            {
+                HeightRequest= 120,
+                Placeholder = "Add a comment",
+            };
+            mComment.TextChanged += MComment_TextChanged;
+
+            mDetailsFrame = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                Style = (Style)hairbl.Resources["DetailsFrame"],
+                IsVisible = false,
+                Children = { descriptionLabel, mComment }
             };
 
             var frame = new Frame
@@ -61,16 +82,24 @@ namespace HairApp.Controls
                                Style = (Style)hairbl.Resources["RoutineContent"],
                              Orientation = StackOrientation.Horizontal,
 
-                             Children = { mCheckBox, label1 ,commentButton}
+                             Children = { mCheckBox, nameLabel, commentButton}
                         },
-                        mComment
+                        mDetailsFrame
                     }
                  
                 }
             };
             frame.GestureRecognizers.Add(tapGestureRecognizer);
             View = frame;
+        }
 
+        private void MComment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            mRoutine.Comment = e.NewTextValue;
+        }
+
+        private void ShowMore()
+        {
 
         }
 

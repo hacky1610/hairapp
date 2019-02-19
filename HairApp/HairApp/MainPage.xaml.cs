@@ -21,6 +21,7 @@ namespace HairApp
             OpenWashDayOverview.Source = "edit.png";
             OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
             ShowCalendar.Source = "calendar.png";
+            OpenStatistic.Source = "chart.png";
 
             TestPage.Clicked += TestPage_Clicked;
 
@@ -33,7 +34,7 @@ namespace HairApp
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession.GetFutureDays()));
+            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
 
         }
 
@@ -53,10 +54,12 @@ namespace HairApp
                     OpenCareDay.Text = $"Lets do {timeToNexDay.Days[0].Name}";
                     OpenCareDay.Command = new Command<string>(OpenCareDayCommand);
                     OpenCareDay.CommandParameter = timeToNexDay.Days[0].ID;
+                    ValsImage.Source = "caredaytoday.jpg";
 
                 }
                 else
                 {
+                    ValsImage.Source = "caredaysoon.jpg";
                     TimeToNextCareDay.Text = $"Next care day {timeToNexDay.Days[0].Name} is in {timeToNexDay.Time2Wait} days";
                 }
             }
@@ -76,9 +79,19 @@ namespace HairApp
         private void OpenCareDayCommand(string id)
         {
             var day = App.MainSession.GetWashingDayById(id);
-            var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
-            var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
-             Navigation.PushAsync(new WashDayInstance(wdInstance));
+            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
+            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
+
+            var instancePage = new WashDayInstance(day,wdInstance);
+            instancePage.OkClicked += InstancePage_OkClicked;
+
+            Navigation.PushAsync(instancePage);
+        }
+
+
+        private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void TestPage_Clicked(object sender, EventArgs e)

@@ -10,6 +10,7 @@ using Android.Content;
 using System.Globalization;
 using HairAppBl.Controller;
 using HairAppBl;
+using Plugin.CurrentActivity;
 
 namespace HairApp.Droid
 {
@@ -31,6 +32,9 @@ namespace HairApp.Droid
             myApp = new App();
             LoadApplication(myApp);
 
+            //Media
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             CheckForNotify();
 
             App.InitAlarms += App_InitAlarms;
@@ -41,6 +45,11 @@ namespace HairApp.Droid
             InitAlarms(DateTime.Now, "Foo", "Bar");
         }
 
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
         private void CheckForNotify()
         {
             var id = Intent.GetStringExtra("washday_id");
@@ -48,10 +57,12 @@ namespace HairApp.Droid
             {
                 var day =  App.MainSession.GetWashingDayById(id);
                 var fileDb = new FileDB(Constants.SchedulesStorageFile);
-                var alarmController = new HairAppBl.Controller.AlarmController(fileDb);
-                var contr = new HairAppBl.Controller.WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), DateTime.Now, contr.GetRoutineDefinitions());
-                myApp.GetNavigation().PushAsync(new WashDayInstance(wdInstance));
+                var alarmController = new AlarmController(fileDb);
+
+                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(),day.Description);
+                myApp.MainPage.Navigation.PushAsync(new WashDayInstance(day,wdInstance));
+                
             }
         }
 

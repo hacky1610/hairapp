@@ -90,7 +90,7 @@ namespace HairAppBl.Controller
             return tempList;
         }
 
-        private RoutineDefinition GetRoutineById(string id )
+        public RoutineDefinition GetRoutineById(string id )
         {
             foreach (var r in this.mAllRoutines)
             {
@@ -98,6 +98,17 @@ namespace HairAppBl.Controller
                     return r;
             }
             return null;
+        }
+
+        public WashingDayInstance GetWashingDayInstance(DateTime date)
+        {
+            foreach(var i in mWashingDay.Instances)
+            {
+                if (ScheduleController.IsSameDay(date, i.Day))
+                    return i;
+            }
+
+            return new WashingDayInstance(mWashingDay.ID, Guid.NewGuid().ToString(), date, GetRoutineDefinitions(), mWashingDay.Description);
         }
 
         public List<RoutineDefinition> GetUnusedRoutineDefinitions()
@@ -130,12 +141,7 @@ namespace HairAppBl.Controller
             return routines;
         }
 
-        public WashingDayInstance GetWashingDayInstance()
-        {
-            var instance = new WashingDayInstance();
-
-            return instance;
-        }
+  
         
          public List<DateTime> GetScheduledDays()
         {
@@ -146,6 +152,11 @@ namespace HairAppBl.Controller
         public ScheduleController  GetScheduleController()
         {
             return mScheduleController;
+        }
+
+        public String GetSchedule()
+        {
+           return mScheduleController.GetSchedule();
         }
           
     }

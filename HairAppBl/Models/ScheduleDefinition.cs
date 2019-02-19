@@ -51,9 +51,7 @@ namespace HairAppBl.Models
             public Weekly()
             {
                 Period = 1;
-                WeekDays = new List<DayOfWeek>{
-                    DayOfWeek.Monday
-                };
+                WeekDays = new List<DayOfWeek>();
             }
 
         }
@@ -87,6 +85,18 @@ namespace HairAppBl.Models
             public int Period { get; set; }
            
          }
+
+        public class ScheduleTypeObject
+        {
+            public  ScheduleDefinition.ScheduleType Type { get; private set; }
+            public string Name { get; private set; }
+
+            public ScheduleTypeObject(ScheduleDefinition.ScheduleType type, String name)
+            {
+                Type = type;
+                Name = name;
+            }
+        }
 
     }
 }

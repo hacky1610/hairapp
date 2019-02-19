@@ -11,6 +11,7 @@ using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
+using static HairAppBl.Models.ScheduleDefinition;
 
 namespace HairApp
 {
@@ -19,57 +20,165 @@ namespace HairApp
 	{
         private WashingDayEditorController mWashingDayEditorController;
         private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
-        public event EventHandler<WashDayEditorEventArgs> OkClicked;
         private Boolean mCreate;
-        HairAppBl.Interfaces.IHairBl mHairbl;
+        private HairAppBl.Interfaces.IHairBl mHairbl;
 
+        //Events
+        public event EventHandler<WashDayEditorEventArgs> OkClicked;
 
         public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
-	{
-	    InitializeComponent ();
+	    {
+	        InitializeComponent ();
             mHairbl = hairbl;
-       
             this.mCreate = create;
-
             this.mWashingDayEditorController = wdController;
+
             RefreshList();
 
-            var saveClose = new Controls.SaveCancelControl();
+            var saveClose = new Controls.NavigationControl("Cancel","Save");
             SaveButtonContainer.Content = saveClose.View;
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
-            this.OKButton.Clicked += OKButton_Clicked;
-            this.CancelButton.Clicked += CancelButton_Clicked;
+            saveClose.RightButton.Clicked += OKButton_Clicked;
+            saveClose.LeftButton.Clicked += CancelButton_Clicked;
 	    
-	    InitFields();
+	        InitFields();
         }
 	
 	    private void InitFields()
 	    {
+            var model = mWashingDayEditorController.GetModel();
+
+            //Title
             this.WashDayNameEntry.Placeholder = "Title";
             this.WashDayNameEntry.Text = mWashingDayEditorController.GetModel().Name;
 
-            this.StartDatePicker.MinimumDate = DateTime.Now;
+            //Description
+            this.Description.Placeholder = "Description";
+            this.AddDescription.Clicked += AddDescription_Clicked;
+            if(!String.IsNullOrWhiteSpace(model.Description))
+            {
+                AddDescription.IsVisible = false;
+                Description.IsVisible = true;
+                Description.Text = model.Description;
+            }
 
-            var schedule = mWashingDayEditorController.GetModel().Scheduled;
+            //Schedule
+            var typeList = ScheduleController.CreateScheduleTypeList();
+
+            OpenTypeButton.Source = "combo.png";
+            OpenTypeButton.Clicked += OpenTypeButton_Clicked;
+
+            TypeSelection.ItemsSource = typeList;
+            TypeSelection.ItemDisplayBinding = new Binding("Name");
+
+            SelectScheduleTypeView(model.Scheduled.Type);
+
+            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Dayly)
+                TypeSelection.SelectedIndex = 0;
+            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Weekly)
+                TypeSelection.SelectedIndex = 1;
+            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Monthly)
+                TypeSelection.SelectedIndex = 2;
+            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Yearly)
+                TypeSelection.SelectedIndex = 3;
+
+            TypeSelection.SelectedIndexChanged += TypeSelection_SelectedIndexChanged;
+
+
+            this.StartDatePicker.MinimumDate = DateTime.Now;
+            var schedule = model.Scheduled;
 
             this.StartDatePicker.Date = schedule.StartDate;
 
+            //Dayly
+            mEntryDaylyPeriod.Text = schedule.DaylyPeriod.Period.ToString();
+
+            //Weekly
             foreach (var d in schedule.WeeklyPeriod.WeekDays)
                 setWeekDay(d);
 
-            mEntryWeeklyPeriod.Text = schedule.WeeklyPeriod.Period.ToString() ;
-		
-	    }
+            if (!schedule.WeeklyPeriod.WeekDays.Any())
+                setWeekDay(DayOfWeek.Monday);
 
-        private void SaveFields()
+            mEntryWeeklyPeriod.Items.Add("1");
+            mEntryWeeklyPeriod.Items.Add("2");
+            mEntryWeeklyPeriod.Items.Add("3");
+            mEntryWeeklyPeriod.Items.Add("4");
+            mEntryWeeklyPeriod.Items.Add("5");
+
+            mEntryWeeklyPeriod.SelectedIndex = schedule.WeeklyPeriod.Period - 1;
+
+        }
+
+        private void TypeSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var schedule = mWashingDayEditorController.GetModel().Scheduled;
+            var selectedItem = (ScheduleTypeObject)((Picker)sender).SelectedItem;
+            SelectScheduleTypeView(selectedItem.Type);
+        }
 
+        private void SelectScheduleTypeView(ScheduleType type)
+        {
+            DaylySection.IsVisible = false;
+            WeeklySection.IsVisible = false;
+            MonthlySection.IsVisible = false;
+            YearlySection.IsVisible = false;
+
+            if (type == ScheduleType.Dayly)
+                DaylySection.IsVisible = true;
+            else if (type == ScheduleType.Weekly)
+                WeeklySection.IsVisible = true;
+            else if (type == ScheduleType.Monthly)
+                MonthlySection.IsVisible = true;
+            else if (type == ScheduleType.Yearly)
+                YearlySection.IsVisible = true;
+
+        }
+
+        private void OpenTypeButton_Clicked(object sender, EventArgs e)
+        {
+            TypeSelection.Focus();
+        }
+
+        private void AddDescription_Clicked(object sender, EventArgs e)
+        {
+            ShowDescription();
+        }
+
+        private void ShowDescription()
+        {
+            AddDescription.IsVisible = false;
+            Description.IsVisible = true;
+        }
+
+        private bool SaveFields()
+        {
+            if (String.IsNullOrWhiteSpace(WashDayNameEntry.Text))
+            {
+                DisplayAlert("Something is missing ", "You forgot to enter a title", "OK");
+                WashDayNameEntry.Focus();
+                return false;
+            }
+
+            //Title
             mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
-            schedule.WeeklyPeriod.WeekDays = getWeekDays();
-            schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.Text);
+
+            //Description
+            mWashingDayEditorController.GetModel().Description = Description.Text;
+
+            //Schedule
+            var schedule = mWashingDayEditorController.GetModel().Scheduled;
             schedule.StartDate = StartDatePicker.Date;
+            schedule.Type = ((ScheduleTypeObject)TypeSelection.SelectedItem).Type;
+
+            //Dayly
+            schedule.DaylyPeriod.Period = Convert.ToInt32(mEntryDaylyPeriod.Text);
+
+            //Weekly
+            schedule.WeeklyPeriod.WeekDays = getWeekDays();
+            schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.SelectedItem);
+
+            return true;
         }
 
         private void setWeekDay(DayOfWeek day)
@@ -129,7 +238,8 @@ namespace HairApp
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            SaveFields();
+            if (!SaveFields())
+                return;
             mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID, mWashingDayEditorController.GetModel().Name);
             Navigation.PopAsync();
             OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));

@@ -10,6 +10,8 @@ using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
+using Plugin.Media.Abstractions;
+using Plugin.Media;
 
 namespace HairApp
 {
@@ -17,18 +19,109 @@ namespace HairApp
 	public partial class WashDayInstance : ContentPage
 	{
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
-        private HairAppBl.Models.WashingDayInstance mInstance;
-        public WashDayInstance(HairAppBl.Models.WashingDayInstance instance)
+        private WashingDayInstance mInstance;
+        private WashingDayDefinition mDefinition;
+        public event EventHandler<WashDayInstanceEventArgs> OkClicked;
+        private bool mCreate;
+
+        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
 		{
 			InitializeComponent ();
        
             mInstance =  instance;
+            mDefinition = definition;
 
-            OKButton.Clicked += OKButton_Clicked;
+            InitFields();
+        }
+
+        private void InitFields()
+        {
+            //Description
+            DescriptionFrame.IsVisible = false;
+            if (!string.IsNullOrEmpty(mDefinition.Description))
+            {
+                Description.Text = mDefinition.Description;
+                DescriptionFrame.IsVisible = true;
+            }
+
+            //Save close
+            var saveClose = new Controls.NavigationControl("Cancel", "Save");
+            SaveButtonContainer.Content = saveClose.View;
+
+            saveClose.RightButton.Clicked += OKButton_Clicked;
+            saveClose.LeftButton.Clicked += CancelButton_Clicked;
+
             RefreshList();
+
+            //Needed Time
+            UsedTime.Time = mInstance.NeededTime;
+
+            //Comment
+            AddComment.Clicked += AddComment_Clicked;
+            Comment.Text = mInstance.Comment;
+            CommentFrame.IsVisible = false;
+            if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
+
+
+            //Take pic
+            var takePicButton = new ImageButton { Source = "camera.png", HeightRequest = 70 };
+            takePicButton.Clicked += TakePicture_Clicked;
+            PictureList.Children.Add(takePicButton);
+
+            foreach (var pic in mInstance.Pictures)
+                AddPicToAlbum(ImageSource.FromFile(pic.Path));
+        }
+
+
+        private async void TakePicture_Clicked(object sender, EventArgs e)
+        {
+            var c = new Controller.CameraController();
+            var file = await c.TakePhoto();
+            mInstance.Pictures.Add(new Picture(file.Path));
+            AddPicToAlbum(ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            }));
+        }
+
+        private void AddPicToAlbum(ImageSource source)
+        {
+            var picView = new Image { HeightRequest = 100 , Margin = new Thickness(10,10,10,10)};
+
+
+            picView.Source = source;
+
+            PictureList.Children.Add(picView);
+        }
+
+        private void AddComment_Clicked(object sender, EventArgs e)
+        {
+            ShowComment();
+        }
+
+        private void ShowComment()
+        {
+            AddComment.IsVisible = false;
+            CommentFrame.IsVisible = true;
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
+        {
+            if (!mInstance.Saved)
+            {
+                mDefinition.Instances.Add(mInstance);
+                mInstance.Saved = true;
+            }
+
+            mInstance.Comment = Comment.Text;
+            mInstance.NeededTime = UsedTime.Time;
+
+            Navigation.PopAsync();
+        }
+
+        private void CancelButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
@@ -42,6 +135,18 @@ namespace HairApp
                 var c = new Controls.RoutineInstanceCell(r,App.BL);
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
+            }
+        }
+
+        public class WashDayInstanceEventArgs : EventArgs
+        {
+            public Boolean Created { get; set; }
+            public WashingDayInstance Instance { get; set; }
+
+            public WashDayInstanceEventArgs(WashingDayInstance instance, Boolean create)
+            {
+                this.Instance = instance;
+                this.Created = create;
             }
         }
 

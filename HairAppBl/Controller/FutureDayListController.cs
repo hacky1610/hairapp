@@ -8,31 +8,38 @@ using Newtonsoft.Json;
 
 namespace HairAppBl.Controller
 {
-    public class FutureDayListController
+    public class FutureDayListController<T>
     {
-        Dictionary<DateTime, List<Models.WashingDayDefinition>> mList;
+        Dictionary<DateTime, List<T>> mList;
 
         public FutureDayListController()
         {
-            mList = new Dictionary<DateTime, List<WashingDayDefinition>>();
+            mList = new Dictionary<DateTime, List<T>>();
         }
 
-        public void Add(WashingDayDefinition def, List<DateTime> dates)
+        public void AddMultiple(T val, List<DateTime> dates)
         {
             foreach(var d in dates)
             {
-                if(mList.ContainsKey(d))
-                {
-                    mList[d].Add(def);
-                }
-                else
-                {
-                    mList.Add(d, new List<WashingDayDefinition>() { def});
-                }
+                Add(val, d);
             }
         }
 
-        public Dictionary<DateTime, List<Models.WashingDayDefinition>> GetAllDays()
+        public void Add(T val, DateTime date)
+        {
+
+            if (mList.ContainsKey(date))
+            {
+                mList[date].Add(val);
+            }
+            else
+            {
+                mList.Add(date, new List<T>() { val });
+            }
+            
+        }
+
+        public Dictionary<DateTime, List<T>> GetAllDays()
         {
             return mList;
         }

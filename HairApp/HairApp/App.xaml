@@ -4,9 +4,16 @@
              x:Class="HairApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="ScrollPageContent" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#ffb380" />
+
+            </Style>
+            
             <Style x:Key="PageContent" TargetType="StackLayout">
                 <Setter Property="Padding" Value="20,20,20,20" />
-                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#ffb380" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+
             </Style>
 
             <Style x:Key="Heading" TargetType="Label">
@@ -18,9 +25,14 @@
             <!--Routine-->
             <Style x:Key="RoutineFrame" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="Padding" Value="0,10,0,10" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+            </Style>
+
+            <Style x:Key="RoutineFrameSelect" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="3" />
                 <Setter Property="Padding" Value="0,0,0,0" />
                 <Setter Property="HorizontalOptions" Value="Fill" />
-
             </Style>
 
             <Style x:Key="RoutineContent" TargetType="Frame">
@@ -41,11 +53,76 @@
 
             <!--Frame-->
             <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="OutlineColor" Value="White" />
+                <Setter Property="OutlineColor" Value="Black" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="Padding" Value="5,5,5,5" />
             </Style>
+
+            <!--Pages-->
+            <Style x:Key="Page" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0" />
+            </Style>
+
+            <!--Home-->
+            <Style x:Key="HomeButton" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Padding" Value="20,20,20,20" />
+            </Style>
+
+            <!--WashDayEditor-->
+            <Style x:Key="AddDescriptionButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Margin" Value="0,-20,0,0" />
+            </Style>
+
+            <Style x:Key="DescriptiontSection" TargetType="Editor">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+
+            <Style x:Key="PeriodPicker" TargetType="Picker">
+                <Setter Property="Margin" Value="0,-17,0,0" />
+            </Style>
+
+            <Style x:Key="TypeSelection" TargetType="Picker">
+                <Setter Property="Margin" Value="0,-12,0,0" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="OpenTypeSelection" TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="10" />
+                <Setter Property="Margin" Value="0,-2,5,0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+
+
+
+
+            <!--Instance-->
+            <Style x:Key="InstanceDescription" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="DetailsFrame" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+            
+            <!--Calendar-->
+            <Style x:Key="CalendarDetailsFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="Padding" Value="5,5,5,5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"
+                        />
+            </Style>
+
+            <Style x:Key="CalendarDetailsImage" TargetType="Image">
+                <Setter Property="HeightRequest" Value="30" />
+            </Style>
+
+            
+
 
 
         </ResourceDictionary>

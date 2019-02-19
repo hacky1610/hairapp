@@ -2,35 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HairApp"
-             x:Class="HairApp.MainPage">
-    
-    
+             x:Class="HairApp.MainPage"
+             NavigationPage.HasNavigationBar="false">
 
-    <StackLayout>
-        <!-- Place new controls here -->
+
+
+    <StackLayout Style="{StaticResource PageContent}">
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
+                <Label x:Name="Title" Text="Vals Hair App" 
+           VerticalOptions="Start" FontSize="Large"/>
+
+        </Frame>
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
         <StackLayout>
             <Label x:Name="TimeToNextCareDay" Text="" 
-           HorizontalOptions="Center"/>
+           HorizontalOptions="Center" FontSize="Medium"/>
+                <Image x:Name="ValsImage"></Image>
             <Button x:Name="OpenCareDay"></Button>
-        </StackLayout>
-        
-        <Button x:Name="TestPage" Text="Test" 
+                <Button x:Name="TestPage" Text="Test" 
            HorizontalOptions="End"/>
-        <Grid>
+            </StackLayout>
+        
+ 
+        </Frame>
+        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="End" >
+           
+            <Grid VerticalOptions="End" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            
-            <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0"/>
-            <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" />
-        </Grid>
-      
+
+                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
+                <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
+                <ImageButton  x:Name="OpenStatistic" Grid.Row="0" Grid.Column="2" Style="{StaticResource HomeButton}"/>
+
+            </Grid>
+        </Frame>
 
 
     </StackLayout>

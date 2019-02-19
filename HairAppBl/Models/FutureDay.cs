@@ -4,14 +4,12 @@ using System.Text;
 
 namespace HairAppBl.Models
 {
-    public class FutureDay
+    public class Picture
     {
-        public DateTime Date { get; set; }
-        public List<WashingDayDefinition> Definitions  { get; set; }
-
-        public FutureDay()
+        public readonly String Path;
+        public Picture(String path)
         {
-            Definitions = new List<WashingDayDefinition>();
+            Path = path;
         }
 
     }

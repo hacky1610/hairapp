@@ -10,7 +10,7 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    public class WashingDayCell : ViewCell
+    public class WashingDayInstanceCell : ViewCell
     {
         ImageButton editButton;
         ImageButton deleteButton;
@@ -20,17 +20,16 @@ namespace HairApp.Controls
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> Edited;
         private HairAppBl.Interfaces.IHairBl mHairBl;
-        public WashingDayDefinition WashingDayDefinition { get; set; }
+        public WashingDayInstance WashingDayInstance{ get; set; }
 
 
-        public WashingDayCell(WashingDayDefinition def, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashingDayInstanceCell(WashingDayInstance instance,string name, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
-            this.WashingDayDefinition = def;
-
+            this.WashingDayInstance = instance;
             text = new Label
             {
-                Text = WashingDayDefinition.Name,
+                Text = name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
