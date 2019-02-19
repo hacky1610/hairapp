@@ -16,7 +16,7 @@ namespace HairAppBl.Models
         {
             AllRoutines = new List<RoutineDefinition>();
             WashingDays = new List<WashingDayDefinition>();
-
+            Initialized = false;
         }
 
    
