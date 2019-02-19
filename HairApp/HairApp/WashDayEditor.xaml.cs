@@ -74,14 +74,8 @@ namespace HairApp
 
             SelectScheduleTypeView(model.Scheduled.Type);
 
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Dayly)
-                TypeSelection.SelectedIndex = 0;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Weekly)
-                TypeSelection.SelectedIndex = 1;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Monthly)
-                TypeSelection.SelectedIndex = 2;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Yearly)
-                TypeSelection.SelectedIndex = 3;
+            var i = from s in typeList where s.Type == model.Scheduled.Type select s;
+            TypeSelection.SelectedItem = i.First();
 
             TypeSelection.SelectedIndexChanged += TypeSelection_SelectedIndexChanged;
 
@@ -109,11 +103,26 @@ namespace HairApp
 
             mEntryWeeklyPeriod.SelectedIndex = schedule.WeeklyPeriod.Period - 1;
 
+            //Monthly
+            mEntryMonthPeriod_1.Text = schedule.MonthlyPeriod.Period.ToString();
+            var occurenceList = ScheduleController.CreateMonthOccurenceTypeList();
+            mPickerOcurenceInMonth.ItemsSource = occurenceList;
+            mPickerOcurenceInMonth.ItemDisplayBinding = new Binding("Name");
+
+            var occurenceItem = from s in occurenceList where s.Type == schedule.MonthlyPeriod.Type select s;
+            mPickerOcurenceInMonth.SelectedItem = occurenceItem.First();
+
+            var weekDayList = ScheduleController.CreateDayOfWeekList();
+            mPickerDayInWeek.ItemsSource = weekDayList;
+            mPickerDayInWeek.ItemDisplayBinding = new Binding("Name");
+
+            var weekDayItem = from s in weekDayList where s.Type == schedule.MonthlyPeriod.WeekDay select s;
+            mPickerDayInWeek.SelectedItem = weekDayItem.First();
         }
 
         private void TypeSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedItem = (ScheduleTypeObject)((Picker)sender).SelectedItem;
+            var selectedItem = (TypeNameObject<ScheduleDefinition.ScheduleType>)((Picker)sender).SelectedItem;
             SelectScheduleTypeView(selectedItem.Type);
         }
 
@@ -169,7 +178,7 @@ namespace HairApp
             //Schedule
             var schedule = mWashingDayEditorController.GetModel().Scheduled;
             schedule.StartDate = StartDatePicker.Date;
-            schedule.Type = ((ScheduleTypeObject)TypeSelection.SelectedItem).Type;
+            schedule.Type = ((TypeNameObject<ScheduleType>)TypeSelection.SelectedItem).Type;
 
             //Dayly
             schedule.DaylyPeriod.Period = Convert.ToInt32(mEntryDaylyPeriod.Text);
@@ -177,6 +186,11 @@ namespace HairApp
             //Weekly
             schedule.WeeklyPeriod.WeekDays = getWeekDays();
             schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.SelectedItem);
+
+            //Monthly
+            schedule.MonthlyPeriod.Period = Convert.ToInt32(mEntryMonthPeriod_1.Text);
+            schedule.MonthlyPeriod.Type = ((TypeNameObject<Monthly.ScheduleType>)mPickerOcurenceInMonth.SelectedItem).Type;
+            schedule.MonthlyPeriod.WeekDay = ((TypeNameObject<DayOfWeek>)mPickerDayInWeek.SelectedItem).Type;
 
             return true;
         }

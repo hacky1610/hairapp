@@ -81,19 +81,35 @@
             </Style>
 
             <Style x:Key="PeriodPicker" TargetType="Picker">
-                <Setter Property="Margin" Value="0,-17,0,0" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
 
             <Style x:Key="TypeSelection" TargetType="Picker">
                 <Setter Property="Margin" Value="0,-12,0,0" />
                 <Setter Property="FontSize" Value="14" />
+                <Setter Property="WidthRequest" Value="120" />
             </Style>
 
             <Style x:Key="OpenTypeSelection" TargetType="ImageButton">
-                <Setter Property="HeightRequest" Value="10" />
-                <Setter Property="Margin" Value="0,-2,5,0" />
+                <Setter Property="HeightRequest" Value="8" />
+                <Setter Property="Margin" Value="-3,-4,5,0" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
+
+            <Style x:Key="EditorLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="EditorEntry" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="EditorDatePicker" TargetType="DatePicker">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            
+
+
 
 
 

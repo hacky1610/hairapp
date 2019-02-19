@@ -37,19 +37,7 @@ namespace HairAppBl.Tests
             Assert.AreEqual(4, res.Day);
         }
 
-        [Test]
-        public void GetScheduledDays_CheckDefault()
-        {
-            WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null);
-            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
-            var res = wdc.GetScheduledDays();
-
-            Assert.AreEqual(DayOfWeek.Monday, res[0].DayOfWeek );
-            Assert.AreEqual(DayOfWeek.Monday, res[1].DayOfWeek);
-        }
-
-        [Test]
+          [Test]
         public void GetScheduledDays_CheckOtherWeekDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
@@ -75,6 +63,10 @@ namespace HairAppBl.Tests
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.Period = 2;
+            wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
+            {
+                DayOfWeek.Monday,
+            };
             wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 5);
 
             var res = wdc.GetScheduledDays();
@@ -191,9 +183,90 @@ namespace HairAppBl.Tests
             Assert.AreEqual(0,controller.Time2NextCareDay(new DateTime(2019, 2, 7)));
         }
 
+        [Test]
+        public void Monthly_FirstFridayOfMonth()
+        {
+            var day = ScheduleController.GetDayFromMonthlyPeriod(DayOfWeek.Friday,ScheduleDefinition.Monthly.ScheduleType.First , 2, 2019);
 
 
-     
+            Assert.AreEqual(new DateTime(2019,2,1), day);
+        }
+
+        [Test]
+        public void Monthly_SecondFridayOfMonth()
+        {
+            var day = ScheduleController.GetDayFromMonthlyPeriod(DayOfWeek.Friday,ScheduleDefinition.Monthly.ScheduleType.Second , 2, 2019);
+
+
+            Assert.AreEqual(new DateTime(2019, 2, 8), day);
+        }
+
+        [Test]
+        public void Monthly_ThirdFridayOfMonth()
+        {
+            var day = ScheduleController.GetDayFromMonthlyPeriod(DayOfWeek.Friday, ScheduleDefinition.Monthly.ScheduleType.Third, 2, 2019);
+
+
+            Assert.AreEqual(new DateTime(2019, 2, 15), day);
+        }
+
+        [Test]
+        public void Monthly_FourthdFridayOfMonth()
+        {
+            var day = ScheduleController.GetDayFromMonthlyPeriod(DayOfWeek.Friday, ScheduleDefinition.Monthly.ScheduleType.Fourth, 2, 2019);
+
+
+            Assert.AreEqual(new DateTime(2019, 2, 22), day);
+        }
+
+        [Test]
+        public void Monthly_LastthdFridayOfMonth()
+        {
+            var day = ScheduleController.GetDayFromMonthlyPeriod(DayOfWeek.Friday, ScheduleDefinition.Monthly.ScheduleType.Last, 2, 2019);
+
+
+            Assert.AreEqual(new DateTime(2019, 2, 22), day);
+        }
+
+        [Test]
+        public void Monthly_FirstSaturday_MonthlyPeriod_1()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines, ac);
+            wdc.GetModel().Scheduled.Type = ScheduleDefinition.ScheduleType.Monthly;
+            wdc.GetModel().Scheduled.MonthlyPeriod.Period = 1;
+            wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 1);
+            wdc.GetModel().Scheduled.MonthlyPeriod.Type = ScheduleDefinition.Monthly.ScheduleType.First;
+            wdc.GetModel().Scheduled.MonthlyPeriod.WeekDay = DayOfWeek.Saturday;
+
+            var controller = wdc.GetScheduleController();
+            var days =  controller.GetScheduledDays();
+
+        }
+
+        [Test]
+        public void Monthly_SecondSaturday_BeforeStart_MonthlyPeriod_2()
+        {
+            WashingDayDefinition wd = new WashingDayDefinition();
+            AlarmController ac = new AlarmController(null);
+
+            WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines, ac);
+            wdc.GetModel().Scheduled.Type = ScheduleDefinition.ScheduleType.Monthly;
+            wdc.GetModel().Scheduled.MonthlyPeriod.Period = 2;
+            wdc.GetModel().Scheduled.StartDate = new DateTime(2019, 2, 23);
+            wdc.GetModel().Scheduled.MonthlyPeriod.Type = ScheduleDefinition.Monthly.ScheduleType.First;
+            wdc.GetModel().Scheduled.MonthlyPeriod.WeekDay = DayOfWeek.Saturday;
+
+            var controller = wdc.GetScheduleController();
+            var days = controller.GetScheduledDays();
+            Assert.AreEqual(new DateTime(2019, 3, 2), days[0]);
+            Assert.AreEqual(new DateTime(2019, 5, 4), days[1]);
+        }
+
+
+
 
 
 
