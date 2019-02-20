@@ -41,6 +41,23 @@ namespace HairApp
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (!String.IsNullOrEmpty(App.washdayToShow))
+            {
+                var day = App.MainSession.GetWashingDayById(App.washdayToShow);
+                var fileDb = new FileDB(Constants.SchedulesStorageFile);
+                var alarmController = new AlarmController(fileDb);
+
+                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), alarmController);
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(App.washdayToShow, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(), day.Description);
+                App.washdayToShow = String.Empty;
+
+                Device.BeginInvokeOnMainThread(() => {
+                    Navigation.PushAsync(new WashDayInstance(day, wdInstance));
+                });
+                ;
+            }
+
+
             OpenCareDay.IsVisible = false;
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())

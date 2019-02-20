@@ -107,7 +107,7 @@ namespace HairApp
             CommentFrame.IsVisible = true;
         }
 
-        private void OKButton_Clicked(object sender, EventArgs e)
+        private  void OKButton_Clicked(object sender, EventArgs e)
         {
             if (!mInstance.Saved)
             {
@@ -118,7 +118,7 @@ namespace HairApp
             mInstance.Comment = Comment.Text;
             mInstance.NeededTime = UsedTime.Time;
 
-            Navigation.PopAsync();
+             App.Current.MainPage.Navigation.PopAsync();
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

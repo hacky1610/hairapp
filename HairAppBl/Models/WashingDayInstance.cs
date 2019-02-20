@@ -17,6 +17,7 @@ namespace HairAppBl.Models
         public WashingDayInstance():base()
         {
             Routines = new List<RoutineInstance>();
+            Pictures = new List<Picture>();
         }
 
         public WashingDayInstance(string wdID, string id,DateTime date, List<RoutineDefinition> routines,string desc):base(wdID,id,date)

@@ -29,20 +29,19 @@ namespace HairApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             XamForms.Controls.Droid.Calendar.Init();
-            myApp = new App();
+
+            myApp = new App(Intent.GetStringExtra("washday_id"));
             LoadApplication(myApp);
 
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-
-            CheckForNotify();
 
             App.InitAlarms += App_InitAlarms;
         }
 
         private void App_InitAlarms(object sender, EventArgs e)
         {
-            InitAlarms(DateTime.Now, "Foo", "Bar");
+            InitAlarms();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
@@ -50,28 +49,9 @@ namespace HairApp.Droid
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private void CheckForNotify()
-        {
-            var id = Intent.GetStringExtra("washday_id");
-            if (id != null)
-            {
-                var day =  App.MainSession.GetWashingDayById(id);
-                var fileDb = new FileDB(Constants.SchedulesStorageFile);
-                var alarmController = new AlarmController(fileDb);
-
-                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(),day.Description);
-                myApp.MainPage.Navigation.PushAsync(new WashDayInstance(day,wdInstance));
-                
-            }
-        }
-
-
-        public void InitAlarms(DateTime dateTime, string title, string message)
+        public void InitAlarms()
         {
             Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
-            alarmIntent.PutExtra("message", message);
-            alarmIntent.PutExtra("title", title);
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
