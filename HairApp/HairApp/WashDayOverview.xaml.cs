@@ -73,7 +73,7 @@ namespace HairApp
         private void WashDay_Edited(object sender, EventArgs e)
         {
             var item = ((WashingDayCell)sender);
-	    var contr = new HairAppBl.Controller.WashingDayEditorController(item.WashingDayDefinition, App.MainSession.GetAllDefinitions(), this.mAlarmController);               
+	        var contr = new WashingDayEditorController(item.WashingDayDefinition, App.MainSession.GetAllDefinitions(), this.mAlarmController);               
             var editor = new WashDayEditor(contr, false,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
@@ -83,6 +83,7 @@ namespace HairApp
         {
             var item = ((WashingDayCell)sender);
             mWashingDays.Remove(item.WashingDayDefinition);
+            mAlarmController.DeleteWashDay(item.WashingDayDefinition.ID);
             RefreshList();
         }
     }

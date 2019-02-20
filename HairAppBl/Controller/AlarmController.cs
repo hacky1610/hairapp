@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using HairAppBl.Interfaces;
 using HairAppBl.Models;
@@ -54,8 +55,17 @@ namespace HairAppBl.Controller
                     wdId.Add(schedule);
                 }
             }
-            return wdId;
-           
+            return wdId;    
+        }
+
+        public void DeleteWashDay(string id)
+        {
+            var washDays = Load();
+            if (washDays.ContainsKey(id))
+                washDays.Remove(id);
+            this.database.Save(washDays);
+
+
         }
     }
 }

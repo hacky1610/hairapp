@@ -52,7 +52,7 @@ namespace HairApp
                 App.washdayToShow = String.Empty;
 
                 Device.BeginInvokeOnMainThread(() => {
-                    Navigation.PushAsync(new WashDayInstance(day, wdInstance));
+                    Navigation.PushAsync(new WashDayInstance(day, wdInstance),true);
                 });
                 ;
             }
@@ -102,7 +102,7 @@ namespace HairApp
             var instancePage = new WashDayInstance(day,wdInstance);
             instancePage.OkClicked += InstancePage_OkClicked;
 
-            Navigation.PushAsync(instancePage);
+            Navigation.PushAsync(instancePage, true);
         }
 
 
