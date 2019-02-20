@@ -43,8 +43,8 @@ namespace HairApp
         private void AddWashday_Clicked(object sender, EventArgs e)
         {
             var def = new WashingDayDefinition();
-	    def.ID = Guid.NewGuid().ToString();
-	     var contr = new HairAppBl.Controller.WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);                           
+	        def.ID = Guid.NewGuid().ToString();
+	        var contr = new WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);                           
             var editor = new WashDayEditor(contr,true,mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);

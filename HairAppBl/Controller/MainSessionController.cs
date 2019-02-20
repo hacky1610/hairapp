@@ -9,7 +9,27 @@ namespace HairAppBl.Controller
     public class MainSessionController: Interfaces.ISession
     {
         readonly IDictionary<string, object> mProperties;
+        public event EventHandler<EventArgs> InitAlarms;
         MainSession MainSession = null;
+
+        public bool Initialized {
+            get
+            {
+                return MainSession.Initialized;
+            }
+            set
+            {
+                MainSession.Initialized = value;
+                if (value)
+                    SendInitAlarms();
+            }
+        }
+
+        public  void SendInitAlarms()
+        {
+            InitAlarms(null, new EventArgs());
+        }
+
         public MainSessionController(IDictionary<string, object> props)
         {
             mProperties = props;
@@ -40,6 +60,10 @@ namespace HairAppBl.Controller
         {
             MainSession.User = name;
         }
+
+   
+
+
 
         public List<RoutineDefinition> GetAllDefinitions()
         {
@@ -137,7 +161,6 @@ namespace HairAppBl.Controller
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Leave in Conditioner", "LeaveInConditioner", "", "Please make Leave in Conditioner"));
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Clay", "Clay", "", "Please use Clay"));
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Rinses", "Rinses", "", "Please use Rinses"));
-            MainSession.Initialized = true;
         }
 
         public class CommingDays

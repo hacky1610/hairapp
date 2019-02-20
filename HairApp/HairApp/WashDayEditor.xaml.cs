@@ -25,6 +25,7 @@ namespace HairApp
 
         //Events
         public event EventHandler<WashDayEditorEventArgs> OkClicked;
+        public event EventHandler<EventArgs> CancelClicked;
 
         public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 	    {
@@ -169,6 +170,13 @@ namespace HairApp
                 return false;
             }
 
+            if (!mWashingDayEditorController.GetRoutineDefinitions().Any())
+            {
+                DisplayAlert("Something is missing ", "You forgot to add a routine", "OK");
+                return false;
+            }
+
+
             //Title
             mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
 
@@ -247,7 +255,7 @@ namespace HairApp
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
-
+            CancelClicked?.Invoke(this, new EventArgs());
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)

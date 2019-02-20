@@ -36,7 +36,7 @@ namespace HairApp.Droid
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            App.InitAlarms += App_InitAlarms;
+            App.MainSession.InitAlarms += App_InitAlarms;
         }
 
         private void App_InitAlarms(object sender, EventArgs e)
@@ -55,13 +55,8 @@ namespace HairApp.Droid
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day +1 , 8,0,0);
-            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
-            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
-            var notifyTimeInInMilliseconds = utcTime.AddSeconds(-epochDif).Ticks / 10000;
-
-            //alarmManager.SetRepeating(AlarmType.RtcWakeup, notifyTimeInInMilliseconds, 60001 * 60 , pendingIntent);
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
+            alarmManager.SetRepeating(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), AlarmController.Get24Houres() , pendingIntent);
+            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
 
         }
 

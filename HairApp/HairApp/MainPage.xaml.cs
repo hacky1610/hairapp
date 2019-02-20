@@ -35,33 +35,47 @@ namespace HairApp
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
+        }
 
+        private void OpenPageIfNeeded()
+        {
+            if(!App.MainSession.Initialized)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Navigation.PushAsync(new IntroPage(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController), true);
+                });
+               return;
+            }
+
+            if (!String.IsNullOrEmpty(App.washdayToShow))
+            {
+                var day = App.MainSession.GetWashingDayById(App.washdayToShow);
+                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), mAlarmController);
+                var wdInstance = new HairAppBl.Models.WashingDayInstance(App.washdayToShow, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(), day.Description);
+                App.washdayToShow = String.Empty;
+
+                Device.BeginInvokeOnMainThread(() => {
+                    Navigation.PushAsync(new WashDayInstance(day, wdInstance), true);
+                });
+                ;
+            }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (!String.IsNullOrEmpty(App.washdayToShow))
-            {
-                var day = App.MainSession.GetWashingDayById(App.washdayToShow);
-                var fileDb = new FileDB(Constants.SchedulesStorageFile);
-                var alarmController = new AlarmController(fileDb);
-
-                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(App.washdayToShow, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(), day.Description);
-                App.washdayToShow = String.Empty;
-
-                Device.BeginInvokeOnMainThread(() => {
-                    Navigation.PushAsync(new WashDayInstance(day, wdInstance),true);
-                });
-                ;
-            }
+            OpenPageIfNeeded();
 
 
             OpenCareDay.IsVisible = false;
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())
+            {
                 TimeToNextCareDay.Text = "No Care day configured";
+                ValsImage.Source = "nocareday.jpg";
+
+            }
             else if (timeToNexDay.Days.Count == 1)
             {
                 if (timeToNexDay.Time2Wait == 0)

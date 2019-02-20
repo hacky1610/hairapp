@@ -24,7 +24,6 @@ namespace HairApp
 			InitializeComponent();
             Init.Clicked += Init_Clicked;
 
-            InitAlarms.Clicked += InitAlarms_Clicked;
             ShowLog.Clicked += ShowLog_Clicked;
         }
 
@@ -32,11 +31,6 @@ namespace HairApp
         {
             Navigation.PushAsync(new LogView(App.BL.Logger));
 
-        }
-
-        private void InitAlarms_Clicked(object sender, EventArgs e)
-        {
-            App.SendInitAlarms();
         }
 
         private void Init_Clicked(object sender, EventArgs e)

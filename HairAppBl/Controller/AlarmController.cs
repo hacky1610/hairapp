@@ -67,5 +67,18 @@ namespace HairAppBl.Controller
 
 
         }
+
+        public static long GetAlarmTime()
+        {
+            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 8, 0, 0);
+            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
+            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
+            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
+        }
+
+        public static long Get24Houres()
+        {
+            return 60001 * 60 * 24;
+        }
     }
 }

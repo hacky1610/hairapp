@@ -46,6 +46,8 @@ namespace HairApp
 
             };
             cal.SpecialDates.Clear();
+            cal.SelectedDate = DateTime.Now;
+            RefreshList(ScheduleController.GetToday());
 
             FillFutureDays(cal);
             FillInstances(cal);

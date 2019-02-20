@@ -58,6 +58,7 @@ namespace HairApp.Controls
             {
                 HeightRequest= 120,
                 Placeholder = "Add a comment",
+                Text = mRoutine.Comment
             };
             mComment.TextChanged += MComment_TextChanged;
 

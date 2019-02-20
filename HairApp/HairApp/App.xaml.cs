@@ -10,7 +10,6 @@ namespace HairApp
 {
     public partial class App : Application
     {
-        public static event EventHandler<EventArgs> InitAlarms;
         public static String washdayToShow;
 
         public App()
@@ -18,9 +17,9 @@ namespace HairApp
             InitializeComponent();
 
             App.BL = new HairAppBl.HairAppBl(new FileLogger(),Application.Current.Resources);
-            App.MainSession = new HairAppBl.Controller.MainSessionController(Current.Properties);
-            HairAppBl.Controller.Session.Register(App.MainSession);
-            HairAppBl.Controller.Session.Restore();
+            App.MainSession = new MainSessionController(Current.Properties);
+            Session.Register(App.MainSession);
+            Session.Restore();
 
             var logger = new HairAppBl.ConsoleLogger();
 
@@ -37,22 +36,16 @@ namespace HairApp
             return MainPage.Navigation;
         }
 
-        public static HairAppBl.Interfaces.IHairBl BL { get; set; }
-        public static HairAppBl.Controller.MainSessionController MainSession { get; set; }
+        public static IHairBl BL { get; set; }
+        public static MainSessionController MainSession { get; set; }
 
         protected override void OnStart()
         {
-           
-        }
-
-        public static void SendInitAlarms()
-        {
-            InitAlarms(null, new EventArgs());
-        }
+        }   
 
         protected override void OnSleep()
         {
-            HairAppBl.Controller.Session.Save();
+            Session.Save();
         }
 
         protected override void OnResume()
