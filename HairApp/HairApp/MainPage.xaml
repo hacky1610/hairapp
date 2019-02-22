@@ -19,8 +19,7 @@
            HorizontalOptions="Center" FontSize="Medium"/>
                 <Image x:Name="ValsImage"></Image>
             <Button x:Name="OpenCareDay"></Button>
-                <Button x:Name="TestPage" Text="Test" 
-           HorizontalOptions="End"/>
+               
             </StackLayout>
         
  

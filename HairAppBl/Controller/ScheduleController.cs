@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HairAppBl.Models;
 
 namespace HairAppBl.Controller
@@ -125,6 +126,18 @@ namespace HairAppBl.Controller
                     days += $" {d},";
                 days.TrimEnd(',');
                 return $"Every{days} each {mSchedule.WeeklyPeriod.Period} week.";
+
+            }
+            else if (mSchedule.Type == ScheduleDefinition.ScheduleType.Monthly)
+            {
+                var occurenceList = CreateMonthOccurenceTypeList();
+                var occurenceItem = from item in occurenceList where item.Type == mSchedule.MonthlyPeriod.Type select item;
+
+                var weekDayList = CreateDayOfWeekList();
+                var day = from item in weekDayList where item.Type == mSchedule.MonthlyPeriod.WeekDay select item;
+
+
+                return $"At {occurenceList.First().Name} {day.First().Name} every {mSchedule.MonthlyPeriod.Period} month.";
 
             }
             return "";

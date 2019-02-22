@@ -32,7 +32,7 @@ namespace HairApp.Controller
                 return null;
             }
 
-            return await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = "HairApp",
                 SaveToAlbum = true,

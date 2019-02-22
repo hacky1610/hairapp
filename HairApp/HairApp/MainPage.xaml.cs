@@ -23,13 +23,11 @@ namespace HairApp
             ShowCalendar.Source = "calendar.png";
             OpenStatistic.Source = "chart.png";
 
-            TestPage.Clicked += TestPage_Clicked;
 
             ShowCalendar.Clicked += ShowCalendar_Clicked;
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             this.mAlarmController = new AlarmController(fileDb);
-
         }
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
