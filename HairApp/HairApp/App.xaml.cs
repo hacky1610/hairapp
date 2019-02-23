@@ -20,6 +20,7 @@ namespace HairApp
             App.MainSession = new MainSessionController(Current.Properties);
             Session.Register(App.MainSession);
             Session.Restore();
+            App.MainSession.Initialized = false;
 
             var logger = new HairAppBl.ConsoleLogger();
 

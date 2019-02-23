@@ -16,11 +16,18 @@
                 <Frame Style="{StaticResource FrameStyle}">
                         <StackLayout>
                             <Entry x:Name="WashDayNameEntry"/>
-                            <Button x:Name="AddDescription" Text="Add description" Style="{StaticResource AddDescriptionButton}"/>
-                            <Editor x:Name="Description" HeightRequest="150" Style="{StaticResource DescriptiontSection}"/>
                         </StackLayout>
                 </Frame>
-                <Frame Style="{StaticResource FrameStyle}">
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Routines"></Label>
+                            <StackLayout x:Name="RoutineList">
+                            </StackLayout>
+                            <Button Text="Add routine" x:Name="AddRoutine"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Orientation="Vertical">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
                                 <Label Text="Schedule" HorizontalOptions="StartAndExpand"></Label>
@@ -80,19 +87,17 @@
 
                         </StackLayout>
                 </Frame>
-
-                <Frame Style="{StaticResource FrameStyle}">
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="Routines"></Label>
-                        <StackLayout x:Name="RoutineList">
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout>
+                            <Button x:Name="AddDescription" Text="Add description" Style="{StaticResource AddDescriptionButton}"/>
+                            <Editor x:Name="Description" HeightRequest="150" Style="{StaticResource DescriptiontSection}"/>
                         </StackLayout>
-                        <Button Text="Add routine" x:Name="AddRoutine"/>
-                    </StackLayout>
-                </Frame>
+                    </Frame>
 
-            
 
-            </StackLayout>
+
+
+                </StackLayout>
         </ScrollView>
        
     </StackLayout>

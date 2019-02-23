@@ -17,7 +17,9 @@ namespace HairApp
 	{
         List<WashingDayDefinition> mWashingDays;
         HairAppBl.Interfaces.IHairBl mHairbl;
-	AlarmController mAlarmController;
+	    AlarmController mAlarmController;
+        public event EventHandler<EventArgs> PageClosed;
+
 
         public IntroPage(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
 	    {
@@ -43,6 +45,7 @@ namespace HairApp
         private void Editor_CancelClicked(object sender, EventArgs e)
         {
             App.MainSession.Initialized = true;
+            PageClosed?.Invoke(this, new EventArgs());
             Navigation.PopAsync(true);
         }
 
@@ -50,6 +53,8 @@ namespace HairApp
         {
              mWashingDays.Add(e.Definition);
             App.MainSession.Initialized = true;
+            PageClosed?.Invoke(this, new EventArgs());
+
             Navigation.PopAsync(true);
         }
     }

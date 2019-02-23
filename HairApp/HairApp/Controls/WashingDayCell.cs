@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using HairAppBl.Models;
+using HairAppBl.Controller;
 
 namespace HairApp.Controls
 {
@@ -16,7 +17,8 @@ namespace HairApp.Controls
         ImageButton deleteButton;
         StackLayout buttonGroup;
         Label text;
-        
+        Label timeText;
+
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> Edited;
         private HairAppBl.Interfaces.IHairBl mHairBl;
@@ -27,6 +29,8 @@ namespace HairApp.Controls
         {
             this.mHairBl = hairbl;
             this.WashingDayDefinition = def;
+            var c = new ScheduleController(def.Scheduled);
+            var t = c.Time2NextCareDay(ScheduleController.GetToday());
 
             text = new Label
             {
@@ -61,6 +65,13 @@ namespace HairApp.Controls
                 Children = { editButton, deleteButton }
             };
 
+            timeText = new Label
+            {
+                Text = $"in {t} days"
+            };
+
+
+
             var frame = new Frame
             {
                 Style = (Style)hairbl.Resources["RoutineFrame"],
@@ -74,6 +85,7 @@ namespace HairApp.Controls
                         Orientation = StackOrientation.Vertical,
                         Children = { text }
                     },
+                    timeText,
                     buttonGroup
                     
                 }
@@ -101,12 +113,15 @@ namespace HairApp.Controls
         public void Select()
         {
             this.buttonGroup.IsVisible = true;
+            this.timeText.IsVisible = false;
 
         }
 
         public void Deselect()
         {
             this.buttonGroup.IsVisible = false;
+            this.timeText.IsVisible = true;
+
         }
 
         private void SendRemoved()

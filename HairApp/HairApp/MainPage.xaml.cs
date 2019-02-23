@@ -12,22 +12,31 @@ namespace HairApp
     public partial class MainPage : ContentPage
     {
         private AlarmController mAlarmController;
+        private Controls.CareDayList mCareDayList;
+
         public MainPage()
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
-
-            OpenWashDayOverview.Source = "edit.png";
-            OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
+            Home.Source = "home.png";
             ShowCalendar.Source = "calendar.png";
             OpenStatistic.Source = "chart.png";
 
 
             ShowCalendar.Clicked += ShowCalendar_Clicked;
+            mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             this.mAlarmController = new AlarmController(fileDb);
+
+            mCareDayList = new Controls.CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
+            CareDayListFrame.Content = mCareDayList;
+        }
+
+        private void MAddCareDayButton_Clicked(object sender, EventArgs e)
+        {
+            mCareDayList.AddWashDay();
         }
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
@@ -41,7 +50,9 @@ namespace HairApp
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    Navigation.PushAsync(new IntroPage(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController), true);
+                    var page = new IntroPage(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
+                    page.PageClosed += IntroPage_Closed;
+                    Navigation.PushAsync(page, true);
                 });
                return;
             }
@@ -60,13 +71,33 @@ namespace HairApp
             }
         }
 
+        private void IntroPage_Closed(object sender, EventArgs e)
+        {
+            mInfo.IsVisible = true;
+            var animation = new Animation(v => mAddCareDayButton.Scale = v, 1, 1.2);
+            animation.Commit(mAddCareDayButton, "SimpleAnimation", 16, 1000, Easing.Linear, (v, c) => mAddCareDayButton.Scale = 1, () => true);
+
+            
+            var aTimer = new System.Timers.Timer(10000);
+            aTimer.Elapsed += (s,ev)=>
+            {
+                Device.BeginInvokeOnMainThread(() => {
+                    var animation1 = new Animation(v => mInfo.Scale = v, 1, 0.0);
+                    animation1.Commit(this, "SimpleAnimation1", 16, 1000, Easing.Linear, (v, c) => { mInfo.Scale = 0; mInfo.IsVisible = false; },() => false);
+                    AnimationExtensions.AbortAnimation(mAddCareDayButton, "SimpleAnimation");
+                });
+            };
+            aTimer.Enabled = true;
+        }
+
+  
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             OpenPageIfNeeded();
 
-
-            OpenCareDay.IsVisible = false;
+            mCareDayList.RefreshList();
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())
             {
@@ -74,17 +105,12 @@ namespace HairApp
                 ValsImage.Source = "nocareday.jpg";
 
             }
-            else if (timeToNexDay.Days.Count == 1)
+            else 
             {
                 if (timeToNexDay.Time2Wait == 0)
                 {
-                    TimeToNextCareDay.Text = $"Today is care day: {timeToNexDay.Days[0].Name}";
-                    OpenCareDay.IsVisible = true;
-                    OpenCareDay.Text = $"Lets do {timeToNexDay.Days[0].Name}";
-                    OpenCareDay.Command = new Command<string>(OpenCareDayCommand);
-                    OpenCareDay.CommandParameter = timeToNexDay.Days[0].ID;
+                    TimeToNextCareDay.Text = $"Today is care day";
                     ValsImage.Source = "caredaytoday.jpg";
-
                 }
                 else
                 {
@@ -92,17 +118,7 @@ namespace HairApp
                     TimeToNextCareDay.Text = $"Next care day {timeToNexDay.Days[0].Name} is in {timeToNexDay.Time2Wait} days";
                 }
             }
-            else
-            {
-                if (timeToNexDay.Time2Wait == 0)
-                {
-                    TimeToNextCareDay.Text = "Today is care day";
-                }
-                else
-                {
-                    TimeToNextCareDay.Text = $"Next care day is in {timeToNexDay.Time2Wait} days";
-                }
-            }
+  
         }
 
         private void OpenCareDayCommand(string id)
@@ -128,12 +144,7 @@ namespace HairApp
             Navigation.PushAsync(new TestPage());
         }
 
-        private void OpenWashingDayOverview_Clicked(object sender, EventArgs e)
-        {
-            App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL,mAlarmController));
-        }
 
     }
 }

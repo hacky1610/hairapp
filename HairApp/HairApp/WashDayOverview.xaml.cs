@@ -18,7 +18,7 @@ namespace HairApp
 	{
         List<WashingDayDefinition> mWashingDays;
         HairAppBl.Interfaces.IHairBl mHairbl;
-	AlarmController mAlarmController;
+	    AlarmController mAlarmController;
 
         public WashDayOverview(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl  hairbl, AlarmController ac)
 	    {

@@ -7,43 +7,50 @@
 
 
 
-    <StackLayout Style="{StaticResource PageContent}">
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
-                <Label x:Name="Title" Text="Vals Hair App" 
-           VerticalOptions="Start" FontSize="Large"/>
+    <StackLayout VerticalOptions="FillAndExpand">
 
-        </Frame>
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
-        <StackLayout>
-            <Label x:Name="TimeToNextCareDay" Text="" 
-           HorizontalOptions="Center" FontSize="Medium"/>
-                <Image x:Name="ValsImage"></Image>
-            <Button x:Name="OpenCareDay"></Button>
-               
-            </StackLayout>
-        
- 
-        </Frame>
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="End" >
-           
+        <ScrollView Style="{StaticResource HomePageContent}" >
+                <StackLayout>
+                    <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
+                        <StackLayout>
+                            <Label x:Name="TimeToNextCareDay" Text="" 
+                             HorizontalOptions="Center" FontSize="Medium"/>
+                            <Image x:Name="ValsImage"></Image>
+
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="List of all care days" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+                    <Frame  x:Name="CareDayListFrame"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" BackgroundColor="Transparent">
+
+                    </Frame>
+                    <Frame x:Name="mInfo"  Style="{StaticResource InfoFrame}">
+                        <Label Style="{StaticResource InfoText}">Click Plus to create another care day</Label>
+                    </Frame>
+                    <ImageButton Source="add.png" BackgroundColor="Transparent" x:Name="mAddCareDayButton"  HeightRequest="50" ></ImageButton>
+
+                </StackLayout>
+            </ScrollView>
+
+        <Frame 
+                Padding="0,0,0,0" Margin="0,0,0,0" >
+
             <Grid VerticalOptions="End" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
 
-                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
-                <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
+                <ImageButton  x:Name="Home" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
+                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
                 <ImageButton  x:Name="OpenStatistic" Grid.Row="0" Grid.Column="2" Style="{StaticResource HomeButton}"/>
 
             </Grid>
         </Frame>
-
 
     </StackLayout>
 
