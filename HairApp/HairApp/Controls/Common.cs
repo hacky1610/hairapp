@@ -21,5 +21,16 @@ namespace HairApp.Controls
 
             return row;
         }
+
+        public static ImageButton GetButton(string image, HairAppBl.Interfaces.IHairBl hairbl)
+        {
+            return new ImageButton
+            {
+                Style = (Style)hairbl.Resources["RoutineButton"],
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                Source = image
+
+            };
+        }
     }
 }

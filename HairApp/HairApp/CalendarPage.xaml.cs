@@ -11,7 +11,7 @@ using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
 using XamForms.Controls;
-using static HairApp.Controls.WashingDayDefinitionCalendarCell;
+using static HairApp.Controls.WashingDayDefinitionControl;
 
 namespace HairApp
 {
@@ -119,7 +119,7 @@ namespace HairApp
                 foreach (var d in mFutureDays[date])
                 {
                     var wdController = new HairAppBl.Controller.WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
-                    var c = new WashingDayDefinitionCalendarCell(wdController, App.BL);
+                    var c = new WashingDayDefinitionControl(wdController, App.BL);
                     c.Edited += WashingDayEdited;
                     this.PlanedWashDays.Children.Add(c.View);
                 }

@@ -12,21 +12,21 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    public class WashingDayDefinitionCalendarCell : ViewCell
+    public class WashingDayDefinitionControl : ViewCell
     {
-        Label text;
+        Label mLabelText;
         private HairAppBl.Interfaces.IHairBl mHairBl;
         public WashingDayEditorController WdController { get; set; }
         private StackLayout mDetailsFrame;
         public event EventHandler<WashingDayCellEventArgs> Edited;
 
-        public WashingDayDefinitionCalendarCell(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashingDayDefinitionControl(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
             this.WdController = controller;
             var def = WdController.GetModel();
 
-            text = new Label
+            mLabelText = new Label
             {
                 Text = def.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
@@ -34,10 +34,13 @@ namespace HairApp.Controls
             };
 
 
-            var moreInfoButton = GetButton("info.png");
+            var moreInfoButton = Common.GetButton("info.png",hairbl);
             moreInfoButton.Clicked += (sender, e) =>
             {
-                mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
+                if (!mDetailsFrame.IsVisible)
+                    ShowDetailsAnimation();
+                else
+                    HideDetailsAnimation();
             };
 
             var descriptionLabel = Common.GetCalendarDetailsRow("description.png", new Label
@@ -97,7 +100,7 @@ namespace HairApp.Controls
                             Style = (Style)hairbl.Resources["RoutineContent"],
                             Orientation = StackOrientation.Horizontal,
 
-                            Children = { text, moreInfoButton }
+                            Children = { mLabelText, moreInfoButton }
                         },
                         mDetailsFrame
                         
@@ -106,7 +109,20 @@ namespace HairApp.Controls
             };
             View = frame;
                 
-              
+          
+        }
+
+        private void ShowDetailsAnimation()
+        {
+            mDetailsFrame.IsVisible = true;
+            var animation = new Animation(v => mDetailsFrame.HeightRequest = v,0, 500);
+            animation.Commit(mDetailsFrame, "ShowDetails", 16, 800,Easing.SinIn,(v,c) => { mDetailsFrame.HeightRequest = -1; });
+        }
+
+        private void HideDetailsAnimation()
+        {
+            var animation = new Animation(v => mDetailsFrame.HeightRequest = v, 500, 0);
+            animation.Commit(mDetailsFrame, "ShowDetails", 16, 800, Easing.SinIn, (v, c) => { mDetailsFrame.IsVisible = false; });
         }
 
         private void EditButton_Clicked(object sender, EventArgs e)
@@ -114,16 +130,7 @@ namespace HairApp.Controls
             Edited(this, new WashingDayCellEventArgs(WdController));
         }
 
-        private ImageButton GetButton(string image)
-        {
-            return new ImageButton
-            {
-                Style = (Style)mHairBl.Resources["RoutineButton"],
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                Source = image
 
-            };
-        }
 
         public class WashingDayCellEventArgs : EventArgs
         {

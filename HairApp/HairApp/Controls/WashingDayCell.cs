@@ -101,18 +101,6 @@ namespace HairApp.Controls
               
         }
 
-        private ImageButton GetButton(string image)
-        {
-            return new ImageButton
-            {
-                Style = (Style)mHairBl.Resources["RoutineButton"],
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                Source = image
-
-            };
-        }
-
-
 
         public void Select()
         {

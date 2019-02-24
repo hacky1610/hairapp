@@ -38,7 +38,7 @@ namespace HairApp.Controls
             };
 
 
-            var moreInfoButton = GetButton("info.png");
+            var moreInfoButton = Common.GetButton("info.png",hairbl);
             moreInfoButton.Clicked += (sender, e) =>
             {
                 mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
@@ -127,17 +127,6 @@ namespace HairApp.Controls
         private void ShowMoreButton_Clicked(object sender, EventArgs e)
         {
             Openclicked(this, new WashingDayCellEventArgs(Instance, Definition));
-        }
-
-        private ImageButton GetButton(string image)
-        {
-            return new ImageButton
-            {
-                Style = (Style)mHairBl.Resources["RoutineButton"],
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                Source = image
-
-            };
         }
 
         public class WashingDayCellEventArgs : EventArgs

@@ -32,7 +32,7 @@ namespace HairApp.Controls
                 ShowMore();
             };
 
-            var commentButton = GetButton("comment.png");
+            var commentButton = Common.GetButton("comment.png",hairbl);
             commentButton.Clicked += (sender, e) =>
             {
                 mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
@@ -108,19 +108,6 @@ namespace HairApp.Controls
         {
             mRoutine.Checked = e.Value;
         }
-
-        private ImageButton GetButton(string image)
-        {
-            return new ImageButton
-            {
-                Style = (Style)mHairBl.Resources["RoutineButton"],
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                Source = image
-
-            };
-        }
-
-
 
         public void Select()
         {

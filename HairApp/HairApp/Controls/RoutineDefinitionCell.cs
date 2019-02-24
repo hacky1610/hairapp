@@ -9,27 +9,31 @@ namespace HairApp.Controls
     /// <summary>
     /// For custom renderer on Android (only)
     /// </summary>
+    public class ListButton : Button { }
 
-    public class WashingDayInstanceCell : ViewCell
+    public class RoutineDefinitionCell : ViewCell
     {
         ImageButton editButton;
         ImageButton deleteButton;
+        ImageButton upButton;
+        ImageButton downButton;
         StackLayout buttonGroup;
         Label text;
         
         public event EventHandler<EventArgs> Removed;
-        public event EventHandler<EventArgs> Edited;
+        public event EventHandler<EventArgs> MovedUp;
+        public event EventHandler<EventArgs> MovedDown;
         private HairAppBl.Interfaces.IHairBl mHairBl;
-        public WashingDayInstance WashingDayInstance{ get; set; }
 
+        public RoutineDefinition Routine { get; set; }
 
-        public WashingDayInstanceCell(WashingDayInstance instance,string name, HairAppBl.Interfaces.IHairBl hairbl)
+        public RoutineDefinitionCell(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
-            this.WashingDayInstance = instance;
+            this.Routine = routine;
             text = new Label
             {
-                Text = name,
+                Text = Routine.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
@@ -40,16 +44,29 @@ namespace HairApp.Controls
             };
 
 
-            editButton = GetButton("edit.png");
+            editButton = Common.GetButton("edit.png", hairbl);
             editButton.Clicked += (sender, e) =>
             {
-                SendEdited();
+                var b = (Button)sender;
             };
 
-            deleteButton = GetButton("remove.png");
+            deleteButton = Common.GetButton("remove.png", hairbl);
             deleteButton.Clicked += (sender, e) =>
             {
                 SendRemoved();
+            };
+
+            downButton = Common.GetButton("down.png", hairbl);
+            downButton.Clicked += (sender, e) =>
+            {
+                SendMoveDown();
+
+            };
+
+            upButton = Common.GetButton("up.png",hairbl);
+            upButton.Clicked += (sender, e) =>
+            {
+                SendMoveUp();
             };
 
             buttonGroup = new StackLayout
@@ -57,7 +74,7 @@ namespace HairApp.Controls
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
                 IsVisible = false,
-                Children = { editButton, deleteButton }
+                Children = { downButton,upButton,editButton, deleteButton }
             };
 
             var frame = new Frame
@@ -84,19 +101,6 @@ namespace HairApp.Controls
               
         }
 
-        private ImageButton GetButton(string image)
-        {
-            return new ImageButton
-            {
-                Style = (Style)mHairBl.Resources["RoutineButton"],
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                Source = image
-
-            };
-        }
-
-
-
         public void Select()
         {
             this.buttonGroup.IsVisible = true;
@@ -110,15 +114,21 @@ namespace HairApp.Controls
 
         private void SendRemoved()
         {
-            Removed?.Invoke(this, new EventArgs());
+            if (Removed != null)
+                Removed(this,new EventArgs());
         }
 
-        private void SendEdited()
+        private void SendMoveUp()
         {
-            Edited?.Invoke(this, new EventArgs());
+            if (MovedUp != null)
+                MovedUp(this, new EventArgs());
         }
 
-
+        private void SendMoveDown()
+        {
+            if (MovedDown != null)
+                MovedDown(this, new EventArgs());
+        }
     }
 
 }

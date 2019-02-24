@@ -19,7 +19,7 @@ namespace HairApp
 	public partial class WashDayEditor : ContentPage
 	{
         private WashingDayEditorController mWashingDayEditorController;
-        private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
+        private List<RoutineDefinitionCell> mRoutineListControls = new List<RoutineDefinitionCell>();
         private Boolean mCreate;
         private HairAppBl.Interfaces.IHairBl mHairbl;
 
@@ -287,7 +287,7 @@ namespace HairApp
             this.mRoutineListControls.Clear();
             foreach (var r in mWashingDayEditorController.GetRoutineDefinitions())
             {
-                var c = new Controls.WashingDayEditorCell(r,App.BL);
+                var c = new Controls.RoutineDefinitionCell(r,App.BL);
                 c.Removed += Routine_Removed;
                 c.MovedDown += Routine_MovedDown;
                 c.MovedUp += Routine_MovedUp;
@@ -296,7 +296,7 @@ namespace HairApp
             }
         }
 
-        private WashingDayEditorCell GetRoutineControl(RoutineDefinition routine)
+        private RoutineDefinitionCell GetRoutineControl(RoutineDefinition routine)
         {
             foreach(var c in mRoutineListControls)
             {
@@ -308,7 +308,7 @@ namespace HairApp
 
         private void Routine_MovedDown(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.MoveDown(item.Routine);
             RefreshList();
             GetRoutineControl(item.Routine).Select();
@@ -316,7 +316,7 @@ namespace HairApp
 
         private void Routine_MovedUp(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.MoveUp(item.Routine);
             RefreshList();
             GetRoutineControl(item.Routine).Select();
@@ -325,7 +325,7 @@ namespace HairApp
 
         private void Routine_Removed(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.RemoveRoutine(item.Routine);
             RefreshList();
         }
