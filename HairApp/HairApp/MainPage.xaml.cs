@@ -121,19 +121,6 @@ namespace HairApp
   
         }
 
-        private void OpenCareDayCommand(string id)
-        {
-            var day = App.MainSession.GetWashingDayById(id);
-            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
-            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
-
-            var instancePage = new WashDayInstance(day,wdInstance);
-            instancePage.OkClicked += InstancePage_OkClicked;
-
-            Navigation.PushAsync(instancePage, true);
-        }
-
-
         private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
         {
             throw new NotImplementedException();

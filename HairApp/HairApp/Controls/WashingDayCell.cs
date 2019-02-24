@@ -13,14 +13,13 @@ namespace HairApp.Controls
 
     public class WashingDayCell : ViewCell
     {
-        ImageButton editButton;
-        ImageButton deleteButton;
-        StackLayout buttonGroup;
-        Label text;
+        StackLayout startCareDayContainer;
+        Label mNameLabel;
         Label timeText;
 
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> Edited;
+        public event EventHandler<WashingDayCellEventArgs> StartCareDay;
         private HairAppBl.Interfaces.IHairBl mHairBl;
         public WashingDayDefinition WashingDayDefinition { get; set; }
 
@@ -32,7 +31,7 @@ namespace HairApp.Controls
             var c = new ScheduleController(def.Scheduled);
             var t = c.Time2NextCareDay(ScheduleController.GetToday());
 
-            text = new Label
+            mNameLabel = new Label
             {
                 Text = WashingDayDefinition.Name,
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
@@ -44,30 +43,35 @@ namespace HairApp.Controls
                 Select();
             };
 
+            //StartCareDay
+            var startImage = new Image { Source = "start.png" };
 
-            editButton = GetButton("edit.png");
-            editButton.Clicked += (sender, e) =>
-            {
-                SendEdited();
-            };
+            var startLabel = new Label { Text = "Start care day" };
 
-            deleteButton = GetButton("remove.png");
-            deleteButton.Clicked += (sender, e) =>
-            {
-                SendRemoved();
-            };
 
-            buttonGroup = new StackLayout
+            startCareDayContainer = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
                 IsVisible = false,
-                Children = { editButton, deleteButton }
+                Children = { startLabel, startImage }
             };
 
+            var startCareDayTab = new TapGestureRecognizer();
+            startCareDayTab.Tapped += (s, e) => {
+                StartCareDay?.Invoke(this, new WashingDayCellEventArgs(WashingDayDefinition));
+            };
+
+            startCareDayContainer.GestureRecognizers.Add(startCareDayTab);
+            startCareDayContainer.IsVisible = t == 0;
+
+            //Time label
+            var text = "today";
+            if (t > 0)
+                text = $"in {t} days";
             timeText = new Label
             {
-                Text = $"in {t} days"
+                Text = text
             };
 
 
@@ -83,10 +87,10 @@ namespace HairApp.Controls
                     Children = {
                     new StackLayout {
                         Orientation = StackOrientation.Vertical,
-                        Children = { text }
+                        Children = { mNameLabel }
                     },
                     timeText,
-                    buttonGroup
+                    startCareDayContainer
                     
                 }
                 }
@@ -112,15 +116,11 @@ namespace HairApp.Controls
 
         public void Select()
         {
-            this.buttonGroup.IsVisible = true;
-            this.timeText.IsVisible = false;
 
         }
 
         public void Deselect()
         {
-            this.buttonGroup.IsVisible = false;
-            this.timeText.IsVisible = true;
 
         }
 
@@ -132,6 +132,16 @@ namespace HairApp.Controls
         private void SendEdited()
         {
             Edited?.Invoke(this, new EventArgs());
+        }
+
+        public class WashingDayCellEventArgs : EventArgs
+        {
+            public readonly WashingDayDefinition Definition;
+
+            public WashingDayCellEventArgs(WashingDayDefinition definition)
+            {
+                this.Definition = definition;
+            }
         }
 
 

@@ -57,8 +57,21 @@ namespace HairApp.Controls
                 var c = new WashingDayCell(r, App.BL);
                 c.Removed += WashDay_Removed;
                 c.Edited += WashDay_Edited;
+                c.StartCareDay += WasgDay_StartCareDay;
                 this.mWashDayList.Children.Add(c.View);
             }
+        }
+
+        private void WasgDay_StartCareDay(object sender, WashingDayCell.WashingDayCellEventArgs e)
+        {
+            var day = App.MainSession.GetWashingDayById(e.Definition.ID);
+            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), this.mAlarmController);
+            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
+
+            var instancePage = new WashDayInstance(day, wdInstance);
+            //instancePage.OkClicked += InstancePage_OkClicked;
+
+            Navigation.PushAsync(instancePage, true);
         }
 
         private void WashDay_Edited(object sender, EventArgs e)
