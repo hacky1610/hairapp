@@ -47,9 +47,6 @@
     <Compile Update="IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="WashDayOverview.xaml.cs">
-      <DependentUpon>WashDayOverview.xaml</DependentUpon>
-    </Compile>
     <Compile Update="WashDayInstance.xaml.cs">
       <DependentUpon>WashDayInstance.xaml</DependentUpon>
     </Compile>

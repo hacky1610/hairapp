@@ -54,40 +54,38 @@ namespace HairApp.Controls
             this.mWashDayList.Children.Clear();
             foreach (var r in this.mWashingDays)
             {
-                var c = new WashingDayCell(r, App.BL);
+                var wdController = new WashingDayEditorController(r, App.MainSession.GetAllDefinitions(), null);
+
+                var c = new WashingDayDefinitionHomeControl(wdController, App.BL);
                 c.Removed += WashDay_Removed;
                 c.Edited += WashDay_Edited;
-                c.StartCareDay += WasgDay_StartCareDay;
+                c.StartCareDay += WashDay_StartCareDay;
                 this.mWashDayList.Children.Add(c.View);
             }
         }
 
-        private void WasgDay_StartCareDay(object sender, WashingDayCell.WashingDayCellEventArgs e)
+        private void WashDay_StartCareDay(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
         {
-            var day = App.MainSession.GetWashingDayById(e.Definition.ID);
-            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), this.mAlarmController);
-            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
+            var wdInstance = e.Controller.GetWashingDayInstance(ScheduleController.GetToday());
 
-            var instancePage = new WashDayInstance(day, wdInstance);
+            var instancePage = new WashDayInstance(e.Controller.GetModel(), wdInstance);
             //instancePage.OkClicked += InstancePage_OkClicked;
 
             Navigation.PushAsync(instancePage, true);
         }
 
-        private void WashDay_Edited(object sender, EventArgs e)
+        private void WashDay_Edited(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
         {
-            var item = ((WashingDayCell)sender);
-            var contr = new WashingDayEditorController(item.WashingDayDefinition, App.MainSession.GetAllDefinitions(), this.mAlarmController);
+            var contr = new WashingDayEditorController(e.Controller.GetModel(), App.MainSession.GetAllDefinitions(), this.mAlarmController);
             var editor = new WashDayEditor(contr, false, mHairbl);
             editor.OkClicked += Editor_OkClicked;
             Navigation.PushAsync(editor);
         }
 
-        private void WashDay_Removed(object sender, EventArgs e)
+        private void WashDay_Removed(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
         {
-            var item = ((WashingDayCell)sender);
-            mWashingDays.Remove(item.WashingDayDefinition);
-            mAlarmController.DeleteWashDay(item.WashingDayDefinition.ID);
+            mWashingDays.Remove(e.Controller.GetModel());
+            mAlarmController.DeleteWashDay(e.Controller.GetModel().ID);
             RefreshList();
         }
 

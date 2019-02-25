@@ -118,7 +118,7 @@ namespace HairApp
                 PlanedWashDaysContainer.IsVisible = true;
                 foreach (var d in mFutureDays[date])
                 {
-                    var wdController = new HairAppBl.Controller.WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
+                    var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
                     var c = new WashingDayDefinitionControl(wdController, App.BL);
                     c.Edited += WashingDayEdited;
                     this.PlanedWashDays.Children.Add(c.View);
