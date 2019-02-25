@@ -12,37 +12,17 @@ namespace HairApp.Controls
     /// For custom renderer on Android (only)
     /// </summary>
 
-    public class WashingDayInstanceCalendarCell : ViewCell
+    public class WashingDayInstanceCalendarCell : DetailsControl
     {
-        Label text;
-        
-        private HairAppBl.Interfaces.IHairBl mHairBl;
         private readonly WashingDayInstance Instance;
         private readonly WashingDayDefinition Definition;
-        private StackLayout mDetailsFrame;
         public event EventHandler<WashingDayCellEventArgs> Openclicked;
 
-
-
-        public WashingDayInstanceCalendarCell(WashingDayInstance instance,WashingDayDefinition def, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashingDayInstanceCalendarCell(WashingDayInstance instance,WashingDayDefinition def, HairAppBl.Interfaces.IHairBl hairbl):base(hairbl)
         {
-            this.mHairBl = hairbl;
             this.Instance = instance;
             this.Definition = def;
-
-            text = new Label
-            {
-                Text = Definition.Name,
-                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                FontAttributes = FontAttributes.Bold
-            };
-
-
-            var moreInfoButton = Common.GetButton("info.png",hairbl);
-            moreInfoButton.Clicked += (sender, e) =>
-            {
-                mDetailsFrame.IsVisible = !mDetailsFrame.IsVisible;
-            };
+            this.HeaderName = Definition.Name;
 
             var commentLabel = Common.GetCalendarDetailsRow("comment.png",new Label
             {
@@ -88,40 +68,11 @@ namespace HairApp.Controls
             var routineFrame = Common.GetCalendarDetailsRow("list.png", routineList, hairbl);
             var neededTime = Common.GetCalendarDetailsRow("time.png", new Label { Text = $"{instance.NeededTime.TotalMinutes} minutes"}, hairbl);
 
-            mDetailsFrame = new StackLayout
-            {
-                Orientation = StackOrientation.Vertical,
-                Style = (Style)hairbl.Resources["DetailsFrame"],
-                IsVisible = false,
-                Children = { commentLabel, routineFrame, neededTime,pictureList, showMore}
-            };
-
-           
-
-
-            var frame = new Frame
-            {
-                Style = (Style)hairbl.Resources["RoutineFrame"],
-                Content = new StackLayout
-                {
-                    Orientation = StackOrientation.Vertical,
-                    Children =
-                    {
-                        new StackLayout
-                        {
-                            Style = (Style)hairbl.Resources["RoutineContent"],
-                            Orientation = StackOrientation.Horizontal,
-
-                            Children = { text, moreInfoButton }
-                        },
-                        mDetailsFrame
-                        
-                    }
-                }
-            };
-            View = frame;
-                
-              
+            DetailsContent.Add(commentLabel);
+            DetailsContent.Add(routineFrame);
+            DetailsContent.Add(neededTime);
+            DetailsContent.Add(pictureList);
+            DetailsContent.Add(showMore);
         }
 
         private void ShowMoreButton_Clicked(object sender, EventArgs e)
