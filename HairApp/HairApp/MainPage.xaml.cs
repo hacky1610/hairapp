@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using HairAppBl;
 using HairAppBl.Controller;
+using Rg.Plugins.Popup.Extensions;
 
 namespace HairApp
 {
@@ -69,6 +70,12 @@ namespace HairApp
                 });
                 ;
             }
+
+            Device.BeginInvokeOnMainThread(() => {
+                var diaog = new HelpPage();
+                // Open a PopupPage
+                Navigation.PushPopupAsync(diaog);
+            });
         }
 
         private void IntroPage_Closed(object sender, EventArgs e)
@@ -96,6 +103,9 @@ namespace HairApp
         {
             base.OnAppearing();
             OpenPageIfNeeded();
+
+         
+         
 
             mCareDayList.RefreshList();
            var timeToNexDay =   App.MainSession.NextDay();

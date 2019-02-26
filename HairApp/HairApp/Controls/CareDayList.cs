@@ -15,6 +15,7 @@ namespace HairApp.Controls
         HairAppBl.Interfaces.IHairBl mHairbl;
         AlarmController mAlarmController;
         StackLayout mWashDayList;
+        WashingDayDefinitionHomeControl helpItem;
 
 
         public CareDayList(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
@@ -61,7 +62,14 @@ namespace HairApp.Controls
                 c.Edited += WashDay_Edited;
                 c.StartCareDay += WashDay_StartCareDay;
                 this.mWashDayList.Children.Add(c.View);
+
+                helpItem = c;
             }
+        }
+
+        public void ShowHelp()
+        {
+            helpItem?.ShowHelp();
         }
 
         private void WashDay_StartCareDay(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)

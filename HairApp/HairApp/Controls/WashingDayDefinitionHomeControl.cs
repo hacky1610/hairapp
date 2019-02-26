@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using HairAppBl.Models;
 using HairAppBl.Controller;
 using static HairApp.WashDayEditor;
+using HairApp.Controller;
 
 namespace HairApp.Controls
 {
@@ -59,7 +60,14 @@ namespace HairApp.Controls
                 Text = text
             };
 
-        
+
+
+        }
+
+        public void ShowHelp()
+        {
+            var tt = new ToolTipController(HeaderExtensionLeft, "Click here to show more info");
+            tt.Show();
         }
       
 
