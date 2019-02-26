@@ -72,7 +72,9 @@ namespace HairApp
             }
 
             Device.BeginInvokeOnMainThread(() => {
-                var diaog = new HelpPage();
+                var helpController = new Controller.HelpController();
+                helpController.Add("Foo", "Des", "Tooltip", mAddCareDayButton);
+                var diaog = new HelpPage(helpController);
                 // Open a PopupPage
                 Navigation.PushPopupAsync(diaog);
             });

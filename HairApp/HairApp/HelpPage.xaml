@@ -5,19 +5,12 @@
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              x:Class="HairApp.HelpPage"
              BackgroundColor="Transparent">
-    <pages:PopupPage.Animation>
-        <animations:ScaleAnimation 
-            PositionIn="Center"
-            PositionOut="Center"
-            ScaleIn="1.2"
-            ScaleOut="0.8"
-            DurationIn="400"
-            DurationOut="300"
-            EasingIn="SinOut"
-            EasingOut="SinIn"
-            HasBackgroundAnimation="True"/>
-    </pages:PopupPage.Animation>
-        <Label x:Name="HelpText" Text="Hier steht eine hilfe"></Label>
+
+    <StackLayout HeightRequest="50" VerticalOptions="Start">
+        <Button x:Name="HelpText" Text="Hier steht eine hilfe"></Button>
+
+    </StackLayout>
+        
 
         
 
