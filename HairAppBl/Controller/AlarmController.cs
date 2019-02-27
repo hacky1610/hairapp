@@ -71,6 +71,7 @@ namespace HairAppBl.Controller
         public static long GetAlarmTime()
         {
             var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 8, 0, 0);
+            //var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 10, 0);
             var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
             var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
             return utcTime.AddSeconds(-epochDif).Ticks / 10000;

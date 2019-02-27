@@ -33,7 +33,10 @@ namespace HairApp
 
             mCareDayList = new Controls.CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
             CareDayListFrame.Content = mCareDayList;
+
+            App.MainSession.SendInitAlarms();
         }
+
 
         private void MAddCareDayButton_Clicked(object sender, EventArgs e)
         {
@@ -72,11 +75,11 @@ namespace HairApp
             }
 
             Device.BeginInvokeOnMainThread(() => {
-                var helpController = new Controller.HelpController();
-                helpController.Add("Foo", "Des", "Tooltip", mAddCareDayButton);
-                var diaog = new HelpPage(helpController);
+                //var helpController = new Controller.HelpController();
+                //helpController.Add("Foo", "Des", "Tooltip", mAddCareDayButton);
+                //var diaog = new HelpPage(helpController);
                 // Open a PopupPage
-                Navigation.PushPopupAsync(diaog);
+                //Navigation.PushPopupAsync(diaog);
             });
         }
 

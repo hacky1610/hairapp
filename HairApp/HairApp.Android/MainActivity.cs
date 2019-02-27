@@ -30,13 +30,15 @@ namespace HairApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             XamForms.Controls.Droid.Calendar.Init();
 
+            MainSessionController.InitAlarms += App_InitAlarms;
+
+
             myApp = new App(Intent.GetStringExtra("washday_id"));
             LoadApplication(myApp);
 
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            App.MainSession.InitAlarms += App_InitAlarms;
         }
 
         private void App_InitAlarms(object sender, EventArgs e)
