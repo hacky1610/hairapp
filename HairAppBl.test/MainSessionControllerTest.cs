@@ -56,13 +56,15 @@ namespace HairAppBl.Tests
             c.Init();
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();
-            wdd.ID = "Foo";
+            wdd.Scheduled.Type = ScheduleDefinition.ScheduleType.Dayly;
+            wdd.Scheduled.DaylyPeriod.Period = 1;
             days.Add(wdd);
 
+            var fDays = c.GetFutureDays();
 
-            Assert.AreEqual(1, c.GetAllWashingDays().Count);
-            Assert.AreEqual("Foo", c.GetAllWashingDays()[0].ID);
+            Assert.AreEqual(ScheduleController.GetToday(), c.GetFutureDays()[ScheduleController.GetToday()]);
         }
+
 
 
 

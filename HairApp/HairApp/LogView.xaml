@@ -6,8 +6,12 @@
   
         <ScrollView>
         <StackLayout Style="{StaticResource PageContent}">
-            <Editor x:Name="LogContent"></Editor>
-            <Button Text="CLear" x:Name="ClearButton"></Button>
+            <Editor x:Name="LogContent" FontSize="Small" VerticalOptions="StartAndExpand"></Editor>
+            <StackLayout Orientation="Horizontal" HeightRequest="50">
+                <Button Text="CLear" x:Name="ClearButton"/>
+                    <Button Text="Init" x:Name="Init"/>
+                <Button Text="Init Alarms" x:Name="InitAlarms"/>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 

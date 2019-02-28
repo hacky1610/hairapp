@@ -11,7 +11,8 @@
 
         <ScrollView Style="{StaticResource HomePageContent}" >
                 <StackLayout>
-                    <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
+                <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent"/>
+                <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
                         <StackLayout>
                             <Label x:Name="TimeToNextCareDay" Text="" 
                              HorizontalOptions="Center" FontSize="Medium"/>

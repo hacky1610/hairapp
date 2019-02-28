@@ -25,11 +25,11 @@ namespace HairAppBl.Controller
 
         public  void SendInitAlarms()
         {
-            if (!MainSession.AlarmInitialized)
-            {
+            //if (!MainSession.AlarmInitialized)
+            //{
                 InitAlarms(null, new EventArgs());
                 MainSession.AlarmInitialized = true;
-            }
+            //}
         }
 
         public MainSessionController(IDictionary<string, object> props)

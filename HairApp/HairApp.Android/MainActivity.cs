@@ -53,6 +53,7 @@ namespace HairApp.Droid
 
         public void InitAlarms()
         {
+            App.BL.Logger.WriteLine("Init Alarms called");
             Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);

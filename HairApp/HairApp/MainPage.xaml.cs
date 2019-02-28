@@ -20,23 +20,28 @@ namespace HairApp
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
+            //Home Menu
             Home.Source = "home.png";
             ShowCalendar.Source = "calendar.png";
             OpenStatistic.Source = "chart.png";
 
-
+            //Button Events
             ShowCalendar.Clicked += ShowCalendar_Clicked;
             mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
+            openSettingsButton.Clicked += OpenSettingsButton_Clicked;
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             this.mAlarmController = new AlarmController(fileDb);
 
             mCareDayList = new Controls.CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
             CareDayListFrame.Content = mCareDayList;
-
-            App.MainSession.SendInitAlarms();
         }
 
+        private void OpenSettingsButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new LogView(App.BL.Logger));
+
+        }
 
         private void MAddCareDayButton_Clicked(object sender, EventArgs e)
         {
@@ -141,10 +146,6 @@ namespace HairApp
             throw new NotImplementedException();
         }
 
-        private void TestPage_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new TestPage());
-        }
 
 
 
