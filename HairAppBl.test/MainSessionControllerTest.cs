@@ -48,7 +48,22 @@ namespace HairAppBl.Tests
             Assert.AreEqual(1,c.GetAllWashingDays().Count);
             Assert.AreEqual("Foo",c.GetAllWashingDays()[0].ID);
         }
-        
+
+        [Test]
+        public void GetFutureDaysIsWorking()
+        {
+            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
+            c.Init();
+            var days = c.GetAllWashingDays();
+            var wdd = new WashingDayDefinition();
+            wdd.ID = "Foo";
+            days.Add(wdd);
+
+
+            Assert.AreEqual(1, c.GetAllWashingDays().Count);
+            Assert.AreEqual("Foo", c.GetAllWashingDays()[0].ID);
+        }
+
 
 
 

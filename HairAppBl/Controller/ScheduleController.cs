@@ -124,7 +124,7 @@ namespace HairAppBl.Controller
                 var days = String.Empty;
                 foreach (var d in mSchedule.WeeklyPeriod.WeekDays)
                     days += $" {d},";
-                days.TrimEnd(',');
+                days = days.TrimEnd(',');
                 return $"Every{days} each {mSchedule.WeeklyPeriod.Period} week.";
 
             }
