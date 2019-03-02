@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.HairApp" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<application android:label="HairApp.Android" android:icon="@mipmap/icon">
+    <receiver android:name=".Droid.AlarmReceiver"
+        android:enabled="true"
+        android:exported="true"
+        android:label="BootReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+        </intent-filter>
+    </receiver>
      <service
             android:name=".Droid.NotifyService"
             android:exported="false"/>

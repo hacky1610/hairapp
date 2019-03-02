@@ -72,8 +72,7 @@ namespace HairAppBl.Controller
         {
             var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
             s = s.AddDays(1);
-            s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour,DateTime.Now.Minute, 0);
-            s = s.AddMinutes(2);
+            //s = DateTime.Now.AddSeconds(30);
             var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
             var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
             return utcTime.AddSeconds(-epochDif).Ticks / 10000;

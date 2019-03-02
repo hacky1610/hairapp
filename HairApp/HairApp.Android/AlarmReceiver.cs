@@ -14,6 +14,7 @@ using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using HairAppBl;
 using System.IO;
 using HairAppBl.Controller;
+using Android.Graphics;
 
 namespace HairApp.Droid
 {
@@ -32,7 +33,7 @@ namespace HairApp.Droid
 
         private static void WriteLog(string value)
         {
-            var mLogfilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
+            var mLogfilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
             using (var file = File.AppendText(mLogfilePath))
             {
                 file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
@@ -110,7 +111,10 @@ namespace HairApp.Droid
                               .SetContentTitle(title) // Set the title
                               .SetNumber(1) // Display the count in the Content Info
                               .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display
-                              .SetContentText(content); // the message to display.
+                              .SetContentText(content)
+                              .SetLargeIcon(BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.icon))
+                              ; // the message to display.
+               
 
                 // Finally, publish the notification:
                 var notificationManager = NotificationManagerCompat.From(context);
