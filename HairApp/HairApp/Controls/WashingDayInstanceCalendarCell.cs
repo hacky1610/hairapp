@@ -23,6 +23,7 @@ namespace HairApp.Controls
             this.Instance = instance;
             this.Definition = def;
             this.HeaderName = Definition.Name;
+            Color = Definition.ItemColor;
 
             var commentLabel = Common.GetCalendarDetailsRow("comment.png",new Label
             {

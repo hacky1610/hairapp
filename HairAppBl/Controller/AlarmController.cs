@@ -35,7 +35,7 @@ namespace HairAppBl.Controller
             {               
                 return  this.database.Load<Dictionary<string, ScheduleSqlDefinition>>();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return new Dictionary<string, ScheduleSqlDefinition>();
             }

@@ -25,8 +25,9 @@ namespace HairApp.Controls
             this.WdController = controller;
             var def = WdController.GetModel();
             HeaderName = def.Name;
+            Color = def.ItemColor;
 
-            HeaderExtensionLeft = new Label { Text = "Foo" };
+            //HeaderExtensionLeft = new Label { Text = "Foo" };
 
             var descriptionLabel = Common.GetCalendarDetailsRow("description.png", new Label
             {

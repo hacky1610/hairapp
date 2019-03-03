@@ -18,9 +18,22 @@ namespace HairApp.Controls
         private Label mLabelText;
         private HairAppBl.Interfaces.IHairBl mHairBl;
         private StackLayout mDetailsFrame;
+        private Frame mColorFrame;
         private ContentView mHeaderLeft;
         private ContentView mHeaderRight;
 
+
+        protected Color Color
+        {
+            get
+            {
+                return mColorFrame.BackgroundColor;
+            }
+            set
+            {
+                mColorFrame.BackgroundColor = value;
+            }
+        }
         protected string HeaderName {
             get
             {
@@ -71,6 +84,12 @@ namespace HairApp.Controls
             this.mHairBl = hairbl;
 
             //Header
+            mColorFrame = new Frame
+            {
+                CornerRadius = 4,
+                WidthRequest = 10
+            };
+
             mLabelText = new Label
             {
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
@@ -118,7 +137,7 @@ namespace HairApp.Controls
                             Style = (Style)hairbl.Resources["RoutineContent"],
                             Orientation = StackOrientation.Horizontal,
 
-                            Children = { mLabelText,mHeaderLeft,mHeaderRight }
+                            Children = {mColorFrame, mLabelText,mHeaderLeft,mHeaderRight }
                         },
                         mDetailsFrame
                         
