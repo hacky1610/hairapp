@@ -102,7 +102,7 @@ namespace HairAppBl.Controller
 
         }
 
-        public Dictionary<DateTime, List<Models.WashingDayInstance>> GetInstances()
+        public Dictionary<DateTime, List<WashingDayInstance>> GetInstancesByDate()
         {
             var c = new FutureDayListController<WashingDayInstance>();
             foreach (var d in MainSession.WashingDays)
@@ -114,7 +114,16 @@ namespace HairAppBl.Controller
                
             }
             return c.GetAllDays();
+        }
 
+        public List<WashingDayInstance> GetInstances()
+        {
+            var list = new List<WashingDayInstance>();
+            foreach (var d in MainSession.WashingDays)
+            {
+                list.AddRange(d.Instances);
+            }
+            return list;
         }
 
         public CommingDays NextDay()

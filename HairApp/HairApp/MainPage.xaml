@@ -11,7 +11,7 @@
 
         <ScrollView Style="{StaticResource HomePageContent}" >
                 <StackLayout>
-                <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent"/>
+                <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent" IsVisible="False"/>
                 <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
                         <StackLayout>
                             <Label x:Name="TimeToNextCareDay" Text="" 
@@ -32,26 +32,7 @@
                 </StackLayout>
             </ScrollView>
 
-        <Frame 
-                Padding="0,0,0,0" Margin="0,0,0,0" >
-
-            <Grid VerticalOptions="End" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-
-                <ImageButton  x:Name="Home" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
-                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
-                <ImageButton  x:Name="OpenStatistic" Grid.Row="0" Grid.Column="2" Style="{StaticResource HomeButton}"/>
-
-            </Grid>
-        </Frame>
+        <ContentView x:Name="NavigationContainer" />
 
     </StackLayout>
 

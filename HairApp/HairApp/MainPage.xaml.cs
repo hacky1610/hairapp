@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using HairAppBl;
 using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
+using HairApp.Controls;
 
 namespace HairApp
 {
@@ -20,14 +21,15 @@ namespace HairApp
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
-            //Home Menu
-            Home.Source = "home.png";
-            ShowCalendar.Source = "calendar.png";
-            OpenStatistic.Source = "chart.png";
+            //MainMenu
+            var navMenu = new MainNavigationControl(App.BL);
+            NavigationContainer.Content = navMenu.View;
+
 
             //Button Events
-            ShowCalendar.Clicked += ShowCalendar_Clicked;
+            navMenu.MiddleButton.Clicked += ShowCalendar_Clicked;
             mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
+            navMenu.RightButton.Clicked += OpenStatistic_Clicked;
             openSettingsButton.Clicked += OpenSettingsButton_Clicked;
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
@@ -35,6 +37,14 @@ namespace HairApp
 
             mCareDayList = new Controls.CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
             CareDayListFrame.Content = mCareDayList;
+
+            //InitAlarms
+            App.MainSession.SendInitAlarms();
+        }
+
+        private void OpenStatistic_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HistoryPage(App.BL, App.MainSession,  App.MainSession.GetInstances()));
         }
 
         private void OpenSettingsButton_Clicked(object sender, EventArgs e)
@@ -50,7 +60,7 @@ namespace HairApp
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
+            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstancesByDate()));
         }
 
         private void OpenPageIfNeeded()

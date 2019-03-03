@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HairApp.WashDayInstance"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout Style="{StaticResource Page}">
-        <ContentView x:Name="SaveButtonContainer"/>
-        <ScrollView Style="{StaticResource ScrollPageContent}">        
-            <StackLayout Style="{StaticResource PageContent}" >
+    <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand" BackgroundColor="Beige">
+        <ContentView x:Name="SaveButtonContainer" />
+        <ScrollView Style="{StaticResource ScrollPageContent}" BackgroundColor="AliceBlue">
+            <StackLayout Style="{StaticResource PageContent}" VerticalOptions="EndAndExpand" >
 
             <Label Text="Do you care day"
                 Style="{StaticResource Heading}" />
@@ -21,7 +21,7 @@
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout>
                         <Label>Needed time</Label>
-                        <TimePicker x:Name="UsedTime" />
+                        <TimePicker x:Name="UsedTime"/>
                     </StackLayout>
                 </Frame>
               

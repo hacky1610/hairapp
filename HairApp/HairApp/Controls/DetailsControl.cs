@@ -44,7 +44,7 @@ namespace HairApp.Controls
             }
         }
 
-        protected View HeaderExtensionRight
+        public View HeaderExtensionRight
         {
             get
             {
