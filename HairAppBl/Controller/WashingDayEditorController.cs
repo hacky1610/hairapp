@@ -16,6 +16,8 @@ namespace HairAppBl.Controller
         {
             if(wd == null)
                 throw new ArgumentNullException("wd");
+            if (ac == null)
+                throw new ArgumentNullException("ac");
 
             this.mWashingDay = wd;
             this.mAllRoutines = allroutines;

@@ -64,7 +64,7 @@ namespace HairApp.Droid
         void  ButtonOnClick(Context context)
         {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
-            var alarmController = new HairAppBl.Controller.AlarmController(fileDb);
+            var alarmController = new AlarmController(fileDb);
             var washdays = alarmController.GetWashDays();
 
             if (washdays.Count == 0)

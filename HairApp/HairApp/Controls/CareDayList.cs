@@ -55,7 +55,7 @@ namespace HairApp.Controls
             this.mWashDayList.Children.Clear();
             foreach (var r in this.mWashingDays)
             {
-                var wdController = new WashingDayEditorController(r, App.MainSession.GetAllDefinitions(), null);
+                var wdController = new WashingDayEditorController(r, App.MainSession.GetAllDefinitions(), mAlarmController);
 
                 var c = new WashingDayDefinitionHomeControl(wdController, App.BL);
                 c.Removed += WashDay_Removed;

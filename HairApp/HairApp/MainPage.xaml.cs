@@ -35,7 +35,7 @@ namespace HairApp
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             this.mAlarmController = new AlarmController(fileDb);
 
-            mCareDayList = new Controls.CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
+            mCareDayList = new CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
             CareDayListFrame.Content = mCareDayList;
 
             //InitAlarms
@@ -60,7 +60,7 @@ namespace HairApp
 
         private void ShowCalendar_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstancesByDate()));
+            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstancesByDate(),mAlarmController));
         }
 
         private void OpenPageIfNeeded()

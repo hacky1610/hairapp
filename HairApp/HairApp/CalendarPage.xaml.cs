@@ -21,8 +21,9 @@ namespace HairApp
         Dictionary<DateTime, List<WashingDayDefinition>> mFutureDays;
         Dictionary<DateTime, List<WashingDayInstance>> mInstances;
         MainSessionController mMainSessionController;
+        AlarmController mAlarmController;
 
-        public CalendarPage(MainSessionController controller, Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances)
+        public CalendarPage(MainSessionController controller, Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances, AlarmController ac)
 		{
 			InitializeComponent();
 
@@ -33,6 +34,7 @@ namespace HairApp
             mFutureDays = futureDays;
             mInstances = instances;
             mMainSessionController = controller;
+            mAlarmController = ac;
 
             var cal = new Calendar
             {
@@ -118,7 +120,7 @@ namespace HairApp
                 PlanedWashDaysContainer.IsVisible = true;
                 foreach (var d in mFutureDays[date])
                 {
-                    var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
+                    var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
                     var c = new WashingDayDefinitionControl(wdController, App.BL);
                     c.Edited += WashingDayEdited;
                     this.PlanedWashDays.Children.Add(c.View);

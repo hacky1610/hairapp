@@ -16,12 +16,10 @@ namespace HairApp
         {
             InitializeComponent();
 
-            App.BL = new HairAppBl.HairAppBl(new FileLogger(),Application.Current.Resources);
+            BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
             Session.Register(App.MainSession);
             Session.Restore();
-
-            var logger = new HairAppBl.ConsoleLogger();
 
             MainPage = new NavigationPage( new MainPage());
         }
@@ -47,6 +45,7 @@ namespace HairApp
         {
             Session.Save();
         }
+
 
         protected override void OnResume()
         {
