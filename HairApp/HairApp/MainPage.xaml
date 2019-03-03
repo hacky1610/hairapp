@@ -32,7 +32,6 @@
                 </StackLayout>
             </ScrollView>
 
-        <ContentView x:Name="NavigationContainer" />
 
     </StackLayout>
 

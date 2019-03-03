@@ -22,15 +22,12 @@ namespace HairApp
         List<WashingDayInstance>  mInstances;
         MainSessionController mMainSessionController;
 
-        public HistoryPage(HairAppBl.Interfaces.IHairBl hairbl,MainSessionController controller, List<WashingDayInstance> instances)
+        public HistoryPage(HairAppBl.Interfaces.IHairBl hairbl,MainSessionController controller)
 		{
 			InitializeComponent();
 
-            mInstances = instances;
+            mInstances = controller.GetInstances();
             mMainSessionController = controller;
-
-            //MainMenu
-            NavigationContainer.Content = new MainNavigationControl(hairbl).View;
 
             RefreshList();
           

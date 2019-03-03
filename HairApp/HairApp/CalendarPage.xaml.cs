@@ -22,21 +22,19 @@ namespace HairApp
         Dictionary<DateTime, List<WashingDayInstance>> mInstances;
         MainSessionController mMainSessionController;
         AlarmController mAlarmController;
+        DateTime mLastDate;
+        Calendar mCalendar;
 
-        public CalendarPage(MainSessionController controller, Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances, AlarmController ac)
+        public CalendarPage(MainSessionController controller, AlarmController ac)
 		{
 			InitializeComponent();
 
-            var navi = new Controls.NavigationControl("Home", "");
-            NavigationContainer.Content = navi.View;
-            navi.LeftButton.Clicked += LeftButton_Clicked; ;
-
-            mFutureDays = futureDays;
-            mInstances = instances;
+            mFutureDays = controller.GetFutureDays();
+            mInstances = controller.GetInstancesByDate();
             mMainSessionController = controller;
             mAlarmController = ac;
 
-            var cal = new Calendar
+            mCalendar = new Calendar
             {
                 BorderColor = Color.White,
                 BorderWidth = 3,
@@ -47,21 +45,32 @@ namespace HairApp
                 SelectedBackgroundColor = Color.Gray
 
             };
-            cal.SpecialDates.Clear();
-            cal.SelectedDate = DateTime.Now;
+            mCalendar.SpecialDates.Clear();
+            mCalendar.SelectedDate = DateTime.Now;
             RefreshList(ScheduleController.GetToday());
+            mLastDate = mCalendar.StartDate.AddDays(40);
 
-            FillFutureDays(cal);
-            FillInstances(cal);
+            FillFutureDays(mCalendar);
+            FillInstances(mCalendar);
 
-            cal.DateClicked += Cal_DateClicked;
-            CalendarFrame.Content = cal;
+            mCalendar.RightArrowClicked += NextMonth;
+
+            mCalendar.DateClicked += Cal_DateClicked;
+            CalendarFrame.Content = mCalendar;
+        }
+
+        private void NextMonth(object sender, DateTimeEventArgs e)
+        {
+            mLastDate = mLastDate.AddDays(40);
+            FillFutureDays(mCalendar);
         }
 
         private void FillFutureDays(Calendar cal)
         {
             foreach (var day in mFutureDays)
             {
+                if (day.Key > mLastDate)
+                    continue;
                 if (mInstances.ContainsKey(day.Key))
                     continue;
 

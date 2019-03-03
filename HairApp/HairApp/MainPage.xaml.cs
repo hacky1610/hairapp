@@ -8,6 +8,8 @@ using HairAppBl;
 using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
 using HairApp.Controls;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace HairApp
 {
@@ -16,24 +18,13 @@ namespace HairApp
         private AlarmController mAlarmController;
         private Controls.CareDayList mCareDayList;
 
-        public MainPage()
+        public MainPage(AlarmController ac)
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
-            //MainMenu
-            var navMenu = new MainNavigationControl(App.BL);
-            NavigationContainer.Content = navMenu.View;
 
-
-            //Button Events
-            navMenu.MiddleButton.Clicked += ShowCalendar_Clicked;
-            mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
-            navMenu.RightButton.Clicked += OpenStatistic_Clicked;
-            openSettingsButton.Clicked += OpenSettingsButton_Clicked;
-
-            var fileDb = new FileDB(Constants.SchedulesStorageFile);
-            this.mAlarmController = new AlarmController(fileDb);
+            this.mAlarmController = ac;
 
             mCareDayList = new CareDayList(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
             CareDayListFrame.Content = mCareDayList;
@@ -42,10 +33,6 @@ namespace HairApp
             App.MainSession.SendInitAlarms();
         }
 
-        private void OpenStatistic_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new HistoryPage(App.BL, App.MainSession,  App.MainSession.GetInstances()));
-        }
 
         private void OpenSettingsButton_Clicked(object sender, EventArgs e)
         {
@@ -56,11 +43,6 @@ namespace HairApp
         private void MAddCareDayButton_Clicked(object sender, EventArgs e)
         {
             mCareDayList.AddWashDay();
-        }
-
-        private void ShowCalendar_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstancesByDate(),mAlarmController));
         }
 
         private void OpenPageIfNeeded()

@@ -24,7 +24,6 @@
 
             </ScrollView>
         </StackLayout>
-        <ContentView x:Name="NavigationContainer"/>
     </StackLayout>
    
 </ContentPage>

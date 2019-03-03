@@ -21,7 +21,11 @@ namespace HairApp
             Session.Register(App.MainSession);
             Session.Restore();
 
-            MainPage = new NavigationPage( new MainPage());
+
+            var fileDb = new FileDB(Constants.SchedulesStorageFile);
+            var ac = new AlarmController(fileDb);
+
+            MainPage = new MainTabPage(BL,MainSession,ac);
         }
 
         public App(String washdayId):this()
