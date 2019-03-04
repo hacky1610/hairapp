@@ -51,9 +51,15 @@ namespace HairApp
                     Text = d.Day.ToLongDateString()
                 };
                 c.Openclicked += C_Openclicked;
+                c.ImageClicked += C_ImageClicked;
                 this.DoneWashDays.Children.Add(c.View);
             }
             
+        }
+
+        private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)
+        {
+            Navigation.PushAsync(new PicturePage(e.Source));
         }
 
         private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)

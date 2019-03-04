@@ -6,7 +6,7 @@
     <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand" BackgroundColor="Beige">
         <ContentView x:Name="SaveButtonContainer" />
         <ScrollView Style="{StaticResource ScrollPageContent}" VerticalOptions="FillAndExpand" BackgroundColor="AliceBlue">
-            <StackLayout Style="{StaticResource PageContent}" VerticalOptions="EndAndExpand" >
+            <StackLayout Style="{StaticResource PageContent}" VerticalOptions="FillAndExpand" >
 
             <Label Text="Do you care day"
                 Style="{StaticResource Title}" />

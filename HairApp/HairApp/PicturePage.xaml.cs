@@ -19,14 +19,15 @@ namespace HairApp
 	public partial class PicturePage : ContentPage
 	{
 
-        public PicturePage()
+        public PicturePage(ImageSource source)
 		{
-			//InitializeComponent();
+			InitializeComponent();
 
             var navi = new Controls.NavigationControl("Home", "");
-            //NavigationContainer.Content = navi.View;
+            NavigationContainer.Content = navi.View;
             navi.LeftButton.Clicked += LeftButton_Clicked; ;
 
+            mImageView.Source = source;
         }
 
         private void LeftButton_Clicked(object sender, EventArgs e)

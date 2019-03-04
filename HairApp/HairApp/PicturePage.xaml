@@ -7,7 +7,7 @@
              BackgroundColor="Transparent">
     <StackLayout Style="{StaticResource Page}" HeightRequest="20">
         <ContentView x:Name="NavigationContainer"/>
-        <Image x:Name="mImageView"></Image>
+        <Image HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="mImageView"></Image>
     </StackLayout>
    
 </ContentPage>

@@ -17,6 +17,7 @@ namespace HairApp.Controls
         private readonly WashingDayInstance Instance;
         private readonly WashingDayDefinition Definition;
         public event EventHandler<WashingDayCellEventArgs> Openclicked;
+        public event EventHandler<ImageClickedEventArgs> ImageClicked;
 
         public WashingDayInstanceCalendarCell(WashingDayInstance instance,WashingDayDefinition def, HairAppBl.Interfaces.IHairBl hairbl):base(hairbl)
         {
@@ -37,8 +38,12 @@ namespace HairApp.Controls
             picContainer.Content = picListView;
 
             foreach (var pic in instance.Pictures)
-                picListView.Children.Add(new Image { HeightRequest = 60, Source = ImageSource.FromFile(pic.Path) });
-
+            {
+                var img = new ImageButton { HeightRequest = 60, Source = ImageSource.FromFile(pic.Path), BackgroundColor = Color.Transparent };
+                img.Clicked += Img_Clicked;
+                picListView.Children.Add(img);
+            }
+          
             var pictureList = Common.GetCalendarDetailsRow("camera.png", picContainer, hairbl);
             pictureList.IsVisible = instance.Pictures.Count > 0;
 
@@ -76,6 +81,12 @@ namespace HairApp.Controls
             DetailsContent.Add(showMore);
         }
 
+        private void Img_Clicked(object sender, EventArgs e)
+        {
+            var img = (ImageButton)sender;
+            ImageClicked?.Invoke(this, new ImageClickedEventArgs(img.Source));
+        }
+
         private void ShowMoreButton_Clicked(object sender, EventArgs e)
         {
             Openclicked(this, new WashingDayCellEventArgs(Instance, Definition));
@@ -90,6 +101,16 @@ namespace HairApp.Controls
             {
                 this.Definition = definition;
                 this.Instance = instance;
+            }
+        }
+
+        public class ImageClickedEventArgs : EventArgs
+        {
+            public readonly ImageSource Source;
+
+            public ImageClickedEventArgs(ImageSource source)
+            {
+                this.Source = source;
             }
         }
 
