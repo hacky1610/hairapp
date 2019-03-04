@@ -62,12 +62,10 @@ namespace HairApp
             CommentFrame.IsVisible = false;
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
-
             //Take pic
-            var takePicButton = new ImageButton { Source = "camera.png", HeightRequest = 70 };
             takePicButton.Clicked += TakePicture_Clicked;
-            PictureList.Children.Add(takePicButton);
 
+            PictureListContainer.IsVisible = mInstance.Pictures.Any();
             foreach (var pic in mInstance.Pictures)
                 AddPicToAlbum(ImageSource.FromFile(pic.Path));
         }
@@ -78,6 +76,7 @@ namespace HairApp
             var c = new Controller.CameraController();
             var file = await c.TakePhoto();
             mInstance.Pictures.Add(new Picture(file.Path));
+            PictureListContainer.IsVisible = true;
             AddPicToAlbum(ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
@@ -88,6 +87,7 @@ namespace HairApp
 
         private void AddPicToAlbum(ImageSource source)
         {
+
             var picView = new Image { HeightRequest = 100 , Margin = new Thickness(10,10,10,10)};
 
 

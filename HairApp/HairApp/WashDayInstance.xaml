@@ -5,11 +5,11 @@
              NavigationPage.HasNavigationBar="false">
     <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand" BackgroundColor="Beige">
         <ContentView x:Name="SaveButtonContainer" />
-        <ScrollView Style="{StaticResource ScrollPageContent}" BackgroundColor="AliceBlue">
+        <ScrollView Style="{StaticResource ScrollPageContent}" VerticalOptions="FillAndExpand" BackgroundColor="AliceBlue">
             <StackLayout Style="{StaticResource PageContent}" VerticalOptions="EndAndExpand" >
 
             <Label Text="Do you care day"
-                Style="{StaticResource Heading}" />
+                Style="{StaticResource Title}" />
             <Frame x:Name="DescriptionFrame" Style="{StaticResource FrameStyle}">
             <Label x:Name="Description"
                 Style="{StaticResource InstanceDescription}" />
@@ -20,7 +20,7 @@
                 </StackLayout>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout>
-                        <Label>Needed time</Label>
+                        <Label Style="{StaticResource FrameTitle}">Needed time</Label>
                         <TimePicker x:Name="UsedTime"/>
                     </StackLayout>
                 </Frame>
@@ -28,10 +28,17 @@
 
                 <Frame  Style="{StaticResource FrameStyle}">
                     <StackLayout>
-                        <Label>Pictures</Label>
-                        <ScrollView Orientation="Horizontal">
-                            <StackLayout x:Name="PictureList"  Orientation="Horizontal" BackgroundColor="LightGray" Padding="5,5,5,5"></StackLayout>
-                        </ScrollView>
+                        <Label Style="{StaticResource FrameTitle}">Pictures</Label>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" >
+                                <ImageButton Source="camera.png" HeightRequest="25" x:Name="takePicButton" BackgroundColor="Transparent"></ImageButton>
+                                <Label Text="Take picture"></Label>
+                            </StackLayout>
+                            
+                            <ScrollView Orientation="Horizontal" HorizontalOptions="StartAndExpand" x:Name="PictureListContainer">
+                                <StackLayout x:Name="PictureList"  Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="5,5,5,5"></StackLayout>
+                            </ScrollView>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Button x:Name="AddComment" Text="Add comment" Style="{StaticResource AddDescriptionButton}"/>

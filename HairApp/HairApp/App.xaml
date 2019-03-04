@@ -9,7 +9,11 @@
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
-            
+
+            <Style x:Key="FrameTitle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
             <Style x:Key="ScrollPageContent" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="#ffb380" />
 

@@ -64,7 +64,7 @@ namespace HairApp
             {
                 var day = App.MainSession.GetWashingDayById(App.washdayToShow);
                 var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), mAlarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(App.washdayToShow, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(), day.Description);
+                var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
                 App.washdayToShow = String.Empty;
 
                 Device.BeginInvokeOnMainThread(() => {
