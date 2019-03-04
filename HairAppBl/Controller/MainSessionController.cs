@@ -11,6 +11,9 @@ namespace HairAppBl.Controller
         readonly IDictionary<string, object> mProperties;
         public static event EventHandler<EventArgs> InitAlarms;
         MainSession MainSession = null;
+        public event EventHandler<EventArgs> DefinitionsEdited;
+        public event EventHandler<EventArgs> InstanceEdited;
+
 
         public bool Initialized {
             get
@@ -49,7 +52,15 @@ namespace HairAppBl.Controller
             }
         }
 
+        public void SendDefinitionsEdited()
+        {
+            DefinitionsEdited?.Invoke(this, new EventArgs());
+        }
 
+        public void SendInstanceEdited()
+        {
+            InstanceEdited?.Invoke(this, new EventArgs());
+        }
 
         public void Save()
         {

@@ -20,8 +20,8 @@ namespace HairApp
         {
             App.BL.Logger.Call("MainPage");
             
-            var navigationPage = new NavigationPage(new MainPage(ac));
-            navigationPage.Icon = "home.png";
+            var mainPage = new MainPage(ac);
+            mainPage.Icon = "home.png";
 
             var calPage = new CalendarPage(mainSessionController, ac);
             calPage.Icon = "calendar.png";
@@ -29,12 +29,13 @@ namespace HairApp
             var hPage = new HistoryPage(bl, mainSessionController);
             hPage.Icon = "chart.png";
 
-            Children.Add(navigationPage);
+            Children.Add(mainPage);
             Children.Add(calPage);
             Children.Add(hPage);
             BarBackgroundColor = Color.Brown;
             BarTintColor = Color.Cyan;
 
+            NavigationPage.SetHasNavigationBar(this, false);
             //SetToolbarPlacement(ToolbarPlacement.Bottom);
 
         }

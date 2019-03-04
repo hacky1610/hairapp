@@ -25,7 +25,7 @@ namespace HairApp
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var ac = new AlarmController(fileDb);
 
-            MainPage = new MainTabPage(BL,MainSession,ac);
+            MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
         }
 
         public App(String washdayId):this()

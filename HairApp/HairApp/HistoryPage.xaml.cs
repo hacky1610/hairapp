@@ -19,28 +19,30 @@ namespace HairApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryPage : ContentPage
 	{
-        List<WashingDayInstance>  mInstances;
         MainSessionController mMainSessionController;
 
         public HistoryPage(HairAppBl.Interfaces.IHairBl hairbl,MainSessionController controller)
 		{
 			InitializeComponent();
 
-            mInstances = controller.GetInstances();
             mMainSessionController = controller;
+            mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
 
             RefreshList();
           
         }
 
-
+        private void MMainSessionController_InstanceEdited(object sender, EventArgs e)
+        {
+            RefreshList();
+        }
 
         private void RefreshList()
         {
 
             this.DoneWashDays.Children.Clear();
 
-            foreach (var d in mInstances)
+            foreach (var d in mMainSessionController.GetInstances())
             {
                 var def = mMainSessionController.GetWashingDayById(d.WashDayID);
                 var c = new WashingDayInstanceCalendarCell(d,def, App.BL);

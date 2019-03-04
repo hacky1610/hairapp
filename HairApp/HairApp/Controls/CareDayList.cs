@@ -16,12 +16,14 @@ namespace HairApp.Controls
         AlarmController mAlarmController;
         StackLayout mWashDayList;
         WashingDayDefinitionHomeControl helpItem;
+        MainSessionController mMainSessionController;
 
 
-        public CareDayList(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
+
+        public CareDayList(MainSessionController mainSessionController, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
         {
-
-            mWashingDays = washingDays;
+            mMainSessionController = mainSessionController;
+            mWashingDays = mainSessionController.GetAllWashingDays();
             mHairbl = hairbl;
             mAlarmController = ac;
 
@@ -47,6 +49,8 @@ namespace HairApp.Controls
         {
             if (e.Created)
                 mWashingDays.Add(e.Definition);
+            mMainSessionController.SendDefinitionsEdited();
+
             RefreshList();
         }
 

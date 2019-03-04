@@ -11,6 +11,7 @@
 
             <ScrollView >
                 <StackLayout>
+                    <Label Text="Hair Care Calendar" Style="{StaticResource Title}"></Label>
                     <ContentView x:Name="CalendarFrame"></ContentView>
                     <StackLayout x:Name="PlanedWashDaysContainer" IsVisible="False">
                         <Label Text="Planed Care Days"></Label>

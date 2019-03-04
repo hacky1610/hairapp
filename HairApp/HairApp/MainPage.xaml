@@ -20,7 +20,7 @@
 
                         </StackLayout>
                     </Frame>
-                    <Label Text="List of all care days" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+                    <Label Text="List of all care days" Style="{StaticResource Title}"></Label>
                     <Frame  x:Name="CareDayListFrame"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" BackgroundColor="Transparent">
 
                     </Frame>

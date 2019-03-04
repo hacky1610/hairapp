@@ -118,6 +118,8 @@ namespace HairApp
             mInstance.Comment = Comment.Text;
             mInstance.NeededTime = UsedTime.Time;
 
+            App.MainSession.SendInstanceEdited();
+
              App.Current.MainPage.Navigation.PopAsync();
         }
 

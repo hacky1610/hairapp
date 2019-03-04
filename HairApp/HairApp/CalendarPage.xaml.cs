@@ -18,7 +18,6 @@ namespace HairApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CalendarPage : ContentPage
 	{
-        Dictionary<DateTime, List<WashingDayDefinition>> mFutureDays;
         Dictionary<DateTime, List<WashingDayInstance>> mInstances;
         MainSessionController mMainSessionController;
         AlarmController mAlarmController;
@@ -29,7 +28,6 @@ namespace HairApp
 		{
 			InitializeComponent();
 
-            mFutureDays = controller.GetFutureDays();
             mInstances = controller.GetInstancesByDate();
             mMainSessionController = controller;
             mAlarmController = ac;
@@ -57,6 +55,13 @@ namespace HairApp
 
             mCalendar.DateClicked += Cal_DateClicked;
             CalendarFrame.Content = mCalendar;
+
+            mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
+        }
+
+        private void MMainSessionController_DefinitionsEdited(object sender, EventArgs e)
+        {
+            FillFutureDays(mCalendar);
         }
 
         private void NextMonth(object sender, DateTimeEventArgs e)
@@ -67,7 +72,7 @@ namespace HairApp
 
         private void FillFutureDays(Calendar cal)
         {
-            foreach (var day in mFutureDays)
+            foreach (var day in mMainSessionController.GetFutureDays())
             {
                 if (day.Key > mLastDate)
                     continue;
@@ -124,10 +129,11 @@ namespace HairApp
             DoneWashDaysContainer.IsVisible = false;
 
             this.PlanedWashDays.Children.Clear();
-            if (mFutureDays.ContainsKey(date))
+            var futureDays = mMainSessionController.GetFutureDays();
+            if (futureDays.ContainsKey(date))
             {
                 PlanedWashDaysContainer.IsVisible = true;
-                foreach (var d in mFutureDays[date])
+                foreach (var d in futureDays[date])
                 {
                     var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
                     var c = new WashingDayDefinitionControl(wdController, App.BL);

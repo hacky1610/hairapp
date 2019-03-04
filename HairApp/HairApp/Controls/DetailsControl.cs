@@ -87,7 +87,10 @@ namespace HairApp.Controls
             mColorFrame = new Frame
             {
                 CornerRadius = 4,
-                WidthRequest = 10
+                Padding = new Thickness(0, 0, 0, 0),
+                HeightRequest = 10,
+                WidthRequest = 15
+             
             };
 
             mLabelText = new Label
