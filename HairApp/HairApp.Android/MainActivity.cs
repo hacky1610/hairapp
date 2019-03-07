@@ -29,6 +29,7 @@ namespace HairApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             XamForms.Controls.Droid.Calendar.Init();
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
 
             MainSessionController.InitAlarms += App_InitAlarms;
 

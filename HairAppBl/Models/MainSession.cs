@@ -11,12 +11,15 @@ namespace HairAppBl.Models
         public Boolean AlarmInitialized { get; set; }
 
         public List<RoutineDefinition> AllRoutines { get; set; }
+        public List<HairLength> HairLengths { get; set; }
+
         public List<WashingDayDefinition> WashingDays { get; set; }
 
         public MainSession()
         {
             AllRoutines = new List<RoutineDefinition>();
             WashingDays = new List<WashingDayDefinition>();
+            HairLengths = new List<HairLength>();
             Initialized = false;
         }
 

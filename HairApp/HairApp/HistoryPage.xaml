@@ -15,7 +15,9 @@
                         <Label Text="Finished Care Days" Style="{StaticResource Title}"></Label>
                         <StackLayout x:Name="DoneWashDays">
                         </StackLayout>
-                        <ContentView x:Name="ChartContainer"/>
+                        <Label Text="Hairlength statistic" Style="{StaticResource Title}"></Label>
+
+                        <ContentView x:Name="ChartContainer" HorizontalOptions="Fill"/>
 
                     </StackLayout>
                     

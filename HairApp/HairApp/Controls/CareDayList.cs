@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using XLabs.Forms;
+using System.Linq;
 
 namespace HairApp.Controls
 {
@@ -57,7 +58,9 @@ namespace HairApp.Controls
         public void RefreshList()
         {
             this.mWashDayList.Children.Clear();
-            foreach (var r in this.mWashingDays)
+
+            var orderedList = mWashingDays.OrderBy(x => ((new ScheduleController(x.Scheduled)).Time2NextCareDay(ScheduleController.GetToday())));
+            foreach (var r in orderedList)
             {
                 var wdController = new WashingDayEditorController(r, App.MainSession.GetAllDefinitions(), mAlarmController);
 

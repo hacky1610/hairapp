@@ -137,6 +137,11 @@ namespace HairAppBl.Controller
             return list;
         }
 
+        public List<HairLength> GetHairLength()
+        {
+            return MainSession.HairLengths;
+        }
+
         public CommingDays NextDay()
         {
             var diff = new CommingDays();
