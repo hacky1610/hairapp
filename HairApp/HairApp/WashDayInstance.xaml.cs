@@ -21,8 +21,6 @@ namespace HairApp
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
         private WashingDayInstance mInstance;
         private WashingDayDefinition mDefinition;
-        public event EventHandler<WashDayInstanceEventArgs> OkClicked;
-        private bool mCreate;
 
         public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
 		{

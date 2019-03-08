@@ -16,7 +16,6 @@ namespace HairApp.Controls
     {
         public WashingDayEditorController WdController { get; set; }
         public event EventHandler<WashingDayCellEventArgs> Edited;
-        public event EventHandler<WashingDayCellEventArgs> StartCareDay;
         public event EventHandler<WashingDayCellEventArgs> Removed;
 
 

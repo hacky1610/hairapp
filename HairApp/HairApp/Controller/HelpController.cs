@@ -11,7 +11,6 @@ namespace HairApp.Controller
     public class HelpController
     {
         private List<Models.HelpModel> mHelpList = new List<Models.HelpModel>();
-        private int mCurrent = 0;
 
         public HelpController()
         {

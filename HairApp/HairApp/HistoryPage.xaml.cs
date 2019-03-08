@@ -25,6 +25,7 @@ namespace HairApp
 			InitializeComponent();
 
             mMainSessionController = controller;
+            mHairBl = hairbl;
             mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
 
             RefreshList();
