@@ -43,5 +43,12 @@ namespace HairApp.Controller
                 DefaultCamera = CameraDevice.Rear
             });
         }
+
+        public async Task<MediaFile> SelectPhoto()
+        {
+
+            return await CrossMedia.Current.PickPhotoAsync();
+               
+        }
     }
 }

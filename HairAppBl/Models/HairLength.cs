@@ -17,7 +17,6 @@ namespace HairAppBl.Models
 
         public HairLength(string id)
         {
-            Picture = "/storage/emulated/0/Android/data/com.companyname.HairApp/files/Pictures/HairApp/IMG_20190220_214713.jpg";
         }
 
         public void SendSelected()

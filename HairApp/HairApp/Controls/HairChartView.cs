@@ -26,6 +26,11 @@ namespace HairApp.Controls
         PlotModel mModel;
         HairChartController mController;
         StackLayout mPictContainer;
+        ScrollView mScrollContainer;
+        Label mDateLabel = new Label();
+        Label mBackLengthLabel = new Label();
+        Label mSideLengthLabel = new Label();
+        Label mFRontLengthLabel = new Label();
 
         public HairChartView(HairAppBl.Interfaces.IHairBl hairbl, HairChartController controller)
         {
@@ -71,38 +76,152 @@ namespace HairApp.Controls
                 mModel.Series.Add(ls);
             }
 
-            foreach (var hl in mController.GetLengths())
+            var lengths = mController.GetLengths();
+            foreach (var hl in lengths)
             {
-                mPictContainer.Children.Add(new HairLengthImage(hairbl,hl)
+                var image = new HairLengthImage(hairbl, hl)
                 {
                     Source = hl.Picture,
-                });
+                };
+                image.Clicked += Image_Clicked;
+                mPictContainer.Children.Add(image);
+            }
+
+            mScrollContainer = new ScrollView
+            {
+                Orientation = ScrollOrientation.Horizontal,
+                Content = mPictContainer,
+                HeightRequest = 100,
+            };
+
+            if (lengths.Any())
+            {
+                FillData(lengths.Last());
+                SelectImage((HairLengthImage)mPictContainer.Children.Last());
+                SelectAllPoints(lengths.Last());
             }
 
 
-
+            Padding = new Thickness(0, 0, 0, 0);
+            VerticalOptions = LayoutOptions.FillAndExpand;
+            BackgroundColor = Color.Transparent;
             this.Content = new StackLayout
             {
+                BackgroundColor = Color.Transparent,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 Children =
                 {
-                    new PlotView
+                    new Frame
                     {
-                        Model = mModel,
-                        HeightRequest = 400,
-                        VerticalOptions = LayoutOptions.Fill,
-                        HorizontalOptions = LayoutOptions.Fill,
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        CornerRadius = 4,
+                        Content = new StackLayout
+                        {
+                            VerticalOptions = LayoutOptions.FillAndExpand,
+                            Children =
+                            {
+                                  new PlotView
+                                    {
+                                        Model = mModel,
+                                        VerticalOptions = LayoutOptions.FillAndExpand,
+                                        HorizontalOptions = LayoutOptions.Fill,
+                                    },
+                                    mScrollContainer
+                            }
+                        }
                     },
-                    new ScrollView
+                    new Frame
                     {
-                        Orientation = ScrollOrientation.Horizontal,
-                        Content = mPictContainer
+                        CornerRadius = 4,
+                        Content = GetDataFields()
                     }
+                    
                 }
             };
 
         }
 
-  
+        private void Image_Clicked(object sender, EventArgs e)
+        {
+            var image = (HairLengthImage)sender;
+            ClearSelection();
+            SelectImage(image);
+            SelectAllPoints(image.HairLength);
+            FillData(image.HairLength);
+        }
+
+        private void ClearSelection()
+        {
+            foreach (var image in mPictContainer.Children)
+            {
+                var hairImage = (HairLengthImage)image;
+                hairImage.Deselect();
+            }
+        }
+
+        private StackLayout GetDataFields()
+        {
+            return new StackLayout
+            {
+                Children =
+                {
+                    GetRow("Date",mDateLabel),
+                    GetRow("Back lenght",mBackLengthLabel),
+                    GetRow("Side lenght",mSideLengthLabel),
+                    GetRow("Front lenght",mFRontLengthLabel)
+                }
+            };
+        }
+
+        private StackLayout GetRow(String labelText, Label label)
+        {
+            return new StackLayout
+            {
+                Children =
+                {
+                    new Label{Text= labelText},
+                    label
+                },
+                Orientation = StackOrientation.Horizontal
+            };
+        }
+
+        private void FillData(HairLength hl)
+        {
+            mDateLabel.Text = hl.Day.ToString("dd MMMM yyyy");
+            mBackLengthLabel.Text = $"{hl.Back}cm";
+            mSideLengthLabel.Text = $"{hl.Side}cm";
+            mFRontLengthLabel.Text = $"{hl.Front}cm";
+        }
+
+        private void SelectImage(HairLengthImage image)
+        {
+            image.Select();
+            image.Focus();
+            mScrollContainer.ScrollToAsync(image.X, 0, true);
+        }
+
+        private PointAnnotation SetSelectPoint(DataPoint point)
+        {
+            return new PointAnnotation
+            {
+                Shape = MarkerType.Diamond,
+                Size = 6,
+                X = point.X,
+                Y = point.Y
+            };
+        }
+
+        private void SelectAllPoints(HairLength hl)
+        {
+            mModel.Annotations.Clear();
+            foreach (var selection in mController.GetSelectPoints(hl))
+            {
+                mModel.Annotations.Add(SetSelectPoint(selection));
+
+            }
+            mModel.InvalidatePlot(false);
+        }
 
         private void Ls_TouchStarted(object sender, OxyTouchEventArgs e)
         {
@@ -137,18 +256,10 @@ namespace HairApp.Controls
                 
             };
 
-            var pointAnnotation = new PointAnnotation
-            {
-                Shape = MarkerType.Diamond,
-                Size = 6,
-                X = closest.X,
-                Y = closest.Y,
-            };
-           
-           
+
             mModel.Annotations.Clear();
-            mModel.Annotations.Add(labelAnnotation);
-            mModel.Annotations.Add(pointAnnotation);
+            //mModel.Annotations.Add(labelAnnotation);
+            mModel.Annotations.Add(SetSelectPoint(closest));
             mModel.InvalidatePlot(false);
 
             foreach(var image in mPictContainer.Children)
@@ -156,13 +267,14 @@ namespace HairApp.Controls
                 var hairImage = (HairLengthImage)image;
                 if (hairImage.HairLength == hl)
                 {
-                    hairImage.Select();
-                    hairImage.Focus();
+                    SelectImage(hairImage);
                 }
                 else
                     hairImage.Deselect();
 
             }
+
+            FillData(hl);
        
         }
 

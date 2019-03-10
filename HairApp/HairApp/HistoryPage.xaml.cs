@@ -29,8 +29,6 @@ namespace HairApp
 
             mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
 
-            AddHairLengthButton.Clicked += AddHairLengthButton_Clicked;
-
             RefreshList();
           
         }
@@ -64,58 +62,6 @@ namespace HairApp
                 c.ImageClicked += C_ImageClicked;
                 this.DoneWashDays.Children.Add(c.View);
             }
-
-            var list = new List<HairLength>();
-            list.Add(new HairLength("")
-            {
-                   Back = 30,
-                   Front = 10,
-                   Side = 5,
-                   Day = DateTime.Now.AddDays(-122)
-            });
-            list.Add(new HairLength("")
-            {
-                Back = 35,
-                Front = 15,
-                Side = 6,
-                Day = DateTime.Now.AddDays(-80)
-            });
-            list.Add(new HairLength("")
-            {
-                Back = 36,
-                Front = 10,
-                Side = 8,
-                Day = DateTime.Now.AddDays(-66)
-            });
-            list.Add(new HairLength("")
-            {
-                Back = 40,
-                Front = 10,
-                Side = 12,
-                Day = DateTime.Now.AddDays(-43)
-            });
-            list.Add(new HairLength("")
-            {
-                Back = 50,
-                Front = 10,
-                Side = 15,
-                Day = DateTime.Now.AddDays(-20)
-            });
-            list.Add(new HairLength("")
-            {
-                Back = 55,
-                Front = 10,
-                Side = 20,
-                Day = DateTime.Now
-            });
-
-
-            var controller = new HairChartController(list);
-
-
-            ChartContainer.Content = new HairChartView(mHairBl, controller);
-
-
         }
 
         private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)

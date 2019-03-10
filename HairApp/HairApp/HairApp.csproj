@@ -42,6 +42,9 @@
     <Compile Update="AddHairLengthDialog.xaml.cs">
       <DependentUpon>AddHairLengthDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ChartPage.xaml.cs">
+      <DependentUpon>ChartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="PicturePage.xaml.cs">
       <DependentUpon>PicturePage.xaml</DependentUpon>
     </Compile>

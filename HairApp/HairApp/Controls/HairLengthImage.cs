@@ -10,7 +10,7 @@ using System.Linq;
 namespace HairApp.Controls
 {
 
-    public class HairLengthImage : Image
+    public class HairLengthImage : ImageButton
     {
         HairAppBl.Interfaces.IHairBl mHairbl;
         Entry mBackEntry;
@@ -23,16 +23,19 @@ namespace HairApp.Controls
             mHairbl = hairbl;
             HairLength = hl;
             HeightRequest = 70;
+            BackgroundColor = Color.Transparent;
         }
 
         public void Select()
         {
-            HeightRequest = 100;
+            var animation1 = new Animation(v => HeightRequest = v, 70, 100);
+            animation1.Commit(this, "SimpleAnimation2", 16, 200, Easing.Linear, (v, c) => { }, () => false);
+
         }
 
         public void Deselect()
         {
-            HeightRequest = 70;
+            this.HeightRequest = 70;
         }
     }
 }

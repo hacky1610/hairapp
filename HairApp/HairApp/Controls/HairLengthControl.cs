@@ -16,6 +16,8 @@ namespace HairApp.Controls
         Entry mBackEntry;
         Entry mSideEntry;
         Entry mFrontEntry;
+        Image mPicture;
+        String mCurrentPhoto;
 
         public HairLengthControl( HairAppBl.Interfaces.IHairBl hairbl)
         {
@@ -24,9 +26,24 @@ namespace HairApp.Controls
             mBackEntry = GetEntry();
             mSideEntry = GetEntry();
             mFrontEntry = GetEntry();
+            var takePhoto = new Button { Text = "Take photo" };
+            takePhoto.Clicked += TakePhoto_Clicked;
+
+            mPicture = new Image { HeightRequest = 100, IsVisible = false };
             Children.Add(GetRow(mBackEntry,"Back"));
             Children.Add(GetRow(mSideEntry, "Side"));
             Children.Add(GetRow(mFrontEntry, "Front"));
+            Children.Add(mPicture);
+            Children.Add(takePhoto);
+        }
+
+        private async void TakePhoto_Clicked(object sender, EventArgs e)
+        {
+            var c = new Controller.CameraController();
+            var file = await c.SelectPhoto();
+            mCurrentPhoto = file.AlbumPath;
+            mPicture.IsVisible = true;
+            mPicture.Source = ImageSource.FromResource(file.AlbumPath);
         }
 
         private Entry GetEntry()

@@ -27,11 +27,15 @@ namespace HairApp
             calPage.Icon = "calendar.png";
 
             var hPage = new HistoryPage(bl, mainSessionController);
-            hPage.Icon = "chart.png";
+            hPage.Icon = "checklist.png";
+
+            var cPage = new ChartPage(bl, mainSessionController);
+            cPage.Icon = "chart.png";
 
             Children.Add(mainPage);
             Children.Add(calPage);
             Children.Add(hPage);
+            Children.Add(cPage);
             BarBackgroundColor = Color.Brown;
             BarTintColor = Color.Cyan;
 
