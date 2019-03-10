@@ -39,6 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AddHairLengthDialog.xaml.cs">
+      <DependentUpon>AddHairLengthDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Update="PicturePage.xaml.cs">
       <DependentUpon>PicturePage.xaml</DependentUpon>
     </Compile>

@@ -22,14 +22,21 @@ namespace HairApp.Controls
 
     public class HairChartView : Frame
     {
-        PlotModel mModel;
 
-        public HairChartView(HairAppBl.Interfaces.IHairBl hairbl, List<ChartLine> lines)
+        PlotModel mModel;
+        HairChartController mController;
+        StackLayout mPictContainer;
+
+        public HairChartView(HairAppBl.Interfaces.IHairBl hairbl, HairChartController controller)
         {
 
             mModel = new PlotModel();
+            mController = controller;
+            mPictContainer = new StackLayout();
+            mPictContainer.Orientation = StackOrientation.Horizontal;
+
             var allPoints = new List<DataPoint>();
-            foreach (var l in lines)
+            foreach (var l in mController.GetCharts())
             {
                 allPoints.AddRange(l.Points);
             }
@@ -49,7 +56,7 @@ namespace HairApp.Controls
 
             mModel.IsLegendVisible = true;
 
-            foreach (var l in lines)
+            foreach (var l in mController.GetCharts())
             {
                 var ls = new LineSeries();
                 ls.TrackerFormatString = "{4}cm";
@@ -63,30 +70,67 @@ namespace HairApp.Controls
 
                 mModel.Series.Add(ls);
             }
-          
 
-
-            this.Content = new PlotView
+            foreach (var hl in mController.GetLengths())
             {
-                Model = mModel,
-                HeightRequest = 400,
-                VerticalOptions = LayoutOptions.Fill,
-                HorizontalOptions = LayoutOptions.Fill,
+                mPictContainer.Children.Add(new HairLengthImage(hairbl,hl)
+                {
+                    Source = hl.Picture,
+                });
+            }
+
+
+
+            this.Content = new StackLayout
+            {
+                Children =
+                {
+                    new PlotView
+                    {
+                        Model = mModel,
+                        HeightRequest = 400,
+                        VerticalOptions = LayoutOptions.Fill,
+                        HorizontalOptions = LayoutOptions.Fill,
+                    },
+                    new ScrollView
+                    {
+                        Orientation = ScrollOrientation.Horizontal,
+                        Content = mPictContainer
+                    }
+                }
             };
+
         }
+
+  
 
         private void Ls_TouchStarted(object sender, OxyTouchEventArgs e)
         {
             var ls = (LineSeries)sender;
-            var p = ls.GetNearestPoint(e.Position, true);
+            var nierestPoint = ls.GetNearestPoint(e.Position, true);
 
-            var cm = p.DataPoint.Y;
-            var date = DateTimeAxis.ToDateTime(p.DataPoint.X);
+            //var date = DateTimeAxis.ToDateTime(nierestPoint.DataPoint.X);
+
+            DataPoint closest = new DataPoint();
+            double distance = Double.MaxValue;
+            foreach (var point in ls.Points)
+            {
+                var curDiff = (point.X - nierestPoint.DataPoint.X );
+                if (curDiff < 0)
+                    curDiff = curDiff * -1; 
+                if (curDiff < distance)
+                {
+                    distance = curDiff;
+                    closest = point;
+                }
+            }
+
+            var hl = mController.GetHairLengthByPoint(closest);
 
             var labelAnnotation = new TextAnnotation
             {
-                Text = $"{date.ToString("dd MMMM yyyy")} - {String.Format("{0:0}", cm)}cm",
-                TextPosition = new DataPoint(p.DataPoint.X , p.DataPoint.Y + 2),
+                Text = $"{hl.Day.ToString("dd MMMM yyyy")} - {String.Format("{0:0}", closest.Y)}cm",
+                TextPosition = new DataPoint(closest.X, closest.Y + 2),
                 FontWeight = 4,
                 Background = OxyColor.FromRgb(211, 211, 211),
                 StrokeThickness = 0
@@ -97,8 +141,8 @@ namespace HairApp.Controls
             {
                 Shape = MarkerType.Diamond,
                 Size = 6,
-                X = p.DataPoint.X,
-                Y = p.DataPoint.Y,
+                X = closest.X,
+                Y = closest.Y,
             };
            
            
@@ -106,6 +150,20 @@ namespace HairApp.Controls
             mModel.Annotations.Add(labelAnnotation);
             mModel.Annotations.Add(pointAnnotation);
             mModel.InvalidatePlot(false);
+
+            foreach(var image in mPictContainer.Children)
+            {
+                var hairImage = (HairLengthImage)image;
+                if (hairImage.HairLength == hl)
+                {
+                    hairImage.Select();
+                    hairImage.Focus();
+                }
+                else
+                    hairImage.Deselect();
+
+            }
+       
         }
 
   

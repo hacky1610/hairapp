@@ -11,39 +11,65 @@ namespace HairAppBl.Controller
     public class HairChartController
     {
         readonly List<HairLength> mHairLengths;
+        Dictionary<DataPoint, HairLength> mPointHairLength;
+        ChartLine mBackLength;
+        ChartLine mSideLength;
+        ChartLine mFrontLength;
+
         public HairChartController(List<HairLength> hairLengths)
         {
             if(hairLengths == null)
                 throw new ArgumentNullException("hairLengths");
 
+            mPointHairLength = new Dictionary<DataPoint, HairLength>();
+
             this.mHairLengths = hairLengths;
+
+            SetBackLengths();
+            SetSideLengths();
         }
 
-        public ChartLine GetBackLengths()
+
+        public HairLength GetHairLengthByPoint(DataPoint point)
+        {
+            return mPointHairLength[point];
+        }
+
+
+        private void SetBackLengths()
         {
             var list = new List<DataPoint>();
             foreach(var l in mHairLengths)
             {
-                list.Add(new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Back));
+                var dp = new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Back);
+                list.Add(dp);
+                mPointHairLength.Add(dp, l);
             }
 
-            return new ChartLine("Back",list);
+            mBackLength = new ChartLine("Back",list);
         }
 
-        public ChartLine GetSideLengths()
+        private void SetSideLengths()
         {
             var list = new List<DataPoint>();
             foreach (var l in mHairLengths)
             {
-                list.Add(new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Side));
+                var dp = new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Side);
+                list.Add(dp);
+                mPointHairLength.Add(dp, l);
             }
 
-            return new ChartLine("Side", list);
+            mSideLength = new ChartLine("Side", list);
         }
 
-        public List<ChartLine> GetLengths()
+        public List<ChartLine> GetCharts()
         {
-            return new List<ChartLine> { GetBackLengths(), GetSideLengths() };
+            return new List<ChartLine> { mBackLength,mSideLength};
+        }
+
+        public List<HairLength> GetLengths()
+        {
+            return mHairLengths;
         }
 
     }

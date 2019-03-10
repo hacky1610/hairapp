@@ -26,10 +26,18 @@ namespace HairApp
 
             mMainSessionController = controller;
             mHairBl = hairbl;
+
             mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
+
+            AddHairLengthButton.Clicked += AddHairLengthButton_Clicked;
 
             RefreshList();
           
+        }
+
+        private void AddHairLengthButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushPopupAsync(new AddHairLengthDialog(mHairBl));
         }
 
         private void MMainSessionController_InstanceEdited(object sender, EventArgs e)
@@ -105,7 +113,7 @@ namespace HairApp
             var controller = new HairChartController(list);
 
 
-            ChartContainer.Content = new HairChartView(mHairBl, controller.GetLengths());
+            ChartContainer.Content = new HairChartView(mHairBl, controller);
 
 
         }
