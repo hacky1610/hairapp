@@ -16,7 +16,7 @@ namespace HairAppBl.Models
 
         public ScheduleDefinition()
         {
-            StartDate = DateTime.Now;
+            StartDate = Controller.ScheduleController.GetToday();
             Type = ScheduleType.Weekly;
             DaylyPeriod = new Dayly();
             WeeklyPeriod = new Weekly();

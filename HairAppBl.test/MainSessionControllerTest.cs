@@ -62,7 +62,9 @@ namespace HairAppBl.Tests
 
             var fDays = c.GetFutureDays();
 
-            Assert.AreEqual(ScheduleController.GetToday(), c.GetFutureDays()[ScheduleController.GetToday()]);
+            
+
+            Assert.AreEqual(wdd, c.GetFutureDays()[ScheduleController.GetToday()][0]);
         }
 
 
