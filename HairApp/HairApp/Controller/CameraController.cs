@@ -15,7 +15,7 @@ namespace HairApp.Controller
 
         }
 
-        public ImageSource LoadImage(MediaFile file)
+        public static ImageSource LoadImage(MediaFile file)
         {
             return ImageSource.FromStream(() =>
             {
@@ -44,11 +44,15 @@ namespace HairApp.Controller
             });
         }
 
+
+
         public async Task<MediaFile> SelectPhoto()
         {
-
             return await CrossMedia.Current.PickPhotoAsync();
                
         }
+
+ 
+
     }
 }

@@ -20,6 +20,7 @@ namespace HairApp.Droid
         App myApp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -40,6 +41,18 @@ namespace HairApp.Droid
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
+
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            myApp.InitException();
+        }
+
+        private void AndroidEnvironment_UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
+        {
+                myApp.SendException(e.Exception);
         }
 
         private void App_InitAlarms(object sender, EventArgs e)

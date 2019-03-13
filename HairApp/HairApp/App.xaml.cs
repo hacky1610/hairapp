@@ -4,6 +4,9 @@ using Xamarin.Forms.Xaml;
 using HairAppBl;
 using HairAppBl.Interfaces;
 using HairAppBl.Controller;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HairApp
@@ -26,7 +29,24 @@ namespace HairApp
             var ac = new AlarmController(fileDb);
 
             MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
+
         }
+
+        public void InitException()
+        {
+            AppCenter.Start("android=8321cd36-8954-4649-97f7-c8eb9019d46e;" +
+                  "uwp={Your UWP App secret here};" +
+                  "ios=5fa34f6c-5c63-4560-acbc-9d560e6e34b2",
+                  typeof(Analytics), typeof(Crashes));
+
+        }
+
+        public void SendException(Exception e)
+        {
+            Crashes.TrackError(e);
+        }
+
+  
 
         public App(String washdayId):this()
         {

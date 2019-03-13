@@ -45,19 +45,23 @@ namespace HairApp.Controls
             {
                 allPoints.AddRange(l.Points);
             }
-            //Y Axis
-            var maxY = allPoints.Max(p => p.Y) + 5;
-            var minY = allPoints.Min(p => p.Y) - 5;
 
-            var yAxis = new LinearAxis() { Position = AxisPosition.Right, Minimum = minY, Maximum = maxY , StringFormat = "00cm" };
+            if (allPoints.Any())
+            {
+                //Y Axis
+                var maxY = allPoints.Max(p => p.Y) + 5;
+                var minY = allPoints.Min(p => p.Y) - 5;
 
-            //X Axis
-            var minX = allPoints.Min(p => p.X) - 3;
-            var maxX = allPoints.Max(p => p.X) + 3;
-            var xAxis = new DateTimeAxis() { Position = AxisPosition.Bottom, Minimum = minX, Maximum = maxX , StringFormat = "dd.MM.yy" };
+                var yAxis = new LinearAxis() { Position = AxisPosition.Right, Minimum = minY, Maximum = maxY, StringFormat = "00cm" };
 
-            mModel.Axes.Add(yAxis);
-            mModel.Axes.Add(xAxis);
+                //X Axis
+                var minX = allPoints.Min(p => p.X) - 3;
+                var maxX = allPoints.Max(p => p.X) + 3;
+                var xAxis = new DateTimeAxis() { Position = AxisPosition.Bottom, Minimum = minX, Maximum = maxX, StringFormat = "dd.MM.yy" };
+
+                mModel.Axes.Add(yAxis);
+                mModel.Axes.Add(xAxis);
+            }
 
             mModel.IsLegendVisible = true;
 
@@ -76,7 +80,7 @@ namespace HairApp.Controls
                 mModel.Series.Add(ls);
             }
 
-            var lengths = mController.GetLengths();
+            var lengths = mController.GetLengths().OrderBy(x => x.Day);
             foreach (var hl in lengths)
             {
                 var image = new HairLengthImage(hairbl, hl)

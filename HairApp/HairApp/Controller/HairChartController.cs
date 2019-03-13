@@ -36,6 +36,12 @@ namespace HairAppBl.Controller
             return mPointHairLength[point];
         }
 
+        private void AddToList(DataPoint key, HairLength hl)
+        {
+            if (mPointHairLength.ContainsKey(key)) return;
+            mPointHairLength.Add(key, hl);
+
+        }
 
         private void SetBackLengths()
         {
@@ -44,7 +50,7 @@ namespace HairAppBl.Controller
             {
                 var dp = new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Back);
                 list.Add(dp);
-                mPointHairLength.Add(dp, l);
+                AddToList(dp, l);
             }
 
             mBackLength = new ChartLine("Back",list);
@@ -57,7 +63,7 @@ namespace HairAppBl.Controller
             {
                 var dp = new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Side);
                 list.Add(dp);
-                mPointHairLength.Add(dp, l);
+                AddToList(dp, l);
             }
 
             mSideLength = new ChartLine("Side", list);
@@ -70,7 +76,7 @@ namespace HairAppBl.Controller
             {
                 var dp = new DataPoint(DateTimeAxis.ToDouble(l.Day), l.Front);
                 list.Add(dp);
-                mPointHairLength.Add(dp, l);
+                AddToList(dp, l);
             }
 
             mFrontLength = new ChartLine("Front", list);

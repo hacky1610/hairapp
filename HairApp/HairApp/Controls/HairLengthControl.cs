@@ -6,6 +6,8 @@ using System.Text;
 using Xamarin.Forms;
 using XLabs.Forms;
 using System.Linq;
+using Plugin.Media.Abstractions;
+using HairApp.Controller;
 
 namespace HairApp.Controls
 {
@@ -13,6 +15,8 @@ namespace HairApp.Controls
     public class HairLengthControl : StackLayout
     {
         HairAppBl.Interfaces.IHairBl mHairbl;
+        public event EventHandler<EventArgs> TakeOrPicPhotoClicked;
+        DatePicker mDatePicker;
         Entry mBackEntry;
         Entry mSideEntry;
         Entry mFrontEntry;
@@ -22,7 +26,8 @@ namespace HairApp.Controls
         public HairLengthControl( HairAppBl.Interfaces.IHairBl hairbl)
         {
             mHairbl = hairbl;
-
+            mDatePicker = new DatePicker();
+            mDatePicker.Date = ScheduleController.GetToday();
             mBackEntry = GetEntry();
             mSideEntry = GetEntry();
             mFrontEntry = GetEntry();
@@ -30,6 +35,7 @@ namespace HairApp.Controls
             takePhoto.Clicked += TakePhoto_Clicked;
 
             mPicture = new Image { HeightRequest = 100, IsVisible = false };
+            Children.Add(mDatePicker);
             Children.Add(GetRow(mBackEntry,"Back"));
             Children.Add(GetRow(mSideEntry, "Side"));
             Children.Add(GetRow(mFrontEntry, "Front"));
@@ -37,13 +43,38 @@ namespace HairApp.Controls
             Children.Add(takePhoto);
         }
 
-        private async void TakePhoto_Clicked(object sender, EventArgs e)
+        private void TakePhoto_Clicked(object sender, EventArgs e)
         {
-            var c = new Controller.CameraController();
-            var file = await c.SelectPhoto();
-            mCurrentPhoto = file.AlbumPath;
-            mPicture.IsVisible = true;
-            mPicture.Source = ImageSource.FromResource(file.AlbumPath);
+            TakeOrPicPhotoClicked?.Invoke(this, new EventArgs());
+        }
+
+        public HairLength GetHairLength()
+        {
+            var hl = new HairLength("");
+            hl.Back = GetLengthValue(mBackEntry);
+            hl.Side = GetLengthValue(mSideEntry);
+            hl.Front = GetLengthValue(mFrontEntry);
+            hl.Picture = mCurrentPhoto;
+            hl.Day = mDatePicker.Date;
+            
+
+            return hl;
+        }
+
+        public int GetLengthValue(Entry entry)
+        {
+            return entry.Text != null ? Int32.Parse(entry.Text) : 0;
+        }
+
+        public void SetPicture(MediaFile file)
+        {
+            if (file != null)
+            {
+                mPicture.IsVisible = true;
+                mCurrentPhoto = file.Path;
+
+                mPicture.Source = CameraController.LoadImage(file);
+            }
         }
 
         private Entry GetEntry()
