@@ -63,8 +63,6 @@ namespace HairApp.Controls
                 mModel.Axes.Add(xAxis);
             }
 
-            mModel.IsLegendVisible = true;
-
             foreach (var l in mController.GetCharts())
             {
                 var ls = new LineSeries();
@@ -76,9 +74,11 @@ namespace HairApp.Controls
                 ls.SelectionMode = SelectionMode.Single;
                 ls.StrokeThickness = 4;
                 ls.Points.AddRange(l.Points);
+                ls.Color = l.Color;
 
                 mModel.Series.Add(ls);
             }
+            mModel.IsLegendVisible = false;
 
             var lengths = mController.GetLengths().OrderBy(x => x.Day);
             foreach (var hl in lengths)
@@ -170,10 +170,28 @@ namespace HairApp.Controls
                 Children =
                 {
                     GetRow("Date",mDateLabel),
-                    GetRow("Back lenght",mBackLengthLabel),
-                    GetRow("Side lenght",mSideLengthLabel),
-                    GetRow("Front lenght",mFRontLengthLabel)
+                    GetRow("Back lenght",mBackLengthLabel,HairChartController.BackLineColor),
+                    GetRow("Side lenght",mSideLengthLabel,HairChartController.SideLineColor),
+                    GetRow("Front lenght",mFRontLengthLabel,HairChartController.FrontLineColor),
                 }
+            };
+        }
+
+        private StackLayout GetRow(String labelText, Label label, OxyColor col)
+        {
+            var colFrame = new Frame();
+            colFrame.Padding = new Thickness(2, 2, 2, 2);
+            colFrame.BackgroundColor = Color.FromRgb(col.R,col.G,col.B);
+            colFrame.WidthRequest = 15;
+            return new StackLayout
+            {
+                Children =
+                {
+                    colFrame,
+                    new Label{Text= labelText},
+                    label
+                },
+                Orientation = StackOrientation.Horizontal
             };
         }
 

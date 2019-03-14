@@ -10,10 +10,13 @@ namespace HairApp.Models
         public List<DataPoint> Points { get; private set; }
         public String Name { get; private set; }
 
-        public ChartLine(string name, List<DataPoint> points )
+        public OxyColor Color { get; private set; }
+
+        public ChartLine(string name, List<DataPoint> points, OxyColor color )
         {
             Name = name;
             Points = points;
+            Color = color;
         }
     }
 }

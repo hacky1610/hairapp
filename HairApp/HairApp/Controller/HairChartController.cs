@@ -15,6 +15,9 @@ namespace HairAppBl.Controller
         ChartLine mBackLength;
         ChartLine mSideLength;
         ChartLine mFrontLength;
+        public static OxyColor BackLineColor = OxyColor.FromRgb(255, 0, 0);
+        public static OxyColor SideLineColor = OxyColor.FromRgb(255, 103, 0);
+        public static OxyColor FrontLineColor = OxyColor.FromRgb(0, 0, 140);
 
         public HairChartController(List<HairLength> hairLengths)
         {
@@ -53,7 +56,7 @@ namespace HairAppBl.Controller
                 AddToList(dp, l);
             }
 
-            mBackLength = new ChartLine("Back",list);
+            mBackLength = new ChartLine("Back",list,BackLineColor);
         }
 
         private void SetSideLengths()
@@ -66,7 +69,7 @@ namespace HairAppBl.Controller
                 AddToList(dp, l);
             }
 
-            mSideLength = new ChartLine("Side", list);
+            mSideLength = new ChartLine("Side", list, SideLineColor);
         }
 
         private void SetFrontLengths()
@@ -79,7 +82,7 @@ namespace HairAppBl.Controller
                 AddToList(dp, l);
             }
 
-            mFrontLength = new ChartLine("Front", list);
+            mFrontLength = new ChartLine("Front", list,FrontLineColor);
         }
 
 
