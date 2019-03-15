@@ -16,7 +16,9 @@ namespace HairApp
     public partial class MainPage : ContentPage
     {
         private AlarmController mAlarmController;
-        private Controls.CareDayList mCareDayList;
+        private CareDayList mCareDayList;
+        public event EventHandler<EventArgs> ListRefreshed;
+
 
         public MainPage(AlarmController ac)
         {
@@ -35,6 +37,7 @@ namespace HairApp
             App.MainSession.SendInitAlarms();
         }
 
+ 
 
         private void OpenSettingsButton_Clicked(object sender, EventArgs e)
         {

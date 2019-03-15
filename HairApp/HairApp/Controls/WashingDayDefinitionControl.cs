@@ -50,6 +50,14 @@ namespace HairApp.Controls
             };
             editButton.Clicked += EditButton_Clicked;
 
+            var deleteButton = new Button
+            {
+                Text = "remove",
+                BackgroundColor = Color.Transparent,
+                TextColor = Color.Blue
+            };
+            deleteButton.Clicked += DeleteButton_Clicked; ;
+
             var routineList = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
@@ -65,9 +73,19 @@ namespace HairApp.Controls
             DetailsContent.Add(descriptionLabel);
             DetailsContent.Add(scheduleLabel);
             DetailsContent.Add(listContainer);
-            DetailsContent.Add(editButton);
+            DetailsContent.Add(new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = {
+                    editButton,deleteButton }
+            });
         }
-      
+
+        private void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            Removed(this, new WashingDayCellEventArgs(WdController));
+        }
+
         private void EditButton_Clicked(object sender, EventArgs e)
         {
             Edited(this, new WashingDayCellEventArgs(WdController));

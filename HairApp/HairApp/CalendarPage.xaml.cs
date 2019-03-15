@@ -30,6 +30,7 @@ namespace HairApp
 
             mInstances = controller.GetInstancesByDate();
             mMainSessionController = controller;
+
             mAlarmController = ac;
 
             mCalendar = new Calendar
@@ -59,9 +60,14 @@ namespace HairApp
             mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
         }
 
+
         private void MMainSessionController_DefinitionsEdited(object sender, EventArgs e)
         {
+            mCalendar.SpecialDates.Clear();
             FillFutureDays(mCalendar);
+            RefreshList(mCalendar.SelectedDate.Value);
+            mCalendar.ForceRedraw();
+
         }
 
         private void NextMonth(object sender, DateTimeEventArgs e)

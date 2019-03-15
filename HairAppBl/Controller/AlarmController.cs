@@ -70,7 +70,7 @@ namespace HairAppBl.Controller
 
         public static long GetAlarmTime()
         {
-            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
+            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 4, 0, 0);
             if (s < DateTime.Now)
                 s = s.AddDays(1);
 

@@ -101,6 +101,8 @@ namespace HairApp.Controls
         {
             mWashingDays.Remove(e.Controller.GetModel());
             mAlarmController.DeleteWashDay(e.Controller.GetModel().ID);
+            mMainSessionController.SendDefinitionsEdited();
+
             RefreshList();
         }
 
