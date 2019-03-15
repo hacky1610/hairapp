@@ -255,6 +255,7 @@ namespace HairApp
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             Navigation.PopAsync();
         }
 
@@ -262,6 +263,8 @@ namespace HairApp
         {
             if (!SaveFields())
                 return;
+
+            this.IsEnabled = false;
             if (mCreate)
                 mMainSessionController.GetAllWashingDays().Add(mWashingDayEditorController.GetModel());
 

@@ -34,7 +34,7 @@ namespace HairApp.Controls
             commentLabel.IsVisible = !String.IsNullOrWhiteSpace(instance.Comment);
 
             var picContainer = new ScrollView { Orientation = ScrollOrientation.Horizontal };
-            var picListView = new StackLayout { Orientation = StackOrientation.Vertical };
+            var picListView = new StackLayout { Orientation = StackOrientation.Horizontal };
             picContainer.Content = picListView;
 
             foreach (var pic in instance.Pictures)

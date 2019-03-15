@@ -117,6 +117,7 @@ namespace HairApp
 
         private  void OKButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             if (!mInstance.Saved)
             {
                 mDefinition.Instances.Add(mInstance);
@@ -133,6 +134,7 @@ namespace HairApp
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             Navigation.PopAsync();
         }
 
