@@ -39,20 +39,14 @@ namespace HairApp
 
         private async void Hlc_TakeOrPicPhotoClicked(object sender, EventArgs e)
         {
-            var answer = await DisplayAlert("Take Picture?", "Choose!", "Take new picture", "Select from album");
-            var c = new Controller.CameraController();
-            Plugin.Media.Abstractions.MediaFile file;
-            if (answer)
-            {
-                file = await c.TakePhoto();
-            }
-            else
-            {
-                file = await c.SelectPhoto();
-            }
-            mHairLengthControl.SetPicture(file);
+            var choose = new ChoosePictureDialog(null);
+            choose.PictureChoosen += Choose_PictureChoosen;
+            await Navigation.PushPopupAsync(choose);
+        }
 
-
+        private void Choose_PictureChoosen(object sender, ChoosePictureDialog.PictureChoosenEventArgs e)
+        {
+            mHairLengthControl.SetPicture(e.File);
         }
 
         public class AddHairLengthDialogEventArgs: EventArgs

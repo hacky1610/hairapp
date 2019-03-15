@@ -74,14 +74,21 @@ namespace HairApp
 
         private async void TakePicture_Clicked(object sender, EventArgs e)
         {
-            var c = new Controller.CameraController();
-            var file = await c.TakePhoto();
-            mInstance.Pictures.Add(new Picture(file.Path));
+            var choose = new ChoosePictureDialog(null);
+            choose.PictureChoosen += Choose_PictureChoosen; ;
+            await Navigation.PushPopupAsync(choose);
+
+          
+        }
+
+        private void Choose_PictureChoosen(object sender, ChoosePictureDialog.PictureChoosenEventArgs e)
+        {
+            mInstance.Pictures.Add(new Picture(e.File.Path));
             PictureListContainer.IsVisible = true;
             AddPicToAlbum(ImageSource.FromStream(() =>
             {
-                var stream = file.GetStream();
-                file.Dispose();
+                var stream = e.File.GetStream();
+                e.File.Dispose();
                 return stream;
             }));
         }
