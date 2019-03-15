@@ -8,7 +8,8 @@
         <ScrollView Style="{StaticResource ScrollPageContent}" VerticalOptions="FillAndExpand" BackgroundColor="AliceBlue">
             <StackLayout Style="{StaticResource PageContent}" VerticalOptions="FillAndExpand" >
 
-            <Label Text="Do you care day"
+            
+            <Label x:Name="mLabelTitle" 
                 Style="{StaticResource Title}" />
             <Frame x:Name="DescriptionFrame" Style="{StaticResource FrameStyle}">
             <Label x:Name="Description"

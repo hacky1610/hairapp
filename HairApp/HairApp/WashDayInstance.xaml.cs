@@ -34,6 +34,9 @@ namespace HairApp
 
         private void InitFields()
         {
+            //Title
+            mLabelTitle.Text = $"Do your care day: {mDefinition.Name}";
+
             //Description
             DescriptionFrame.IsVisible = false;
             if (!string.IsNullOrEmpty(mDefinition.Description))
@@ -118,7 +121,7 @@ namespace HairApp
 
             App.MainSession.SendInstanceEdited();
 
-             App.Current.MainPage.Navigation.PopAsync();
+            App.Current.MainPage.Navigation.PopAsync();
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

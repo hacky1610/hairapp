@@ -28,10 +28,17 @@ namespace HairApp.Controls
             mHairbl = hairbl;
             mAlarmController = ac;
 
+            mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
+
             //WashdayList
             mWashDayList = new StackLayout { Orientation = StackOrientation.Vertical , HorizontalOptions = LayoutOptions.FillAndExpand };
 
             this.Children.Add(mWashDayList);
+            RefreshList();
+        }
+
+        private void MMainSessionController_DefinitionsEdited(object sender, EventArgs e)
+        {
             RefreshList();
         }
 
@@ -40,20 +47,12 @@ namespace HairApp.Controls
             var def = new WashingDayDefinition();
             def.ID = Guid.NewGuid().ToString();
             var contr = new WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);
-            var editor = new WashDayEditor(contr, true, mHairbl);
-            editor.OkClicked += Editor_OkClicked;
+            var editor = new WashDayEditor(mMainSessionController, contr, true, mHairbl);
             Navigation.PushAsync(editor);
 
         }
 
-        private void Editor_OkClicked(object sender, WashDayEditor.WashDayEditorEventArgs e)
-        {
-            if (e.Created)
-                mWashingDays.Add(e.Definition);
-            mMainSessionController.SendDefinitionsEdited();
 
-            RefreshList();
-        }
 
         public void RefreshList()
         {
@@ -84,16 +83,13 @@ namespace HairApp.Controls
             var wdInstance = e.Controller.GetWashingDayInstance(ScheduleController.GetToday());
 
             var instancePage = new WashDayInstance(e.Controller.GetModel(), wdInstance);
-            //instancePage.OkClicked += InstancePage_OkClicked;
-
             Navigation.PushAsync(instancePage, true);
         }
 
         private void WashDay_Edited(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
         {
             var contr = new WashingDayEditorController(e.Controller.GetModel(), App.MainSession.GetAllDefinitions(), this.mAlarmController);
-            var editor = new WashDayEditor(contr, false, mHairbl);
-            editor.OkClicked += Editor_OkClicked;
+            var editor = new WashDayEditor(mMainSessionController, contr, false, mHairbl);
             Navigation.PushAsync(editor);
         }
 

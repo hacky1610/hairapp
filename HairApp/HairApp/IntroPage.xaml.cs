@@ -35,10 +35,8 @@ namespace HairApp
             var def = new WashingDayDefinition();
             def.ID = Guid.NewGuid().ToString();
             var contr = new WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);
-            var editor = new WashDayEditor(contr, true, mHairbl);
-            editor.OkClicked += Editor_OkClicked;
-            editor.CancelClicked += Editor_CancelClicked;
-            Navigation.PushAsync(editor);
+           // var editor = new WashDayEditor(contr, true, mHairbl);
+            //Navigation.PushAsync(editor);
 
         }
 
@@ -51,11 +49,11 @@ namespace HairApp
 
         private void Editor_OkClicked(object sender, WashDayEditor.WashDayEditorEventArgs e)
         {
-             mWashingDays.Add(e.Definition);
+            /* mWashingDays.Add(e.Definition);
             App.MainSession.Initialized = true;
             PageClosed?.Invoke(this, new EventArgs());
 
-            Navigation.PopAsync(true);
+            Navigation.PopAsync(true);*/
         }
     }
 }

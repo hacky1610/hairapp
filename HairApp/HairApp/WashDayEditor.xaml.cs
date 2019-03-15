@@ -19,20 +19,21 @@ namespace HairApp
 	public partial class WashDayEditor : ContentPage
 	{
         private WashingDayEditorController mWashingDayEditorController;
+        private MainSessionController mMainSessionController;
         private List<RoutineDefinitionCell> mRoutineListControls = new List<RoutineDefinitionCell>();
         private Boolean mCreate;
         private HairAppBl.Interfaces.IHairBl mHairbl;
 
-        //Events
-        public event EventHandler<WashDayEditorEventArgs> OkClicked;
-        public event EventHandler<EventArgs> CancelClicked;
 
-        public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashDayEditor (MainSessionController mainSession, WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 	    {
 	        InitializeComponent ();
+
+
             mHairbl = hairbl;
-            this.mCreate = create;
-            this.mWashingDayEditorController = wdController;
+            mCreate = create;
+            mWashingDayEditorController = wdController;
+            mMainSessionController = mainSession;
 
             RefreshList();
 
@@ -255,16 +256,18 @@ namespace HairApp
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
-            CancelClicked?.Invoke(this, new EventArgs());
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
             if (!SaveFields())
                 return;
+            if (mCreate)
+                mMainSessionController.GetAllWashingDays().Add(mWashingDayEditorController.GetModel());
+
+            mMainSessionController.SendDefinitionsEdited();
             mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID, mWashingDayEditorController.GetModel().Name);
             Navigation.PopAsync();
-            OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
         }
 
         private void AddRoutine_Clicked(object sender, EventArgs e)
