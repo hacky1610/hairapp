@@ -54,11 +54,13 @@ namespace HairAppBl.Controller
 
         public void SendDefinitionsEdited()
         {
+            Save();
             DefinitionsEdited?.Invoke(this, new EventArgs());
         }
 
         public void SendInstanceEdited()
         {
+            Save();
             InstanceEdited?.Invoke(this, new EventArgs());
         }
 

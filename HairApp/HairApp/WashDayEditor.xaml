@@ -36,7 +36,7 @@
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
                                 <Label Style="{StaticResource EditorLabel}" >Start date:</Label>
-                                <controls:ExtendedDatePicker Style="{StaticResource EditorDatePicker}"  x:Name="StartDatePicker" ></controls:ExtendedDatePicker>
+                                <DatePicker Style="{StaticResource EditorDatePicker}"  x:Name="StartDatePicker" ></DatePicker>
                             </StackLayout>
                             <StackLayout x:Name="DaylySection">
                                 <StackLayout Orientation="Horizontal">

@@ -96,6 +96,8 @@ namespace HairApp
                     continue;
                 if (instances.ContainsKey(day.Key))
                     continue;
+                if (day.Key < ScheduleController.GetToday())
+                    continue;
 
                 var pattern = new BackgroundPattern(1);
                 pattern.Pattern = new List<Pattern>();

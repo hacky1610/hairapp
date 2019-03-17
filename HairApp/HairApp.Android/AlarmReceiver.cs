@@ -104,10 +104,12 @@ namespace HairApp.Droid
                 // Create the PendingIntent with the back stack:
                 var resultPendingIntent = stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
+                var p = PendingIntent.GetActivity(context, DateTime.Now.Millisecond, resultIntent, PendingIntentFlags.UpdateCurrent);
+
                 // Build the notification:
                 var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                               .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
-                              .SetContentIntent(resultPendingIntent) // Start up this activity when the user clicks the intent.
+                              .SetContentIntent(p) // Start up this activity when the user clicks the intent.
                               .SetContentTitle(title) // Set the title
                               .SetNumber(1) // Display the count in the Content Info
                               .SetSmallIcon(Resource.Drawable.icon) // This is the icon to display

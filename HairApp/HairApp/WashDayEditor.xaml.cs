@@ -82,9 +82,8 @@ namespace HairApp
             TypeSelection.SelectedIndexChanged += TypeSelection_SelectedIndexChanged;
 
 
-            this.StartDatePicker.MinimumDate = DateTime.Now;
             var schedule = model.Scheduled;
-
+            this.StartDatePicker.MinimumDate = schedule.StartDate;
             this.StartDatePicker.Date = schedule.StartDate;
 
             //Dayly
