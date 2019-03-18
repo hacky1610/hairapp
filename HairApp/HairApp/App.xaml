@@ -51,6 +51,16 @@
                 <Setter Property="TextColor" Value="White" />
             </Style>
 
+            <Style x:Key="DetailsActionLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="DetailsActionImage" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+            </Style>
+
 
             <!--Routine-->
             <Style x:Key="RoutineFrame" TargetType="Frame">

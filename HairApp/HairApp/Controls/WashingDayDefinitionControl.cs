@@ -26,8 +26,6 @@ namespace HairApp.Controls
             HeaderName = def.Name;
             Color = def.ItemColor;
 
-            //HeaderExtensionLeft = new Label { Text = "Foo" };
-
             var descriptionLabel = Common.GetCalendarDetailsRow("description.png", new Label
             {
                 Text = def.Description,
@@ -42,21 +40,54 @@ namespace HairApp.Controls
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
             }, hairbl);
 
-            var editButton = new Button
+
+            var editLabel = new Label
             {
                 Text = "edit",
-                BackgroundColor = Color.Transparent,
-                TextColor = Color.Blue
+                Style = (Style)hairbl.Resources["DetailsActionLabel"]
             };
-            editButton.Clicked += EditButton_Clicked;
 
-            var deleteButton = new Button
+            var editControl = new StackLayout
             {
-                Text = "remove",
-                BackgroundColor = Color.Transparent,
-                TextColor = Color.Blue
+                Orientation = StackOrientation.Horizontal,
+                Children =
+                {
+                    new Image
+                    {
+                        Source = "edit.png",
+                         Style = (Style)hairbl.Resources["DetailsActionImage"]
+                    },
+                    editLabel
+                }
             };
-            deleteButton.Clicked += DeleteButton_Clicked; ;
+            var editClicked = new TapGestureRecognizer();
+            editClicked.Tapped += EditButton_Clicked;
+
+            editControl.GestureRecognizers.Add(editClicked);
+
+            var deleteLabel = new Label
+            {
+                Text = "Remove",
+                Style = (Style)hairbl.Resources["DetailsActionLabel"]
+            };
+
+            var deleteControl = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children =
+                {
+                    new Image
+                    {
+                        Source = "remove.png",
+                         Style = (Style)hairbl.Resources["DetailsActionImage"]
+                    },
+                    deleteLabel
+                }
+            };
+            var deleteClicked = new TapGestureRecognizer();
+            deleteClicked.Tapped += DeleteButton_Clicked;
+
+            deleteControl.GestureRecognizers.Add(deleteClicked);
 
             var routineList = new StackLayout
             {
@@ -76,8 +107,10 @@ namespace HairApp.Controls
             DetailsContent.Add(new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.Center,
+                Spacing = 30,
                 Children = {
-                    editButton,deleteButton }
+                    editControl,deleteControl }
             });
         }
 
