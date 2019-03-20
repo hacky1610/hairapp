@@ -10,6 +10,7 @@ using Rg.Plugins.Popup.Extensions;
 using HairApp.Controls;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using HairApp.Resources;
 
 namespace HairApp
 {
@@ -24,7 +25,6 @@ namespace HairApp
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
-
 
             this.mAlarmController = ac;
 
@@ -126,7 +126,7 @@ namespace HairApp
             {
                 if (timeToNexDay.Time2Wait == 0)
                 {
-                    TimeToNextCareDay.Text = $"Today is care day";
+                    TimeToNextCareDay.Text = AppResources.CareDayToday;
                     ValsImage.Source = "caredaytoday.jpg";
                 }
                 else

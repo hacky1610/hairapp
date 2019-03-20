@@ -7,6 +7,8 @@ using HairAppBl.Controller;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using HairApp.Interfaces;
+using HairApp.Resources;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HairApp
@@ -18,6 +20,12 @@ namespace HairApp
         public App()
         {
             InitializeComponent();
+
+            //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+            var ci = new System.Globalization.CultureInfo("de-de");
+            AppResources.Culture = ci;
+            DependencyService.Get<ILocalize>().SetLocale(ci);
+
 
             BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
