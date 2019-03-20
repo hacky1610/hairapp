@@ -73,7 +73,7 @@ namespace HairAppBl.Controller
             var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
             if (s < DateTime.Now)
                 s = s.AddDays(1);
-            //s = DateTime.Now.AddMinutes(1);
+           // s = DateTime.Now.AddMinutes(1);
 
 
             var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);

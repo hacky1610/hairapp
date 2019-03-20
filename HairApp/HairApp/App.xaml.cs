@@ -29,6 +29,7 @@ namespace HairApp
 
             BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
+            App.MainSession.Saved += MainSession_Saved;
             Session.Register(App.MainSession);
             Session.Restore();
 
@@ -38,6 +39,11 @@ namespace HairApp
 
             MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
 
+        }
+
+        private void MainSession_Saved(object sender, EventArgs e)
+        {
+            Current.SavePropertiesAsync();
         }
 
         public void InitException()

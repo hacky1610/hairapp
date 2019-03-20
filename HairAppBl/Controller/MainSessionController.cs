@@ -13,6 +13,7 @@ namespace HairAppBl.Controller
         MainSession MainSession = null;
         public event EventHandler<EventArgs> DefinitionsEdited;
         public event EventHandler<EventArgs> InstanceEdited;
+        public event EventHandler<EventArgs> Saved;
 
 
         public bool Initialized {
@@ -69,6 +70,7 @@ namespace HairAppBl.Controller
             string json = JsonConvert.SerializeObject(MainSession);
             string key = MainSession.GetType().ToString();
             mProperties[key] = json;
+            Saved?.Invoke(this, new EventArgs());
         }
 
         public void SetName(string name)
