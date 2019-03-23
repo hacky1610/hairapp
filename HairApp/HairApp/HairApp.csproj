@@ -73,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="RoutineEditor.xaml.cs">
+      <DependentUpon>RoutineEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Update="WashDayInstance.xaml.cs">
       <DependentUpon>WashDayInstance.xaml</DependentUpon>
     </Compile>

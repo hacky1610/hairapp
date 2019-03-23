@@ -23,6 +23,7 @@ namespace HairApp.Controls
         public event EventHandler<EventArgs> Removed;
         public event EventHandler<EventArgs> MovedUp;
         public event EventHandler<EventArgs> MovedDown;
+        public event EventHandler<EventArgs> Selected;
         private HairAppBl.Interfaces.IHairBl mHairBl;
 
         public RoutineDefinition Routine { get; set; }
@@ -103,6 +104,7 @@ namespace HairApp.Controls
 
         public void Select()
         {
+            Selected?.Invoke(this, new EventArgs());
             this.buttonGroup.IsVisible = true;
 
         }

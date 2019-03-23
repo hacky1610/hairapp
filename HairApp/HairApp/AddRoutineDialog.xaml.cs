@@ -16,7 +16,7 @@ namespace HairApp
         private WashingDayEditorController mWashingDayEditorController;
         private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
         private HairAppBl.Interfaces.IHairBl mHairbl;
-             
+
 
 
         public AddRoutineDialog()
@@ -30,15 +30,25 @@ namespace HairApp
             this.mWashingDayEditorController = controller;
             mHairbl =  hairbl;
             InitializeComponent();
-            foreach(var routine in controller.GetUnusedRoutineDefinitions())
-            {
-                var routineObject = new RoutineCellObject(routine);
-                mRoutines.Add(routineObject);
-            }
-
+          
             RefreshList();
             AddButton.Clicked += AddButton_Clicked;
+            openSettingsButton.Clicked += OpenSettingsButton_Clicked;
 
+        }
+
+        private void OpenSettingsButton_Clicked(object sender, EventArgs e)
+        {
+            IsVisible = false;
+            var routineEditor = new RoutineEditor(null, mHairbl);
+            routineEditor.Disappearing += RoutineEditor_Disappearing;
+            Navigation.PushAsync(routineEditor);
+        }
+
+        private void RoutineEditor_Disappearing(object sender, EventArgs e)
+        {
+            IsVisible = true;
+            RefreshList();
         }
 
         private void AddButton_Clicked(object sender, EventArgs e)
@@ -54,6 +64,13 @@ namespace HairApp
 
         private void RefreshList()
         {
+            mRoutines.Clear();
+            foreach (var routine in mWashingDayEditorController.GetUnusedRoutineDefinitions())
+            {
+                var routineObject = new RoutineCellObject(routine);
+                mRoutines.Add(routineObject);
+            }
+
             this.RoutineList.Children.Clear();
             foreach (var r in mRoutines)
             {
@@ -61,7 +78,6 @@ namespace HairApp
                 this.RoutineList.Children.Add(c.View);
             }
         }
-
 
 
         protected override void OnAppearing()

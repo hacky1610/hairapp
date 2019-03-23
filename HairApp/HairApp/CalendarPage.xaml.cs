@@ -110,7 +110,7 @@ namespace HairApp
 
                 var specialDate = new SpecialDate(day.Key)
                 {
-                    BackgroundColor = Color.Blue,
+                    BackgroundColor = Color.Transparent,
                     Selectable = true,
                     BackgroundPattern = pattern,
                 };

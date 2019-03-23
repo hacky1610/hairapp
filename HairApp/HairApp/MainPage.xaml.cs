@@ -54,13 +54,13 @@ namespace HairApp
         {
             if(!App.MainSession.Initialized)
             {
-                Device.BeginInvokeOnMainThread(() =>
+               /* Device.BeginInvokeOnMainThread(() =>
                 {
                     var page = new IntroPage(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
                     page.PageClosed += IntroPage_Closed;
                     Navigation.PushAsync(page, true);
                 });
-               return;
+               return;*/
             }
 
             if (!String.IsNullOrEmpty(App.washdayToShow))
@@ -118,7 +118,7 @@ namespace HairApp
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())
             {
-                TimeToNextCareDay.Text = "No Care day configured";
+                TimeToNextCareDay.Text = AppResources.NoCareDay;
                 ValsImage.Source = "nocareday.jpg";
 
             }

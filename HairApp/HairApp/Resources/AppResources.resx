@@ -120,4 +120,13 @@
   <data name="CareDayToday" xml:space="preserve">
     <value>Today is care day</value>
   </data>
+  <data name="NoCareDay" xml:space="preserve">
+    <value>No Care day configured</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

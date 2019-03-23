@@ -12,6 +12,7 @@ using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
 using static HairAppBl.Models.ScheduleDefinition;
+using HairApp.Resources;
 
 namespace HairApp
 {
@@ -37,7 +38,7 @@ namespace HairApp
 
             RefreshList();
 
-            var saveClose = new Controls.NavigationControl("Cancel","Save");
+            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save);
             SaveButtonContainer.Content = saveClose.View;
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
@@ -292,12 +293,22 @@ namespace HairApp
             this.mRoutineListControls.Clear();
             foreach (var r in mWashingDayEditorController.GetRoutineDefinitions())
             {
-                var c = new Controls.RoutineDefinitionCell(r,App.BL);
+                var c = new RoutineDefinitionCell(r,App.BL);
                 c.Removed += Routine_Removed;
                 c.MovedDown += Routine_MovedDown;
                 c.MovedUp += Routine_MovedUp;
+                c.Selected += Routine_Selected;
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
+            }
+        }
+
+        private void Routine_Selected(object sender, EventArgs e)
+        {
+            foreach(var rd in mRoutineListControls)
+            {
+                if (sender != rd)
+                    rd.Deselect();
             }
         }
 
