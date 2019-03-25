@@ -69,11 +69,8 @@ namespace HairApp.Droid
 
             if (washdays.Count == 0)
             {
-                //App.BL.Logger.WriteLine("Today is no washing day");
                 return;
             }
-            //App.BL.Logger.WriteLine("Today is washday. Send notify");
-
 
             foreach (var wd in washdays)
             {

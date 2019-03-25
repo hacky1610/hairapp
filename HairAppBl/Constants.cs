@@ -3,7 +3,7 @@ using System.IO;
 
 namespace HairAppBl
 {
-    public class Constants
+    public static class Constants
     {
         public static string SchedulesStorageFile 
         {
