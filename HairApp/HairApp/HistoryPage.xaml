@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="HairApp.HistoryPage"
+             NavigationPage.HasNavigationBar="false"
+             BackgroundColor="Transparent">
+    <StackLayout Style="{StaticResource Page}" >
+        <StackLayout Style="{StaticResource PageContent}">
+
+            <ScrollView >
+                <StackLayout>
+ 
+                    <StackLayout x:Name="DoneWashDaysContainer">
+                        <Label Text="Finished Care Days" Style="{StaticResource Title}"></Label>
+                        <StackLayout x:Name="DoneWashDays">
+                        </StackLayout>
+                    </StackLayout>
+                    
+
+                </StackLayout>
+
+            </ScrollView>
+        </StackLayout>
+    </StackLayout>
+   
+</ContentPage>

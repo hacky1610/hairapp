@@ -7,43 +7,30 @@
 
 
 
-    <StackLayout Style="{StaticResource PageContent}">
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
-                <Label x:Name="Title" Text="Vals Hair App" 
-           VerticalOptions="Start" FontSize="Large"/>
+    <StackLayout VerticalOptions="FillAndExpand">
 
-        </Frame>
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="StartAndExpand">
-        <StackLayout>
-            <Label x:Name="TimeToNextCareDay" Text="" 
-           HorizontalOptions="Center" FontSize="Medium"/>
-                <Image x:Name="ValsImage"></Image>
-            <Button x:Name="OpenCareDay"></Button>
-                <Button x:Name="TestPage" Text="Test" 
-           HorizontalOptions="End"/>
-            </StackLayout>
-        
- 
-        </Frame>
-        <Frame Style="{StaticResource FrameStyle}" VerticalOptions="End" >
-           
-            <Grid VerticalOptions="End" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <ScrollView Style="{StaticResource HomePageContent}" >
+                <StackLayout>
+                <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent" IsVisible="False"/>
+                <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
+                        <StackLayout>
+                            <Label x:Name="TimeToNextCareDay" Text="" 
+                             HorizontalOptions="Center" FontSize="Medium"/>
+                            <Image x:Name="ValsImage"></Image>
 
+                        </StackLayout>
+                    </Frame>
+                    <Label Text="List of all care days" Style="{StaticResource Title}"></Label>
+                    <Frame  x:Name="CareDayListFrame"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" BackgroundColor="Transparent">
 
-                <ImageButton  x:Name="ShowCalendar" Grid.Row="0" Grid.Column="0" Style="{StaticResource HomeButton}" />
-                <ImageButton  x:Name="OpenWashDayOverview" Grid.Row="0" Grid.Column="1" Style="{StaticResource HomeButton}"/>
-                <ImageButton  x:Name="OpenStatistic" Grid.Row="0" Grid.Column="2" Style="{StaticResource HomeButton}"/>
+                    </Frame>
+                    <Frame x:Name="mInfo"  Style="{StaticResource InfoFrame}">
+                        <Label Style="{StaticResource InfoText}">Click Plus to create another care day</Label>
+                    </Frame>
+                    <ImageButton Source="add.png" BackgroundColor="Transparent" x:Name="mAddCareDayButton"  HeightRequest="50" ></ImageButton>
 
-            </Grid>
-        </Frame>
+                </StackLayout>
+            </ScrollView>
 
 
     </StackLayout>

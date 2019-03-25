@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+      <NoWarn>NU1701</NoWarn>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
@@ -10,6 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Forms9Patch" Version="1.6.5.1" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.13.2" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.13.2" />
+    <PackageReference Include="OxyPlot.Xamarin.Forms" Version="1.0.0">
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
@@ -35,20 +41,71 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ChoosePictureDialog.xaml.cs">
+      <DependentUpon>ChoosePictureDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AddHairLengthDialog.xaml.cs">
+      <DependentUpon>AddHairLengthDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ChartPage.xaml.cs">
+      <DependentUpon>ChartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PicturePage.xaml.cs">
+      <DependentUpon>PicturePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="HistoryPage.xaml.cs">
+      <DependentUpon>HistoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>
     </Compile>
     <Compile Update="CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="WashDayOverview.xaml.cs">
-      <DependentUpon>WashDayOverview.xaml</DependentUpon>
+    <Compile Update="IntroPage.xaml.cs">
+      <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="WashDayInstance.xaml.cs">
       <DependentUpon>WashDayInstance.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AddRoutineDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="CalendarPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="HelpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="HistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="IntroPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="LogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="PicturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="WashDayEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="WashDayInstance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

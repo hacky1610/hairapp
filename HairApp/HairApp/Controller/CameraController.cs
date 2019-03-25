@@ -15,7 +15,7 @@ namespace HairApp.Controller
 
         }
 
-        public ImageSource LoadImage(MediaFile file)
+        public static ImageSource LoadImage(MediaFile file)
         {
             return ImageSource.FromStream(() =>
             {
@@ -32,7 +32,7 @@ namespace HairApp.Controller
                 return null;
             }
 
-            return await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = "HairApp",
                 SaveToAlbum = true,
@@ -43,5 +43,16 @@ namespace HairApp.Controller
                 DefaultCamera = CameraDevice.Rear
             });
         }
+
+
+
+        public async Task<MediaFile> SelectPhoto()
+        {
+            return await CrossMedia.Current.PickPhotoAsync();
+               
+        }
+
+ 
+
     }
 }

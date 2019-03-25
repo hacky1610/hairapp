@@ -9,7 +9,32 @@ namespace HairAppBl.Controller
     public class MainSessionController: Interfaces.ISession
     {
         readonly IDictionary<string, object> mProperties;
+        public static event EventHandler<EventArgs> InitAlarms;
         MainSession MainSession = null;
+        public event EventHandler<EventArgs> DefinitionsEdited;
+        public event EventHandler<EventArgs> InstanceEdited;
+
+
+        public bool Initialized {
+            get
+            {
+                return MainSession.Initialized;
+            }
+            set
+            {
+                MainSession.Initialized = value;
+            }
+        }
+
+        public  void SendInitAlarms()
+        {
+            //if (!MainSession.AlarmInitialized)
+            //{
+                InitAlarms(null, new EventArgs());
+                MainSession.AlarmInitialized = true;
+            //}
+        }
+
         public MainSessionController(IDictionary<string, object> props)
         {
             mProperties = props;
@@ -27,7 +52,17 @@ namespace HairAppBl.Controller
             }
         }
 
+        public void SendDefinitionsEdited()
+        {
+            Save();
+            DefinitionsEdited?.Invoke(this, new EventArgs());
+        }
 
+        public void SendInstanceEdited()
+        {
+            Save();
+            InstanceEdited?.Invoke(this, new EventArgs());
+        }
 
         public void Save()
         {
@@ -40,6 +75,10 @@ namespace HairAppBl.Controller
         {
             MainSession.User = name;
         }
+
+   
+
+
 
         public List<RoutineDefinition> GetAllDefinitions()
         {
@@ -76,7 +115,7 @@ namespace HairAppBl.Controller
 
         }
 
-        public Dictionary<DateTime, List<Models.WashingDayInstance>> GetInstances()
+        public Dictionary<DateTime, List<WashingDayInstance>> GetInstancesByDate()
         {
             var c = new FutureDayListController<WashingDayInstance>();
             foreach (var d in MainSession.WashingDays)
@@ -88,7 +127,21 @@ namespace HairAppBl.Controller
                
             }
             return c.GetAllDays();
+        }
 
+        public List<WashingDayInstance> GetInstances()
+        {
+            var list = new List<WashingDayInstance>();
+            foreach (var d in MainSession.WashingDays)
+            {
+                list.AddRange(d.Instances);
+            }
+            return list;
+        }
+
+        public List<HairLength> GetHairLength()
+        {
+            return MainSession.HairLengths;
         }
 
         public CommingDays NextDay()
@@ -137,7 +190,6 @@ namespace HairAppBl.Controller
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Leave in Conditioner", "LeaveInConditioner", "", "Please make Leave in Conditioner"));
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Clay", "Clay", "", "Please use Clay"));
             MainSession.AllRoutines.Add(RoutineDefinition.Create("Rinses", "Rinses", "", "Please use Rinses"));
-            MainSession.Initialized = true;
         }
 
         public class CommingDays

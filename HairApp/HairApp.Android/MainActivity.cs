@@ -20,6 +20,7 @@ namespace HairApp.Droid
         App myApp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -29,20 +30,34 @@ namespace HairApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             XamForms.Controls.Droid.Calendar.Init();
-            myApp = new App();
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
+
+            MainSessionController.InitAlarms += App_InitAlarms;
+
+
+            myApp = new App(Intent.GetStringExtra("washday_id"));
             LoadApplication(myApp);
 
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            CheckForNotify();
 
-            App.InitAlarms += App_InitAlarms;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            myApp.InitException();
+        }
+
+        private void AndroidEnvironment_UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
+        {
+                myApp.SendException(e.Exception);
         }
 
         private void App_InitAlarms(object sender, EventArgs e)
         {
-            InitAlarms(DateTime.Now, "Foo", "Bar");
+            InitAlarms();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
@@ -50,38 +65,15 @@ namespace HairApp.Droid
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private void CheckForNotify()
+        public void InitAlarms()
         {
-            var id = Intent.GetStringExtra("washday_id");
-            if (id != null)
-            {
-                var day =  App.MainSession.GetWashingDayById(id);
-                var fileDb = new FileDB(Constants.SchedulesStorageFile);
-                var alarmController = new AlarmController(fileDb);
-
-                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),alarmController);
-                var wdInstance = new HairAppBl.Models.WashingDayInstance(id, Guid.NewGuid().ToString(), ScheduleController.GetToday(), contr.GetRoutineDefinitions(),day.Description);
-                myApp.MainPage.Navigation.PushAsync(new WashDayInstance(day,wdInstance));
-                
-            }
-        }
-
-
-        public void InitAlarms(DateTime dateTime, string title, string message)
-        {
+            App.BL.Logger.WriteLine("Init Alarms called");
             Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
-            alarmIntent.PutExtra("message", message);
-            alarmIntent.PutExtra("title", title);
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day +1 , 8,0,0);
-            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
-            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
-            var notifyTimeInInMilliseconds = utcTime.AddSeconds(-epochDif).Ticks / 10000;
-
-            //alarmManager.SetRepeating(AlarmType.RtcWakeup, notifyTimeInInMilliseconds, 60001 * 60 , pendingIntent);
-            alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
+            alarmManager.SetRepeating(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), AlarmController.Get24Houres() , pendingIntent);
+            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
 
         }
 

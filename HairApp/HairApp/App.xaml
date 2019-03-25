@@ -4,16 +4,32 @@
              x:Class="HairApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="Title" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="FrameTitle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
             <Style x:Key="ScrollPageContent" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="#ffb380" />
 
             </Style>
-            
+
             <Style x:Key="PageContent" TargetType="StackLayout">
                 <Setter Property="Padding" Value="20,20,20,20" />
                 <Setter Property="BackgroundColor" Value="#ffb380" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
 
+            <Style x:Key="HomePageContent" TargetType="ScrollView">
+                <Setter Property="Padding" Value="15,15,15,15" />
+                <Setter Property="BackgroundColor" Value="#ffb380" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                
             </Style>
 
             <Style x:Key="Heading" TargetType="Label">
@@ -21,12 +37,36 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="FontSize" Value="Medium" />
             </Style>
-            
+
+            <Style x:Key="InfoFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="DarkGray" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="IsVisible" Value="False" />
+                <Setter Property="Padding" Value="3,3,3,3" />
+            </Style>
+
+            <Style x:Key="InfoText" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style x:Key="DetailsActionLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="DetailsActionImage" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+            </Style>
+
+
             <!--Routine-->
             <Style x:Key="RoutineFrame" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="3" />
                 <Setter Property="Padding" Value="0,10,0,10" />
-                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
             <Style x:Key="RoutineFrameSelect" TargetType="Frame">
@@ -67,13 +107,13 @@
             <!--Home-->
             <Style x:Key="HomeButton" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="Padding" Value="20,20,20,20" />
+                <Setter Property="Padding" Value="5,5,5,5" />
             </Style>
 
             <!--WashDayEditor-->
             <Style x:Key="AddDescriptionButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="Margin" Value="0,-20,0,0" />
+                <Setter Property="Margin" Value="0,-10,0,0" />
             </Style>
 
             <Style x:Key="DescriptiontSection" TargetType="Editor">
@@ -81,19 +121,35 @@
             </Style>
 
             <Style x:Key="PeriodPicker" TargetType="Picker">
-                <Setter Property="Margin" Value="0,-17,0,0" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
 
             <Style x:Key="TypeSelection" TargetType="Picker">
                 <Setter Property="Margin" Value="0,-12,0,0" />
                 <Setter Property="FontSize" Value="14" />
+                <Setter Property="WidthRequest" Value="120" />
             </Style>
 
             <Style x:Key="OpenTypeSelection" TargetType="ImageButton">
-                <Setter Property="HeightRequest" Value="10" />
-                <Setter Property="Margin" Value="0,-2,5,0" />
+                <Setter Property="HeightRequest" Value="8" />
+                <Setter Property="Margin" Value="-3,-4,5,0" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
+
+            <Style x:Key="EditorLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="EditorEntry" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="EditorDatePicker" TargetType="DatePicker">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            
+
+
 
 
 

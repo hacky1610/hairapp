@@ -6,56 +6,128 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using HairAppBl;
 using HairAppBl.Controller;
+using Rg.Plugins.Popup.Extensions;
+using HairApp.Controls;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace HairApp
 {
     public partial class MainPage : ContentPage
     {
         private AlarmController mAlarmController;
-        public MainPage()
+        private CareDayList mCareDayList;
+        public event EventHandler<EventArgs> ListRefreshed;
+
+
+        public MainPage(AlarmController ac)
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
 
-            OpenWashDayOverview.Source = "edit.png";
-            OpenWashDayOverview.Clicked += OpenWashingDayOverview_Clicked;
-            ShowCalendar.Source = "calendar.png";
-            OpenStatistic.Source = "chart.png";
+            this.mAlarmController = ac;
 
-            TestPage.Clicked += TestPage_Clicked;
+            mCareDayList = new CareDayList(App.MainSession, App.BL, mAlarmController);
+            CareDayListFrame.Content = mCareDayList;
 
-            ShowCalendar.Clicked += ShowCalendar_Clicked;
+            mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
 
-            var fileDb = new FileDB(Constants.SchedulesStorageFile);
-            this.mAlarmController = new AlarmController(fileDb);
-
+            //InitAlarms
+            App.MainSession.SendInitAlarms();
         }
 
-        private void ShowCalendar_Clicked(object sender, EventArgs e)
+ 
+
+        private void OpenSettingsButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new CalendarPage(App.MainSession,App.MainSession.GetFutureDays(),App.MainSession.GetInstances()));
+            Navigation.PushAsync(new LogView(App.BL.Logger));
 
         }
+
+        private void MAddCareDayButton_Clicked(object sender, EventArgs e)
+        {
+            mCareDayList.AddWashDay();
+        }
+
+        private void OpenPageIfNeeded()
+        {
+            if(!App.MainSession.Initialized)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var page = new IntroPage(App.MainSession.GetAllWashingDays(), App.BL, mAlarmController);
+                    page.PageClosed += IntroPage_Closed;
+                    Navigation.PushAsync(page, true);
+                });
+               return;
+            }
+
+            if (!String.IsNullOrEmpty(App.washdayToShow))
+            {
+                var day = App.MainSession.GetWashingDayById(App.washdayToShow);
+                var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), mAlarmController);
+                var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
+                App.washdayToShow = String.Empty;
+
+                Device.BeginInvokeOnMainThread(() => {
+                    Navigation.PushAsync(new WashDayInstance(day, wdInstance), true);
+                });
+                ;
+            }
+
+            Device.BeginInvokeOnMainThread(() => {
+                //var helpController = new Controller.HelpController();
+                //helpController.Add("Foo", "Des", "Tooltip", mAddCareDayButton);
+                //var diaog = new HelpPage(helpController);
+                // Open a PopupPage
+                //Navigation.PushPopupAsync(diaog);
+            });
+        }
+
+        private void IntroPage_Closed(object sender, EventArgs e)
+        {
+            mInfo.IsVisible = true;
+            var animation = new Animation(v => mAddCareDayButton.Scale = v, 1, 1.2);
+            animation.Commit(mAddCareDayButton, "SimpleAnimation", 16, 1000, Easing.Linear, (v, c) => mAddCareDayButton.Scale = 1, () => true);
+
+            
+            var aTimer = new System.Timers.Timer(10000);
+            aTimer.Elapsed += (s,ev)=>
+            {
+                Device.BeginInvokeOnMainThread(() => {
+                    var animation1 = new Animation(v => mInfo.Scale = v, 1, 0.0);
+                    animation1.Commit(this, "SimpleAnimation1", 16, 1000, Easing.Linear, (v, c) => { mInfo.Scale = 0; mInfo.IsVisible = false; },() => false);
+                    AnimationExtensions.AbortAnimation(mAddCareDayButton, "SimpleAnimation");
+                });
+            };
+            aTimer.Enabled = true;
+        }
+
+  
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            OpenCareDay.IsVisible = false;
+            OpenPageIfNeeded();
+
+         
+         
+
+            mCareDayList.RefreshList();
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())
+            {
                 TimeToNextCareDay.Text = "No Care day configured";
-            else if (timeToNexDay.Days.Count == 1)
+                ValsImage.Source = "nocareday.jpg";
+
+            }
+            else 
             {
                 if (timeToNexDay.Time2Wait == 0)
                 {
-                    TimeToNextCareDay.Text = $"Today is care day: {timeToNexDay.Days[0].Name}";
-                    OpenCareDay.IsVisible = true;
-                    OpenCareDay.Text = $"Lets do {timeToNexDay.Days[0].Name}";
-                    OpenCareDay.Command = new Command<string>(OpenCareDayCommand);
-                    OpenCareDay.CommandParameter = timeToNexDay.Days[0].ID;
+                    TimeToNextCareDay.Text = $"Today is care day";
                     ValsImage.Source = "caredaytoday.jpg";
-
                 }
                 else
                 {
@@ -63,48 +135,16 @@ namespace HairApp
                     TimeToNextCareDay.Text = $"Next care day {timeToNexDay.Days[0].Name} is in {timeToNexDay.Time2Wait} days";
                 }
             }
-            else
-            {
-                if (timeToNexDay.Time2Wait == 0)
-                {
-                    TimeToNextCareDay.Text = "Today is care day";
-                }
-                else
-                {
-                    TimeToNextCareDay.Text = $"Next care day is in {timeToNexDay.Time2Wait} days";
-                }
-            }
+  
         }
-
-        private void OpenCareDayCommand(string id)
-        {
-            var day = App.MainSession.GetWashingDayById(id);
-            var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(),this.mAlarmController);
-            var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
-
-            var instancePage = new WashDayInstance(day,wdInstance);
-            instancePage.OkClicked += InstancePage_OkClicked;
-
-            Navigation.PushAsync(instancePage);
-        }
-
 
         private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void TestPage_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new TestPage());
-        }
 
-        private void OpenWashingDayOverview_Clicked(object sender, EventArgs e)
-        {
-            App.BL.Logger.Call("ChangeScreen_Clicked");
 
-            Navigation.PushAsync(new WashDayOverview(App.MainSession.GetAllWashingDays(), App.BL,mAlarmController));
-        }
 
     }
 }

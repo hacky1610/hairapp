@@ -22,7 +22,20 @@ namespace HairApp
             InitializeComponent();
             LogContent.Text = logger.ReadLog();
             ClearButton.Clicked += ClearButton_Clicked;
+            Init.Clicked += Init_Clicked;
+            InitAlarms.Clicked += InitAlarms_Clicked;
             mLogger = logger;
+        }
+
+        private void InitAlarms_Clicked(object sender, EventArgs e)
+        {
+            App.MainSession.SendInitAlarms();
+        }
+
+        private void Init_Clicked(object sender, EventArgs e)
+        {
+            App.MainSession.Init();
+
         }
 
         private void ClearButton_Clicked(object sender, EventArgs e)

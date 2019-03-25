@@ -19,19 +19,21 @@ namespace HairApp
 	public partial class WashDayEditor : ContentPage
 	{
         private WashingDayEditorController mWashingDayEditorController;
-        private List<WashingDayEditorCell> mRoutineListControls = new List<WashingDayEditorCell>();
+        private MainSessionController mMainSessionController;
+        private List<RoutineDefinitionCell> mRoutineListControls = new List<RoutineDefinitionCell>();
         private Boolean mCreate;
         private HairAppBl.Interfaces.IHairBl mHairbl;
 
-        //Events
-        public event EventHandler<WashDayEditorEventArgs> OkClicked;
 
-        public WashDayEditor (WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
+        public WashDayEditor (MainSessionController mainSession, WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 	    {
 	        InitializeComponent ();
+
+
             mHairbl = hairbl;
-            this.mCreate = create;
-            this.mWashingDayEditorController = wdController;
+            mCreate = create;
+            mWashingDayEditorController = wdController;
+            mMainSessionController = mainSession;
 
             RefreshList();
 
@@ -74,21 +76,14 @@ namespace HairApp
 
             SelectScheduleTypeView(model.Scheduled.Type);
 
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Dayly)
-                TypeSelection.SelectedIndex = 0;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Weekly)
-                TypeSelection.SelectedIndex = 1;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Monthly)
-                TypeSelection.SelectedIndex = 2;
-            if (model.Scheduled.Type == ScheduleDefinition.ScheduleType.Yearly)
-                TypeSelection.SelectedIndex = 3;
+            var i = from s in typeList where s.Type == model.Scheduled.Type select s;
+            TypeSelection.SelectedItem = i.First();
 
             TypeSelection.SelectedIndexChanged += TypeSelection_SelectedIndexChanged;
 
 
-            this.StartDatePicker.MinimumDate = DateTime.Now;
             var schedule = model.Scheduled;
-
+            this.StartDatePicker.MinimumDate = schedule.StartDate;
             this.StartDatePicker.Date = schedule.StartDate;
 
             //Dayly
@@ -109,11 +104,26 @@ namespace HairApp
 
             mEntryWeeklyPeriod.SelectedIndex = schedule.WeeklyPeriod.Period - 1;
 
+            //Monthly
+            mEntryMonthPeriod_1.Text = schedule.MonthlyPeriod.Period.ToString();
+            var occurenceList = ScheduleController.CreateMonthOccurenceTypeList();
+            mPickerOcurenceInMonth.ItemsSource = occurenceList;
+            mPickerOcurenceInMonth.ItemDisplayBinding = new Binding("Name");
+
+            var occurenceItem = from s in occurenceList where s.Type == schedule.MonthlyPeriod.Type select s;
+            mPickerOcurenceInMonth.SelectedItem = occurenceItem.First();
+
+            var weekDayList = ScheduleController.CreateDayOfWeekList();
+            mPickerDayInWeek.ItemsSource = weekDayList;
+            mPickerDayInWeek.ItemDisplayBinding = new Binding("Name");
+
+            var weekDayItem = from s in weekDayList where s.Type == schedule.MonthlyPeriod.WeekDay select s;
+            mPickerDayInWeek.SelectedItem = weekDayItem.First();
         }
 
         private void TypeSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedItem = (ScheduleTypeObject)((Picker)sender).SelectedItem;
+            var selectedItem = (TypeNameObject<ScheduleDefinition.ScheduleType>)((Picker)sender).SelectedItem;
             SelectScheduleTypeView(selectedItem.Type);
         }
 
@@ -160,6 +170,13 @@ namespace HairApp
                 return false;
             }
 
+            if (!mWashingDayEditorController.GetRoutineDefinitions().Any())
+            {
+                DisplayAlert("Something is missing ", "You forgot to add a routine", "OK");
+                return false;
+            }
+
+
             //Title
             mWashingDayEditorController.GetModel().Name = WashDayNameEntry.Text;
 
@@ -169,7 +186,7 @@ namespace HairApp
             //Schedule
             var schedule = mWashingDayEditorController.GetModel().Scheduled;
             schedule.StartDate = StartDatePicker.Date;
-            schedule.Type = ((ScheduleTypeObject)TypeSelection.SelectedItem).Type;
+            schedule.Type = ((TypeNameObject<ScheduleType>)TypeSelection.SelectedItem).Type;
 
             //Dayly
             schedule.DaylyPeriod.Period = Convert.ToInt32(mEntryDaylyPeriod.Text);
@@ -177,6 +194,11 @@ namespace HairApp
             //Weekly
             schedule.WeeklyPeriod.WeekDays = getWeekDays();
             schedule.WeeklyPeriod.Period = Convert.ToInt32(mEntryWeeklyPeriod.SelectedItem);
+
+            //Monthly
+            schedule.MonthlyPeriod.Period = Convert.ToInt32(mEntryMonthPeriod_1.Text);
+            schedule.MonthlyPeriod.Type = ((TypeNameObject<Monthly.ScheduleType>)mPickerOcurenceInMonth.SelectedItem).Type;
+            schedule.MonthlyPeriod.WeekDay = ((TypeNameObject<DayOfWeek>)mPickerDayInWeek.SelectedItem).Type;
 
             return true;
         }
@@ -232,17 +254,22 @@ namespace HairApp
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             Navigation.PopAsync();
-
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)
         {
             if (!SaveFields())
                 return;
+
+            this.IsEnabled = false;
+            if (mCreate)
+                mMainSessionController.GetAllWashingDays().Add(mWashingDayEditorController.GetModel());
+
+            mMainSessionController.SendDefinitionsEdited();
             mWashingDayEditorController.SaveInstances(mWashingDayEditorController.GetModel().ID, mWashingDayEditorController.GetModel().Name);
             Navigation.PopAsync();
-            OkClicked?.Invoke(this, new WashDayEditorEventArgs(mWashingDayEditorController.GetModel(), mCreate));
         }
 
         private void AddRoutine_Clicked(object sender, EventArgs e)
@@ -265,7 +292,7 @@ namespace HairApp
             this.mRoutineListControls.Clear();
             foreach (var r in mWashingDayEditorController.GetRoutineDefinitions())
             {
-                var c = new Controls.WashingDayEditorCell(r,App.BL);
+                var c = new Controls.RoutineDefinitionCell(r,App.BL);
                 c.Removed += Routine_Removed;
                 c.MovedDown += Routine_MovedDown;
                 c.MovedUp += Routine_MovedUp;
@@ -274,7 +301,7 @@ namespace HairApp
             }
         }
 
-        private WashingDayEditorCell GetRoutineControl(RoutineDefinition routine)
+        private RoutineDefinitionCell GetRoutineControl(RoutineDefinition routine)
         {
             foreach(var c in mRoutineListControls)
             {
@@ -286,7 +313,7 @@ namespace HairApp
 
         private void Routine_MovedDown(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.MoveDown(item.Routine);
             RefreshList();
             GetRoutineControl(item.Routine).Select();
@@ -294,7 +321,7 @@ namespace HairApp
 
         private void Routine_MovedUp(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.MoveUp(item.Routine);
             RefreshList();
             GetRoutineControl(item.Routine).Select();
@@ -303,7 +330,7 @@ namespace HairApp
 
         private void Routine_Removed(object sender, EventArgs e)
         {
-            var item = ((WashingDayEditorCell)sender);
+            var item = ((RoutineDefinitionCell)sender);
             this.mWashingDayEditorController.RemoveRoutine(item.Routine);
             RefreshList();
         }

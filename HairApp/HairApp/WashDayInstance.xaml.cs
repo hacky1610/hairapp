@@ -21,8 +21,6 @@ namespace HairApp
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
         private WashingDayInstance mInstance;
         private WashingDayDefinition mDefinition;
-        public event EventHandler<WashDayInstanceEventArgs> OkClicked;
-        private bool mCreate;
 
         public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
 		{
@@ -36,6 +34,9 @@ namespace HairApp
 
         private void InitFields()
         {
+            //Title
+            mLabelTitle.Text = $"Do your care day: {mDefinition.Name}";
+
             //Description
             DescriptionFrame.IsVisible = false;
             if (!string.IsNullOrEmpty(mDefinition.Description))
@@ -62,12 +63,10 @@ namespace HairApp
             CommentFrame.IsVisible = false;
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
-
             //Take pic
-            var takePicButton = new ImageButton { Source = "camera.png", HeightRequest = 70 };
             takePicButton.Clicked += TakePicture_Clicked;
-            PictureList.Children.Add(takePicButton);
 
+            PictureListContainer.IsVisible = mInstance.Pictures.Any();
             foreach (var pic in mInstance.Pictures)
                 AddPicToAlbum(ImageSource.FromFile(pic.Path));
         }
@@ -75,19 +74,28 @@ namespace HairApp
 
         private async void TakePicture_Clicked(object sender, EventArgs e)
         {
-            var c = new Controller.CameraController();
-            var file = await c.TakePhoto();
-            mInstance.Pictures.Add(new Picture(file.Path));
+            var choose = new ChoosePictureDialog(null);
+            choose.PictureChoosen += Choose_PictureChoosen; ;
+            await Navigation.PushPopupAsync(choose);
+
+          
+        }
+
+        private void Choose_PictureChoosen(object sender, ChoosePictureDialog.PictureChoosenEventArgs e)
+        {
+            mInstance.Pictures.Add(new Picture(e.File.Path));
+            PictureListContainer.IsVisible = true;
             AddPicToAlbum(ImageSource.FromStream(() =>
             {
-                var stream = file.GetStream();
-                file.Dispose();
+                var stream = e.File.GetStream();
+                e.File.Dispose();
                 return stream;
             }));
         }
 
         private void AddPicToAlbum(ImageSource source)
         {
+
             var picView = new Image { HeightRequest = 100 , Margin = new Thickness(10,10,10,10)};
 
 
@@ -107,8 +115,9 @@ namespace HairApp
             CommentFrame.IsVisible = true;
         }
 
-        private void OKButton_Clicked(object sender, EventArgs e)
+        private  void OKButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             if (!mInstance.Saved)
             {
                 mDefinition.Instances.Add(mInstance);
@@ -118,11 +127,14 @@ namespace HairApp
             mInstance.Comment = Comment.Text;
             mInstance.NeededTime = UsedTime.Time;
 
-            Navigation.PopAsync();
+            App.MainSession.SendInstanceEdited();
+
+            App.Current.MainPage.Navigation.PopAsync();
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
+            this.IsEnabled = false;
             Navigation.PopAsync();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using HairAppBl.Interfaces;
 using HairAppBl.Models;
@@ -34,7 +35,7 @@ namespace HairAppBl.Controller
             {               
                 return  this.database.Load<Dictionary<string, ScheduleSqlDefinition>>();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return new Dictionary<string, ScheduleSqlDefinition>();
             }
@@ -54,8 +55,35 @@ namespace HairAppBl.Controller
                     wdId.Add(schedule);
                 }
             }
-            return wdId;
-           
+            return wdId;    
+        }
+
+        public void DeleteWashDay(string id)
+        {
+            var washDays = Load();
+            if (washDays.ContainsKey(id))
+                washDays.Remove(id);
+            this.database.Save(washDays);
+
+
+        }
+
+        public static long GetAlarmTime()
+        {
+            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
+            if (s < DateTime.Now)
+                s = s.AddDays(1);
+            //s = DateTime.Now.AddMinutes(1);
+
+
+            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
+            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
+            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
+        }
+
+        public static long Get24Houres()
+        {
+            return 60001 * 60 * 24;
         }
     }
 }

@@ -11,30 +11,27 @@ using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
 using XamForms.Controls;
-using static HairApp.Controls.WashingDayDefinitionCalendarCell;
+using static HairApp.Controls.WashingDayDefinitionControl;
 
 namespace HairApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CalendarPage : ContentPage
 	{
-        Dictionary<DateTime, List<WashingDayDefinition>> mFutureDays;
-        Dictionary<DateTime, List<WashingDayInstance>> mInstances;
         MainSessionController mMainSessionController;
+        AlarmController mAlarmController;
+        DateTime mLastDate;
+        Calendar mCalendar;
 
-        public CalendarPage(MainSessionController controller, Dictionary<DateTime, List<WashingDayDefinition>> futureDays, Dictionary<DateTime, List<WashingDayInstance>> instances)
+        public CalendarPage(MainSessionController controller, AlarmController ac)
 		{
 			InitializeComponent();
 
-            var navi = new Controls.NavigationControl("Home", "");
-            NavigationContainer.Content = navi.View;
-            navi.LeftButton.Clicked += LeftButton_Clicked; ;
-
-            mFutureDays = futureDays;
-            mInstances = instances;
             mMainSessionController = controller;
 
-            var cal = new Calendar
+            mAlarmController = ac;
+
+            mCalendar = new Calendar
             {
                 BorderColor = Color.White,
                 BorderWidth = 3,
@@ -42,23 +39,64 @@ namespace HairApp
                 StartDay = DayOfWeek.Monday,
                 StartDate = DateTime.Now,
                 SelectedBorderColor = Color.Black,
-                SelectedBackgroundColor = Color.Gray
+                SelectedBackgroundColor = Color.Gray,
+                //DatesBackgroundColor = Color.Yellow,
+                //WeekdaysBackgroundColor = Color.Green
 
             };
-            cal.SpecialDates.Clear();
+            mCalendar.SpecialDates.Clear();
+            mCalendar.SelectedDate = DateTime.Now;
+            RefreshList(ScheduleController.GetToday());
+            mLastDate = mCalendar.StartDate.AddDays(40);
 
-            FillFutureDays(cal);
-            FillInstances(cal);
+            FillFutureDays(mCalendar);
+            FillInstances(mCalendar);
 
-            cal.DateClicked += Cal_DateClicked;
-            CalendarFrame.Content = cal;
+            mCalendar.RightArrowClicked += NextMonth;
+
+            mCalendar.DateClicked += Cal_DateClicked;
+            CalendarFrame.Content = mCalendar;
+
+            mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
+            mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
+        }
+
+        private void MMainSessionController_InstanceEdited(object sender, EventArgs e)
+        {
+            Redraw();
+        }
+
+        private void MMainSessionController_DefinitionsEdited(object sender, EventArgs e)
+        {
+            Redraw();
+        }
+
+        private void Redraw()
+        {
+            mCalendar.SpecialDates.Clear();
+            FillFutureDays(mCalendar);
+            FillInstances(mCalendar);
+            RefreshList(mCalendar.SelectedDate.Value);
+            mCalendar.ForceRedraw();
+        }
+
+
+        private void NextMonth(object sender, DateTimeEventArgs e)
+        {
+            mLastDate = mLastDate.AddDays(40);
+            FillFutureDays(mCalendar);
         }
 
         private void FillFutureDays(Calendar cal)
         {
-            foreach (var day in mFutureDays)
+            var instances = mMainSessionController.GetInstancesByDate();
+            foreach (var day in mMainSessionController.GetFutureDays())
             {
-                if (mInstances.ContainsKey(day.Key))
+                if (day.Key > mLastDate)
+                    continue;
+                if (instances.ContainsKey(day.Key))
+                    continue;
+                if (day.Key < ScheduleController.GetToday())
                     continue;
 
                 var pattern = new BackgroundPattern(1);
@@ -82,7 +120,7 @@ namespace HairApp
 
         private void FillInstances(Calendar cal)
         {
-            foreach (var day in mInstances)
+            foreach (var day in mMainSessionController.GetInstancesByDate())
             {
 
                 var specialDate = new SpecialDate(day.Key)
@@ -111,31 +149,40 @@ namespace HairApp
             DoneWashDaysContainer.IsVisible = false;
 
             this.PlanedWashDays.Children.Clear();
-            if (mFutureDays.ContainsKey(date))
+            var futureDays = mMainSessionController.GetFutureDays();
+            var instances = mMainSessionController.GetInstancesByDate();
+            if (futureDays.ContainsKey(date))
             {
                 PlanedWashDaysContainer.IsVisible = true;
-                foreach (var d in mFutureDays[date])
+                foreach (var d in futureDays[date])
                 {
-                    var wdController = new HairAppBl.Controller.WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), null);
-                    var c = new WashingDayDefinitionCalendarCell(wdController, App.BL);
+                    var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
+                    var c = new WashingDayDefinitionControl(wdController, App.BL);
                     c.Edited += WashingDayEdited;
                     this.PlanedWashDays.Children.Add(c.View);
                 }
             }
 
             this.DoneWashDays.Children.Clear();
-            if (mInstances.ContainsKey(date))
+            if (instances.ContainsKey(date))
             {
                 PlanedWashDaysContainer.IsVisible = false;
                 DoneWashDaysContainer.IsVisible = true;
-                foreach (var d in mInstances[date])
+                foreach (var d in instances[date])
                 {
                     var def = mMainSessionController.GetWashingDayById(d.WashDayID);
                     var c = new WashingDayInstanceCalendarCell(d,def, App.BL);
                     c.Openclicked += C_Openclicked;
+                    c.ImageClicked += C_ImageClicked;
                     this.DoneWashDays.Children.Add(c.View);
                 }
             }
+        }
+
+        private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)
+        {
+            Navigation.PushAsync(new PicturePage(e.Source));
+
         }
 
         private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)
@@ -146,7 +193,7 @@ namespace HairApp
 
         private void WashingDayEdited(object sender, WashingDayCellEventArgs e)
         {
-            Navigation.PushAsync(new WashDayEditor(e.Controller, false, App.BL));
+            Navigation.PushAsync(new WashDayEditor(mMainSessionController, e.Controller, false, App.BL));
 
         }
     }
