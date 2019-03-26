@@ -32,9 +32,6 @@ namespace HairApp.Droid
             XamForms.Controls.Droid.Calendar.Init();
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
 
-            MainSessionController.InitAlarms += App_InitAlarms;
-
-
             myApp = new App(Intent.GetStringExtra("washday_id"));
             LoadApplication(myApp);
 
@@ -72,7 +69,7 @@ namespace HairApp.Droid
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            alarmManager.SetRepeating(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), AlarmController.Get24Houres() , pendingIntent);
+            alarmManager.Set(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), pendingIntent);
             //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
 
         }

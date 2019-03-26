@@ -8,7 +8,6 @@ namespace HairAppBl.Models
     {
         public string User { get; set; }
         public Boolean Initialized { get; set; }
-        public Boolean AlarmInitialized { get; set; }
 
         public List<RoutineDefinition> AllRoutines { get; set; }
         public List<HairLength> HairLengths { get; set; }

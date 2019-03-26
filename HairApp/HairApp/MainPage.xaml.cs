@@ -33,8 +33,17 @@ namespace HairApp
 
             mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
 
+            var openLog = new TapGestureRecognizer();
+            openLog.NumberOfTapsRequired = 2;
+            openLog.Tapped+= (s, e) => {
+                Navigation.PushAsync(new LogView(App.BL.Logger));
+            };
+            ValsImage.GestureRecognizers.Add(openLog);
+
+
             //InitAlarms
-            App.MainSession.SendInitAlarms();
+            //App.MainSession.SendInitAlarms();
+
         }
 
  

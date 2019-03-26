@@ -26,9 +26,13 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
+            WriteLog("Alarm recieved");
 
-           CreateNotificationChannel(context);
-            ButtonOnClick(context);
+            CreateNotificationChannel(context);
+            Notify(context);
+
+            new Alarm().Init();
+
         }
 
         private static void WriteLog(string value)
@@ -61,7 +65,7 @@ namespace HairApp.Droid
             notificationManager.CreateNotificationChannel(channel);
         }
 
-        void  ButtonOnClick(Context context)
+        void Notify(Context context)
         {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);

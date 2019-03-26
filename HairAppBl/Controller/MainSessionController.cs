@@ -9,7 +9,6 @@ namespace HairAppBl.Controller
     public class MainSessionController: Interfaces.ISession
     {
         readonly IDictionary<string, object> mProperties;
-        public static event EventHandler<EventArgs> InitAlarms;
         MainSession MainSession = null;
         public event EventHandler<EventArgs> DefinitionsEdited;
         public event EventHandler<EventArgs> InstanceEdited;
@@ -25,15 +24,6 @@ namespace HairAppBl.Controller
             {
                 MainSession.Initialized = value;
             }
-        }
-
-        public  void SendInitAlarms()
-        {
-            //if (!MainSession.AlarmInitialized)
-            //{
-                InitAlarms(null, new EventArgs());
-                MainSession.AlarmInitialized = true;
-            //}
         }
 
         public MainSessionController(IDictionary<string, object> props)
