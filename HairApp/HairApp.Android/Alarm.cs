@@ -12,7 +12,7 @@ using HairAppBl.Controller;
 
 namespace HairApp.Droid
 {
-    public class Alarm : HairApp.Interfaces.IAlarm
+    public class Alarm : IAlarm
     {
         public void Init()
         {
@@ -21,7 +21,15 @@ namespace HairApp.Droid
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
             alarmManager.SetAndAllowWhileIdle(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), pendingIntent);
+        }
 
+        public void InitReminder()
+        {
+            Intent alarmIntent = new Intent(Application.Context, typeof(ReminderReceiver));
+            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
+            AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
+
+            alarmManager.SetAndAllowWhileIdle(AlarmType.RtcWakeup, AlarmController.GetReminderime(), pendingIntent);
         }
 
 

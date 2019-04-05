@@ -165,15 +165,13 @@ namespace HairApp.Controls
         private async void ShowDetailsAnimation()
         {
             mDetailsFrame.IsVisible = true;
-            mDetailsFrame.FadeTo(1, 400);
-            await mDetailsFrame.RotateXTo(360, 500);
+            await Task.WhenAll(mDetailsFrame.FadeTo(1, 400), mDetailsFrame.RotateXTo(360, 500));
 
         }
 
         private async void HideDetailsAnimation()
         {
-            mDetailsFrame.FadeTo(0, 400);
-            await mDetailsFrame.RotateXTo(0, 500);
+            await Task.WhenAll(mDetailsFrame.FadeTo(0, 400), mDetailsFrame.RotateXTo(0, 500));
             mDetailsFrame.IsVisible = false;
 
         }

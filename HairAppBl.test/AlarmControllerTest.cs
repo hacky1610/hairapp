@@ -16,7 +16,7 @@ namespace HairAppBl.Tests
             var dbMock = new DbMock();
             
             AlarmController ac = new AlarmController(dbMock);
-            var days = ac.GetWashDays();
+            var days = ac.GetTodayWashDays();
             Assert.NotNull(days);
         }
 
@@ -80,7 +80,7 @@ namespace HairAppBl.Tests
             schedule.DaylyPeriod.Period = 1;
             var day = new ScheduleSqlDefinition(schedule, "Foo", "Bar");
             ac.SaveWashDay(day);
-            var days = ac.GetWashDays();
+            var days = ac.GetTodayWashDays();
             Assert.AreEqual(1, days.Count);
         }
 

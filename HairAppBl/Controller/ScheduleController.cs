@@ -96,7 +96,7 @@ namespace HairAppBl.Controller
         public Boolean IsCareDay(DateTime currentDay)
         {
             
-            return ScheduleController.ContainsDay(GetScheduledDays(),currentDay);
+            return ContainsDay(GetScheduledDays(),currentDay);
             
         }
         

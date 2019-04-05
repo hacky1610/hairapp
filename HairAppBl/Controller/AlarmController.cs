@@ -41,7 +41,7 @@ namespace HairAppBl.Controller
             }
         }
 
-        public  List<ScheduleSqlDefinition> GetWashDays()
+        public  List<ScheduleSqlDefinition> GetTodayWashDays()
         {
             List<ScheduleSqlDefinition> wdId = new List<ScheduleSqlDefinition>();
             Dictionary<string, ScheduleSqlDefinition> list = Load();
@@ -56,6 +56,23 @@ namespace HairAppBl.Controller
                 }
             }
             return wdId;    
+        }
+
+        public List<ScheduleSqlDefinition> GetReminderWashDays()
+        {
+            List<ScheduleSqlDefinition> wdId = new List<ScheduleSqlDefinition>();
+            Dictionary<string, ScheduleSqlDefinition> list = Load();
+
+            foreach (var schedule in list.Values)
+            {
+                var s = schedule.GetDefinition();
+                var controller = new ScheduleController(s);
+                if (controller.IsCareDay(ScheduleController.GetToday().AddDays(1)))
+                {
+                    wdId.Add(schedule);
+                }
+            }
+            return wdId;
         }
 
         public void DeleteWashDay(string id)
@@ -74,6 +91,19 @@ namespace HairAppBl.Controller
             if (s < DateTime.Now)
                 s = s.AddDays(1);
             //s = DateTime.Now.AddMinutes(2);
+
+
+            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
+            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
+            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
+        }
+
+        public static long GetReminderime()
+        {
+            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 18, 0, 0);
+            if (s < DateTime.Now)
+                s = s.AddDays(1);
+            s = DateTime.Now.AddMinutes(1);
 
 
             var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);

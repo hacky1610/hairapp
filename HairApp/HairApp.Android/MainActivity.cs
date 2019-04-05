@@ -51,27 +51,11 @@ namespace HairApp.Droid
         {
                 myApp.SendException(e.Exception);
         }
-
-        private void App_InitAlarms(object sender, EventArgs e)
-        {
-            InitAlarms();
-        }
+  
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        public void InitAlarms()
-        {
-            App.BL.Logger.WriteLine("Init Alarms called");
-            Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
-
-            alarmManager.Set(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), pendingIntent);
-            //alarmManager.SetRepeating(AlarmType.ElapsedRealtime, SystemClock.ElapsedRealtime(), 60001 * 30 , pendingIntent);
-
         }
 
         public override void OnBackPressed()

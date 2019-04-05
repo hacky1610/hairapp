@@ -19,14 +19,50 @@ using Android.Graphics;
 namespace HairApp.Droid
 {
     [BroadcastReceiver]
-    public class ReminderReceiver : BroadcastReceiver
+    public class AlarmReceiver : BroadcastReceiver
     {
+        static readonly string CHANNEL_ID = "hairapp_notification";
+        internal static readonly string WASHDAY_ID = "washday_id";
+
         public override void OnReceive(Context context, Intent intent)
         {
+            WriteLog("Alarm recieved");
+
+            CreateNotificationChannel(context);
             Notify(context);
 
             new Alarm().InitReminder();
 
+        }
+
+        private static void WriteLog(string value)
+        {
+            var mLogfilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
+            using (var file = File.AppendText(mLogfilePath))
+            {
+                file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
+            }
+        }
+
+        void CreateNotificationChannel(Context context)
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification
+                // channel on older versions of Android.
+                return;
+            }
+
+            var name = "Channel";
+            var description = "Foo";
+            var channel = new NotificationChannel(CHANNEL_ID, name, NotificationImportance.Default)
+            {
+                Description = description
+            };
+
+            var notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
+            notificationManager.CreateNotificationChannel(channel);
         }
 
         void Notify(Context context)
@@ -37,7 +73,7 @@ namespace HairApp.Droid
 
             foreach (var wd in washdays)
             {
-                SendNotify(context, wd.ID, "Reminder for Hair Care", $"TOmorrow is: {wd.Name}");
+                SendNotify(context, wd.ID, "Time for Hair Care", $"Today is: {wd.Name}");
             }
         }
 
@@ -46,10 +82,15 @@ namespace HairApp.Droid
 
             try
             {
+                // Pass the current button press count value to the next activity:
+                var valuesForActivity = new Bundle();
+                valuesForActivity.PutString(WASHDAY_ID, washDayId);
 
                 // When the user clicks the notification, SecondActivity will start up.
                 var resultIntent = new Intent(context, typeof(MainActivity));
 
+                // Pass some values to SecondActivity:
+                resultIntent.PutExtras(valuesForActivity);
 
                 // Construct a back stack for cross-task navigation:
                 var stackBuilder = TaskStackBuilder.Create(context);
@@ -61,7 +102,7 @@ namespace HairApp.Droid
                 var p = PendingIntent.GetActivity(context, DateTime.Now.Millisecond, resultIntent, PendingIntentFlags.UpdateCurrent);
 
                 // Build the notification:
-                var builder = new NotificationCompat.Builder(context)
+                var builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                               .SetAutoCancel(true) // Dismiss the notification from the notification area when the user clicks on it
                               .SetContentIntent(p) // Start up this activity when the user clicks the intent.
                               .SetContentTitle(title) // Set the title
@@ -78,6 +119,7 @@ namespace HairApp.Droid
             }
             catch (Exception e)
             {
+                WriteLog(e.StackTrace);
             }
           
         }
