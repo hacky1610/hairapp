@@ -30,10 +30,10 @@
         VerticalOptions="Center" 
         HorizontalOptions="Fill" 
         >
-            <Label Text="Enter your hair length" Style="{StaticResource Heading}"/>
+            <Label x:Name="mEnterHairLengthLabel" Style="{StaticResource Heading}"/>
             <ContentView x:Name="hairLengthContainer"></ContentView>
             <StackLayout Orientation="Horizontal">
-                <Button x:Name="CancelButton" Text="Cancel"></Button>
+                <Button x:Name="CancelButton"></Button>
                 <Button x:Name="OKButton" Text="OK"></Button>
             </StackLayout>
         </StackLayout>

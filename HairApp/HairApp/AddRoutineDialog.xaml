@@ -29,12 +29,12 @@
         HorizontalOptions="Fill" 
         >
             <StackLayout Orientation="Horizontal">
-                <Label Text="Choose a routine" Style="{StaticResource Heading}" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="mChooseRoutineLabel" Style="{StaticResource Heading}" HorizontalOptions="CenterAndExpand"/>
                 <ImageButton x:Name="openSettingsButton" Source="settings.png" BackgroundColor="Transparent" HeightRequest="23" HorizontalOptions="End"></ImageButton>
             </StackLayout>
             <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
             </StackLayout>
-            <Button x:Name="AddButton" Text="Add"></Button>
+            <Button x:Name="AddButton"></Button>
         </StackLayout>
     </Frame>
  

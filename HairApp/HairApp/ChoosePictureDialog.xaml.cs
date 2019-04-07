@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
+using HairApp.Resources;
 
 namespace HairApp
 {
@@ -28,6 +22,10 @@ namespace HairApp
             SelectPicContainer.ScaleTo(1, 500);
             TakePicContainer.Scale = 0;
             TakePicContainer.ScaleTo(1, 500);
+
+            //Resources
+            mTakeNewPicLabel.Text = AppResources.TakePic;
+            mSelectFromAlbumLabel.Text = AppResources.SelectFromAlbum;
         }
 
         private async void SelectPictureButton_Clicked(object sender, EventArgs e)

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 
 using Xamarin.Forms;
@@ -16,7 +13,7 @@ using HairApp.Resources;
 
 namespace HairApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WashDayEditor : ContentPage
 	{
         private WashingDayEditorController mWashingDayEditorController;
@@ -46,6 +43,26 @@ namespace HairApp
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
 	    
 	        InitFields();
+
+            //Resources
+            mDefineYourCareDayLabel.Text = AppResources.DefineYourCareDay;
+            AddRoutine.Text = AppResources.AddRoutine;
+            mScheduleLabel.Text = AppResources.Schedule;
+            mWeekSelectionEveryLabel.Text = AppResources.Every;
+            mWeekSelectionEveryWeek.Text = AppResources.Weeks;
+            mDaysSelectionEveryLabel.Text = AppResources.Every;
+            mDaysSelectionDaysLabel.Text = AppResources.Days;
+            mStartDateLabel.Text = AppResources.StartDate;
+            mRoutinesLabel.Text = AppResources.Routines;
+            AddDescription.Text = AppResources.AddDescription;
+
+            mCheckBoxMonday.DefaultText = AppResources.Monday;
+            mCheckBoxTuesday.DefaultText = AppResources.Tuesdays;
+            mCheckBoxWednesday.DefaultText = AppResources.Wednesday;
+            mCheckBoxThursday.DefaultText = AppResources.Thursday;
+            mCheckBoxFriday.DefaultText = AppResources.Friday;
+            mCheckBoxSaturday.DefaultText = AppResources.Saturday;
+            mCheckBoxSunday.DefaultText = AppResources.Sunday;
         }
 	
 	    private void InitFields()

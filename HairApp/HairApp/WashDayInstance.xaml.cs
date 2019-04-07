@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HairApp.Controls;
-using HairAppBl.Controller;
 using HairAppBl.Models;
-using Plugin.Media.Abstractions;
-using Plugin.Media;
+using HairApp.Resources;
 
 namespace HairApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WashDayInstance : ContentPage
 	{
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
@@ -58,9 +54,9 @@ namespace HairApp
             UsedTime.Time = mInstance.NeededTime;
 
             //Comment
-            AddComment.Clicked += AddComment_Clicked;
-            Comment.Text = mInstance.Comment;
-            CommentFrame.IsVisible = false;
+            mAddCommentButton.Clicked += AddComment_Clicked;
+            mCommentEntry.Text = mInstance.Comment;
+            mCommentFrame.IsVisible = false;
             if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
             //Take pic
@@ -69,6 +65,10 @@ namespace HairApp
             PictureListContainer.IsVisible = mInstance.Pictures.Any();
             foreach (var pic in mInstance.Pictures)
                 AddPicToAlbum(ImageSource.FromFile(pic.Path));
+
+            //Resources
+            mTakePicLabel.Text = AppResources.TakePic;
+            mAddCommentButton.Text = AppResources.AddComment;
         }
 
 
@@ -111,8 +111,8 @@ namespace HairApp
 
         private void ShowComment()
         {
-            AddComment.IsVisible = false;
-            CommentFrame.IsVisible = true;
+            mAddCommentButton.IsVisible = false;
+            mCommentFrame.IsVisible = true;
         }
 
         private  void OKButton_Clicked(object sender, EventArgs e)
@@ -124,7 +124,7 @@ namespace HairApp
                 mInstance.Saved = true;
             }
 
-            mInstance.Comment = Comment.Text;
+            mInstance.Comment = mCommentEntry.Text;
             mInstance.NeededTime = UsedTime.Time;
 
             App.MainSession.SendInstanceEdited();

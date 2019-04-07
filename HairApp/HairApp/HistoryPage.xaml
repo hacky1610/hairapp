@@ -12,7 +12,7 @@
                 <StackLayout>
  
                     <StackLayout x:Name="DoneWashDaysContainer">
-                        <Label Text="Finished Care Days" Style="{StaticResource Title}"></Label>
+                        <Label x:Name="mFinishedCareDaysLabel"  Style="{StaticResource Title}"></Label>
                         <StackLayout x:Name="DoneWashDays">
                         </StackLayout>
                     </StackLayout>

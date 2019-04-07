@@ -1,9 +1,4 @@
-﻿using Forms9Patch;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HairApp.Models
+﻿namespace HairApp.Models
 {
     public class HelpModel
     {

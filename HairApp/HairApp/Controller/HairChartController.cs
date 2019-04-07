@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using HairApp.Models;
 using HairAppBl.Models;
 using OxyPlot;

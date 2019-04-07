@@ -6,9 +6,9 @@
              NavigationPage.HasNavigationBar="false"
              BackgroundColor="Transparent">
         <StackLayout Style="{StaticResource PageContent}">
-                    <Label Text="Hairlength statistic" Style="{StaticResource Title}"></Label>
+                    <Label x:Name="mHairLengthStatisticLabel" Style="{StaticResource Title}"></Label>
                     <ContentView x:Name="ChartContainer" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
-                    <Button Text="Add hair length" x:Name="AddHairLengthButton"></Button>
+                    <Button x:Name="mAddHairLengthButton"></Button>
          </StackLayout>
    
 </ContentPage>

@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rg.Plugins.Popup.Extensions;
-
+using HairApp.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
-using HairAppBl.Models;
 using XamForms.Controls;
 using static HairApp.Controls.WashingDayDefinitionControl;
 
 namespace HairApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CalendarPage : ContentPage
 	{
         MainSessionController mMainSessionController;
@@ -28,9 +23,21 @@ namespace HairApp
 			InitializeComponent();
 
             mMainSessionController = controller;
-
             mAlarmController = ac;
 
+            //Calendar
+            InitCalendar();
+
+            //Resources
+            mPlanedCareDaysLabel.Text = AppResources.PlanedCareDays;
+            mFinshedCareDaysLabel.Text = AppResources.FinishedCareDays;
+
+            mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
+            mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
+        }
+
+        private void InitCalendar()
+        {
             mCalendar = new Calendar
             {
                 BorderColor = Color.White,
@@ -40,8 +47,6 @@ namespace HairApp
                 StartDate = DateTime.Now,
                 SelectedBorderColor = Color.Black,
                 SelectedBackgroundColor = Color.Gray,
-                //DatesBackgroundColor = Color.Yellow,
-                //WeekdaysBackgroundColor = Color.Green
 
             };
             mCalendar.SpecialDates.Clear();
@@ -56,9 +61,6 @@ namespace HairApp
 
             mCalendar.DateClicked += Cal_DateClicked;
             CalendarFrame.Content = mCalendar;
-
-            mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
-            mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
         }
 
         private void MMainSessionController_InstanceEdited(object sender, EventArgs e)

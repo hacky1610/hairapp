@@ -1,7 +1,6 @@
 ﻿using OxyPlot;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HairApp.Models
 {

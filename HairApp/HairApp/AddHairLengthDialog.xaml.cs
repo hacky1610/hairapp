@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
+using HairApp.Resources;
 
 namespace HairApp
 {
-	public partial class AddHairLengthDialog : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class AddHairLengthDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
         private HairAppBl.Interfaces.IHairBl mHairbl;
         HairApp.Controls.HairLengthControl mHairLengthControl;
@@ -28,6 +21,11 @@ namespace HairApp
             mHairLengthControl.TakeOrPicPhotoClicked += Hlc_TakeOrPicPhotoClicked;
 
             OKButton.Clicked += OKButton_Clicked;
+
+            //Resources
+            mEnterHairLengthLabel.Text = AppResources.EnterYourHairLength;
+            CancelButton.Text = AppResources.Cancel;
+            OKButton.Text = AppResources.Save;
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)

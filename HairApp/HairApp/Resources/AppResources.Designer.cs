@@ -61,6 +61,69 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add ähnelt.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add comment ähnelt.
+        /// </summary>
+        internal static string AddComment {
+            get {
+                return ResourceManager.GetString("AddComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add description ähnelt.
+        /// </summary>
+        internal static string AddDescription {
+            get {
+                return ResourceManager.GetString("AddDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter hair length  ähnelt.
+        /// </summary>
+        internal static string AddHairLength {
+            get {
+                return ResourceManager.GetString("AddHairLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add routine ähnelt.
+        /// </summary>
+        internal static string AddRoutine {
+            get {
+                return ResourceManager.GetString("AddRoutine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Back ähnelt.
+        /// </summary>
+        internal static string BackLenght {
+            get {
+                return ResourceManager.GetString("BackLenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hair Care Calendar ähnelt.
+        /// </summary>
+        internal static string CalendarTitle {
+            get {
+                return ResourceManager.GetString("CalendarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         internal static string Cancel {
@@ -79,6 +142,141 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose a routine ähnelt.
+        /// </summary>
+        internal static string ChooseRoutine {
+            get {
+                return ResourceManager.GetString("ChooseRoutine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date ähnelt.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Days ähnelt.
+        /// </summary>
+        internal static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Define your Care Day ähnelt.
+        /// </summary>
+        internal static string DefineYourCareDay {
+            get {
+                return ResourceManager.GetString("DefineYourCareDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your hair length ähnelt.
+        /// </summary>
+        internal static string EnterYourHairLength {
+            get {
+                return ResourceManager.GetString("EnterYourHairLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Every ähnelt.
+        /// </summary>
+        internal static string Every {
+            get {
+                return ResourceManager.GetString("Every", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Finished Care Days ähnelt.
+        /// </summary>
+        internal static string FinishedCareDays {
+            get {
+                return ResourceManager.GetString("FinishedCareDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Friday ähnelt.
+        /// </summary>
+        internal static string Friday {
+            get {
+                return ResourceManager.GetString("Friday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Front ähnelt.
+        /// </summary>
+        internal static string FrontLength {
+            get {
+                return ResourceManager.GetString("FrontLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hairlength statistic ähnelt.
+        /// </summary>
+        internal static string HairlengthStatistic {
+            get {
+                return ResourceManager.GetString("HairlengthStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die in {count} days ähnelt.
+        /// </summary>
+        internal static string InDays {
+            get {
+                return ResourceManager.GetString("InDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die List of all care days ähnelt.
+        /// </summary>
+        internal static string ListOfAllCareDays {
+            get {
+                return ResourceManager.GetString("ListOfAllCareDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Monday ähnelt.
+        /// </summary>
+        internal static string Monday {
+            get {
+                return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Next care day {name} is in {days} days ähnelt.
+        /// </summary>
+        internal static string NextCareDay {
+            get {
+                return ResourceManager.GetString("NextCareDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No Care day configured ähnelt.
         /// </summary>
         internal static string NoCareDay {
@@ -88,11 +286,155 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Planed Care Days ähnelt.
+        /// </summary>
+        internal static string PlanedCareDays {
+            get {
+                return ResourceManager.GetString("PlanedCareDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove ähnelt.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Routines ähnelt.
+        /// </summary>
+        internal static string Routines {
+            get {
+                return ResourceManager.GetString("Routines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Saturday ähnelt.
+        /// </summary>
+        internal static string Saturday {
+            get {
+                return ResourceManager.GetString("Saturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Save ähnelt.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Schedule ähnelt.
+        /// </summary>
+        internal static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Select from album ähnelt.
+        /// </summary>
+        internal static string SelectFromAlbum {
+            get {
+                return ResourceManager.GetString("SelectFromAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die show more ähnelt.
+        /// </summary>
+        internal static string ShowMore {
+            get {
+                return ResourceManager.GetString("ShowMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Side ähnelt.
+        /// </summary>
+        internal static string SideLenght {
+            get {
+                return ResourceManager.GetString("SideLenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start date: ähnelt.
+        /// </summary>
+        internal static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sunday ähnelt.
+        /// </summary>
+        internal static string Sunday {
+            get {
+                return ResourceManager.GetString("Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Take new pic ähnelt.
+        /// </summary>
+        internal static string TakePic {
+            get {
+                return ResourceManager.GetString("TakePic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Thursday ähnelt.
+        /// </summary>
+        internal static string Thursday {
+            get {
+                return ResourceManager.GetString("Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die today ähnelt.
+        /// </summary>
+        internal static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tuesday ähnelt.
+        /// </summary>
+        internal static string Tuesdays {
+            get {
+                return ResourceManager.GetString("Tuesdays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wednesday ähnelt.
+        /// </summary>
+        internal static string Wednesday {
+            get {
+                return ResourceManager.GetString("Wednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Weeks ähnelt.
+        /// </summary>
+        internal static string Weeks {
+            get {
+                return ResourceManager.GetString("Weeks", resourceCulture);
             }
         }
     }

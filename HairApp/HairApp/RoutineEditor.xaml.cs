@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using Rg.Plugins.Popup.Extensions;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
-using HairAppBl.Models;
-using static HairAppBl.Models.ScheduleDefinition;
 using HairApp.Resources;
 
 namespace HairApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RoutineEditor : ContentPage
 	{
         private List<RoutineDefinitionEditCell> mRoutineListControls = new List<RoutineDefinitionEditCell>();

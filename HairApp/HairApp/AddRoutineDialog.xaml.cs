@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
+using HairApp.Resources;
 
 namespace HairApp
 {
-	public partial class AddRoutineDialog : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class AddRoutineDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
         private WashingDayEditorController mWashingDayEditorController;
         private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
         private HairAppBl.Interfaces.IHairBl mHairbl;
 
-
-
         public AddRoutineDialog()
         {
             InitializeComponent();
+
+            //Resources
+            mChooseRoutineLabel.Text = AppResources.ChooseRoutine;
+            AddButton.Text = AppResources.Add;
 
         }
 

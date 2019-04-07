@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using HairAppBl;
 using HairAppBl.Controller;
-using Rg.Plugins.Popup.Extensions;
 using HairApp.Controls;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using HairApp.Resources;
 
 namespace HairApp
@@ -19,7 +12,6 @@ namespace HairApp
         private AlarmController mAlarmController;
         private CareDayList mCareDayList;
         public event EventHandler<EventArgs> ListRefreshed;
-
 
         public MainPage(AlarmController ac)
         {
@@ -40,13 +32,9 @@ namespace HairApp
             };
             ValsImage.GestureRecognizers.Add(openLog);
 
-
-            //InitAlarms
-            //App.MainSession.SendInitAlarms();
-
+            //Resources
+            mListOfAllCareDaysLabel.Text = AppResources.ListOfAllCareDays;
         }
-
- 
 
         private void OpenSettingsButton_Clicked(object sender, EventArgs e)
         {
@@ -120,9 +108,6 @@ namespace HairApp
             base.OnAppearing();
             OpenPageIfNeeded();
 
-         
-         
-
             mCareDayList.RefreshList();
            var timeToNexDay =   App.MainSession.NextDay();
             if (!timeToNexDay.Days.Any())
@@ -141,7 +126,10 @@ namespace HairApp
                 else
                 {
                     ValsImage.Source = "caredaysoon.jpg";
-                    TimeToNextCareDay.Text = $"Next care day {timeToNexDay.Days[0].Name} is in {timeToNexDay.Time2Wait} days";
+                    var text = AppResources.NextCareDay.Replace("{name}", timeToNexDay.Days[0].Name);
+                    TimeToNextCareDay.Text = text.Replace("{days}", timeToNexDay.Time2Wait.ToString());
+
+
                 }
             }
   

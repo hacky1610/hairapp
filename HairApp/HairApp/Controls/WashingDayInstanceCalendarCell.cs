@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 using HairAppBl.Models;
-using HairAppBl.Controller;
-using static HairApp.WashDayEditor;
 
 namespace HairApp.Controls
 {
@@ -49,7 +45,7 @@ namespace HairApp.Controls
 
             var showMore = new Button
             {
-                Text = "show more",
+                Text = Resources.AppResources.ShowMore,
                 BackgroundColor = Color.Transparent,
                 TextColor = Color.Blue
             };

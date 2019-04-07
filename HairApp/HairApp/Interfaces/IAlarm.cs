@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace HairApp.Interfaces
+﻿namespace HairApp.Interfaces
 {
     public interface IAlarm
     {

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 using HairAppBl.Models;
 using HairAppBl.Controller;
-using static HairApp.WashDayEditor;
-using System.Threading.Tasks;
 using OxyPlot.Xamarin.Forms;
 using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
 using System.Linq;
-using HairApp.Models;
 using OxyPlot.Annotations;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -169,10 +166,10 @@ namespace HairApp.Controls
             {
                 Children =
                 {
-                    GetRow("Date",mDateLabel),
-                    GetRow("Back lenght",mBackLengthLabel,HairChartController.BackLineColor),
-                    GetRow("Side lenght",mSideLengthLabel,HairChartController.SideLineColor),
-                    GetRow("Front lenght",mFRontLengthLabel,HairChartController.FrontLineColor),
+                    GetRow(AppResources.Date,mDateLabel),
+                    GetRow(AppResources.BackLenght,mBackLengthLabel,HairChartController.BackLineColor),
+                    GetRow(AppResources.SideLenght,mSideLengthLabel,HairChartController.SideLineColor),
+                    GetRow(AppResources.FrontLength,mFRontLengthLabel,HairChartController.FrontLineColor),
                 }
             };
         }

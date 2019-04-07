@@ -1,11 +1,5 @@
-﻿using HairAppBl.Controller;
-using HairAppBl.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HairAppBl.Models;
 using Xamarin.Forms;
-using XLabs.Forms;
-using System.Linq;
 
 namespace HairApp.Controls
 {
@@ -13,9 +7,6 @@ namespace HairApp.Controls
     public class HairLengthImage : ImageButton
     {
         HairAppBl.Interfaces.IHairBl mHairbl;
-        Entry mBackEntry;
-        Entry mSideEntry;
-        Entry mFrontEntry;
         public HairLength HairLength { get;private set; }
 
         public HairLengthImage(HairAppBl.Interfaces.IHairBl hairbl, HairLength hl)

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
-using HairAppBl.Models;
 using HairAppBl.Controller;
-using static HairApp.WashDayEditor;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -43,7 +40,7 @@ namespace HairApp.Controls
 
             var editLabel = new Label
             {
-                Text = "edit",
+                Text = AppResources.Edit,
                 Style = (Style)hairbl.Resources["DetailsActionLabel"]
             };
 
@@ -67,7 +64,7 @@ namespace HairApp.Controls
 
             var deleteLabel = new Label
             {
-                Text = "Remove",
+                Text = AppResources.Remove,
                 Style = (Style)hairbl.Resources["DetailsActionLabel"]
             };
 

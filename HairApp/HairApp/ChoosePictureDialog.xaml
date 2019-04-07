@@ -29,13 +29,13 @@
         <Frame x:Name="SelectPicContainer" CornerRadius="10">
             <StackLayout>
                 <ImageButton x:Name="SelectPictureButton" Source="album.png" HeightRequest="100" BackgroundColor="Transparent"></ImageButton>
-                <Label>Select from album</Label>
+                <Label x:Name="mSelectFromAlbumLabel"></Label>
             </StackLayout>
         </Frame>
         <Frame x:Name="TakePicContainer" CornerRadius="10">
             <StackLayout>
                 <ImageButton x:Name="TakePictureButton" Source="camera.png" HeightRequest="100" BackgroundColor="Transparent"></ImageButton>
-                <Label>Take new pic</Label>
+                <Label x:Name="mTakeNewPicLabel"></Label>
             </StackLayout>
         </Frame>
 

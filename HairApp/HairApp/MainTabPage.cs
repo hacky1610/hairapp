@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using HairAppBl.Interfaces;
 using HairAppBl.Controller;
-using Rg.Plugins.Popup.Extensions;
-using HairApp.Controls;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace HairApp
 {

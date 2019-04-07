@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
-using HairAppBl.Models;
-using HairAppBl.Controller;
-using static HairApp.WashDayEditor;
 using System.Threading.Tasks;
 
 namespace HairApp.Controls

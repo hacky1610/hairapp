@@ -14,12 +14,12 @@
                     <Label Text="Hair Care Calendar" Style="{StaticResource Title}"></Label>
                     <ContentView x:Name="CalendarFrame"></ContentView>
                     <StackLayout x:Name="PlanedWashDaysContainer" IsVisible="False">
-                        <Label Style="{StaticResource FrameTitle}" Text="Planed Care Days"></Label>
+                        <Label Style="{StaticResource FrameTitle}" x:Name="mPlanedCareDaysLabel"></Label>
                         <StackLayout x:Name="PlanedWashDays">
                         </StackLayout>
                     </StackLayout>
                     <StackLayout x:Name="DoneWashDaysContainer" IsVisible="False">
-                        <Label Style="{StaticResource FrameTitle}" Text="Finished Care Days"></Label>
+                        <Label Style="{StaticResource FrameTitle}" x:Name="mFinshedCareDaysLabel" ></Label>
                         <StackLayout x:Name="DoneWashDays">
                         </StackLayout>
                     </StackLayout>

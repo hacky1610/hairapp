@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 using HairAppBl.Models;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -57,7 +56,7 @@ namespace HairApp.Controls
             mComment = new Editor
             {
                 HeightRequest= 120,
-                Placeholder = "Add a comment",
+                Placeholder = AppResources.AddComment,
                 Text = mRoutine.Comment
             };
             mComment.TextChanged += MComment_TextChanged;

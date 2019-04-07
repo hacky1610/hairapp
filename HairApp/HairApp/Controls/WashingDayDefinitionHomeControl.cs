@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
-using HairAppBl.Models;
 using HairAppBl.Controller;
-using static HairApp.WashDayEditor;
 using HairApp.Controller;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -52,9 +49,9 @@ namespace HairApp.Controls
             if (t == 0)
                 HeaderExtensionRight = startCareDayContainer;
 
-            var text = "today";
+            var text = AppResources.Today;
             if (t > 0)
-                text = $"in {t} days";
+                text = AppResources.InDays.Replace("{count}", t.ToString());
             HeaderExtensionLeft = new Label
             {
                 Text = text

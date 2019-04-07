@@ -1,13 +1,10 @@
 ﻿using HairAppBl.Controller;
 using HairAppBl.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
-using XLabs.Forms;
-using System.Linq;
 using Plugin.Media.Abstractions;
 using HairApp.Controller;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -31,14 +28,14 @@ namespace HairApp.Controls
             mBackEntry = GetEntry();
             mSideEntry = GetEntry();
             mFrontEntry = GetEntry();
-            var takePhoto = new Button { Text = "Take photo" };
+            var takePhoto = new Button { Text = AppResources.TakePic};
             takePhoto.Clicked += TakePhoto_Clicked;
 
             mPicture = new Image { HeightRequest = 100, IsVisible = false };
             Children.Add(mDatePicker);
-            Children.Add(GetRow(mBackEntry,"Back"));
-            Children.Add(GetRow(mSideEntry, "Side"));
-            Children.Add(GetRow(mFrontEntry, "Front"));
+            Children.Add(GetRow(mBackEntry,AppResources.BackLenght));
+            Children.Add(GetRow(mSideEntry, AppResources.SideLenght));
+            Children.Add(GetRow(mFrontEntry, AppResources.FrontLength));
             Children.Add(mPicture);
             Children.Add(takePhoto);
         }

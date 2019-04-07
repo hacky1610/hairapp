@@ -1,9 +1,5 @@
-﻿using HairAppBl.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using Xamarin.Forms;
-using XLabs.Forms;
 
 namespace HairApp.Controls
 {

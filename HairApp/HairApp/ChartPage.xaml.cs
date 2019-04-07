@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 
 using Xamarin.Forms;
@@ -10,11 +7,11 @@ using Xamarin.Forms.Xaml;
 using HairApp.Controls;
 using HairAppBl.Controller;
 using HairAppBl.Models;
-using static HairApp.Controls.WashingDayDefinitionControl;
+using HairApp.Resources;
 
 namespace HairApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChartPage : ContentPage
 	{
         MainSessionController mMainSessionController;
@@ -30,7 +27,11 @@ namespace HairApp
 
             mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
 
-            AddHairLengthButton.Clicked += AddHairLengthButton_Clicked;
+            mAddHairLengthButton.Clicked += AddHairLengthButton_Clicked;
+
+            //Resources
+            mAddHairLengthButton.Text = AppResources.AddHairLength;
+            mHairLengthStatisticLabel.Text = AppResources.HairlengthStatistic;
 
 
             RefreshList();

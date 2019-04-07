@@ -132,4 +132,115 @@
   <data name="CalendarTitle" xml:space="preserve">
     <value>Hair Care Calendar</value>
   </data>
+  <data name="PlanedCareDays" xml:space="preserve">
+    <value>Planed Care Days</value>
+  </data>
+  <data name="FinishedCareDays" xml:space="preserve">
+    <value>Finished Care Days</value>
+  </data>
+  <data name="AddHairLength" xml:space="preserve">
+    <value>Enter hair length </value>
+  </data>
+  <data name="HairlengthStatistic" xml:space="preserve">
+    <value>Hairlength statistic</value>
+  </data>
+  <data name="EnterYourHairLength" xml:space="preserve">
+    <value>Enter your hair length</value>
+  </data>
+  <data name="ChooseRoutine" xml:space="preserve">
+    <value>Choose a routine</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="SelectFromAlbum" xml:space="preserve">
+    <value>Select from album</value>
+  </data>
+  <data name="TakePic" xml:space="preserve">
+    <value>Take new pic</value>
+  </data>
+  <data name="ListOfAllCareDays" xml:space="preserve">
+    <value>List of all care days</value>
+  </data>
+  <data name="DefineYourCareDay" xml:space="preserve">
+    <value>Define your Care Day</value>
+  </data>
+  <data name="AddRoutine" xml:space="preserve">
+    <value>Add routine</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>Every</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>Weeks</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date:</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Tuesdays" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Routines" xml:space="preserve">
+    <value>Routines</value>
+  </data>
+  <data name="AddDescription" xml:space="preserve">
+    <value>Add description</value>
+  </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Add comment</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="BackLenght" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="SideLenght" xml:space="preserve">
+    <value>Side</value>
+  </data>
+  <data name="FrontLength" xml:space="preserve">
+    <value>Front</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value>show more</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>today</value>
+  </data>
+  <data name="InDays" xml:space="preserve">
+    <value>in {count} days</value>
+  </data>
+  <data name="NextCareDay" xml:space="preserve">
+    <value>Next care day {name} is in {days} days</value>
+  </data>
 </root>
