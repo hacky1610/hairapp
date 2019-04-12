@@ -44,7 +44,7 @@ namespace HairAppBl.Controller
         public void RemoveRoutine(RoutineDefinition routine)
         {
             if (routine == null)
-                throw new ArgumentNullException("Routine is null");
+                throw new ArgumentNullException("routine");
             if (routine.ID == string.Empty)
                 throw new ArgumentException($"Routine ID is empty");
 
@@ -55,7 +55,7 @@ namespace HairAppBl.Controller
         public void MoveUp(RoutineDefinition routine)
         {
             if (routine == null)
-                throw new ArgumentNullException("Routine is null");
+                throw new ArgumentNullException("routine");
             if (routine.ID == string.Empty)
                 throw new ArgumentException($"Routine ID is empty");
 
@@ -131,19 +131,6 @@ namespace HairAppBl.Controller
 
         }
 
-        private List<RoutineInstance> GetRoutineInstances()
-        {
-            var routines = new List<RoutineInstance>();
-            foreach(var routine in GetRoutineDefinitions())
-            {
-                var r = new RoutineInstance();
-                r.Name = routine.Name;
-                routines.Add(r);
-            }
-            return routines;
-        }
-
-  
         
          public List<DateTime> GetScheduledDays()
         {

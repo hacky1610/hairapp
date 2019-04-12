@@ -58,7 +58,15 @@ namespace HairApp.Droid
         {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);
-            var washdays = alarmController.GetTodayWashDays();
+            var washdays = alarmController.GetWashDays();
+
+            if (washdays.Count == 0)
+            {
+                //App.BL.Logger.WriteLine("Today is no washing day");
+                return;
+            }
+            //App.BL.Logger.WriteLine("Today is washday. Send notify");
+
 
             foreach (var wd in washdays)
             {
