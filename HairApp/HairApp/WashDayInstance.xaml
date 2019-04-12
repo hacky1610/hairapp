@@ -21,7 +21,7 @@
                 </StackLayout>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout>
-                        <Label Style="{StaticResource FrameTitle}">Needed time</Label>
+                        <Label  x:Name="mNeededTimeLabel" Style="{StaticResource FrameTitle}"></Label>
                         <TimePicker x:Name="UsedTime"/>
                     </StackLayout>
                 </Frame>

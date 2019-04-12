@@ -22,7 +22,7 @@ namespace HairApp.Controls
             //StartCareDay
             var startImage = new Image { Source = "start.png" , HeightRequest = 15};
 
-            var startLabel = new Label { Text = "Start care day" };
+            var startLabel = new Label { Text = AppResources.StartCareDay };
 
 
             var startCareDayContainer = new Frame

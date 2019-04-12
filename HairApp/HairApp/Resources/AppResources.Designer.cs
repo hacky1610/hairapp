@@ -178,6 +178,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do your care day:  ähnelt.
+        /// </summary>
+        internal static string DoYourCareDay {
+            get {
+                return ResourceManager.GetString("DoYourCareDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Edit ähnelt.
         /// </summary>
         internal static string Edit {
@@ -259,11 +268,29 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die minutes ähnelt.
+        /// </summary>
+        internal static string Minutes {
+            get {
+                return ResourceManager.GetString("Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Monday ähnelt.
         /// </summary>
         internal static string Monday {
             get {
                 return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Needed time ähnelt.
+        /// </summary>
+        internal static string NeededTime {
+            get {
+                return ResourceManager.GetString("NeededTime", resourceCulture);
             }
         }
         
@@ -367,6 +394,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start care day ähnelt.
+        /// </summary>
+        internal static string StartCareDay {
+            get {
+                return ResourceManager.GetString("StartCareDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start date: ähnelt.
         /// </summary>
         internal static string StartDate {
@@ -385,7 +421,7 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Take new pic ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Take new picture ähnelt.
         /// </summary>
         internal static string TakePic {
             get {

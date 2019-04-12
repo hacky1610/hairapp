@@ -68,7 +68,7 @@ namespace HairApp.Controls
             }
 
             var routineFrame = Common.GetCalendarDetailsRow("list.png", routineList, hairbl);
-            var neededTime = Common.GetCalendarDetailsRow("time.png", new Label { Text = $"{instance.NeededTime.TotalMinutes} minutes"}, hairbl);
+            var neededTime = Common.GetCalendarDetailsRow("time.png", new Label { Text = $"{instance.NeededTime.TotalMinutes} {HairApp.Resources.AppResources.Minutes}"}, hairbl);
 
             DetailsContent.Add(commentLabel);
             DetailsContent.Add(routineFrame);

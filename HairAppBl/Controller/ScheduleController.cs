@@ -117,15 +117,19 @@ namespace HairAppBl.Controller
         {
             if (mSchedule.Type == ScheduleDefinition.ScheduleType.Dayly)
             {
-                return $"Every {mSchedule.DaylyPeriod.Period} days.";
+                if (mSchedule.DaylyPeriod.Period == 1)
+                    return Resources.AppResource.EveryDay;
+
+                return Resources.AppResource.EveryDays.Replace("{count}",mSchedule.DaylyPeriod.Period.ToString());
             }
             else if (mSchedule.Type == ScheduleDefinition.ScheduleType.Weekly)
             {
                 var days = String.Empty;
                 foreach (var d in mSchedule.WeeklyPeriod.WeekDays)
-                    days += $" {d},";
+                    days += $" {System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(d)},";
                 days = days.TrimEnd(',');
-                return $"Every{days} each {mSchedule.WeeklyPeriod.Period} week.";
+                var text = Resources.AppResource.EveryWeek.Replace("{days}",days);
+                return text.Replace("{count}", mSchedule.WeeklyPeriod.Period.ToString());
 
             }
             else if (mSchedule.Type == ScheduleDefinition.ScheduleType.Monthly)
@@ -136,9 +140,9 @@ namespace HairAppBl.Controller
                 var weekDayList = CreateDayOfWeekList();
                 var day = from item in weekDayList where item.Type == mSchedule.MonthlyPeriod.WeekDay select item;
 
-
-                return $"At {occurenceList.First().Name} {day.First().Name} every {mSchedule.MonthlyPeriod.Period} month.";
-
+                var text = Resources.AppResource.MonthlyText.Replace("{occurence}", occurenceList.First().Name);
+                text = text.Replace("{day}", day.First().Name);
+                return text.Replace("{month}", mSchedule.MonthlyPeriod.Period.ToString());
             }
             return "";
         }
@@ -178,34 +182,34 @@ namespace HairAppBl.Controller
         public static List<TypeNameObject<ScheduleDefinition.ScheduleType>> CreateScheduleTypeList()
         {
             var typeList = new List<TypeNameObject<ScheduleDefinition.ScheduleType>>();
-            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Dayly, "Daily"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Weekly, "Weekly"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Monthly, "Monthly"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Yearly, "Yearly"));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Dayly, Resources.AppResource.Daily));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Weekly, Resources.AppResource.Weekly));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Monthly, Resources.AppResource.Monthly));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.ScheduleType>(ScheduleDefinition.ScheduleType.Yearly, Resources.AppResource.Yearly));
             return typeList;
         }
 
         public static List<TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>> CreateMonthOccurenceTypeList()
         {
             var typeList = new List<TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>>();
-            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.First, "First"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Second, "Second"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Third, "Third"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Fourth, "Fourth"));
-            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Last, "Last"));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.First, Resources.AppResource.First));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Second, Resources.AppResource.Second));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Third, Resources.AppResource.Third));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Fourth, Resources.AppResource.Fourth));
+            typeList.Add(new TypeNameObject<ScheduleDefinition.Monthly.ScheduleType>(ScheduleDefinition.Monthly.ScheduleType.Last, Resources.AppResource.Last));
             return typeList;
         }
 
         public static List<TypeNameObject<DayOfWeek>> CreateDayOfWeekList()
         {
             var typeList = new List<TypeNameObject<DayOfWeek>>();
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Monday, "Monday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Tuesday, "Tuesday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Wednesday, "Wednesday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Thursday, "Thursday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Friday, "Friday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Saturday, "Saturday"));
-            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Sunday, "Sunday"));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Monday, Resources.AppResource.Monday));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Tuesday, Resources.AppResource.Tuesdays));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Wednesday, Resources.AppResource.Wednesday));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Thursday, Resources.AppResource.Thursday));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Friday, Resources.AppResource.Friday));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Saturday, Resources.AppResource.Saturday));
+            typeList.Add(new TypeNameObject<DayOfWeek>(DayOfWeek.Sunday, Resources.AppResource.Sunday));
             return typeList;
         }
     }

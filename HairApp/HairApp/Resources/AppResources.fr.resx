@@ -118,141 +118,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CareDayToday" xml:space="preserve">
-    <value>Heute ist Waschtag</value>
+    <value>Aujourd'hui est le jour des soins</value>
   </data>
   <data name="NoCareDay" xml:space="preserve">
-    <value>Kein Waschtag konfiguriert</value>
+    <value>Aucune journée de soins configurée</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Annuler</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
+    <value>Sauvegarder</value>
   </data>
   <data name="CalendarTitle" xml:space="preserve">
-    <value>Hair Care Kalender</value>
+    <value>Calendrier de soins capillaires</value>
   </data>
   <data name="PlanedCareDays" xml:space="preserve">
-    <value>Geplante Waschtage</value>
+    <value>Journées de soins planifiés</value>
   </data>
   <data name="FinishedCareDays" xml:space="preserve">
-    <value>Beendete Washtage</value>
+    <value>Journées de soins finis</value>
   </data>
   <data name="AddHairLength" xml:space="preserve">
-    <value>Haarlänge eintragen</value>
+    <value>Entrez la longueur des cheveux</value>
   </data>
   <data name="HairlengthStatistic" xml:space="preserve">
-    <value>Haarlängen Statistik</value>
+    <value>Statistique de longueur de cheveux</value>
   </data>
   <data name="EnterYourHairLength" xml:space="preserve">
-    <value>Gibt deine Haarlänge ein</value>
+    <value>Entrez votre longueur de cheveux</value>
   </data>
   <data name="ChooseRoutine" xml:space="preserve">
-    <value>Wähle eine Routine</value>
+    <value>Choisissez une routine</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Hinzufügen</value>
+    <value>Ajouter</value>
   </data>
   <data name="SelectFromAlbum" xml:space="preserve">
-    <value>Aus Album wählen</value>
+    <value>Sélectionner dans l'album</value>
   </data>
   <data name="TakePic" xml:space="preserve">
-    <value>Neues Foto</value>
+    <value>Prendre une nouvelle photo</value>
   </data>
   <data name="ListOfAllCareDays" xml:space="preserve">
-    <value>Liste aller Waschtage</value>
+    <value>Liste de tous les jours de soins</value>
   </data>
   <data name="DefineYourCareDay" xml:space="preserve">
-    <value>Erstelle deinen Waschtag</value>
+    <value>Définissez votre journée de soins</value>
   </data>
   <data name="AddRoutine" xml:space="preserve">
-    <value>Routine hinzufügen</value>
+    <value>Ajouter une routine</value>
   </data>
   <data name="Schedule" xml:space="preserve">
-    <value>Typ</value>
+    <value>Programme</value>
   </data>
   <data name="Every" xml:space="preserve">
-    <value>Jede</value>
+    <value>Toutes les</value>
   </data>
   <data name="Weeks" xml:space="preserve">
-    <value>Wochen</value>
+    <value>semaines</value>
   </data>
   <data name="Days" xml:space="preserve">
-    <value>Tage</value>
+    <value>journées</value>
   </data>
   <data name="StartDate" xml:space="preserve">
-    <value>Start Datum</value>
+    <value>Date de début:</value>
   </data>
   <data name="Monday" xml:space="preserve">
-    <value>Montag</value>
+    <value>Lundi</value>
   </data>
   <data name="Tuesdays" xml:space="preserve">
-    <value>Dienstag</value>
+    <value>Mardi</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
-    <value>Mittwoch</value>
+    <value>Mercredi</value>
   </data>
   <data name="Thursday" xml:space="preserve">
-    <value>Donnerstag</value>
+    <value>Jeudi</value>
   </data>
   <data name="Friday" xml:space="preserve">
-    <value>Freitag</value>
+    <value>Vendredi</value>
   </data>
   <data name="Saturday" xml:space="preserve">
-    <value>Samstag</value>
+    <value>Samedi</value>
   </data>
   <data name="Sunday" xml:space="preserve">
-    <value>Sonntag</value>
+    <value>Dimanche</value>
   </data>
   <data name="Routines" xml:space="preserve">
-    <value>Routinen</value>
+    <value>Les routines</value>
   </data>
   <data name="AddDescription" xml:space="preserve">
-    <value>Beschreibung hinzufügen</value>
+    <value>Ajouter une description</value>
   </data>
   <data name="AddComment" xml:space="preserve">
-    <value>Kommentar hinzufügen</value>
+    <value>Ajouter un commentaire</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Datum</value>
+    <value>Date</value>
   </data>
   <data name="BackLenght" xml:space="preserve">
-    <value>Hinten</value>
+    <value>Retour</value>
   </data>
   <data name="SideLenght" xml:space="preserve">
-    <value>Seite</value>
+    <value>Côté</value>
   </data>
   <data name="FrontLength" xml:space="preserve">
-    <value>Vorne</value>
+    <value>De face</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Bearbeiten</value>
+    <value>Modifier</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Entfernen</value>
+    <value>Retirer</value>
   </data>
   <data name="ShowMore" xml:space="preserve">
-    <value>mehr Info</value>
+    <value>montre plus</value>
   </data>
   <data name="Today" xml:space="preserve">
-    <value>heute</value>
+    <value>aujourd'hui</value>
   </data>
   <data name="InDays" xml:space="preserve">
-    <value>in {count} Tagen</value>
+    <value>dans {count} jours</value>
   </data>
   <data name="NextCareDay" xml:space="preserve">
-    <value>Nächster Waschtag {name} ist in {days} Tagen</value>
+    <value>Le jour de soins suivant {name} est dans {days} days</value>
   </data>
   <data name="DoYourCareDay" xml:space="preserve">
-    <value>Mach dein Waschtag:</value>
+    <value>Faites votre journée de soins:</value>
   </data>
   <data name="Minutes" xml:space="preserve">
-    <value>Minuten</value>
+    <value>minutes</value>
   </data>
   <data name="StartCareDay" xml:space="preserve">
-    <value>Waschtag starten</value>
+    <value>Commencer la journée de soins</value>
   </data>
   <data name="NeededTime" xml:space="preserve">
-    <value>Benötigte Zeit</value>
+    <value>Besoin de temps</value>
   </data>
 </root>

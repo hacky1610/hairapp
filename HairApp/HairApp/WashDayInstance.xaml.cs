@@ -31,7 +31,7 @@ namespace HairApp
         private void InitFields()
         {
             //Title
-            mLabelTitle.Text = $"Do your care day: {mDefinition.Name}";
+            mLabelTitle.Text = AppResources.DoYourCareDay + $" {mDefinition.Name}";
 
             //Description
             DescriptionFrame.IsVisible = false;
@@ -42,7 +42,7 @@ namespace HairApp
             }
 
             //Save close
-            var saveClose = new Controls.NavigationControl("Cancel", "Save");
+            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save);
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;
@@ -69,20 +69,21 @@ namespace HairApp
             //Resources
             mTakePicLabel.Text = AppResources.TakePic;
             mAddCommentButton.Text = AppResources.AddComment;
+            mNeededTimeLabel.Text = AppResources.NeededTime;
         }
-
 
         private async void TakePicture_Clicked(object sender, EventArgs e)
         {
             var choose = new ChoosePictureDialog(null);
             choose.PictureChoosen += Choose_PictureChoosen; ;
             await Navigation.PushPopupAsync(choose);
-
-          
         }
 
         private void Choose_PictureChoosen(object sender, ChoosePictureDialog.PictureChoosenEventArgs e)
         {
+            if (e.File == null)
+                return;
+
             mInstance.Pictures.Add(new Picture(e.File.Path));
             PictureListContainer.IsVisible = true;
             AddPicToAlbum(ImageSource.FromStream(() =>
@@ -95,12 +96,8 @@ namespace HairApp
 
         private void AddPicToAlbum(ImageSource source)
         {
-
             var picView = new Image { HeightRequest = 100 , Margin = new Thickness(10,10,10,10)};
-
-
             picView.Source = source;
-
             PictureList.Children.Add(picView);
         }
 

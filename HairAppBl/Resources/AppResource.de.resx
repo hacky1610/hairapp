@@ -117,71 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CareDayToday" xml:space="preserve">
-    <value>Heute ist Waschtag</value>
+  <data name="EveryDays" xml:space="preserve">
+    <value>Jede {count} Tage</value>
   </data>
-  <data name="NoCareDay" xml:space="preserve">
-    <value>Kein Waschtag konfiguriert</value>
+  <data name="EveryDay" xml:space="preserve">
+    <value>Jeden Tag</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="EveryWeek" xml:space="preserve">
+    <value>Jeden {days} jede {count} Woche</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
+  <data name="MonthlyText" xml:space="preserve">
+    <value>Jeden {occurence} {day} jeden {month} Monat</value>
   </data>
-  <data name="CalendarTitle" xml:space="preserve">
-    <value>Hair Care Kalender</value>
+  <data name="Daily" xml:space="preserve">
+    <value>Täglich</value>
   </data>
-  <data name="PlanedCareDays" xml:space="preserve">
-    <value>Geplante Waschtage</value>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monatlich</value>
   </data>
-  <data name="FinishedCareDays" xml:space="preserve">
-    <value>Beendete Washtage</value>
+  <data name="Weekly" xml:space="preserve">
+    <value>Wöchentlich</value>
   </data>
-  <data name="AddHairLength" xml:space="preserve">
-    <value>Haarlänge eintragen</value>
+  <data name="Yearly" xml:space="preserve">
+    <value>Jährlich</value>
   </data>
-  <data name="HairlengthStatistic" xml:space="preserve">
-    <value>Haarlängen Statistik</value>
+  <data name="First" xml:space="preserve">
+    <value>Erster</value>
   </data>
-  <data name="EnterYourHairLength" xml:space="preserve">
-    <value>Gibt deine Haarlänge ein</value>
+  <data name="Second" xml:space="preserve">
+    <value>Zweiter</value>
   </data>
-  <data name="ChooseRoutine" xml:space="preserve">
-    <value>Wähle eine Routine</value>
+  <data name="Third" xml:space="preserve">
+    <value>Dritter</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Hinzufügen</value>
+  <data name="Fourth" xml:space="preserve">
+    <value>Vierter</value>
   </data>
-  <data name="SelectFromAlbum" xml:space="preserve">
-    <value>Aus Album wählen</value>
-  </data>
-  <data name="TakePic" xml:space="preserve">
-    <value>Neues Foto</value>
-  </data>
-  <data name="ListOfAllCareDays" xml:space="preserve">
-    <value>Liste aller Waschtage</value>
-  </data>
-  <data name="DefineYourCareDay" xml:space="preserve">
-    <value>Erstelle deinen Waschtag</value>
-  </data>
-  <data name="AddRoutine" xml:space="preserve">
-    <value>Routine hinzufügen</value>
-  </data>
-  <data name="Schedule" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="Every" xml:space="preserve">
-    <value>Jede</value>
-  </data>
-  <data name="Weeks" xml:space="preserve">
-    <value>Wochen</value>
-  </data>
-  <data name="Days" xml:space="preserve">
-    <value>Tage</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Start Datum</value>
+  <data name="Last" xml:space="preserve">
+    <value>Letzter</value>
   </data>
   <data name="Monday" xml:space="preserve">
     <value>Montag</value>
@@ -204,55 +177,16 @@
   <data name="Sunday" xml:space="preserve">
     <value>Sonntag</value>
   </data>
-  <data name="Routines" xml:space="preserve">
-    <value>Routinen</value>
+  <data name="TimeForHairCare" xml:space="preserve">
+    <value>Zeit für deinen Washtag</value>
   </data>
-  <data name="AddDescription" xml:space="preserve">
-    <value>Beschreibung hinzufügen</value>
+  <data name="TodayIs" xml:space="preserve">
+    <value>Heute ist:</value>
   </data>
-  <data name="AddComment" xml:space="preserve">
-    <value>Kommentar hinzufügen</value>
+  <data name="ReminderForHairCare" xml:space="preserve">
+    <value>Erinnerung für deinen Washtag</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Datum</value>
-  </data>
-  <data name="BackLenght" xml:space="preserve">
-    <value>Hinten</value>
-  </data>
-  <data name="SideLenght" xml:space="preserve">
-    <value>Seite</value>
-  </data>
-  <data name="FrontLength" xml:space="preserve">
-    <value>Vorne</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Bearbeiten</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Entfernen</value>
-  </data>
-  <data name="ShowMore" xml:space="preserve">
-    <value>mehr Info</value>
-  </data>
-  <data name="Today" xml:space="preserve">
-    <value>heute</value>
-  </data>
-  <data name="InDays" xml:space="preserve">
-    <value>in {count} Tagen</value>
-  </data>
-  <data name="NextCareDay" xml:space="preserve">
-    <value>Nächster Waschtag {name} ist in {days} Tagen</value>
-  </data>
-  <data name="DoYourCareDay" xml:space="preserve">
-    <value>Mach dein Waschtag:</value>
-  </data>
-  <data name="Minutes" xml:space="preserve">
-    <value>Minuten</value>
-  </data>
-  <data name="StartCareDay" xml:space="preserve">
-    <value>Waschtag starten</value>
-  </data>
-  <data name="NeededTime" xml:space="preserve">
-    <value>Benötigte Zeit</value>
+  <data name="TomorrowIs" xml:space="preserve">
+    <value>Morgen ist:</value>
   </data>
 </root>
