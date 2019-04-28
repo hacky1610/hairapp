@@ -151,7 +151,7 @@ namespace HairAppBl.Controller
         {
             foreach(var d in days)
             {
-                if (ScheduleController.IsSameDay(d, day))
+                if (IsSameDay(d, day))
                     return true;
             }
             return false;

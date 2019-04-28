@@ -16,6 +16,7 @@ using System.IO;
 using HairAppBl.Controller;
 using Android.Graphics;
 
+
 namespace HairApp.Droid
 {
     [BroadcastReceiver]
@@ -26,6 +27,7 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
+            AndroidLog.WriteLog("Alarm  recieved");
             CreateNotificationChannel(context);
             Notify(context);
 
@@ -58,19 +60,19 @@ namespace HairApp.Droid
         {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);
-            var washdays = alarmController.GetWashDays();
+            var washdays = alarmController.GetTodayWashDays();
 
             if (washdays.Count == 0)
             {
-                //App.BL.Logger.WriteLine("Today is no washing day");
+                AndroidLog.WriteLog("Today is no washing day");
                 return;
             }
-            //App.BL.Logger.WriteLine("Today is washday. Send notify");
+         
 
 
             foreach (var wd in washdays)
             {
-                
+                AndroidLog.WriteLog($"Today is washday: {wd.Name} ");
                 SendNotify(context, wd.ID, HairAppBl.Resources.AppResource.TimeForHairCare ,    $"{HairAppBl.Resources.AppResource.TodayIs} {wd.Name}");
             }
         }
@@ -118,6 +120,7 @@ namespace HairApp.Droid
             }
             catch (Exception e)
             {
+                AndroidLog.WriteLog($"Error during creation of Alarm  Receiver: {e.StackTrace}");
             }
           
         }

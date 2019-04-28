@@ -25,7 +25,7 @@ namespace HairApp.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
-            WriteLog("Alarm reminder recieved");
+            AndroidLog.WriteLog("Alarm reminder recieved");
 
             CreateNotificationChannel(context);
             Notify(context);
@@ -34,14 +34,7 @@ namespace HairApp.Droid
 
         }
 
-        private static void WriteLog(string value)
-        {
-            var mLogfilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
-            using (var file = File.AppendText(mLogfilePath))
-            {
-                file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
-            }
-        }
+ 
 
         void CreateNotificationChannel(Context context)
         {
@@ -68,10 +61,19 @@ namespace HairApp.Droid
         {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);
-            var washdays = alarmController.GetTodayWashDays();
+            var washdays = alarmController.GetReminderWashDays();
+
+
+            if (washdays.Count == 0)
+            {
+                AndroidLog.WriteLog("Remineder: Tomorrow is no washing day");
+                return;
+            }
+
 
             foreach (var wd in washdays)
             {
+                AndroidLog.WriteLog($"Remineder: Tomorrow is washday: {wd.Name} ");
                 SendNotify(context, wd.ID, HairAppBl.Resources.AppResource.ReminderForHairCare, $"{HairAppBl.Resources.AppResource.TomorrowIs} {wd.Name}");
             }
         }
@@ -104,7 +106,7 @@ namespace HairApp.Droid
             }
             catch (Exception e)
             {
-                WriteLog(e.StackTrace);
+                AndroidLog.WriteLog($"Error during creation of Alarm Reminder Receiver: {e.StackTrace}");
             }
           
         }
