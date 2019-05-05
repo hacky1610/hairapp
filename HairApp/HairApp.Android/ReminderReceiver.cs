@@ -70,7 +70,6 @@ namespace HairApp.Droid
                 return;
             }
 
-
             foreach (var wd in washdays)
             {
                 AndroidLog.WriteLog($"Remineder: Tomorrow is washday: {wd.Name} ");

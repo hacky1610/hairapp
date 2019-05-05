@@ -127,7 +127,6 @@ namespace HairApp
 
                 var specialDate = new SpecialDate(day.Key)
                 {
-                    BackgroundColor = Color.Blue,
                     Selectable = true,
                     BackgroundImage = "done.png",
                 };
