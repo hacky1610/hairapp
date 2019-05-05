@@ -82,6 +82,12 @@ namespace HairAppBl.Controller
             return MainSession.WashingDays;
         }
 
+        public void DeleteWashDay(WashingDayDefinition washingDay)
+        {
+            MainSession.WashingDays.Remove(washingDay);
+            SendDefinitionsEdited();
+        }
+
         public int TimeToNextCareDay()
         {
             var diff = Int32.MaxValue;

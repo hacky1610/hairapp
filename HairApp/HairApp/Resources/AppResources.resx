@@ -255,4 +255,25 @@
   <data name="NeededTime" xml:space="preserve">
     <value>Needed time</value>
   </data>
+  <data name="MissingValueTitle" xml:space="preserve">
+    <value>Missing value</value>
+  </data>
+  <data name="ForgotTitle" xml:space="preserve">
+    <value>You forgot to enter a title</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ForgotRoutine" xml:space="preserve">
+    <value>You forgot to add a routine</value>
+  </data>
+  <data name="DeleteWashDay" xml:space="preserve">
+    <value>Delete washday</value>
+  </data>
+  <data name="DeleteWashdayConfirmation" xml:space="preserve">
+    <value>If you delete the washday all data concerning this washday will be deleted</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

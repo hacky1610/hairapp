@@ -183,14 +183,14 @@ namespace HairApp
         {
             if (String.IsNullOrWhiteSpace(WashDayNameEntry.Text))
             {
-                DisplayAlert("Something is missing ", "You forgot to enter a title", "OK");
+                DisplayAlert(AppResources.MissingValueTitle, AppResources.ForgotTitle, AppResources.OK);
                 WashDayNameEntry.Focus();
                 return false;
             }
 
             if (!mWashingDayEditorController.GetRoutineDefinitions().Any())
             {
-                DisplayAlert("Something is missing ", "You forgot to add a routine", "OK");
+                DisplayAlert(AppResources.MissingValueTitle, AppResources.ForgotRoutine, AppResources.OK);
                 return false;
             }
 

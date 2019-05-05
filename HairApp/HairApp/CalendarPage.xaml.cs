@@ -78,6 +78,9 @@ namespace HairApp
             mCalendar.SpecialDates.Clear();
             FillFutureDays(mCalendar);
             FillInstances(mCalendar);
+            if (mCalendar.SelectedDate == null)
+                mCalendar.SelectedDate = DateTime.Now;
+
             RefreshList(mCalendar.SelectedDate.Value);
             mCalendar.ForceRedraw();
         }
@@ -160,6 +163,7 @@ namespace HairApp
                     var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
                     var c = new WashingDayDefinitionControl(wdController, App.BL);
                     c.Edited += WashingDayEdited;
+                    c.Removed += C_Removed;
                     this.PlanedWashDays.Children.Add(c.View);
                 }
             }
@@ -178,6 +182,18 @@ namespace HairApp
                     this.DoneWashDays.Children.Add(c.View);
                 }
             }
+        }
+
+        private async void C_Removed(object sender, WashingDayCellEventArgs e)
+        {
+            var answer  = await DisplayAlert(AppResources.DeleteWashDay, AppResources.DeleteWashdayConfirmation, AppResources.Delete, AppResources.Cancel);
+            if (answer)
+            {
+                mAlarmController.DeleteWashDay(e.Controller.GetModel().ID);
+                mMainSessionController.DeleteWashDay(e.Controller.GetModel());
+                Redraw();
+            }
+        
         }
 
         private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)

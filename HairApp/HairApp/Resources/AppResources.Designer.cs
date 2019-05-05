@@ -178,6 +178,33 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete washday ähnelt.
+        /// </summary>
+        internal static string DeleteWashDay {
+            get {
+                return ResourceManager.GetString("DeleteWashDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If you delete the washday all data concerning this washday will be deleted ähnelt.
+        /// </summary>
+        internal static string DeleteWashdayConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteWashdayConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Do your care day:  ähnelt.
         /// </summary>
         internal static string DoYourCareDay {
@@ -219,6 +246,24 @@ namespace HairApp.Resources {
         internal static string FinishedCareDays {
             get {
                 return ResourceManager.GetString("FinishedCareDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You forgot to add a routine ähnelt.
+        /// </summary>
+        internal static string ForgotRoutine {
+            get {
+                return ResourceManager.GetString("ForgotRoutine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You forgot to enter a title ähnelt.
+        /// </summary>
+        internal static string ForgotTitle {
+            get {
+                return ResourceManager.GetString("ForgotTitle", resourceCulture);
             }
         }
         
@@ -277,6 +322,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Missing value ähnelt.
+        /// </summary>
+        internal static string MissingValueTitle {
+            get {
+                return ResourceManager.GetString("MissingValueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Monday ähnelt.
         /// </summary>
         internal static string Monday {
@@ -309,6 +363,15 @@ namespace HairApp.Resources {
         internal static string NoCareDay {
             get {
                 return ResourceManager.GetString("NoCareDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die OK ähnelt.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         

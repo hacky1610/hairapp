@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Linq;
+using HairApp.Resources;
 
 namespace HairApp.Controls
 {
@@ -16,15 +17,16 @@ namespace HairApp.Controls
         StackLayout mWashDayList;
         WashingDayDefinitionHomeControl helpItem;
         MainSessionController mMainSessionController;
+        ContentPage mPage;
 
 
-
-        public CareDayList(MainSessionController mainSessionController, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
+        public CareDayList(MainSessionController mainSessionController, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac, ContentPage page)
         {
             mMainSessionController = mainSessionController;
             mWashingDays = mainSessionController.GetAllWashingDays();
             mHairbl = hairbl;
             mAlarmController = ac;
+            mPage = page;
 
             mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
 
@@ -91,13 +93,15 @@ namespace HairApp.Controls
             Navigation.PushAsync(editor);
         }
 
-        private void WashDay_Removed(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
+        private async void WashDay_Removed(object sender, WashingDayDefinitionControl.WashingDayCellEventArgs e)
         {
-            mWashingDays.Remove(e.Controller.GetModel());
-            mAlarmController.DeleteWashDay(e.Controller.GetModel().ID);
-            mMainSessionController.SendDefinitionsEdited();
-
-            RefreshList();
+            var answer = await mPage.DisplayAlert(AppResources.DeleteWashDay, AppResources.DeleteWashdayConfirmation, AppResources.Delete, AppResources.Cancel);
+            if (answer)
+            {
+                mAlarmController.DeleteWashDay(e.Controller.GetModel().ID);
+                mMainSessionController.DeleteWashDay(e.Controller.GetModel());
+                RefreshList();
+            }
         }
 
 

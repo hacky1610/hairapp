@@ -20,7 +20,7 @@ namespace HairApp
 
             this.mAlarmController = ac;
 
-            mCareDayList = new CareDayList(App.MainSession, App.BL, mAlarmController);
+            mCareDayList = new CareDayList(App.MainSession, App.BL, mAlarmController, this);
             CareDayListFrame.Content = mCareDayList;
 
             mAddCareDayButton.Clicked += MAddCareDayButton_Clicked;
