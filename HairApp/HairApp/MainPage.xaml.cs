@@ -128,20 +128,13 @@ namespace HairApp
                     ValsImage.Source = "caredaysoon.jpg";
                     var text = AppResources.NextCareDay.Replace("{name}", timeToNexDay.Days[0].Name);
                     TimeToNextCareDay.Text = text.Replace("{days}", timeToNexDay.Time2Wait.ToString());
-
-
                 }
             }
-  
         }
 
         private void InstancePage_OkClicked(object sender, WashDayInstance.WashDayInstanceEventArgs e)
         {
             throw new NotImplementedException();
         }
-
-
-
-
     }
 }

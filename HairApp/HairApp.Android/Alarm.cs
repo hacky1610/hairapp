@@ -16,22 +16,12 @@ namespace HairApp.Droid
     {
         public void Init()
         {
-            AndroidLog.WriteLog("Init Alarm");
-            Intent alarmIntent = new Intent(Application.Context, typeof(AlarmReceiver));
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
-            alarmManager.SetAndAllowWhileIdle(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), pendingIntent);
         }
 
         public void InitReminder()
         {
-            AndroidLog.WriteLog("Init Reminder");
-            Intent alarmIntent = new Intent(Application.Context, typeof(ReminderReceiver));
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, alarmIntent, PendingIntentFlags.UpdateCurrent);
-            AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
-
-            alarmManager.SetAndAllowWhileIdle(AlarmType.RtcWakeup, AlarmController.GetReminderime(), pendingIntent);
+      
         }
 
 

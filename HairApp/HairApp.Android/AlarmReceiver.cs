@@ -19,21 +19,14 @@ using Android.Graphics;
 
 namespace HairApp.Droid
 {
-    [BroadcastReceiver]
-    public class AlarmReceiver : BroadcastReceiver
+    public class AlarmReceiver 
     {
         static readonly string CHANNEL_ID = "hairapp_notification";
         internal static readonly string WASHDAY_ID = "washday_id";
 
-        public override void OnReceive(Context context, Intent intent)
-        {
-            AndroidLog.WriteLog("Alarm  recieved");
-            CreateNotificationChannel(context);
-            Notify(context);
+        public AlarmReceiver()
+        { }
 
-            new Alarm().Init();
-
-        }
 
         void CreateNotificationChannel(Context context)
         {
@@ -56,8 +49,10 @@ namespace HairApp.Droid
             notificationManager.CreateNotificationChannel(channel);
         }
 
-        void Notify(Context context)
+        public void Notify(Context context)
         {
+            CreateNotificationChannel(context);
+
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);
             var washdays = alarmController.GetTodayWashDays();
@@ -67,8 +62,6 @@ namespace HairApp.Droid
                 AndroidLog.WriteLog("Today is no washing day");
                 return;
             }
-         
-
 
             foreach (var wd in washdays)
             {

@@ -8,6 +8,16 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 			</intent-filter>
 		</receiver>
+    <receiver
+            android:name=".Droid.AlarmReceiver2"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+        </receiver>
+    <service
+           android:name=".AlarmService"
+           android:enabled="true" >
+        </service>
 		<service android:name=".Droid.NotifyService" android:exported="false" />
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>

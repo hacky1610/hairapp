@@ -18,23 +18,9 @@ using Android.Graphics;
 
 namespace HairApp.Droid
 {
-    [BroadcastReceiver]
-    public class ReminderReceiver : BroadcastReceiver
+    public class ReminderReceiver 
     {
         static readonly string CHANNEL_ID = "hairapp_reminder_notification";
-
-        public override void OnReceive(Context context, Intent intent)
-        {
-            AndroidLog.WriteLog("Alarm reminder recieved");
-
-            CreateNotificationChannel(context);
-            Notify(context);
-
-            new Alarm().InitReminder();
-
-        }
-
- 
 
         void CreateNotificationChannel(Context context)
         {
@@ -57,8 +43,10 @@ namespace HairApp.Droid
             notificationManager.CreateNotificationChannel(channel);
         }
 
-        void Notify(Context context)
+        public void Notify(Context context)
         {
+            CreateNotificationChannel(context);
+
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var alarmController = new AlarmController(fileDb);
             var washdays = alarmController.GetReminderWashDays();

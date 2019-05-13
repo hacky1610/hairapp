@@ -17,11 +17,19 @@ namespace HairApp.Droid
     {
         public static void WriteLog(string value)
         {
-            var mLogfilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
-            using (var file = File.AppendText(mLogfilePath))
+            try
             {
-                file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
+                var mLogfilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "logger.txt");
+                using (var file = File.AppendText(mLogfilePath))
+                {
+                    file.WriteLine($"{DateTime.Now.ToLocalTime()}: {value}");
+                }
             }
+            catch(Exception e)
+            {
+
+            }
+          
         }
     }
 }

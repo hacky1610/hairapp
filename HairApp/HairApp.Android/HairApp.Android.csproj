@@ -63,6 +63,8 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmService.cs" />
+    <Compile Include="AlarmServiceRestarter.cs" />
     <Compile Include="AndroidLog.cs" />
     <Compile Include="ReminderReceiver.cs" />
     <Compile Include="AlarmReceiver.cs" />
