@@ -40,8 +40,8 @@ public class AlarmService : Service
 
         public void startTimer()
         {
-            var oneHour = 1000 * 60 * 60;
-            timer = new Timer(Run, null, oneHour, oneHour);
+            var oneHour = 1000 * 60 * 5;
+            timer = new Timer(Run, null, 0, oneHour);
 
         }
 
@@ -50,14 +50,14 @@ public class AlarmService : Service
             var currentHour = DateTime.Now.Hour;
             AndroidLog.WriteLog("Timer event");
 
-            if (currentHour == 8)
+            if (currentHour < 24)
             {
                 AndroidLog.WriteLog("It is 8 o clock - call alarm");
 
                  var alarm = new AlarmReceiver();
                 alarm.Notify(this.ApplicationContext);
             }
-            else if (currentHour == 18)
+            else if (currentHour < 24)
             {
                 AndroidLog.WriteLog("It is 18 o clock - call reminder");
 

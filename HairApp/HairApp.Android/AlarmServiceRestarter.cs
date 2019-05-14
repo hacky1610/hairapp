@@ -20,7 +20,16 @@ namespace HairApp.Droid
         {
             AndroidLog.WriteLog("AlarmServiceRestarter called");
 
-            context.StartService(new Intent(context,typeof(AlarmService)));
+            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+            {
+                AndroidLog.WriteLog("Start ForegroundService");
+                context.StartForegroundService(new Intent(context, typeof(AlarmService)));
+            } else {
+                AndroidLog.WriteLog("Start BAckroundService");
+                context.StartService(new Intent(context, typeof(AlarmService)));
+            }
+
+
         }
 
     }
