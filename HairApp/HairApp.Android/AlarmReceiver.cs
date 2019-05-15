@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Support.V4.App;
 using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 using HairAppBl;
-using System.IO;
 using HairAppBl.Controller;
 using Android.Graphics;
 
@@ -26,7 +18,6 @@ namespace HairApp.Droid
 
         public AlarmReceiver()
         { }
-
 
         void CreateNotificationChannel(Context context)
         {
@@ -72,10 +63,8 @@ namespace HairApp.Droid
 
         private static void SendNotify(Context context,string washDayId,string title, string content)
         {
-
             try
             {
-
                 // Pass the current button press count value to the next activity:
                 var valuesForActivity = new Bundle();
                 valuesForActivity.PutString(WASHDAY_ID, washDayId);

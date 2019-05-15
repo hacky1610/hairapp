@@ -18,8 +18,6 @@ namespace HairApp.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         App myApp;
-        Intent mServiceIntent;
-        private AlarmService mAlarmService;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
@@ -40,32 +38,8 @@ namespace HairApp.Droid
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            mAlarmService = new AlarmService(this);
-            mServiceIntent = new Intent(this, typeof(AlarmService));
-            if (!isMyServiceRunning(typeof(AlarmService)))
-            {
-                StartService(mServiceIntent);
-            }
 
-        }
-
-        private bool isMyServiceRunning(Type serviceClass)
-        {
-            ActivityManager manager = (ActivityManager)GetSystemService(Context.ActivityService);
-            
-            var servicess = manager.GetRunningServices(Int32.MaxValue);
-            foreach(var s in servicess)
-            {
-                if (s.Service.ClassName.Contains(serviceClass.FullName))
-                {
-                    AndroidLog.WriteLog("Service is running");
-
-                    return true;
-                }
-            }
-            AndroidLog.WriteLog("Service is not running");
-
-            return false;
+            JobUtil.scheduleJob(ApplicationContext); 
         }
 
         protected override void OnStart()
@@ -97,7 +71,6 @@ namespace HairApp.Droid
         {
             AndroidLog.WriteLog("MainActivity destroy");
 
-            StopService(mServiceIntent);
             base.OnDestroy();
         }
     }

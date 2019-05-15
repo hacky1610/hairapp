@@ -63,9 +63,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmService.cs" />
-    <Compile Include="AlarmServiceRestarter.cs" />
+    <Compile Include="AlarmJob.cs" />
     <Compile Include="AndroidLog.cs" />
+    <Compile Include="JobUtil.cs" />
     <Compile Include="ReminderReceiver.cs" />
     <Compile Include="AlarmReceiver.cs" />
     <Compile Include="Alarm.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartServiceReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
