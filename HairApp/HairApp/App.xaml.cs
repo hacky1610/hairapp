@@ -40,7 +40,8 @@ namespace HairApp
 
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
-            var ac = new AlarmController(fileDb);
+            var historyfileDb = new FileDB(Constants.HistoryStorageFile);
+            var ac = new AlarmController(fileDb, historyfileDb);
 
             MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
 

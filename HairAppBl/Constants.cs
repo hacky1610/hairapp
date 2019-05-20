@@ -9,5 +9,10 @@ namespace HairAppBl
         {
             get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "schedules.json");
         }
+
+        public static string HistoryStorageFile
+        {
+            get => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "alarmhistory.json");
+        }
     }
 }

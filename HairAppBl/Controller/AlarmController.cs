@@ -11,29 +11,57 @@ namespace HairAppBl.Controller
 {
     public class AlarmController
     {
-        private readonly IDataBase database;
-        public AlarmController(IDataBase db)
+        private readonly IDataBase scheduleDatabase;
+        private readonly IDataBase alarmHistoryDatabase;
+        public AlarmController(IDataBase scheduleDb, IDataBase alarmDb)
         {
-            this.database = db;
+            this.scheduleDatabase = scheduleDb;
+            this.alarmHistoryDatabase = alarmDb;
         }
 
         public void SaveWashDay(ScheduleSqlDefinition def)
         {
 
-            Dictionary<string,ScheduleSqlDefinition> list = Load();
+            var list = LoadScheduleDatabase();
             if (list.ContainsKey(def.ID))
                 list.Remove(def.ID);
             list.Add(def.ID, def);
              
-             this.database.Save(list);
+             this.scheduleDatabase.Save(list);
+        }
+
+        public void SetAlarmShown(String id)
+        {
+
+            var list = LoadAlarmHistory();
+            if (!list.ContainsKey(id))
+            {
+                list.Add(id, new AlarmHistory());
+            }
+            list[id].LastAlarm = ScheduleController.GetToday();
+
+            this.alarmHistoryDatabase.Save(list);
+        }
+
+        public void SetReminderShown(String id)
+        {
+
+            var list = LoadAlarmHistory();
+            if (!list.ContainsKey(id))
+            {
+                list.Add(id, new AlarmHistory());
+            }
+            list[id].LastReminder = ScheduleController.GetToday();
+
+            this.alarmHistoryDatabase.Save(list);
         }
 
 
-        public Dictionary<string, ScheduleSqlDefinition> Load()
+        public Dictionary<string, ScheduleSqlDefinition> LoadScheduleDatabase()
         {
             try
             {               
-                return  this.database.Load<Dictionary<string, ScheduleSqlDefinition>>();
+                return  this.scheduleDatabase.Load<Dictionary<string, ScheduleSqlDefinition>>();
             }
             catch(Exception)
             {
@@ -41,10 +69,50 @@ namespace HairAppBl.Controller
             }
         }
 
+        public Dictionary<string, AlarmHistory> LoadAlarmHistory()
+        {
+            try
+            {
+                return this.alarmHistoryDatabase.Load<Dictionary<string, AlarmHistory>>();
+            }
+            catch (Exception)
+            {
+                return new Dictionary<string, AlarmHistory>();
+            }
+        }
+
+        public bool AlarmShown(string id)
+        {
+            var list = LoadAlarmHistory();
+
+            if (list.ContainsKey(id))
+            {
+                var val = list[id];
+                if (val.LastAlarm == ScheduleController.GetToday())
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool ReminderShown(string id)
+        {
+            var list = LoadAlarmHistory();
+
+            if (list.ContainsKey(id))
+            {
+                var val = list[id];
+                if (val.LastReminder == ScheduleController.GetToday())
+                    return true;
+            }
+
+            return false;
+        }
+
         public  List<ScheduleSqlDefinition> GetTodayWashDays()
         {
-            List<ScheduleSqlDefinition> wdId = new List<ScheduleSqlDefinition>();
-            Dictionary<string, ScheduleSqlDefinition> list = Load();
+            var wdId = new List<ScheduleSqlDefinition>();
+            var list = LoadScheduleDatabase();
 
             foreach (var schedule in list.Values)
             {
@@ -52,7 +120,8 @@ namespace HairAppBl.Controller
                 var controller = new ScheduleController(s);
                 if(controller.IsCareDay(DateTime.Now))
                 {
-                    wdId.Add(schedule);
+                    if(!AlarmShown(schedule.ID))
+                         wdId.Add(schedule);
                 }
             }
             return wdId;    
@@ -61,7 +130,7 @@ namespace HairAppBl.Controller
         public List<ScheduleSqlDefinition> GetReminderWashDays()
         {
             List<ScheduleSqlDefinition> wdId = new List<ScheduleSqlDefinition>();
-            Dictionary<string, ScheduleSqlDefinition> list = Load();
+            Dictionary<string, ScheduleSqlDefinition> list = LoadScheduleDatabase();
 
             foreach (var schedule in list.Values)
             {
@@ -69,7 +138,8 @@ namespace HairAppBl.Controller
                 var controller = new ScheduleController(s);
                 if (controller.IsCareDay(ScheduleController.GetToday().AddDays(1)))
                 {
-                    wdId.Add(schedule);
+                    if (!ReminderShown(schedule.ID))
+                        wdId.Add(schedule);
                 }
             }
             return wdId;
@@ -77,43 +147,16 @@ namespace HairAppBl.Controller
 
         public void DeleteWashDay(string id)
         {
-            var washDays = Load();
+            var washDays = LoadScheduleDatabase();
             if (washDays.ContainsKey(id))
                 washDays.Remove(id);
-            this.database.Save(washDays);
+            this.scheduleDatabase.Save(washDays);
 
 
         }
 
-        public static long GetAlarmTime()
-        {
-            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
-            if (s < DateTime.Now)
-                s = s.AddDays(1);
-            //s = DateTime.Now.AddSeconds(30);
+ 
 
-
-            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
-            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
-            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
-        }
-
-        public static long GetReminderime()
-        {
-            var s = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 18, 0, 0);
-            if (s < DateTime.Now)
-                s = s.AddDays(1);
-            //s = DateTime.Now.AddSeconds(5);
-
-
-            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
-            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
-            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
-        }
-
-        public static long Get24Houres()
-        {
-            return 60001 * 60 * 24;
-        }
+ 
     }
 }

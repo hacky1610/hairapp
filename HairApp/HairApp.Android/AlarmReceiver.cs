@@ -45,7 +45,8 @@ namespace HairApp.Droid
             CreateNotificationChannel(context);
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
-            var alarmController = new AlarmController(fileDb);
+            var historyfileDb = new FileDB(Constants.HistoryStorageFile);
+            var alarmController = new AlarmController(fileDb,historyfileDb);
             var washdays = alarmController.GetTodayWashDays();
 
             if (washdays.Count == 0)
@@ -57,6 +58,7 @@ namespace HairApp.Droid
             foreach (var wd in washdays)
             {
                 AndroidLog.WriteLog($"Today is washday: {wd.Name} ");
+                alarmController.SetAlarmShown(wd.ID);
                 SendNotify(context, wd.ID, HairAppBl.Resources.AppResource.TimeForHairCare ,    $"{HairAppBl.Resources.AppResource.TodayIs} {wd.Name}");
             }
         }
