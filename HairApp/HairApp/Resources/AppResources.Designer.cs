@@ -205,6 +205,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description ähnelt.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Do your care day:  ähnelt.
         /// </summary>
         internal static string DoYourCareDay {
@@ -394,6 +403,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit your routines ähnelt.
+        /// </summary>
+        internal static string RoutinEditorHeading {
+            get {
+                return ResourceManager.GetString("RoutinEditorHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Routines ähnelt.
         /// </summary>
         internal static string Routines {
@@ -498,6 +516,15 @@ namespace HairApp.Resources {
         internal static string Thursday {
             get {
                 return ResourceManager.GetString("Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name ähnelt.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

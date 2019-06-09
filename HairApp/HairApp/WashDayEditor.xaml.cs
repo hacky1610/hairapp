@@ -27,7 +27,6 @@ namespace HairApp
 	    {
 	        InitializeComponent ();
 
-
             mHairbl = hairbl;
             mCreate = create;
             mWashingDayEditorController = wdController;

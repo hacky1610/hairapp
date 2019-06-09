@@ -16,6 +16,7 @@ namespace HairApp.Controls
         Entry description;
 
         public event EventHandler<EventArgs> Removed;
+        public event EventHandler<EventArgs> Selected;
         private HairAppBl.Interfaces.IHairBl mHairBl;
 
         public RoutineDefinition Routine { get; set; }
@@ -24,6 +25,15 @@ namespace HairApp.Controls
         {
             this.mHairBl = hairbl;
             this.Routine = routine;
+            var labelTitle = new Label
+            {
+                Text = Resources.AppResources.Title
+            };
+            var labelDescription = new Label
+            {
+                Text = Resources.AppResources.Description
+            };
+
             title = new Entry
             {
                 Text = Routine.Name,
@@ -61,23 +71,44 @@ namespace HairApp.Controls
                     Orientation = StackOrientation.Vertical,
 
                     Children = {
+                        labelTitle,
                     new StackLayout {
                         Orientation = StackOrientation.Horizontal,
                         Children = { title, buttonGroup }
                     },
+                    labelDescription,
                     description
                     
                     
                 }
                 }
             };
+            var editClicked = new TapGestureRecognizer();
+            editClicked.Tapped += EditClicked_Tapped; ;
+
+            frame.GestureRecognizers.Add(editClicked);
             View = frame;
+        }
+
+        private void EditClicked_Tapped(object sender, EventArgs e)
+        {
+            Selected?.Invoke(this, new EventArgs());
         }
 
         public void Save()
         {
             Routine.Name = title.Text;
             Routine.Description = description.Text;
+        }
+
+        public void Select()
+        {
+            deleteButton.IsVisible = true;
+        }
+
+        public void Deselect()
+        {
+            deleteButton.IsVisible = false;
         }
 
 

@@ -23,12 +23,21 @@ namespace HairApp
 
             mHairbl = hairbl;
 
-            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save);
+            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save);
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
-	    
+            mAddRoutineButton.Clicked += MAddRoutineButton_Clicked;
+            RefreshList();
+
+            //Ressources
+            mHeading.Text = AppResources.RoutinEditorHeading;
+        }
+
+        private void MAddRoutineButton_Clicked(object sender, EventArgs e)
+        {
+            App.MainSession.GetAllDefinitions().Add(new HairAppBl.Models.RoutineDefinition());
             RefreshList();
         }
 
@@ -39,15 +48,36 @@ namespace HairApp
             foreach (var r in App.MainSession.GetAllDefinitions())
             {
                 var c = new RoutineDefinitionEditCell(r, mHairbl);
+                c.Removed += Routine_Removed;
+                c.Selected += C_Selected;
                 mRoutineListControls.Add(c);
                 this.RoutineList.Children.Add(c.View);
             }
         }
 
+        private void DeselectAll()
+        {
+            foreach(RoutineDefinitionEditCell item in mRoutineListControls)
+            {
+                item.Deselect();
+            }
+        }
+
+        private void C_Selected(object sender, EventArgs e)
+        {
+            DeselectAll();
+            ((RoutineDefinitionEditCell)sender).Select();
+        }
+
+        private void Routine_Removed(object sender, EventArgs e)
+        {
+            App.MainSession.DeleteRoutine(((RoutineDefinitionEditCell)sender).Routine);
+            RefreshList();
+        }
+
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
-
         }
 
         private void OKButton_Clicked(object sender, EventArgs e)

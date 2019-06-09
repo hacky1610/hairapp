@@ -6,9 +6,15 @@
              NavigationPage.HasNavigationBar="false">
     <StackLayout Style="{StaticResource Page}">
         <ContentView x:Name="SaveButtonContainer" />
+        <Label x:Name="mHeading"
+                Style="{StaticResource Heading}" />
         <ScrollView>
+            <StackLayout Orientation="Vertical">
             <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
-             </StackLayout>
+            </StackLayout >
+           
+                <ImageButton Source="add.png" BackgroundColor="Transparent" x:Name="mAddRoutineButton"  HeightRequest="50" ></ImageButton>
+            </StackLayout>
         </ScrollView>
     </StackLayout>
 </ContentPage>
