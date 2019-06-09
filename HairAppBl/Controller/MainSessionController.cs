@@ -68,13 +68,16 @@ namespace HairAppBl.Controller
             MainSession.User = name;
         }
 
-   
-
-
-
         public List<RoutineDefinition> GetAllDefinitions()
         {
             return MainSession.AllRoutines;
+        }
+
+        public void DeleteRoutine(RoutineDefinition r)
+        {
+            MainSession.AllRoutines.Remove(r);
+            Save();
+
         }
 
         public List<WashingDayDefinition> GetAllWashingDays()

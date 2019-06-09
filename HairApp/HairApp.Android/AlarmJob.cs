@@ -22,7 +22,7 @@ namespace HairApp.Droid
             }
            
 
-            JobUtil.scheduleJob(ApplicationContext); // reschedule the job
+           // JobUtil.scheduleJob(ApplicationContext); // reschedule the job
             return true;
         }
 
