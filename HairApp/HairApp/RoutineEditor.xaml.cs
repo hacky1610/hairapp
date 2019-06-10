@@ -16,7 +16,7 @@ namespace HairApp
         private HairAppBl.Interfaces.IHairBl mHairbl;
 
 
-        public RoutineEditor(MainSessionController mainSession, HairAppBl.Interfaces.IHairBl hairbl)
+        public RoutineEditor(MainSessionController mainSession, HairAppBl.Interfaces.IHairBl hairbl,HairAppBl.Models.RoutineDefinition select = null)
 	    {
 	        InitializeComponent ();
 
@@ -29,7 +29,7 @@ namespace HairApp
             saveClose.RightButton.Clicked += OKButton_Clicked;
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
             mAddRoutineButton.Clicked += MAddRoutineButton_Clicked;
-            RefreshList();
+            RefreshList(select);
 
             //Ressources
             mHeading.Text = AppResources.RoutinEditorHeading;
@@ -41,7 +41,7 @@ namespace HairApp
             RefreshList();
         }
 
-        private void RefreshList()
+        private void RefreshList(HairAppBl.Models.RoutineDefinition select = null)
         {
             this.RoutineList.Children.Clear();
             mRoutineListControls.Clear();
@@ -53,6 +53,7 @@ namespace HairApp
                 mRoutineListControls.Add(c);
                 this.RoutineList.Children.Add(c.View);
             }
+
         }
 
         private void DeselectAll()

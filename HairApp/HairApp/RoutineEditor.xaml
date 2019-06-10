@@ -8,7 +8,7 @@
         <ContentView x:Name="SaveButtonContainer" />
         <Label x:Name="mHeading"
                 Style="{StaticResource Heading}" />
-        <ScrollView>
+        <ScrollView x:Name="ScrollContainer">
             <StackLayout Orientation="Vertical">
             <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
             </StackLayout >

@@ -241,7 +241,7 @@
     <value>dans {count} jours</value>
   </data>
   <data name="NextCareDay" xml:space="preserve">
-    <value>Le jour de soins suivant {name} est dans {days} days</value>
+    <value>Le jour de soins suivant {name} est dans {days} jours</value>
   </data>
   <data name="DoYourCareDay" xml:space="preserve">
     <value>Faites votre journée de soins:</value>
@@ -283,6 +283,9 @@
     <value>Nom</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>la description</value>
+    <value>La description</value>
+  </data>
+  <data name="EditRoutine" xml:space="preserve">
+    <value>Editer la routine</value>
   </data>
 </root>

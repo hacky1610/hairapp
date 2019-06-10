@@ -41,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="SingleRoutineEditor.xaml.cs">
+      <DependentUpon>SingleRoutineEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ChoosePictureDialog.xaml.cs">
       <DependentUpon>ChoosePictureDialog.xaml</DependentUpon>
     </Compile>

@@ -29,6 +29,7 @@ namespace HairApp.Controls
             {
                 Text = Resources.AppResources.Title
             };
+            
             var labelDescription = new Label
             {
                 Text = Resources.AppResources.Description
@@ -103,12 +104,14 @@ namespace HairApp.Controls
 
         public void Select()
         {
-            deleteButton.IsVisible = true;
+            buttonGroup.IsVisible = true;
+            View.Focus();
+            
         }
 
         public void Deselect()
         {
-            deleteButton.IsVisible = false;
+            buttonGroup.IsVisible = false;
         }
 
 

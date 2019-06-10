@@ -4,76 +4,47 @@ using System.Threading.Tasks;
 using HairAppBl.Controller;
 using Rg.Plugins.Popup.Extensions;
 using HairApp.Resources;
+using HairAppBl.Models;
 
 namespace HairApp
 {
-    public partial class AddRoutineDialog : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class SingleRoutineEditor : Rg.Plugins.Popup.Pages.PopupPage
     {
-        private WashingDayEditorController mWashingDayEditorController;
-        private List<RoutineCellObject> mRoutines = new List<RoutineCellObject>();
         private HairAppBl.Interfaces.IHairBl mHairbl;
+        private RoutineDefinition mRoutine;
+        private Controls.RoutineDefinitionEditCell mRoutineControl;
 
-        public AddRoutineDialog()
+        public SingleRoutineEditor()
         {
             InitializeComponent();
 
             //Resources
-            mChooseRoutineLabel.Text = AppResources.ChooseRoutine;
-            AddButton.Text = AppResources.Add;
+            OKButton.Text = AppResources.Add;
+            mEditRoutineLabel.Text = AppResources.EditRoutine; 
 
         }
 
-        public AddRoutineDialog(WashingDayEditorController controller, HairAppBl.Interfaces.IHairBl hairbl):this()
+        public SingleRoutineEditor(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairBl) :this()
         {
-            this.mWashingDayEditorController = controller;
-            mHairbl =  hairbl;
-          
+            mRoutine = routine;
+            mHairbl = hairBl;
             RefreshList();
-            AddButton.Clicked += AddButton_Clicked;
-            openSettingsButton.Clicked += OpenSettingsButton_Clicked;
+            OKButton.Clicked += OKButton_Clicked;
 
         }
 
-        private void OpenSettingsButton_Clicked(object sender, EventArgs e)
+        private void OKButton_Clicked(object sender, EventArgs e)
         {
-            IsVisible = false;
-            var routineEditor = new RoutineEditor(null, mHairbl);
-            routineEditor.Disappearing += RoutineEditor_Disappearing;
-            Navigation.PushAsync(routineEditor);
+            mRoutineControl.Save();
+            Navigation.PopPopupAsync();
         }
 
-        private void RoutineEditor_Disappearing(object sender, EventArgs e)
-        {
-            IsVisible = true;
-            RefreshList();
-        }
-
-        private void AddButton_Clicked(object sender, EventArgs e)
-        {
-            foreach(var r in mRoutines)
-            {
-                if(r.Checked)
-                    this.mWashingDayEditorController.AddRoutine(r.RoutineObject);
-            }
-            // Close the last PopupPage int the PopupStack
-           Navigation.PopPopupAsync();
-        }
 
         private void RefreshList()
         {
-            mRoutines.Clear();
-            foreach (var routine in mWashingDayEditorController.GetUnusedRoutineDefinitions())
-            {
-                var routineObject = new RoutineCellObject(routine);
-                mRoutines.Add(routineObject);
-            }
+            mRoutineControl = new Controls.RoutineDefinitionEditCell(mRoutine, mHairbl);
+            RoutineContentView.Content = mRoutineControl.View;
 
-            this.RoutineList.Children.Clear();
-            foreach (var r in mRoutines)
-            {
-                var c = new Controls.AddRoutineCell(r,mHairbl);
-                this.RoutineList.Children.Add(c.View);
-            }
         }
 
 
@@ -149,20 +120,5 @@ namespace HairApp
             return base.OnBackgroundClicked();
         }
     }
-    
-    public class RoutineCellObject
-    {
-        public string Name { get; set; }
-        public HairAppBl.Models.RoutineDefinition RoutineObject { get; set; }
-        public Boolean Checked { get; set; }
 
-
-        public RoutineCellObject(HairAppBl.Models.RoutineDefinition routine)
-        {
-            Name = routine.Name;
-            RoutineObject = routine;
-        }
-
-
-    }
 }

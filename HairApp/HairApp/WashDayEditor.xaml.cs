@@ -34,7 +34,7 @@ namespace HairApp
 
             RefreshList();
 
-            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save);
+            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save);
             SaveButtonContainer.Content = saveClose.View;
 
             this.AddRoutine.Clicked += AddRoutine_Clicked;
@@ -300,23 +300,44 @@ namespace HairApp
 
         private void Diaog_Disappearing(object sender, EventArgs e)
         {
-            RefreshList();
+            RefreshList(true);
         }
 
-        private void RefreshList()
+        private void RefreshList(bool selectLast = false)
         {
             this.RoutineList.Children.Clear();
             this.mRoutineListControls.Clear();
+            var count = 1;
             foreach (var r in mWashingDayEditorController.GetRoutineDefinitions())
             {
-                var c = new RoutineDefinitionCell(r,App.BL);
+                var c = new RoutineDefinitionCell(r,App.BL, count++);
                 c.Removed += Routine_Removed;
                 c.MovedDown += Routine_MovedDown;
                 c.MovedUp += Routine_MovedUp;
                 c.Selected += Routine_Selected;
+                c.Edited += Routine_Edited;
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
             }
+
+            if(selectLast)
+            {
+                if (this.mRoutineListControls.Any())
+                    mRoutineListControls.Last().Select();
+            }
+        }
+
+        private void Routine_Edited(object sender, EventArgs e)
+        {
+            RoutineDefinitionCell s = (RoutineDefinitionCell)sender;
+            var routineEditor = new SingleRoutineEditor(s.Routine,mHairbl);
+            routineEditor.Disappearing += RoutineEditor_Disappearing; ;
+            Navigation.PushPopupAsync(routineEditor);
+        }
+
+        private void RoutineEditor_Disappearing(object sender, EventArgs e)
+        {
+            RefreshList();
         }
 
         private void Routine_Selected(object sender, EventArgs e)

@@ -232,6 +232,15 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edit routine ähnelt.
+        /// </summary>
+        internal static string EditRoutine {
+            get {
+                return ResourceManager.GetString("EditRoutine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Enter your hair length ähnelt.
         /// </summary>
         internal static string EnterYourHairLength {

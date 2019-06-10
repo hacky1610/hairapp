@@ -124,7 +124,7 @@
     <value>Tous les jours</value>
   </data>
   <data name="EveryWeek" xml:space="preserve">
-    <value>Tous les {jours} toutes les {count} semaines</value>
+    <value>Tous les {days} toutes les {count} semaines</value>
   </data>
   <data name="MonthlyText" xml:space="preserve">
     <value>À {occurrence} {jour} tous les {mois} mois</value>

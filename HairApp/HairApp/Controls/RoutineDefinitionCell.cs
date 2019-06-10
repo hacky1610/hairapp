@@ -22,17 +22,18 @@ namespace HairApp.Controls
         public event EventHandler<EventArgs> MovedUp;
         public event EventHandler<EventArgs> MovedDown;
         public event EventHandler<EventArgs> Selected;
+        public event EventHandler<EventArgs> Edited;
         private HairAppBl.Interfaces.IHairBl mHairBl;
 
         public RoutineDefinition Routine { get; set; }
 
-        public RoutineDefinitionCell(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairbl)
+        public RoutineDefinitionCell(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairbl, int number)
         {
             this.mHairBl = hairbl;
             this.Routine = routine;
             text = new Label
             {
-                Text = Routine.Name,
+                Text = $"{number}) {Routine.Name}",
                 FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
             };
@@ -46,7 +47,7 @@ namespace HairApp.Controls
             editButton = Common.GetButton("edit.png", hairbl);
             editButton.Clicked += (sender, e) =>
             {
-                var b = (Button)sender;
+                SendEdit();
             };
 
             deleteButton = Common.GetButton("remove.png", hairbl);
@@ -122,6 +123,11 @@ namespace HairApp.Controls
         {
             if (MovedUp != null)
                 MovedUp(this, new EventArgs());
+        }
+
+        private void SendEdit()
+        {
+            Edited.Invoke(this, new EventArgs());
         }
 
         private void SendMoveDown()

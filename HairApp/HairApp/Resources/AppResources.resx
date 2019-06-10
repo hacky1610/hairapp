@@ -285,4 +285,7 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="EditRoutine" xml:space="preserve">
+    <value>Edit routine</value>
+  </data>
 </root>
