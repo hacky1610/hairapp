@@ -17,10 +17,10 @@ namespace HairApp.Droid
             builder.SetPeriodic(JobInfo.MinPeriodMillis);
             builder.SetPersisted(true);
             builder.SetRequiredNetworkType(NetworkType.Any); // device should be idle
-            builder.SetRequiresBatteryNotLow(false);
-            builder.SetRequiresCharging(false);
-            builder.SetRequiresDeviceIdle(false);
-            builder.SetRequiresStorageNotLow(false);
+            //builder.SetRequiresBatteryNotLow(false);
+            //builder.SetRequiresCharging(false);
+            //builder.SetRequiresDeviceIdle(false);
+            //builder.SetRequiresStorageNotLow(false);
             JobScheduler jobScheduler = (JobScheduler)context.GetSystemService(Context.JobSchedulerService);
             jobScheduler.Schedule(builder.Build());
          

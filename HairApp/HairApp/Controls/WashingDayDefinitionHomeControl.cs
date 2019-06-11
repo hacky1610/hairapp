@@ -20,34 +20,16 @@ namespace HairApp.Controls
             var t = c.Time2NextCareDay(ScheduleController.GetToday());
 
             //StartCareDay
-            var startImage = new Image { Source = "start.png" , HeightRequest = 15};
-
-            var startLabel = new Label { Text = AppResources.StartCareDay };
-
-
-            var startCareDayContainer = new Frame
-            {
-                Content = new StackLayout
-                {
-                    Orientation = StackOrientation.Horizontal,
-                   
-                    Children = { startLabel, startImage }
-                },
-                CornerRadius = 8,
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                BackgroundColor = Color.DarkGray,
-                Padding = new Thickness(3, 3, 3, 3)
-            };
-           
+            var startImage = new Image { Source = "start.png" , HeightRequest = 22};
 
             var startCareDayTab = new TapGestureRecognizer();
             startCareDayTab.Tapped += (s, e) => {
                 StartCareDay?.Invoke(this, new WashingDayCellEventArgs(controller));
             };
-            startCareDayContainer.GestureRecognizers.Add(startCareDayTab);
+            startImage.GestureRecognizers.Add(startCareDayTab);
 
             if (t == 0)
-                HeaderExtensionRight = startCareDayContainer;
+                HeaderExtensionRight = startImage;
 
             var text = AppResources.Today;
             if (t > 0)

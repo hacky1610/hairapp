@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HairApp.Controller;
 using HairApp.Models;
 using HairAppBl.Models;
 using OxyPlot;
@@ -26,6 +27,7 @@ namespace HairAppBl.Controller
             mPointHairLength = new Dictionary<DataPoint, HairLength>();
 
             this.mHairLengths = hairLengths;
+            mHairLengths.Sort(new HairLengthComparer());
 
             SetBackLengths();
             SetSideLengths();

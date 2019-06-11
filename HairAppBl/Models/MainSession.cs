@@ -8,10 +8,8 @@ namespace HairAppBl.Models
     {
         public string User { get; set; }
         public Boolean Initialized { get; set; }
-
         public List<RoutineDefinition> AllRoutines { get; set; }
         public List<HairLength> HairLengths { get; set; }
-
         public List<WashingDayDefinition> WashingDays { get; set; }
 
         public MainSession()
@@ -21,8 +19,5 @@ namespace HairAppBl.Models
             HairLengths = new List<HairLength>();
             Initialized = false;
         }
-
-   
-
     }
 }
