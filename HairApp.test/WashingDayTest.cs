@@ -23,7 +23,7 @@ namespace HairAppBl.Tests
             dic.Add("RoutineFrame", null); 
             dic.Add("RoutineContent", null);
             dic.Add("RoutineButton", null);
-            new HairApp.Controls.RoutineDefinitionCell(r,hbl);
+            new HairApp.Controls.RoutineDefinitionCell(r,hbl,1);
         }
 
        

@@ -10,12 +10,11 @@ namespace HairAppBl.Models
         public int  Side;
         public int  Front;
         public DateTime  Day;
-        public readonly String ID;
         public String Picture;
         public event EventHandler<EventArgs> Selected;
 
 
-        public HairLength(string id)
+        public HairLength()
         {
         }
 

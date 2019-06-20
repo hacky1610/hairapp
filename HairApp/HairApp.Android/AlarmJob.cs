@@ -11,12 +11,12 @@ namespace HairApp.Droid
         {
             AndroidLog.WriteLog("Job started");
             var currentHour = DateTime.Now.Hour;
-            if(currentHour > 8)
+            if(currentHour >= 6)
             {
                  new AlarmReceiver().Notify(ApplicationContext);
             }
 
-            if (currentHour > 18)
+            if (currentHour >= 14)
             {
                 new ReminderReceiver().Notify(ApplicationContext);
             }

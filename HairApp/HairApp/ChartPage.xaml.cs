@@ -46,7 +46,8 @@ namespace HairApp
 
         private void Dialog_OkClicked(object sender, AddHairLengthDialog.AddHairLengthDialogEventArgs e)
         {
-            mHairLengths.Add(e.HairLength);
+            if(e.AddNewHairLength)
+                mHairLengths.Add(e.HairLength);
             RefreshList();
         }
 
@@ -58,7 +59,17 @@ namespace HairApp
         private void RefreshList()
         {
             var controller = new HairChartController(mHairLengths);
-            ChartContainer.Content = new HairChartView(mHairBl, controller);
+            var cv = new HairChartView(mHairBl, controller);
+            ChartContainer.Content = cv;
+            cv.Edited += Cv_Edited;
+        }
+
+        private void Cv_Edited(object sender, EditEventArgs e)
+        {
+            var dialog = new AddHairLengthDialog(mHairBl,e.HairLenght);
+            dialog.OkClicked += Dialog_OkClicked;
+            Navigation.PushPopupAsync(dialog);
+
         }
     }
 }

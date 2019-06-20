@@ -19,9 +19,18 @@ namespace HairApp.Controls
         Entry mFrontEntry;
         Image mPicture;
         String mCurrentPhoto;
+        HairLength mHairLength;
 
-        public HairLengthControl( HairAppBl.Interfaces.IHairBl hairbl)
+        public HairLengthControl()
         {
+            mHairLength = new HairLength();
+        }
+
+        public HairLengthControl(HairAppBl.Interfaces.IHairBl hairbl, HairLength hl = null):this()
+        {
+            if (hl != null)
+                mHairLength = hl;
+
             mHairbl = hairbl;
             mDatePicker = new DatePicker();
             mDatePicker.Date = ScheduleController.GetToday();
@@ -32,6 +41,22 @@ namespace HairApp.Controls
             takePhoto.Clicked += TakePhoto_Clicked;
 
             mPicture = new Image { HeightRequest = 100, IsVisible = false };
+
+            if (hl != null)
+            {
+                mBackEntry.Text = hl.Back.ToString();
+                mSideEntry.Text = hl.Side.ToString();
+                mFrontEntry.Text = hl.Front.ToString();
+                if(!string.IsNullOrEmpty(hl.Picture))
+                {
+                    mPicture.Source = hl.Picture;
+                    mCurrentPhoto = hl.Picture;
+                    mPicture.IsVisible = true;
+                }
+                mDatePicker.Date = hl.Day;
+            }
+
+
             Children.Add(mDatePicker);
             Children.Add(GetRow(mBackEntry,AppResources.BackLenght));
             Children.Add(GetRow(mSideEntry, AppResources.SideLenght));
@@ -47,15 +72,14 @@ namespace HairApp.Controls
 
         public HairLength GetHairLength()
         {
-            var hl = new HairLength("");
-            hl.Back = GetLengthValue(mBackEntry);
-            hl.Side = GetLengthValue(mSideEntry);
-            hl.Front = GetLengthValue(mFrontEntry);
-            hl.Picture = mCurrentPhoto;
-            hl.Day = mDatePicker.Date;
+            mHairLength.Back = GetLengthValue(mBackEntry);
+            mHairLength.Side = GetLengthValue(mSideEntry);
+            mHairLength.Front = GetLengthValue(mFrontEntry);
+            mHairLength.Picture = mCurrentPhoto;
+            mHairLength.Day = mDatePicker.Date;
             
 
-            return hl;
+            return mHairLength;
         }
 
         public int GetLengthValue(Entry entry)
