@@ -28,6 +28,11 @@ namespace HairApp.Controls
         Label mBackLengthLabel = new Label();
         Label mSideLengthLabel = new Label();
         Label mFRontLengthLabel = new Label();
+        ImageButton mEditButton = new ImageButton();
+        HairLength mCurrentHairLength = null;
+
+        public event EventHandler<EditEventArgs> Edited;
+
 
         public HairChartView(HairAppBl.Interfaces.IHairBl hairbl, HairChartController controller)
         {
@@ -36,6 +41,13 @@ namespace HairApp.Controls
             mController = controller;
             mPictContainer = new StackLayout();
             mPictContainer.Orientation = StackOrientation.Horizontal;
+
+            mEditButton = Common.GetButton("edit.png", hairbl);
+            mEditButton.Clicked += (sender, e) =>
+            {
+                Edited?.Invoke(this, new EditEventArgs(mCurrentHairLength));
+
+            };
 
             var allPoints = new List<DataPoint>();
             foreach (var l in mController.GetCharts())
@@ -142,6 +154,8 @@ namespace HairApp.Controls
 
         }
 
+
+
         private void Image_Clicked(object sender, EventArgs e)
         {
             var image = (HairLengthImage)sender;
@@ -166,7 +180,16 @@ namespace HairApp.Controls
             {
                 Children =
                 {
-                    GetRow(AppResources.Date,mDateLabel),
+                    new StackLayout
+                    {
+                        Children =
+                        {
+                            GetRow(AppResources.Date,mDateLabel),
+                            mEditButton
+                        },
+                        Orientation = StackOrientation.Horizontal
+                    },
+                 
                     GetRow(AppResources.BackLenght,mBackLengthLabel,HairChartController.BackLineColor),
                     GetRow(AppResources.SideLenght,mSideLengthLabel,HairChartController.SideLineColor),
                     GetRow(AppResources.FrontLength,mFRontLengthLabel,HairChartController.FrontLineColor),
@@ -211,6 +234,7 @@ namespace HairApp.Controls
             mBackLengthLabel.Text = $"{hl.Back}cm";
             mSideLengthLabel.Text = $"{hl.Side}cm";
             mFRontLengthLabel.Text = $"{hl.Front}cm";
+            mCurrentHairLength = hl;
         }
 
         private void SelectImage(HairLengthImage image)
@@ -298,6 +322,15 @@ namespace HairApp.Controls
         }
 
   
+    }
+
+    public class EditEventArgs : EventArgs
+    {
+        public readonly HairLength HairLenght;
+        public EditEventArgs(HairLength hl)
+        {
+            HairLenght = hl;
+        }
     }
 
 }

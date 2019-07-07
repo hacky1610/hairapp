@@ -7,20 +7,22 @@ namespace HairApp
     public partial class AddHairLengthDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
         private HairAppBl.Interfaces.IHairBl mHairbl;
-        HairApp.Controls.HairLengthControl mHairLengthControl;
+        Controls.HairLengthControl mHairLengthControl;
         public event EventHandler<AddHairLengthDialogEventArgs> OkClicked;
+        private bool AddNewHairLength;
 
-
-        public AddHairLengthDialog(HairAppBl.Interfaces.IHairBl hairbl)
+        public AddHairLengthDialog(HairAppBl.Interfaces.IHairBl hairbl,HairAppBl.Models.HairLength hl = null)
         {
             InitializeComponent();
             mHairbl = hairbl;
+            AddNewHairLength = hl == null;
 
-            mHairLengthControl = new HairApp.Controls.HairLengthControl(hairbl);
+            mHairLengthControl = new Controls.HairLengthControl(hairbl,hl);
             hairLengthContainer.Content = mHairLengthControl;
             mHairLengthControl.TakeOrPicPhotoClicked += Hlc_TakeOrPicPhotoClicked;
 
             OKButton.Clicked += OKButton_Clicked;
+            CancelButton.Clicked += CancelButton_Clicked;
 
             //Resources
             mEnterHairLengthLabel.Text = AppResources.EnterYourHairLength;
@@ -28,9 +30,14 @@ namespace HairApp
             OKButton.Text = AppResources.Save;
         }
 
+        private void CancelButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopPopupAsync();
+        }
+
         private void OKButton_Clicked(object sender, EventArgs e)
         {
-            OkClicked?.Invoke(this, new AddHairLengthDialogEventArgs(mHairLengthControl.GetHairLength()));
+            OkClicked?.Invoke(this, new AddHairLengthDialogEventArgs(mHairLengthControl.GetHairLength(),AddNewHairLength));
 
             Navigation.PopPopupAsync();
         }
@@ -50,10 +57,12 @@ namespace HairApp
         public class AddHairLengthDialogEventArgs: EventArgs
         {
             public readonly HairAppBl.Models.HairLength HairLength;
+            public bool AddNewHairLength;
 
-            public AddHairLengthDialogEventArgs(HairAppBl.Models.HairLength hl)
+            public AddHairLengthDialogEventArgs(HairAppBl.Models.HairLength hl, bool addNew)
             {
                 HairLength = hl;
+                AddNewHairLength = addNew;
             }
         }
     }

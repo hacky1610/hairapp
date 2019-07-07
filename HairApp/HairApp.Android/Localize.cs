@@ -8,7 +8,7 @@ using HairApp.Interfaces;
 
 namespace UsingResxLocalization.Android
 {
-    public class Localize : HairApp.Interfaces.ILocalize
+    public class Localize : ILocalize
     {
         public void SetLocale(CultureInfo ci)
         {

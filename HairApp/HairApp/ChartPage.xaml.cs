@@ -16,7 +16,7 @@ namespace HairApp
 	{
         MainSessionController mMainSessionController;
         HairAppBl.Interfaces.IHairBl mHairBl;
-        List<HairLength> hairLengths = new List<HairLength>();
+        List<HairLength> mHairLengths;
 
         public ChartPage(HairAppBl.Interfaces.IHairBl hairbl,MainSessionController controller)
 		{
@@ -24,6 +24,7 @@ namespace HairApp
 
             mMainSessionController = controller;
             mHairBl = hairbl;
+            mHairLengths = mMainSessionController.GetHairLength();
 
             mMainSessionController.InstanceEdited += MMainSessionController_InstanceEdited;
 
@@ -33,9 +34,7 @@ namespace HairApp
             mAddHairLengthButton.Text = AppResources.AddHairLength;
             mHairLengthStatisticLabel.Text = AppResources.HairlengthStatistic;
 
-
             RefreshList();
-          
         }
 
         private void AddHairLengthButton_Clicked(object sender, EventArgs e)
@@ -47,7 +46,8 @@ namespace HairApp
 
         private void Dialog_OkClicked(object sender, AddHairLengthDialog.AddHairLengthDialogEventArgs e)
         {
-            hairLengths.Add(e.HairLength);
+            if(e.AddNewHairLength)
+                mHairLengths.Add(e.HairLength);
             RefreshList();
         }
 
@@ -58,28 +58,18 @@ namespace HairApp
 
         private void RefreshList()
         {
-
-       
-
-
-            var controller = new HairChartController(hairLengths);
-
-
-           ChartContainer.Content = new HairChartView(mHairBl, controller);
-
-
+            var controller = new HairChartController(mHairLengths);
+            var cv = new HairChartView(mHairBl, controller);
+            ChartContainer.Content = cv;
+            cv.Edited += Cv_Edited;
         }
 
-        private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)
+        private void Cv_Edited(object sender, EditEventArgs e)
         {
-            Navigation.PushAsync(new PicturePage(e.Source));
-        }
-
-        private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)
-        {
-            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance));
+            var dialog = new AddHairLengthDialog(mHairBl,e.HairLenght);
+            dialog.OkClicked += Dialog_OkClicked;
+            Navigation.PushPopupAsync(dialog);
 
         }
-       
     }
 }
