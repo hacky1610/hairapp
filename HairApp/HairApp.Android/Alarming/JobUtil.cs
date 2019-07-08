@@ -10,21 +10,18 @@ namespace HairApp.Droid
         //https://devblogs.microsoft.com/xamarin/replacing-services-jobs-android-oreo-8-0/
         public static void scheduleJob(Context context)
         {
-            for (int i = 1; i < 12; i++)
-            {
-                AndroidLog.WriteLog($"Create job {i}");
-
-                CreateJob(context, i);
-            }
+            CreateJob(context);
         }
 
 
-        private static void CreateJob(Context context,int minutesToWait)
+        private static void CreateJob(Context context)
         {
-            Java.Lang.Class javaClass = Java.Lang.Class.FromType(typeof(AlarmJob));
+            AndroidLog.WriteLog("Init ServiceRestarter");
+
+            Java.Lang.Class javaClass = Java.Lang.Class.FromType(typeof(ServiceRestarter));
             ComponentName serviceComponent = new ComponentName(context, javaClass);
-            JobInfo.Builder builder = new JobInfo.Builder(minutesToWait, serviceComponent);
-            builder.SetPeriodic(JobInfo.MinPeriodMillis + 60000 * minutesToWait);
+            JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent);
+            builder.SetPeriodic(1000 * 60 * 60 );
             builder.SetPersisted(true);
             builder.SetRequiredNetworkType(NetworkType.Any); // device should be idle
             JobScheduler jobScheduler = (JobScheduler)context.GetSystemService(Context.JobSchedulerService);

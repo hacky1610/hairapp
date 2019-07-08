@@ -155,8 +155,19 @@ namespace HairAppBl.Controller
 
         }
 
- 
+        public static long GetAlarmTime()
+        {
+            var s = DateTime.Now;
+            s = s.AddMinutes(15);
 
- 
+
+            var utcTime = TimeZoneInfo.ConvertTimeToUtc(s);
+            var epochDif = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
+            return utcTime.AddSeconds(-epochDif).Ticks / 10000;
+        }
+
+
+
+
     }
 }

@@ -81,17 +81,18 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmJob.cs" />
+    <Compile Include="Alarming\AlarmService.cs" />
+    <Compile Include="Alarming\ServiceRestarter.cs" />
     <Compile Include="AndroidLog.cs" />
-    <Compile Include="JobUtil.cs" />
-    <Compile Include="ReminderReceiver.cs" />
-    <Compile Include="AlarmReceiver.cs" />
-    <Compile Include="Alarm.cs" />
+    <Compile Include="Alarming\JobUtil.cs" />
+    <Compile Include="Alarming\ReminderNotfiy.cs" />
+    <Compile Include="Alarming\AlarmNotify.cs" />
+    <Compile Include="Alarming\Alarm.cs" />
     <Compile Include="Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StartServiceReceiver.cs" />
+    <Compile Include="Alarming\StartServiceReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

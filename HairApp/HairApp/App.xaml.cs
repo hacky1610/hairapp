@@ -29,8 +29,6 @@ namespace HairApp
 
             //Init Alarms
             DependencyService.Get<IAlarm>().Init();
-            DependencyService.Get<IAlarm>().InitReminder();
-
 
             BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
