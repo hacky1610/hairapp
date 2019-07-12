@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using HairAppBl.Models;
+using System.Drawing;
+using System.Linq;
 
 namespace HairAppBl.Controller
 {
@@ -13,7 +15,6 @@ namespace HairAppBl.Controller
         public event EventHandler<EventArgs> DefinitionsEdited;
         public event EventHandler<EventArgs> InstanceEdited;
         public event EventHandler<EventArgs> Saved;
-
 
         public bool Initialized {
             get
@@ -89,6 +90,18 @@ namespace HairAppBl.Controller
         {
             MainSession.WashingDays.Remove(washingDay);
             SendDefinitionsEdited();
+        }
+
+        public List<Color> GetUnusedColors()
+        {
+            var usedColors = new List<Color>();
+            foreach (var wd in GetAllWashingDays())
+            {
+                usedColors.Add(wd.ItemColor);
+            }
+            var colors = from b in WashingDayDefinition.Colors where !usedColors.Contains(b) select b;
+
+            return colors.ToList();
         }
 
         public int TimeToNextCareDay()

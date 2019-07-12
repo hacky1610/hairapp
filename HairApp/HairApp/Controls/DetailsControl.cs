@@ -17,7 +17,6 @@ namespace HairApp.Controls
         private ContentView mHeaderLeft;
         private ContentView mHeaderRight;
 
-
         protected Color Color
         {
             get

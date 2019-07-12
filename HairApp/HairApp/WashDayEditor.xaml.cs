@@ -37,9 +37,14 @@ namespace HairApp
             var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save);
             SaveButtonContainer.Content = saveClose.View;
 
+            //Events
             this.AddRoutine.Clicked += AddRoutine_Clicked;
             saveClose.RightButton.Clicked += OKButton_Clicked;
             saveClose.LeftButton.Clicked += CancelButton_Clicked;
+
+            var colorButtonClicked = new TapGestureRecognizer();
+            colorButtonClicked.Tapped += ColorClicked_Tapped;
+            colorButton.GestureRecognizers.Add(colorButtonClicked);
 	    
 	        InitFields();
 
@@ -62,15 +67,33 @@ namespace HairApp
             mCheckBoxFriday.DefaultText = AppResources.Friday;
             mCheckBoxSaturday.DefaultText = AppResources.Saturday;
             mCheckBoxSunday.DefaultText = AppResources.Sunday;
+
         }
-	
-	    private void InitFields()
+
+        private void ColorClicked_Tapped(object sender, EventArgs e)
+        {
+            var colDialog = new SelectColorDialog(mMainSessionController);
+            colDialog.Disappearing += ColDialog_Disappearing;
+            Navigation.PushPopupAsync(colDialog);
+        }
+
+        private void ColDialog_Disappearing(object sender, EventArgs e)
+        {
+            var c = ((SelectColorDialog)sender).SelectedColor;
+            colorButton.BackgroundColor = c;
+            mWashingDayEditorController.GetModel().ItemColor = c;
+        }
+
+        private void InitFields()
 	    {
             var model = mWashingDayEditorController.GetModel();
 
             //Title
             this.WashDayNameEntry.Placeholder = "Title";
             this.WashDayNameEntry.Text = mWashingDayEditorController.GetModel().Name;
+
+            //Color
+            colorButton.BackgroundColor = mWashingDayEditorController.GetModel().ItemColor;
 
             //Description
             this.Description.Placeholder = "Description";

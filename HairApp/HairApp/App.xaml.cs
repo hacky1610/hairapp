@@ -27,6 +27,7 @@ namespace HairApp
             AppResources.Culture = ci;
             DependencyService.Get<ILocalize>().SetLocale(ci);
 
+
             //Init Alarms
             DependencyService.Get<IAlarm>().Init();
 

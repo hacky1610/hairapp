@@ -16,7 +16,32 @@ namespace HairAppBl.Models
         public ScheduleDefinition Scheduled { get; set; }
         public Color ItemColor { get; set; }
 
-
+        public static List<Color> Colors = new List<Color>()
+        {
+            Color.Red,
+            Color.Blue,
+            Color.Brown,
+            Color.Purple,
+            Color.Plum,
+            Color.Green,
+            Color.Yellow,
+            Color.Orange,
+            Color.Orchid,
+            Color.SteelBlue,
+            Color.Black,
+            Color.LawnGreen,
+            Color.ForestGreen,
+            Color.LimeGreen,
+            Color.DarkRed,
+            Color.OrangeRed,
+            Color.GreenYellow,
+            Color.LightGoldenrodYellow,
+            Color.CadetBlue,
+            Color.LightBlue,
+            Color.Purple,
+            Color.Olive
+        };
+        
 
         public WashingDayDefinition()
         {

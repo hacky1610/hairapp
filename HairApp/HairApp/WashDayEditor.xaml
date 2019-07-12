@@ -14,7 +14,8 @@
         <ScrollView>
             <StackLayout>
                 <Frame Style="{StaticResource FrameStyle}">
-                        <StackLayout>
+                        <StackLayout Orientation="Horizontal" x:Name="titleFrame">
+                            <Frame x:Name="colorButton" Style="{StaticResource ColorFrame}" ></Frame>
                             <Entry x:Name="WashDayNameEntry"/>
                         </StackLayout>
                 </Frame>

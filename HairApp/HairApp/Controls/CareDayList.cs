@@ -19,7 +19,6 @@ namespace HairApp.Controls
         MainSessionController mMainSessionController;
         ContentPage mPage;
 
-
         public CareDayList(MainSessionController mainSessionController, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac, ContentPage page)
         {
             mMainSessionController = mainSessionController;

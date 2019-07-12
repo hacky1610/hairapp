@@ -18,6 +18,7 @@ namespace HairApp.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         App myApp;
+
         protected  override void OnCreate(Bundle savedInstanceState)
         {
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;

@@ -33,7 +33,6 @@ namespace HairApp.Controls
 
         public event EventHandler<EditEventArgs> Edited;
 
-
         public HairChartView(HairAppBl.Interfaces.IHairBl hairbl, HairChartController controller)
         {
 

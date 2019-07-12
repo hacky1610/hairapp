@@ -99,6 +99,7 @@ namespace HairApp
                 });
             };
             aTimer.Enabled = true;
+
         }
 
   
