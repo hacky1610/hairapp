@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HairAppBl.Tests
 {
-    public class AddRoutineTest
+    public class CareDayListTest
     {
         [SetUp]
         public void SetUp()
@@ -16,17 +16,16 @@ namespace HairAppBl.Tests
         [Test]
         public void Instantiate()
         {
-            var r = new HairApp.RoutineCellObject(new RoutineDefinition());
-            r.Name = "";
             var dic = new Dictionary<string, object>();
             var hbl = new HairAppBl(new ConsoleLogger(),dic);
             dic.Add("RoutineFrame", null); 
             dic.Add("RoutineContent", null);
             dic.Add("RoutineButton", null);
             dic.Add("RoutineFrameSelect", null);
-           
-           var c =  new HairApp.Controls.AddRoutineCell(r,hbl);
-            Assert.False(c.Checked);
+
+            //var r = new HairApp.Controls.CareDayList()
+
+            //Assert.False(c.Checked);
         }
 
        

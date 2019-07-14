@@ -19,7 +19,7 @@ namespace HairApp.Controls
             
             BackgroundColor = color;
             Color = color;
-            Selected = false;
+            
 
             var tb = new TapGestureRecognizer();
             tb.Tapped += Tb_Tapped;
@@ -28,13 +28,7 @@ namespace HairApp.Controls
 
         private void Tb_Tapped(object sender, EventArgs e)
         {
-            Selected = !Selected;
             Clicked?.Invoke(this, new EventArgs());
         }
-
-        public bool Selected{
-            get ; private set; }
-
-       
     }
 }

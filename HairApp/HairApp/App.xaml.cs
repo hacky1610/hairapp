@@ -25,11 +25,11 @@ namespace HairApp
             //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             var ci = new System.Globalization.CultureInfo("fr");
             AppResources.Culture = ci;
-            DependencyService.Get<ILocalize>().SetLocale(ci);
+            DependencyService.Get<ILocalize>()?.SetLocale(ci);
 
 
             //Init Alarms
-            DependencyService.Get<IAlarm>().Init();
+            DependencyService.Get<IAlarm>()?.Init();
 
             BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
