@@ -5753,26 +5753,26 @@ namespace HairApp.Droid
 			// aapt resource value: 0x7f020056
 			public const int avd_hide_password = 2130837590;
 			
-			// aapt resource value: 0x7f02014c
-			public const int avd_hide_password_1 = 2130837836;
-			
-			// aapt resource value: 0x7f02014d
-			public const int avd_hide_password_2 = 2130837837;
-			
 			// aapt resource value: 0x7f02014e
-			public const int avd_hide_password_3 = 2130837838;
+			public const int avd_hide_password_1 = 2130837838;
+			
+			// aapt resource value: 0x7f02014f
+			public const int avd_hide_password_2 = 2130837839;
+			
+			// aapt resource value: 0x7f020150
+			public const int avd_hide_password_3 = 2130837840;
 			
 			// aapt resource value: 0x7f020057
 			public const int avd_show_password = 2130837591;
 			
-			// aapt resource value: 0x7f02014f
-			public const int avd_show_password_1 = 2130837839;
-			
-			// aapt resource value: 0x7f020150
-			public const int avd_show_password_2 = 2130837840;
-			
 			// aapt resource value: 0x7f020151
-			public const int avd_show_password_3 = 2130837841;
+			public const int avd_show_password_1 = 2130837841;
+			
+			// aapt resource value: 0x7f020152
+			public const int avd_show_password_2 = 2130837842;
+			
+			// aapt resource value: 0x7f020153
+			public const int avd_show_password_3 = 2130837843;
 			
 			// aapt resource value: 0x7f020058
 			public const int calendar = 2130837592;
@@ -6470,11 +6470,11 @@ namespace HairApp.Droid
 			// aapt resource value: 0x7f02013f
 			public const int notification_icon_background = 2130837823;
 			
-			// aapt resource value: 0x7f02014a
-			public const int notification_template_icon_bg = 2130837834;
+			// aapt resource value: 0x7f02014c
+			public const int notification_template_icon_bg = 2130837836;
 			
-			// aapt resource value: 0x7f02014b
-			public const int notification_template_icon_low_bg = 2130837835;
+			// aapt resource value: 0x7f02014d
+			public const int notification_template_icon_low_bg = 2130837837;
 			
 			// aapt resource value: 0x7f020140
 			public const int notification_tile_bg = 2130837824;
@@ -6492,19 +6492,25 @@ namespace HairApp.Droid
 			public const int settings = 2130837828;
 			
 			// aapt resource value: 0x7f020145
-			public const int start = 2130837829;
+			public const int splash_screen = 2130837829;
 			
 			// aapt resource value: 0x7f020146
-			public const int time = 2130837830;
+			public const int start = 2130837830;
 			
 			// aapt resource value: 0x7f020147
-			public const int tooltip_frame_dark = 2130837831;
+			public const int time = 2130837831;
 			
 			// aapt resource value: 0x7f020148
-			public const int tooltip_frame_light = 2130837832;
+			public const int tooltip_frame_dark = 2130837832;
 			
 			// aapt resource value: 0x7f020149
-			public const int up = 2130837833;
+			public const int tooltip_frame_light = 2130837833;
+			
+			// aapt resource value: 0x7f02014a
+			public const int up = 2130837834;
+			
+			// aapt resource value: 0x7f02014b
+			public const int valerie = 2130837835;
 			
 			static Drawable()
 			{
@@ -7755,8 +7761,8 @@ namespace HairApp.Droid
 			// aapt resource value: 0x7f0c0172
 			public const int Animation_Design_BottomSheetDialog = 2131493234;
 			
-			// aapt resource value: 0x7f0c0195
-			public const int AppCompatDialogStyle = 2131493269;
+			// aapt resource value: 0x7f0c0196
+			public const int AppCompatDialogStyle = 2131493270;
 			
 			// aapt resource value: 0x7f0c00ad
 			public const int Base_AlertDialog_AppCompat = 2131493037;
@@ -8271,11 +8277,14 @@ namespace HairApp.Droid
 			// aapt resource value: 0x7f0c0012
 			public const int CardView_Light = 2131492882;
 			
-			// aapt resource value: 0x7f0c0193
-			public const int MainTheme = 2131493267;
-			
 			// aapt resource value: 0x7f0c0194
-			public const int MainTheme_Base = 2131493268;
+			public const int MainTheme = 2131493268;
+			
+			// aapt resource value: 0x7f0c0195
+			public const int MainTheme_Base = 2131493269;
+			
+			// aapt resource value: 0x7f0c0193
+			public const int MyTheme_Splash = 2131493267;
 			
 			// aapt resource value: 0x7f0c0031
 			public const int Platform_AppCompat = 2131492913;
