@@ -5,51 +5,51 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HairAppBl.Controller;
 using HairAppBl.Models;
+using HairApp.Resources;
+using HairApp.Interfaces;
 
 namespace HairApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class IntroPage : ContentPage
 	{
-        List<WashingDayDefinition> mWashingDays;
-        HairAppBl.Interfaces.IHairBl mHairbl;
-	    AlarmController mAlarmController;
         public event EventHandler<EventArgs> PageClosed;
+        private MainSessionController mMainSessionController;
 
 
-        public IntroPage(List<WashingDayDefinition> washingDays, HairAppBl.Interfaces.IHairBl hairbl, AlarmController ac)
+        public IntroPage(MainSessionController mainSessionController)
 	    {
 	        InitializeComponent ();
-            mWashingDays = washingDays;
-            mHairbl = hairbl;
-            mAlarmController = ac;
-            AddWashday.Clicked += AddWashday_Clicked;
+            mMainSessionController = mainSessionController;
+            FrenchButton.Clicked += FrenchButton_Clicked;
+            GermanButton.Clicked += GermanButton_Clicked;
+            EnglishButton.Clicked += EnglishButton_Clicked;
         }
 
-        private void AddWashday_Clicked(object sender, EventArgs e)
+        private void SetLanguage(String lang)
         {
-            var def = new WashingDayDefinition();
-            def.ID = Guid.NewGuid().ToString();
-            var contr = new WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);
-           // var editor = new WashDayEditor(contr, true, mHairbl);
-            //Navigation.PushAsync(editor);
+            mMainSessionController.SetCulture(lang);
+            var ci = new System.Globalization.CultureInfo(lang);
+            AppResources.Culture = ci;
+            DependencyService.Get<ILocalize>()?.SetLocale(ci);
+            Navigation.PopAsync();
+        }
+
+        private void EnglishButton_Clicked(object sender, EventArgs e)
+        {
+            SetLanguage("en");
+        }
+
+        private void GermanButton_Clicked(object sender, EventArgs e)
+        {
+            SetLanguage("de");
 
         }
 
-        private void Editor_CancelClicked(object sender, EventArgs e)
+        private void FrenchButton_Clicked(object sender, EventArgs e)
         {
-            App.MainSession.Initialized = true;
-            PageClosed?.Invoke(this, new EventArgs());
-            Navigation.PopAsync(true);
-        }
+            SetLanguage("fr");
 
-        private void Editor_OkClicked(object sender, WashDayEditor.WashDayEditorEventArgs e)
-        {
-            /* mWashingDays.Add(e.Definition);
-            App.MainSession.Initialized = true;
-            PageClosed?.Invoke(this, new EventArgs());
-
-            Navigation.PopAsync(true);*/
         }
     }
 }

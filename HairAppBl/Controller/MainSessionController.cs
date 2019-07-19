@@ -180,6 +180,24 @@ namespace HairAppBl.Controller
             return diff;
         }
 
+        public String GetCulture()
+        {
+            if (HasCulture())
+                return MainSession.Culture;
+            else
+                return "fr";
+        }
+
+        public void SetCulture(String cul)
+        {
+            MainSession.Culture = cul;
+        }
+
+        public bool HasCulture()
+        {
+            return MainSession.Culture != String.Empty;
+        }
+
         public WashingDayDefinition GetWashingDayById(string id)
         {
             foreach(var day in MainSession.WashingDays)

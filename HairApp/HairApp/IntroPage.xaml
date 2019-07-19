@@ -6,11 +6,11 @@
     <StackLayout Style="{StaticResource Page}">
         <StackLayout Style="{StaticResource PageContent}">
 
-            <Label Text="Wellcome to Vals Hair App"
+            <Label Text="Select Language"
                 Style="{StaticResource Heading}" />
-            <Image x:Name="ValsImage" Source="intro.png"></Image>
-            <Label>The first thing you have to do, is to create a care day</Label>
-            <Button Text="Clich here to create a care day" x:Name="AddWashday"/>
+            <Button Text="French" x:Name="FrenchButton"/>
+            <Button Text="German" x:Name="GermanButton"/>
+            <Button Text="English" x:Name="EnglishButton"/>
         </StackLayout>
     </StackLayout>
     

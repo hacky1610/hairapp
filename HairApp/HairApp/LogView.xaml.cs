@@ -20,7 +20,7 @@ namespace HairApp
 
         private void Init_Clicked(object sender, EventArgs e)
         {
-            App.MainSession.Init();
+            App.MainSession.SetCulture(String.Empty);
 
         }
 

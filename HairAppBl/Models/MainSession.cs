@@ -7,6 +7,7 @@ namespace HairAppBl.Models
     public class MainSession
     {
         public string User { get; set; }
+        public string Culture { get; set; }
         public Boolean Initialized { get; set; }
         public List<RoutineDefinition> AllRoutines { get; set; }
         public List<HairLength> HairLengths { get; set; }
@@ -18,6 +19,7 @@ namespace HairAppBl.Models
             WashingDays = new List<WashingDayDefinition>();
             HairLengths = new List<HairLength>();
             Initialized = false;
+            Culture = String.Empty;
         }
     }
 }
