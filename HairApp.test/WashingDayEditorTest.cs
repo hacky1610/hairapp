@@ -30,8 +30,6 @@ namespace HairAppBl.Tests
             msCOntroller = new MainSessionController(null);
 
 
-            var a = new ResourceDictionary();
-            a.lo
         }
 
         [Test]

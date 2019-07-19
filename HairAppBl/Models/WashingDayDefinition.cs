@@ -16,31 +16,39 @@ namespace HairAppBl.Models
         public ScheduleDefinition Scheduled { get; set; }
         public Color ItemColor { get; set; }
 
-        public static List<Color> Colors = new List<Color>()
+        private static List<Color> GetColors()
         {
-            Color.Red,
-            Color.Blue,
-            Color.Brown,
-            Color.Purple,
-            Color.Plum,
-            Color.Green,
-            Color.Yellow,
-            Color.Orange,
-            Color.Orchid,
-            Color.SteelBlue,
-            Color.Black,
-            Color.LawnGreen,
-            Color.ForestGreen,
-            Color.LimeGreen,
-            Color.DarkRed,
-            Color.OrangeRed,
-            Color.GreenYellow,
-            Color.LightGoldenrodYellow,
-            Color.CadetBlue,
-            Color.LightBlue,
-            Color.Purple,
-            Color.Olive
-        };
+            var cols = new List<Color>();
+            int red = 255;
+            int green = 0;
+            int blue = 0;
+
+            for(; green < 255; green= green+ 15)
+            {
+                cols.Add(Color.FromArgb(red, green, blue));
+            }
+            for (; red > 0; red= red - 15)
+            {
+                cols.Add(Color.FromArgb(red, green, blue));
+            }
+            for (; blue < 255; blue= blue + 15)
+            {
+                cols.Add(Color.FromArgb(red, green, blue));
+            }
+            for (; green > 0; green= green- 15)
+            {
+                cols.Add(Color.FromArgb(red, green, blue));
+            }
+            for (; red < 255; red= red +15)
+            {
+                cols.Add(Color.FromArgb(red, green, blue));
+            }
+
+
+            return cols;
+        }
+
+        public static List<Color> Colors = GetColors();
         
 
         public WashingDayDefinition()
