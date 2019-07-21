@@ -189,4 +189,71 @@
   <data name="TomorrowIs" xml:space="preserve">
     <value>Demain est:</value>
   </data>
+  <data name="Prepoo" xml:space="preserve">
+    <value>Pre-poo</value>
+  </data>
+  <data name="PrepooDescription" xml:space="preserve">
+    <value>un traitement à l'huile appliqué sur les cheveux avant le shampooing ou le conditionnement</value>
+  </data>
+  <data name="HotOilTreatmentDescription" xml:space="preserve">
+    <value>Lave tes cheveux. Faire un bain d'eau. Chauffez votre huile de noix de coco. Cheveux mouillés, si ce n'est déjà fait. Masser l'huile dans votre cuir chevelu du bout des doigts trempé dans l'huile chaude. Chauffez une serviette avec un sèche-cheveux ou un sèche-linge. Laver et rincer les cheveux à fond</value>
+  </data>
+  <data name="HotOilTreatment" xml:space="preserve">
+    <value>Traitement à l'huile chaude</value>
+  </data>
+  <data name="Shampoo" xml:space="preserve">
+    <value>Shampoo</value>
+  </data>
+  <data name="ShampooDescription" xml:space="preserve">
+    <value>Lavez vos cheveux avec du shampooing</value>
+  </data>
+  <data name="ClarifyingShampooDescription" xml:space="preserve">
+    <value>Pour les meilleurs résultats. massez le shampooing clarifiant dans vos racines, là où la plupart des produits sont accumulés, puis faites-le pénétrer dans le reste des cheveux.</value>
+  </data>
+  <data name="ClarifyingShampoo" xml:space="preserve">
+    <value>Clarifying Shampoo</value>
+  </data>
+  <data name="ConditionerDescription" xml:space="preserve">
+    <value>Lave tes cheveux Rince ton shampooing. Essore tes cheveux. Mettez votre couleur.
+Laissez le rinçage prendre effet. Rincez le rinçage</value>
+  </data>
+  <data name="Conditioner" xml:space="preserve">
+    <value>Conditioner</value>
+  </data>
+  <data name="DeepConditioner" xml:space="preserve">
+    <value>Deep Conditioner</value>
+  </data>
+  <data name="DeepConditionerDescription" xml:space="preserve">
+    <value>Après avoir appliqué un revitalisant en profondeur, couvrez vos cheveux avec un bonnet de douche ou un sac en plastique et ajoutez du feu doux (enveloppez une serviette chaude et humide autour de votre tête). Cela ouvre la cuticule et permet au revitalisant en profondeur de pénétrer dans vos cheveux. Laissez dans le DC pendant au moins 20 minutes (nous recommandons 20-40.)</value>
+  </data>
+  <data name="ProteinTreatment" xml:space="preserve">
+    <value>Protein Treatment</value>
+  </data>
+  <data name="ProteinTreatmentDescription" xml:space="preserve">
+    <value>Tout comme votre corps, vos cheveux ont besoin de protéines pour rester en bonne santé. ... Les traitements protéiques renforcent les cheveux avec une variété de nutriments et de protéines pour aider à reconstruire et renforcer les mèches de cheveux.</value>
+  </data>
+  <data name="MoisturisingMask" xml:space="preserve">
+    <value>Moisturising mask </value>
+  </data>
+  <data name="MoisturisingMaskDescription" xml:space="preserve">
+    <value>Séparez vos cheveux au centre et commencez par les appliquer sur votre cuir chevelu. Laissez ce masque reposer pendant 30 à 45 minutes, puis rincez-le avec votre shampooing et votre revitalisant ordinaires. Ce masque est le meilleur et le plus efficace s'il est utilisé un par semaine</value>
+  </data>
+  <data name="LeaveInConditioner" xml:space="preserve">
+    <value>Leave in Conditioner</value>
+  </data>
+  <data name="LeaveInConditionerDescription" xml:space="preserve">
+    <value>Lavez vos cheveux avec un shampooing et appliquez le revitalisant, ajoutez une petite quantité de sérum à votre paume, appliquez le produit sur vos cheveux et peignez vos cheveux.</value>
+  </data>
+  <data name="Clay" xml:space="preserve">
+    <value>Argile</value>
+  </data>
+  <data name="ClayDescription" xml:space="preserve">
+    <value>Rincez vos cheveux avec de l'eau pour les mouiller. Ramassez une poignée de cheveux à la fois et appliquez le masque en argile de bentonite des racines aux pointes. Si vos cheveux commencent à sécher, humidifiez-les à nouveau à l'aide d'un vaporisateur. Roulez vos cheveux et mettez un bonnet de douche</value>
+  </data>
+  <data name="Rinse" xml:space="preserve">
+    <value>Rincer</value>
+  </data>
+  <data name="RinseDescription" xml:space="preserve">
+    <value>Lave tes cheveux Rincez-le. Appliquez une petite quantité de conditionneur et massez les cheveux. Attends deux minutes. Rincer les cheveux.</value>
+  </data>
 </root>

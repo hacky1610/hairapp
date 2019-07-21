@@ -189,4 +189,72 @@
   <data name="TomorrowIs" xml:space="preserve">
     <value>Morgen ist:</value>
   </data>
+  <data name="Prepoo" xml:space="preserve">
+    <value>Pre-poo</value>
+  </data>
+  <data name="PrepooDescription" xml:space="preserve">
+    <value>Eine Ölbehandlung, die vor dem Shampoonieren oder Konditionieren auf das Haar aufgetragen wird</value>
+  </data>
+  <data name="HotOilTreatment" xml:space="preserve">
+    <value>Behandlung mit heißem Öl</value>
+  </data>
+  <data name="HotOilTreatmentDescription" xml:space="preserve">
+    <value>Wasche deine Haare. Machen Sie ein Wasserbad. Erhitze dein Kokosöl. Nasses Haar, wenn es nicht schon nass ist. Massieren Sie das Öl mit in heißes Öl getauchten Fingerspitzen in Ihre Kopfhaut. Erhitzen Sie ein Handtuch mit einem Haartrockner oder Wäschetrockner. Haare gründlich waschen und ausspülen</value>
+  </data>
+  <data name="Shampoo" xml:space="preserve">
+    <value>Shampoo</value>
+  </data>
+  <data name="ShampooDescription" xml:space="preserve">
+    <value>Waschen Sie Ihre Haare mit Shampoo</value>
+  </data>
+  <data name="ClarifyingShampooDescription" xml:space="preserve">
+    <value>Für beste Ergebnisse. Massieren Sie das Clarifying Shampoo in die Wurzeln, in denen sich die meisten Produkte ansammeln, und verteilen Sie das Shampoo dann auf dem restlichen Haar.</value>
+  </data>
+  <data name="ClarifyingShampoo" xml:space="preserve">
+    <value>Clarifying Shampoo</value>
+  </data>
+  <data name="ConditionerDescription" xml:space="preserve">
+    <value>Wasche dein Haar. Spüle dein Shampoo aus. Wringe dein Haar aus. Trage deine Spülung auf.
+Lass die Spülung einwirken.Spüle die Spülung aus</value>
+  </data>
+  <data name="Conditioner" xml:space="preserve">
+    <value>Conditioner</value>
+  </data>
+  <data name="DeepConditioner" xml:space="preserve">
+    <value>Deep Conditioner</value>
+  </data>
+  <data name="DeepConditionerDescription" xml:space="preserve">
+    <value>Bedecken Sie Ihr Haar nach dem Auftragen einer tiefen Spülung mit einer Duschhaube oder einer Plastiktüte und fügen Sie geringe Wärme hinzu (wickeln Sie ein warmes, feuchtes Handtuch um Ihren Kopf.) Dadurch wird die Nagelhaut geöffnet und die tiefe Spülung kann in Ihr Haar eindringen. Mindestens 20 Minuten im DC belassen (wir empfehlen 20-40).</value>
+  </data>
+  <data name="ProteinTreatment" xml:space="preserve">
+    <value>Protein Treatment</value>
+  </data>
+  <data name="ProteinTreatmentDescription" xml:space="preserve">
+    <value>Genau wie Ihr Körper braucht Ihr Haar Eiweiß, um gesund zu bleiben. ... Proteinbehandlungen stärken das Haar mit einer Vielzahl von Nährstoffen und Proteinen, um die Haarsträhnen wieder aufzubauen und zu stärken.</value>
+  </data>
+  <data name="MoisturisingMask" xml:space="preserve">
+    <value>Feuchtigkeitsmaske</value>
+  </data>
+  <data name="MoisturisingMaskDescription" xml:space="preserve">
+    <value>Teilen Sie Ihr Haar in der Mitte und tragen Sie es zunächst auf die Kopfhaut auf. Lassen Sie diese Maske 30-45 Minuten einwirken und spülen Sie sie dann mit Ihrem normalen Shampoo und Conditioner aus. Diese Maske ist am besten und effektivsten, wenn sie einmal pro Woche angewendet wird</value>
+  </data>
+  <data name="LeaveInConditioner" xml:space="preserve">
+    <value>Leave in Conditioner</value>
+  </data>
+  <data name="LeaveInConditionerDescription" xml:space="preserve">
+    <value>
+Wasche dein Haar mit Shampoo und trage den Conditioner auf.Gib eine kleine Menge Serum in deine Handfläche.Reibe das Produkt in dein Haar ein.Kämme dein Haar.</value>
+  </data>
+  <data name="Clay" xml:space="preserve">
+    <value>Lehm</value>
+  </data>
+  <data name="ClayDescription" xml:space="preserve">
+    <value>Spülen Sie Ihr Haar mit Wasser aus, um es zu befeuchten. Nehmen Sie jeweils eine Handvoll Haare auf und tragen Sie die Bentonit-Ton-Maske von den Wurzeln bis zu den Spitzen auf. Wenn Ihr Haar zu trocknen beginnt, befeuchten Sie es erneut mit Hilfe einer Sprühflasche. Rollen Sie Ihre Haare auf und setzen Sie eine Duschhaube auf</value>
+  </data>
+  <data name="Rinse" xml:space="preserve">
+    <value>Spülung</value>
+  </data>
+  <data name="RinseDescription" xml:space="preserve">
+    <value>Wasch deine Haare. Spüle es aus. Trage eine kleine Menge Spülung auf.Massiere es in die Haare ein. Warte zwei Minuten. Spüle das Haar aus.</value>
+  </data>
 </root>

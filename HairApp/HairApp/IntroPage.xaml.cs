@@ -32,12 +32,16 @@ namespace HairApp
             var ci = new System.Globalization.CultureInfo(lang);
             AppResources.Culture = ci;
             DependencyService.Get<ILocalize>()?.SetLocale(ci);
+
+
             Navigation.PopAsync();
         }
 
         private void EnglishButton_Clicked(object sender, EventArgs e)
         {
-            SetLanguage("en");
+            SetLanguage("en-US");
+
+
         }
 
         private void GermanButton_Clicked(object sender, EventArgs e)

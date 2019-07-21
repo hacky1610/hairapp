@@ -61,11 +61,84 @@ namespace HairAppBl.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Clarifying Shampoo ähnelt.
+        /// </summary>
+        public static string ClarifyingShampoo {
+            get {
+                return ResourceManager.GetString("ClarifyingShampoo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die For best results. massage the clarifying shampoo into your roots where most major product buildup is, then work the shampoo through the rest of hair. ähnelt.
+        /// </summary>
+        public static string ClarifyingShampooDescription {
+            get {
+                return ResourceManager.GetString("ClarifyingShampooDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Clay ähnelt.
+        /// </summary>
+        public static string Clay {
+            get {
+                return ResourceManager.GetString("Clay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rinse your hair with water to wet it. Pick up handfuls of hair at a time and apply the bentonite clay mask from the roots to the tips. If your hair starts drying, dampen it again with the help of a spray bottle. Roll up your hair and put on a shower cap ähnelt.
+        /// </summary>
+        public static string ClayDescription {
+            get {
+                return ResourceManager.GetString("ClayDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Conditioner ähnelt.
+        /// </summary>
+        public static string Conditioner {
+            get {
+                return ResourceManager.GetString("Conditioner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wash your hair. Rinse your shampoo. Wring your hair out. Put on your flush.
+        ///Let the rinse take effect. Rinse the rinse ähnelt.
+        /// </summary>
+        public static string ConditionerDescription {
+            get {
+                return ResourceManager.GetString("ConditionerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Daily ähnelt.
         /// </summary>
         public static string Daily {
             get {
                 return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Deep Conditioner ähnelt.
+        /// </summary>
+        public static string DeepConditioner {
+            get {
+                return ResourceManager.GetString("DeepConditioner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die After applying a deep conditioner, cover your hair with a shower cap or plastic bag and add low heat (wrap a warm, damp towel around your head.) This opens up the cuticle and allows the deep conditioner to penetrate your hair. Leave in the DC for at least 20 minutes (we recommend 20-40.) ähnelt.
+        /// </summary>
+        public static string DeepConditionerDescription {
+            get {
+                return ResourceManager.GetString("DeepConditionerDescription", resourceCulture);
             }
         }
         
@@ -124,11 +197,65 @@ namespace HairAppBl.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hot oil treatment ähnelt.
+        /// </summary>
+        public static string HotOilTreatment {
+            get {
+                return ResourceManager.GetString("HotOilTreatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wash your hair. Make a water bath. Heat your coconut oil. Wet hair, if it is not already wet. Massage the oil into your scalp using fingertips dipped in the hot oil. Heat a towel with a hair dryer or clothes dryer. Wash and rinse hair thoroughly ähnelt.
+        /// </summary>
+        public static string HotOilTreatmentDescription {
+            get {
+                return ResourceManager.GetString("HotOilTreatmentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Last ähnelt.
         /// </summary>
         public static string Last {
             get {
                 return ResourceManager.GetString("Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Leave in Conditioner ähnelt.
+        /// </summary>
+        public static string LeaveInConditioner {
+            get {
+                return ResourceManager.GetString("LeaveInConditioner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wash your hair with shampoo and apply the conditioner. Add a small amount of serum to your palm. Rub the product into your hair. Comb your hair. ähnelt.
+        /// </summary>
+        public static string LeaveInConditionerDescription {
+            get {
+                return ResourceManager.GetString("LeaveInConditionerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Moisturising mask  ähnelt.
+        /// </summary>
+        public static string MoisturisingMask {
+            get {
+                return ResourceManager.GetString("MoisturisingMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Part your hair down the center and start by applying it down the part and on your scalp. Let this mask sit for 30-45 minutes and then rinse with your regular shampoo and conditioner. This mask is best and most effective if used one a week ähnelt.
+        /// </summary>
+        public static string MoisturisingMaskDescription {
+            get {
+                return ResourceManager.GetString("MoisturisingMaskDescription", resourceCulture);
             }
         }
         
@@ -160,11 +287,65 @@ namespace HairAppBl.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pre-poo ähnelt.
+        /// </summary>
+        public static string Prepoo {
+            get {
+                return ResourceManager.GetString("Prepoo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An oil treatment applied to hair prior to shampooing or conditioning ähnelt.
+        /// </summary>
+        public static string PrepooDescription {
+            get {
+                return ResourceManager.GetString("PrepooDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Protein Treatment ähnelt.
+        /// </summary>
+        public static string ProteinTreatment {
+            get {
+                return ResourceManager.GetString("ProteinTreatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Just like your body, your hair needs protein in order to stay healthy. ... Protein treatments boost the hair with a variety of nutrients and proteins to help reconstruct and strengthen hair strands. ähnelt.
+        /// </summary>
+        public static string ProteinTreatmentDescription {
+            get {
+                return ResourceManager.GetString("ProteinTreatmentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Reminder for Hair Care ähnelt.
         /// </summary>
         public static string ReminderForHairCare {
             get {
                 return ResourceManager.GetString("ReminderForHairCare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rinse ähnelt.
+        /// </summary>
+        public static string Rinse {
+            get {
+                return ResourceManager.GetString("Rinse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wash your hair. Rinse it off. Apply a small amount of conditioner. Massage into hair. Wait two minutes. Rinse the hair. ähnelt.
+        /// </summary>
+        public static string RinseDescription {
+            get {
+                return ResourceManager.GetString("RinseDescription", resourceCulture);
             }
         }
         
@@ -183,6 +364,24 @@ namespace HairAppBl.Resources {
         public static string Second {
             get {
                 return ResourceManager.GetString("Second", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shampoo ähnelt.
+        /// </summary>
+        public static string Shampoo {
+            get {
+                return ResourceManager.GetString("Shampoo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wash your hair with shampoo ähnelt.
+        /// </summary>
+        public static string ShampooDescription {
+            get {
+                return ResourceManager.GetString("ShampooDescription", resourceCulture);
             }
         }
         

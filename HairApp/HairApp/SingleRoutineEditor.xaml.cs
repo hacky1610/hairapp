@@ -19,7 +19,7 @@ namespace HairApp
             InitializeComponent();
 
             //Resources
-            OKButton.Text = AppResources.Add;
+            OKButton.Text = AppResources.OK;
             mEditRoutineLabel.Text = AppResources.EditRoutine; 
 
         }

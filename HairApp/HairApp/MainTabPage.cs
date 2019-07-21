@@ -35,6 +35,7 @@ namespace HairApp
         private void Intro_Disappearing(object sender, System.EventArgs e)
         {
             Init();
+            mMainsSesion.InitRoutines();
         }
 
         private void Init()

@@ -117,44 +117,71 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EveryDays" xml:space="preserve">
-    <value>Every {count} days</value>
+  <data name="CareDayToday" xml:space="preserve">
+    <value>Today is care day</value>
   </data>
-  <data name="EveryDay" xml:space="preserve">
-    <value>Every day</value>
+  <data name="NoCareDay" xml:space="preserve">
+    <value>No Care day configured</value>
   </data>
-  <data name="EveryWeek" xml:space="preserve">
-    <value>Every {days} each {count} week</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="MonthlyText" xml:space="preserve">
-    <value>At {occurence} {day} every {month} month</value>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="Daily" xml:space="preserve">
-    <value>Daily</value>
+  <data name="CalendarTitle" xml:space="preserve">
+    <value>Hair Care Calendar</value>
   </data>
-  <data name="Monthly" xml:space="preserve">
-    <value>Monthly</value>
+  <data name="PlanedCareDays" xml:space="preserve">
+    <value>Planed Care Days</value>
   </data>
-  <data name="Weekly" xml:space="preserve">
-    <value>Weekly</value>
+  <data name="FinishedCareDays" xml:space="preserve">
+    <value>Finished Care Days</value>
   </data>
-  <data name="Yearly" xml:space="preserve">
-    <value>Yearly</value>
+  <data name="AddHairLength" xml:space="preserve">
+    <value>Enter hair length </value>
   </data>
-  <data name="First" xml:space="preserve">
-    <value>First</value>
+  <data name="HairlengthStatistic" xml:space="preserve">
+    <value>Hairlength statistic</value>
   </data>
-  <data name="Second" xml:space="preserve">
-    <value>Second</value>
+  <data name="EnterYourHairLength" xml:space="preserve">
+    <value>Enter your hair length</value>
   </data>
-  <data name="Third" xml:space="preserve">
-    <value>Third</value>
+  <data name="ChooseRoutine" xml:space="preserve">
+    <value>Choose a routine</value>
   </data>
-  <data name="Fourth" xml:space="preserve">
-    <value>Fourth</value>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
   </data>
-  <data name="Last" xml:space="preserve">
-    <value>Last</value>
+  <data name="SelectFromAlbum" xml:space="preserve">
+    <value>Select from album</value>
+  </data>
+  <data name="TakePic" xml:space="preserve">
+    <value>Take new picture</value>
+  </data>
+  <data name="ListOfAllCareDays" xml:space="preserve">
+    <value>List of all care days</value>
+  </data>
+  <data name="DefineYourCareDay" xml:space="preserve">
+    <value>Define your Care Day</value>
+  </data>
+  <data name="AddRoutine" xml:space="preserve">
+    <value>Add routine</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>Every</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>Weeks</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date:</value>
   </data>
   <data name="Monday" xml:space="preserve">
     <value>Monday</value>
@@ -177,83 +204,88 @@
   <data name="Sunday" xml:space="preserve">
     <value>Sunday</value>
   </data>
-  <data name="TimeForHairCare" xml:space="preserve">
-    <value>Time for Hair Care</value>
+  <data name="Routines" xml:space="preserve">
+    <value>Routines</value>
   </data>
-  <data name="TodayIs" xml:space="preserve">
-    <value>Today is:</value>
+  <data name="AddDescription" xml:space="preserve">
+    <value>Add description</value>
   </data>
-  <data name="ReminderForHairCare" xml:space="preserve">
-    <value>Reminder for Hair Care</value>
+  <data name="AddComment" xml:space="preserve">
+    <value>Add comment</value>
   </data>
-  <data name="TomorrowIs" xml:space="preserve">
-    <value>Tomorrow is:</value>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="Prepoo" xml:space="preserve">
-    <value>Pre-poo</value>
+  <data name="BackLenght" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="PrepooDescription" xml:space="preserve">
-    <value>An oil treatment applied to hair prior to shampooing or conditioning</value>
+  <data name="SideLenght" xml:space="preserve">
+    <value>Side</value>
   </data>
-  <data name="HotOilTreatment" xml:space="preserve">
-    <value>Hot oil treatment</value>
+  <data name="FrontLength" xml:space="preserve">
+    <value>Front</value>
   </data>
-  <data name="HotOilTreatmentDescription" xml:space="preserve">
-    <value>Wash your hair. Make a water bath. Heat your coconut oil. Wet hair, if it is not already wet. Massage the oil into your scalp using fingertips dipped in the hot oil. Heat a towel with a hair dryer or clothes dryer. Wash and rinse hair thoroughly</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="Shampoo" xml:space="preserve">
-    <value>Shampoo</value>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
-  <data name="ShampooDescription" xml:space="preserve">
-    <value>Wash your hair with shampoo</value>
+  <data name="ShowMore" xml:space="preserve">
+    <value>show more</value>
   </data>
-  <data name="ClarifyingShampoo" xml:space="preserve">
-    <value>Clarifying Shampoo</value>
+  <data name="Today" xml:space="preserve">
+    <value>today</value>
   </data>
-  <data name="ClarifyingShampooDescription" xml:space="preserve">
-    <value>For best results. massage the clarifying shampoo into your roots where most major product buildup is, then work the shampoo through the rest of hair.</value>
+  <data name="InDays" xml:space="preserve">
+    <value>in {count} days</value>
   </data>
-  <data name="Conditioner" xml:space="preserve">
-    <value>Conditioner</value>
+  <data name="NextCareDay" xml:space="preserve">
+    <value>Next care day {name} is in {days} days</value>
   </data>
-  <data name="ConditionerDescription" xml:space="preserve">
-    <value>Wash your hair. Rinse your shampoo. Wring your hair out. Put on your flush.
-Let the rinse take effect. Rinse the rinse</value>
+  <data name="DoYourCareDay" xml:space="preserve">
+    <value>Do your care day: </value>
   </data>
-  <data name="DeepConditioner" xml:space="preserve">
-    <value>Deep Conditioner</value>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutes</value>
   </data>
-  <data name="DeepConditionerDescription" xml:space="preserve">
-    <value>After applying a deep conditioner, cover your hair with a shower cap or plastic bag and add low heat (wrap a warm, damp towel around your head.) This opens up the cuticle and allows the deep conditioner to penetrate your hair. Leave in the DC for at least 20 minutes (we recommend 20-40.)</value>
+  <data name="StartCareDay" xml:space="preserve">
+    <value>Start care day</value>
   </data>
-  <data name="ProteinTreatment" xml:space="preserve">
-    <value>Protein Treatment</value>
+  <data name="NeededTime" xml:space="preserve">
+    <value>Needed time</value>
   </data>
-  <data name="ProteinTreatmentDescription" xml:space="preserve">
-    <value>Just like your body, your hair needs protein in order to stay healthy. ... Protein treatments boost the hair with a variety of nutrients and proteins to help reconstruct and strengthen hair strands.</value>
+  <data name="MissingValueTitle" xml:space="preserve">
+    <value>Missing value</value>
   </data>
-  <data name="MoisturisingMask" xml:space="preserve">
-    <value>Moisturising mask </value>
+  <data name="ForgotTitle" xml:space="preserve">
+    <value>You forgot to enter a title</value>
   </data>
-  <data name="MoisturisingMaskDescription" xml:space="preserve">
-    <value>Part your hair down the center and start by applying it down the part and on your scalp. Let this mask sit for 30-45 minutes and then rinse with your regular shampoo and conditioner. This mask is best and most effective if used one a week</value>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="LeaveInConditioner" xml:space="preserve">
-    <value>Leave in Conditioner</value>
+  <data name="ForgotRoutine" xml:space="preserve">
+    <value>You forgot to add a routine</value>
   </data>
-  <data name="LeaveInConditionerDescription" xml:space="preserve">
-    <value>Wash your hair with shampoo and apply the conditioner. Add a small amount of serum to your palm. Rub the product into your hair. Comb your hair.</value>
+  <data name="DeleteWashDay" xml:space="preserve">
+    <value>Delete washday</value>
   </data>
-  <data name="Clay" xml:space="preserve">
-    <value>Clay</value>
+  <data name="DeleteWashdayConfirmation" xml:space="preserve">
+    <value>If you delete the washday all data concerning this washday will be deleted</value>
   </data>
-  <data name="ClayDescription" xml:space="preserve">
-    <value>Rinse your hair with water to wet it. Pick up handfuls of hair at a time and apply the bentonite clay mask from the roots to the tips. If your hair starts drying, dampen it again with the help of a spray bottle. Roll up your hair and put on a shower cap</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="Rinse" xml:space="preserve">
-    <value>Rinse</value>
+  <data name="RoutinEditorHeading" xml:space="preserve">
+    <value>Edit your routines</value>
   </data>
-  <data name="RinseDescription" xml:space="preserve">
-    <value>Wash your hair. Rinse it off. Apply a small amount of conditioner. Massage into hair. Wait two minutes. Rinse the hair.</value>
+  <data name="Title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EditRoutine" xml:space="preserve">
+    <value>Edit routine</value>
   </data>
 </root>

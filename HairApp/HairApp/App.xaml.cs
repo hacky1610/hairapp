@@ -36,9 +36,9 @@ namespace HairApp
             Session.Restore();
 
 
-            var ci = new System.Globalization.CultureInfo(MainSession.GetCulture());
-            AppResources.Culture = ci;
-            DependencyService.Get<ILocalize>()?.SetLocale(ci);
+            //var ci = new System.Globalization.CultureInfo(MainSession.GetCulture());
+            //AppResources.Culture = ci;
+            //DependencyService.Get<ILocalize>()?.SetLocale(ci);
 
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var historyfileDb = new FileDB(Constants.HistoryStorageFile);

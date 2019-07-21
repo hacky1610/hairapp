@@ -157,14 +157,17 @@ namespace HairApp
             var instances = mMainSessionController.GetInstancesByDate();
             if (futureDays.ContainsKey(date))
             {
-                PlanedWashDaysContainer.IsVisible = true;
-                foreach (var d in futureDays[date])
+                if(date >= ScheduleController.GetToday())
                 {
-                    var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
-                    var c = new WashingDayDefinitionControl(wdController, App.BL);
-                    c.Edited += WashingDayEdited;
-                    c.Removed += C_Removed;
-                    this.PlanedWashDays.Children.Add(c.View);
+                    PlanedWashDaysContainer.IsVisible = true;
+                    foreach (var d in futureDays[date])
+                    {
+                        var wdController = new WashingDayEditorController(d, App.MainSession.GetAllDefinitions(), mAlarmController);
+                        var c = new WashingDayDefinitionControl(wdController, App.BL);
+                        c.Edited += WashingDayEdited;
+                        c.Removed += C_Removed;
+                        this.PlanedWashDays.Children.Add(c.View);
+                    }
                 }
             }
 

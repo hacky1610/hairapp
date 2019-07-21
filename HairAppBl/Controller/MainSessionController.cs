@@ -211,17 +211,23 @@ namespace HairAppBl.Controller
         public void Init()
         {
             MainSession = new MainSession();
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Prepoo", "Prepoo", "", "Please do your Prepoo"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Hot Oil Treatment", "HotOilTreatment", "", "Please do your Hot Oil Treatment"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Shampoo", "Shampoo", "", "Please wash your hair"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Carifying SHampoo", "CarifyingShampoo", "", "Please wash your hair"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Conditioner", "Conditioner", "", "Please use your Conditioner"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Deep Conditioner", "DeepConditioner", "", "Please use your Deep Conditioner"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Protein Treatment", "ProteinTreatment", "", "Please make Protein Treatment"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Moisturising Mask", "MoisturisingMask", "", "Please make Moisturising Mask"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Leave in Conditioner", "LeaveInConditioner", "", "Please make Leave in Conditioner"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Clay", "Clay", "", "Please use Clay"));
-            MainSession.AllRoutines.Add(RoutineDefinition.Create("Rinses", "Rinses", "", "Please use Rinses"));
+        }
+
+        public void InitRoutines()
+        {
+            MainSession.AllRoutines.Clear();
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.Prepoo, "Prepoo", "", Resources.AppResource.PrepooDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.HotOilTreatment, "HotOilTreatment", "", Resources.AppResource.HotOilTreatmentDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.Shampoo, "Shampoo", "", Resources.AppResource.ShampooDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.ClarifyingShampoo, "CarifyingShampoo", "", Resources.AppResource.ClarifyingShampooDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.Conditioner, "Conditioner", "", Resources.AppResource.ConditionerDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.DeepConditioner, "DeepConditioner", "", Resources.AppResource.DeepConditionerDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.ProteinTreatment, "ProteinTreatment", "", Resources.AppResource.ProteinTreatmentDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.MoisturisingMask, "MoisturisingMask", "", Resources.AppResource.MoisturisingMaskDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.LeaveInConditioner, "LeaveInConditioner", "", Resources.AppResource.LeaveInConditionerDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.Clay, "Clay", "", Resources.AppResource.ClayDescription));
+            MainSession.AllRoutines.Add(RoutineDefinition.Create(Resources.AppResource.Rinse, "Rinses", "", Resources.AppResource.RinseDescription));
+
         }
 
         public class CommingDays
