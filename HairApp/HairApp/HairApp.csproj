@@ -12,13 +12,13 @@
 
   <ItemGroup>
     <PackageReference Include="Forms9Patch" Version="1.6.5.1" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.13.2" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.13.2" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.1.1" />
     <PackageReference Include="OxyPlot.Xamarin.Forms" Version="1.0.0">
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
     <PackageReference Include="XamForms.Controls.Calendar" Version="1.1.1" />
     <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
   </ItemGroup>
@@ -121,5 +121,9 @@
     <None Update="WashDayInstance.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UsingResxLocalization\" />
   </ItemGroup>
 </Project>

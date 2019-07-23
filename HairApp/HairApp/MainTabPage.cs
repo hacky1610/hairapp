@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using HairAppBl.Interfaces;
 using HairAppBl.Controller;
+using HairApp.Interfaces;
 
 namespace HairApp
 {
@@ -20,12 +21,16 @@ namespace HairApp
 
             if (!mainSessionController.HasCulture())
             {
-                var intro = new IntroPage(mainSessionController);
+                var intro = new IntroPage(mainSessionController, ac);
                 intro.Disappearing += Intro_Disappearing;
                 Navigation.PushAsync(intro);
             }
             else
+            {
+                var ci = new System.Globalization.CultureInfo(mainSessionController.GetCulture());
+                DependencyService.Get<ILocalize>().SetLocale(ci);
                 Init();
+            }
             
         
             //SetToolbarPlacement(ToolbarPlacement.Bottom);

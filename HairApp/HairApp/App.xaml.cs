@@ -15,16 +15,19 @@ namespace HairApp
 {
     public partial class App : Application
     {
+        #region Members
         public static String washdayToShow;
+        public static IHairBl BL { get; set; }
+        public static MainSessionController MainSession { get; set; }
+        #endregion
 
+        #region Constructor
         public App()
         {
             InitializeComponent();
 
             //Init Culture
             //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-           
-
 
             //Init Alarms
             DependencyService.Get<IAlarm>()?.Init();
@@ -35,18 +38,19 @@ namespace HairApp
             Session.Register(App.MainSession);
             Session.Restore();
 
-
-            //var ci = new System.Globalization.CultureInfo(MainSession.GetCulture());
-            //AppResources.Culture = ci;
-            //DependencyService.Get<ILocalize>()?.SetLocale(ci);
-
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var historyfileDb = new FileDB(Constants.HistoryStorageFile);
-            var ac = new AlarmController(fileDb, historyfileDb);
+            var settingsDb = new FileDB(Constants.SettingsStorageFile);
+            var ac = new AlarmController(fileDb, historyfileDb,settingsDb);
 
             MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
-
         }
+
+        public App(String washdayId) : this()
+        {
+            washdayToShow = washdayId;
+        }
+        #endregion
 
         private void MainSession_Saved(object sender, EventArgs e)
         {
@@ -59,7 +63,6 @@ namespace HairApp
                   "uwp={Your UWP App secret here};" +
                   "ios=5fa34f6c-5c63-4560-acbc-9d560e6e34b2",
                   typeof(Analytics), typeof(Crashes));
-
         }
 
         public void SendException(Exception e)
@@ -67,20 +70,10 @@ namespace HairApp
             Crashes.TrackError(e);
         }
 
-  
-
-        public App(String washdayId):this()
-        {
-            washdayToShow = washdayId;
-        }
-
         public INavigation GetNavigation()
         {
             return MainPage.Navigation;
         }
-
-        public static IHairBl BL { get; set; }
-        public static MainSessionController MainSession { get; set; }
 
         protected override void OnStart()
         {
@@ -90,7 +83,6 @@ namespace HairApp
         {
             Session.Save();
         }
-
 
         protected override void OnResume()
         {

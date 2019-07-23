@@ -39,7 +39,6 @@ namespace HairApp.Droid
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-
             JobUtil.scheduleJob(ApplicationContext); 
         }
 
@@ -54,7 +53,6 @@ namespace HairApp.Droid
                 myApp.SendException(e.Exception);
         }
   
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);

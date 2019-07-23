@@ -79,7 +79,7 @@ namespace HairApp.Controls
                 ls.MarkerStrokeThickness = 3;
                 ls.TouchStarted += Ls_TouchStarted;
                 ls.Title = l.Name;
-                ls.SelectionMode = SelectionMode.Single;
+                ls.SelectionMode = OxyPlot.SelectionMode.Single;
                 ls.StrokeThickness = 4;
                 ls.Points.AddRange(l.Points);
                 ls.Color = l.Color;

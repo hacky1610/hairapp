@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using HairAppBl.Interfaces;
 using HairAppBl.Models;
@@ -11,14 +12,22 @@ namespace HairAppBl.Controller
 {
     public class AlarmController
     {
+        #region Members
         private readonly IDataBase scheduleDatabase;
         private readonly IDataBase alarmHistoryDatabase;
-        public AlarmController(IDataBase scheduleDb, IDataBase alarmDb)
+        private readonly IDataBase settingsDatabase;
+        #endregion
+
+        #region Constructor
+        public AlarmController(IDataBase scheduleDb, IDataBase alarmDb, IDataBase settingsDB)
         {
             this.scheduleDatabase = scheduleDb;
             this.alarmHistoryDatabase = alarmDb;
+            this.settingsDatabase = settingsDB;
         }
+        #endregion
 
+        #region Public Functions
         public void SaveWashDay(ScheduleSqlDefinition def)
         {
 
@@ -26,8 +35,8 @@ namespace HairAppBl.Controller
             if (list.ContainsKey(def.ID))
                 list.Remove(def.ID);
             list.Add(def.ID, def);
-             
-             this.scheduleDatabase.Save(list);
+
+            this.scheduleDatabase.Save(list);
         }
 
         public void SetAlarmShown(String id)
@@ -56,60 +65,19 @@ namespace HairAppBl.Controller
             this.alarmHistoryDatabase.Save(list);
         }
 
-
-        public Dictionary<string, ScheduleSqlDefinition> LoadScheduleDatabase()
+        public void SetCulture(String culture)
         {
-            try
-            {               
-                return  this.scheduleDatabase.Load<Dictionary<string, ScheduleSqlDefinition>>();
-            }
-            catch(Exception)
-            {
-                return new Dictionary<string, ScheduleSqlDefinition>();
-            }
+            var settings = GetCulture();
+            settings.Culture = culture;
+            this.settingsDatabase.Save(settings);
         }
 
-        public Dictionary<string, AlarmHistory> LoadAlarmHistory()
+        public SettingsModel GetCulture()
         {
-            try
-            {
-                return this.alarmHistoryDatabase.Load<Dictionary<string, AlarmHistory>>();
-            }
-            catch (Exception)
-            {
-                return new Dictionary<string, AlarmHistory>();
-            }
+            return LoadSettingsDb();
         }
 
-        public bool AlarmShown(string id)
-        {
-            var list = LoadAlarmHistory();
-
-            if (list.ContainsKey(id))
-            {
-                var val = list[id];
-                if (val.LastAlarm == ScheduleController.GetToday())
-                    return true;
-            }
-
-            return false;
-        }
-
-        public bool ReminderShown(string id)
-        {
-            var list = LoadAlarmHistory();
-
-            if (list.ContainsKey(id))
-            {
-                var val = list[id];
-                if (val.LastReminder == ScheduleController.GetToday())
-                    return true;
-            }
-
-            return false;
-        }
-
-        public  List<ScheduleSqlDefinition> GetTodayWashDays()
+        public List<ScheduleSqlDefinition> GetTodayWashDays()
         {
             var wdId = new List<ScheduleSqlDefinition>();
             var list = LoadScheduleDatabase();
@@ -118,13 +86,13 @@ namespace HairAppBl.Controller
             {
                 var s = schedule.GetDefinition();
                 var controller = new ScheduleController(s);
-                if(controller.IsCareDay(DateTime.Now))
+                if (controller.IsCareDay(DateTime.Now))
                 {
-                    if(!AlarmShown(schedule.ID))
-                         wdId.Add(schedule);
+                    if (!AlarmShown(schedule.ID))
+                        wdId.Add(schedule);
                 }
             }
-            return wdId;    
+            return wdId;
         }
 
         public List<ScheduleSqlDefinition> GetReminderWashDays()
@@ -165,8 +133,73 @@ namespace HairAppBl.Controller
             return utcTime.AddSeconds(-epochDif).Ticks / 10000;
         }
 
+        public Dictionary<string, ScheduleSqlDefinition> LoadScheduleDatabase()
+        {
+            try
+            {
+                return this.scheduleDatabase.Load<Dictionary<string, ScheduleSqlDefinition>>();
+            }
+            catch (Exception)
+            {
+                return new Dictionary<string, ScheduleSqlDefinition>();
+            }
+        }
 
+        public Dictionary<string, AlarmHistory> LoadAlarmHistory()
+        {
+            try
+            {
+                return this.alarmHistoryDatabase.Load<Dictionary<string, AlarmHistory>>();
+            }
+            catch (Exception)
+            {
+                return new Dictionary<string, AlarmHistory>();
+            }
+        }
 
+        
 
+        public SettingsModel LoadSettingsDb()
+        {
+            try
+            {
+                return this.settingsDatabase.Load<SettingsModel>();
+            }
+            catch (Exception)
+            {
+                return new SettingsModel();
+            }
+        }
+        #endregion
+
+        #region Private functions
+        private bool AlarmShown(string id)
+        {
+            var list = LoadAlarmHistory();
+
+            if (list.ContainsKey(id))
+            {
+                var val = list[id];
+                if (val.LastAlarm == ScheduleController.GetToday())
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool ReminderShown(string id)
+        {
+            var list = LoadAlarmHistory();
+
+            if (list.ContainsKey(id))
+            {
+                var val = list[id];
+                if (val.LastReminder == ScheduleController.GetToday())
+                    return true;
+            }
+
+            return false;
+        }
+        #endregion
     }
 }

@@ -35,7 +35,7 @@ namespace HairAppBl.Tests
         [Test]
         public void Instantiate()
         {
-            var wdController = new WashingDayEditorController(new WashingDayDefinition(),allRoutines,new AlarmController(null,null));
+            var wdController = new WashingDayEditorController(new WashingDayDefinition(),allRoutines,new AlarmController(null,null,null));
 
             HairApp.WashDayEditor d = new HairApp.WashDayEditor(msCOntroller,wdController, true, hairAppBl);
         }

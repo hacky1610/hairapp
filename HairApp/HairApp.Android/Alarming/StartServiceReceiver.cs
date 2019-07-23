@@ -11,7 +11,6 @@ namespace HairApp.Droid
         public override void OnReceive(Context context, Intent intent)
         {
             AndroidLog.WriteLog("Boot completed - start Jobservice");
-
             JobUtil.scheduleJob(context);
         }
     }

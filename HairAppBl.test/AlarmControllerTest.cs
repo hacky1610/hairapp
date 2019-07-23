@@ -15,7 +15,7 @@ namespace HairAppBl.Tests
         {
             var dbMock = new DbMock();
             
-            AlarmController ac = new AlarmController(dbMock,dbMock);
+            AlarmController ac = new AlarmController(dbMock,dbMock,dbMock);
             var days = ac.GetTodayWashDays();
             Assert.NotNull(days);
         }
@@ -25,7 +25,7 @@ namespace HairAppBl.Tests
         {
             var dbMock = new DbMock();
 
-            AlarmController ac = new AlarmController(dbMock,dbMock);
+            AlarmController ac = new AlarmController(dbMock,dbMock,dbMock);
             var schedule = new ScheduleDefinition();
             schedule.WeeklyPeriod.Period = 4;
             var day = new ScheduleSqlDefinition(schedule, "Foo", "Bar");
@@ -40,7 +40,7 @@ namespace HairAppBl.Tests
         {
             var dbMock = new DbMock();
 
-            AlarmController ac = new AlarmController(dbMock,dbMock);
+            AlarmController ac = new AlarmController(dbMock,dbMock,dbMock);
             var schedule = new ScheduleDefinition();
             schedule.WeeklyPeriod.Period = 4;
             var day = new ScheduleSqlDefinition(schedule, "Foo", "Bar");
@@ -59,7 +59,7 @@ namespace HairAppBl.Tests
         {
             var dbMock = new DbMock();
 
-            AlarmController ac = new AlarmController(dbMock,dbMock);
+            AlarmController ac = new AlarmController(dbMock,dbMock,dbMock);
             var schedule = new ScheduleDefinition();
             schedule.WeeklyPeriod.Period = 4;
             var day = new ScheduleSqlDefinition(schedule, "Foo", "Bar");
@@ -74,7 +74,7 @@ namespace HairAppBl.Tests
         {
             var dbMock = new DbMock();
 
-            AlarmController ac = new AlarmController(dbMock,dbMock);
+            AlarmController ac = new AlarmController(dbMock,dbMock,dbMock);
             var schedule = new ScheduleDefinition();
             schedule.Type = ScheduleDefinition.ScheduleType.Dayly;
             schedule.DaylyPeriod.Period = 1;

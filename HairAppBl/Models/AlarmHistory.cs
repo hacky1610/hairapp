@@ -5,22 +5,13 @@ using System.Text;
 
 namespace HairAppBl.Models
 {
-    public class AlarmHistory
+    public class SettingsModel
     {
-        public DateTime LastAlarm { get;  set; }
-        public DateTime LastReminder { get;  set; }
+        public String Culture { get;  set; }
 
-
-        public AlarmHistory()
+        public SettingsModel()
         {
-            LastAlarm = new DateTime(1990, 1, 1);
-            LastReminder = new DateTime(1990, 1, 1);
-        }
-
-        public AlarmHistory(DateTime lastAlarm, DateTime lastTeminder):this()
-        {
-            LastAlarm = lastAlarm;
-            LastReminder = LastReminder;
+            Culture = "fr";
         }
     }
 }

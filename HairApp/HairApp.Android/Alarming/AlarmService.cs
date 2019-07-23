@@ -9,8 +9,6 @@ using HairApp.Droid;
 [BroadcastReceiver]
 public class AlarmService : BroadcastReceiver
 {
-    public int counter = 0;
-    private Timer timer;
     public AlarmService(Context applicationContext) : base()
     {
     }
@@ -19,15 +17,9 @@ public class AlarmService : BroadcastReceiver
     {
     }
 
-
     public override void OnReceive(Context context, Intent intent)
     {
         AndroidLog.WriteLog("AlarmService started");
-
-        //Todo:Usa a variable for the language
-        var ci = new System.Globalization.CultureInfo("fr");
-        var loc = new UsingResxLocalization.Android.Localize();
-        loc.SetLocale(ci);
 
         var currentHour = DateTime.Now.Hour;
         if (currentHour >= 6)
@@ -43,7 +35,6 @@ public class AlarmService : BroadcastReceiver
         }
 
         new Alarm().Init();
-
     }
 
 }

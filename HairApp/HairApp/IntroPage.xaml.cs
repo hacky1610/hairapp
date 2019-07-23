@@ -13,14 +13,15 @@ namespace HairApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class IntroPage : ContentPage
 	{
-        public event EventHandler<EventArgs> PageClosed;
         private MainSessionController mMainSessionController;
+        private AlarmController mAlarmController;
+        public String Culture { get; private set; }
 
-
-        public IntroPage(MainSessionController mainSessionController)
+        public IntroPage(MainSessionController mainSessionController,AlarmController ac)
 	    {
 	        InitializeComponent ();
             mMainSessionController = mainSessionController;
+            mAlarmController = ac;
             FrenchButton.Clicked += FrenchButton_Clicked;
             GermanButton.Clicked += GermanButton_Clicked;
             EnglishButton.Clicked += EnglishButton_Clicked;
@@ -29,6 +30,7 @@ namespace HairApp
         private void SetLanguage(String lang)
         {
             mMainSessionController.SetCulture(lang);
+            mAlarmController.SetCulture(lang);
             var ci = new System.Globalization.CultureInfo(lang);
             AppResources.Culture = ci;
             DependencyService.Get<ILocalize>()?.SetLocale(ci);

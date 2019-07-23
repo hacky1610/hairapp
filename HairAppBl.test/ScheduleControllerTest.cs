@@ -41,7 +41,7 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_CheckOtherWeekDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -59,7 +59,7 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_Period2()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.Period = 2;
@@ -79,7 +79,7 @@ namespace HairAppBl.Tests
         public void GetScheduledDays_Period2_twoDays()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -103,7 +103,7 @@ namespace HairAppBl.Tests
         public void IsCareDay_TodayIsCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -124,7 +124,7 @@ namespace HairAppBl.Tests
         public void IsCareDay_TodayIsNoCareDay()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -145,7 +145,7 @@ namespace HairAppBl.Tests
         public void Time2CareDay_is2()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -166,7 +166,7 @@ namespace HairAppBl.Tests
         public void Time2CareDay_is0()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines,ac);
             wdc.GetModel().Scheduled.WeeklyPeriod.WeekDays = new System.Collections.Generic.List<DayOfWeek>
@@ -232,7 +232,7 @@ namespace HairAppBl.Tests
         public void Monthly_FirstSaturday_MonthlyPeriod_1()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines, ac);
             wdc.GetModel().Scheduled.Type = ScheduleDefinition.ScheduleType.Monthly;
@@ -250,7 +250,7 @@ namespace HairAppBl.Tests
         public void Monthly_SecondSaturday_BeforeStart_MonthlyPeriod_2()
         {
             WashingDayDefinition wd = new WashingDayDefinition();
-            AlarmController ac = new AlarmController(null,null);
+            AlarmController ac = new AlarmController(null,null,null);
 
             WashingDayEditorController wdc = new WashingDayEditorController(wd, allRoutines, ac);
             wdc.GetModel().Scheduled.Type = ScheduleDefinition.ScheduleType.Monthly;

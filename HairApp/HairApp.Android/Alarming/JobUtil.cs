@@ -13,7 +13,6 @@ namespace HairApp.Droid
             CreateJob(context);
         }
 
-
         private static void CreateJob(Context context)
         {
             AndroidLog.WriteLog("Init ServiceRestarter");
@@ -27,7 +26,5 @@ namespace HairApp.Droid
             JobScheduler jobScheduler = (JobScheduler)context.GetSystemService(Context.JobSchedulerService);
             jobScheduler.Schedule(builder.Build());
         }
-
-
-}
+    }
 }
