@@ -9,6 +9,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using HairApp.Interfaces;
 using HairApp.Resources;
+using HairApp.Controls;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HairApp
@@ -43,7 +44,8 @@ namespace HairApp
             var settingsDb = new FileDB(Constants.SettingsStorageFile);
             var ac = new AlarmController(fileDb, historyfileDb,settingsDb);
 
-            MainPage = new NavigationPage(new MainTabPage(BL,MainSession,ac));
+            MainPage = new NavigationPage(new CustomTabBar(BL,MainSession,ac));
+            ((NavigationPage)MainPage).BarBackgroundColor =  Color.FromHex((String)Current.Resources["NavColor"]);
         }
 
         public App(String washdayId) : this()

@@ -81,7 +81,7 @@ namespace HairApp.Controls
         {
             var wdInstance = e.Controller.GetWashingDayInstance(ScheduleController.GetToday());
 
-            var instancePage = new WashDayInstance(e.Controller.GetModel(), wdInstance);
+            var instancePage = new WashDayInstance(e.Controller.GetModel(), wdInstance,mHairbl);
             Navigation.PushAsync(instancePage, true);
         }
 

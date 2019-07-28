@@ -15,15 +15,17 @@ namespace HairApp
 	{
         MainSessionController mMainSessionController;
         AlarmController mAlarmController;
+        HairAppBl.Interfaces.IHairBl mHairBl;
         DateTime mLastDate;
         Calendar mCalendar;
 
-        public CalendarPage(MainSessionController controller, AlarmController ac)
+        public CalendarPage(MainSessionController controller, AlarmController ac, HairAppBl.Interfaces.IHairBl hairbl)
 		{
 			InitializeComponent();
 
             mMainSessionController = controller;
             mAlarmController = ac;
+            mHairBl = hairbl;
 
             //Calendar
             InitCalendar();
@@ -201,13 +203,13 @@ namespace HairApp
 
         private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)
         {
-            Navigation.PushAsync(new PicturePage(e.Source));
+            Navigation.PushAsync(new PicturePage(e.Source,mHairBl));
 
         }
 
         private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)
         {
-            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance));
+            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance,mHairBl));
 
         }
 

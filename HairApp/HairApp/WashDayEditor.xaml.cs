@@ -34,7 +34,7 @@ namespace HairApp
 
             RefreshList();
 
-            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save);
+            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save,hairbl);
             SaveButtonContainer.Content = saveClose.View;
 
             //Events

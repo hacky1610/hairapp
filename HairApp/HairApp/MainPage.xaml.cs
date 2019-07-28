@@ -12,13 +12,15 @@ namespace HairApp
         private AlarmController mAlarmController;
         private CareDayList mCareDayList;
         public event EventHandler<EventArgs> ListRefreshed;
+        HairAppBl.Interfaces.IHairBl mHairBl;
 
-        public MainPage(AlarmController ac)
+        public MainPage(AlarmController ac, HairAppBl.Interfaces.IHairBl hairbl)
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
 
             this.mAlarmController = ac;
+            mHairBl = hairbl;
 
             mCareDayList = new CareDayList(App.MainSession, App.BL, mAlarmController, this);
             CareDayListFrame.Content = mCareDayList;
@@ -68,7 +70,7 @@ namespace HairApp
                 App.washdayToShow = String.Empty;
 
                 Device.BeginInvokeOnMainThread(() => {
-                    Navigation.PushAsync(new WashDayInstance(day, wdInstance), true);
+                    Navigation.PushAsync(new WashDayInstance(day, wdInstance,mHairBl), true);
                 });
                 ;
             }

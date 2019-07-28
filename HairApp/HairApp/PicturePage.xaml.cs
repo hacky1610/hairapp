@@ -9,11 +9,11 @@ namespace HairApp
 	public partial class PicturePage : ContentPage
 	{
 
-        public PicturePage(ImageSource source)
+        public PicturePage(ImageSource source, HairAppBl.Interfaces.IHairBl hairbl)
 		{
 			InitializeComponent();
 
-            var navi = new Controls.NavigationControl("Home", "");
+            var navi = new Controls.NavigationControl("Home", "",hairbl);
             NavigationContainer.Content = navi.View;
             navi.LeftButton.Clicked += LeftButton_Clicked; ;
 

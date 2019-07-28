@@ -4,6 +4,10 @@
              x:Class="HairApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <x:String x:Key="MainColor">#fcfbf5</x:String>
+            <x:String x:Key="NavColor">#dbb653</x:String>
+            
+
             <Style x:Key="Title" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="FontAttributes" Value="Bold" />
@@ -15,19 +19,25 @@
             </Style>
 
             <Style x:Key="ScrollPageContent" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="#ffb380" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
 
             </Style>
 
+            <Style x:Key="NavigationControl" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="#b69427" />
+
+            </Style>
+            
+
             <Style x:Key="PageContent" TargetType="StackLayout">
-                <Setter Property="Padding" Value="20,20,20,20" />
-                <Setter Property="BackgroundColor" Value="#ffb380" />
+                <Setter Property="Padding" Value="20,10,20,0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
             </Style>
 
             <Style x:Key="HomePageContent" TargetType="ScrollView">
-                <Setter Property="Padding" Value="15,15,15,15" />
-                <Setter Property="BackgroundColor" Value="#ffb380" />
+                <Setter Property="Padding" Value="15,10,15,0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 
             </Style>
@@ -77,6 +87,7 @@
                 <Setter Property="CornerRadius" Value="3" />
                 <Setter Property="Padding" Value="0,10,0,10" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BackgroundColor" Value="#f7cf63" />
             </Style>
 
             <Style x:Key="RoutineFrameSelect" TargetType="Frame">
@@ -88,6 +99,7 @@
             <Style x:Key="RoutineContent" TargetType="Frame">
                 <Setter Property="HorizontalOptions" Value="Fill" />
                 <Setter Property="Padding" Value="15, 5, 10, 5" />
+
             </Style>
 
             <Style x:Key="RoutineButton" TargetType="Frame">

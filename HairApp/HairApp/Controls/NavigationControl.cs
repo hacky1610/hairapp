@@ -8,13 +8,13 @@ namespace HairApp.Controls
 
     public class NavigationControl : ViewCell
     {
-
         public readonly Button LeftButton;
         public readonly Button RightButton;
-        public NavigationControl(string leftButtonText,string rightButtonText)
+
+        public NavigationControl(string leftButtonText,string rightButtonText, HairAppBl.Interfaces.IHairBl hairbl)
         {
             var grid = new Grid();
-            grid.BackgroundColor = Color.FromHex("E56D0D");
+            grid.Style = (Style)hairbl.Resources["NavigationControl"];
             grid.HorizontalOptions = LayoutOptions.FillAndExpand;
             
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
@@ -27,9 +27,6 @@ namespace HairApp.Controls
             grid.Children.Add(LeftButton, 0, 0);
             grid.Children.Add(RightButton, 1, 0);
             View = grid;
-
         }
-
- 
     }
 }

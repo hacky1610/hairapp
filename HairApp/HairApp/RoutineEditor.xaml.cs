@@ -23,7 +23,7 @@ namespace HairApp
 
             mHairbl = hairbl;
 
-            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save);
+            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save,hairbl);
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;

@@ -4,19 +4,18 @@ using System.Threading.Tasks;
 
 namespace HairApp.Controls
 {
-    /// <summary>
-    /// For custom renderer on Android (only)
-    /// </summary>
-
     public class DetailsControl : ViewCell
     {
+        #region Members
         private Label mLabelText;
         private HairAppBl.Interfaces.IHairBl mHairBl;
         private StackLayout mDetailsFrame;
         private Frame mColorFrame;
         private ContentView mHeaderLeft;
         private ContentView mHeaderRight;
+        #endregion
 
+        #region Properties
         protected Color Color
         {
             get
@@ -69,10 +68,10 @@ namespace HairApp.Controls
             {
                 return mDetailsFrame.Children;
             }
-           
-   
         }
+        #endregion
 
+        #region Constructor
         public DetailsControl(HairAppBl.Interfaces.IHairBl hairbl)
         {
             this.mHairBl = hairbl;
@@ -84,7 +83,6 @@ namespace HairApp.Controls
                 Padding = new Thickness(0, 0, 0, 0),
                 HeightRequest = 10,
                 WidthRequest = 15
-             
             };
 
             mLabelText = new Label
@@ -100,17 +98,6 @@ namespace HairApp.Controls
             {
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
-
-
-            //var moreInfoButton = Common.GetButton("info.png",hairbl);
-            //moreInfoButton.Clicked +=  (sender, e) =>
-            //{
-            //    if (!mDetailsFrame.IsVisible)
-            //        ShowDetailsAnimation();
-            //    else
-            //        HideDetailsAnimation();
-            //};
-
 
             mDetailsFrame = new StackLayout
             {
@@ -133,11 +120,9 @@ namespace HairApp.Controls
                         {
                             Style = (Style)hairbl.Resources["RoutineContent"],
                             Orientation = StackOrientation.Horizontal,
-
                             Children = {mColorFrame, mLabelText,mHeaderLeft,mHeaderRight }
                         },
                         mDetailsFrame
-                        
                     }
                 }
             };
@@ -147,29 +132,25 @@ namespace HairApp.Controls
                     ShowDetailsAnimation();
                 else
                     HideDetailsAnimation();
-                
             };
             frame.GestureRecognizers.Add(tapGestureRecognizer);
 
             View = frame;
-                
-          
         }
+        #endregion
 
+        #region Functions
         private async void ShowDetailsAnimation()
         {
             mDetailsFrame.IsVisible = true;
             await Task.WhenAll(mDetailsFrame.FadeTo(1, 400), mDetailsFrame.RotateXTo(360, 500));
-
         }
 
         private async void HideDetailsAnimation()
         {
             await Task.WhenAll(mDetailsFrame.FadeTo(0, 400), mDetailsFrame.RotateXTo(0, 500));
             mDetailsFrame.IsVisible = false;
-
         }
-
+        #endregion
     }
-
 }

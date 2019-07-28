@@ -64,12 +64,12 @@ namespace HairApp
 
         private void C_ImageClicked(object sender, WashingDayInstanceCalendarCell.ImageClickedEventArgs e)
         {
-            Navigation.PushAsync(new PicturePage(e.Source));
+            Navigation.PushAsync(new PicturePage(e.Source,mHairBl));
         }
 
         private void C_Openclicked(object sender, WashingDayInstanceCalendarCell.WashingDayCellEventArgs e)
         {
-            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance));
+            Navigation.PushAsync(new WashDayInstance(e.Definition, e.Instance,mHairBl));
 
         }
        

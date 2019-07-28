@@ -45,10 +45,10 @@ namespace HairApp
 
         private void Init()
         {
-            var mainPage = new MainPage(mAlarmController);
+            var mainPage = new MainPage(mAlarmController,mHairBl);
             mainPage.Icon = "home.png";
 
-            var calPage = new CalendarPage(mMainsSesion, mAlarmController);
+            var calPage = new CalendarPage(mMainsSesion, mAlarmController,mHairBl);
             calPage.Icon = "calendar.png";
 
             var hPage = new HistoryPage(mHairBl, mMainsSesion);

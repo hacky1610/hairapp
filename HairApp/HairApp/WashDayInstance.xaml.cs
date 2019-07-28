@@ -17,13 +17,15 @@ namespace HairApp
         private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
         private WashingDayInstance mInstance;
         private WashingDayDefinition mDefinition;
+        private HairAppBl.Interfaces.IHairBl mHairbl;
 
-        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance)
+        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
 		{
 			InitializeComponent ();
        
             mInstance =  instance;
             mDefinition = definition;
+            mHairbl = hairbl;
 
             InitFields();
         }
@@ -42,7 +44,7 @@ namespace HairApp
             }
 
             //Save close
-            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save);
+            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save,mHairbl);
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;
