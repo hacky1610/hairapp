@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HairApp.test
+namespace HairApp.Tests
 {
     class HairLengthControlTest
     {

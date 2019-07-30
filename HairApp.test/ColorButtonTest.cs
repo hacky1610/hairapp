@@ -3,7 +3,7 @@ using HairAppBl.Models;
 using HairAppBl.Controller;
 using System.Collections.Generic;
 
-namespace HairAppBl.Tests
+namespace HairApp.Tests
 {
     public class ColorButtonTest
     {

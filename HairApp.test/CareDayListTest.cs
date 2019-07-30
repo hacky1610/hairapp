@@ -2,8 +2,9 @@ using NUnit.Framework;
 using HairAppBl.Models;
 using HairAppBl.Controller;
 using System.Collections.Generic;
+using HairAppBl;
 
-namespace HairAppBl.Tests
+namespace HairApp.Tests
 {
     public class CareDayListTest
     {
@@ -17,7 +18,7 @@ namespace HairAppBl.Tests
         public void Instantiate()
         {
             var dic = new Dictionary<string, object>();
-            var hbl = new HairAppBl(new ConsoleLogger(),dic);
+            var hbl = new HairAppBl.HairAppBl(new ConsoleLogger(),dic);
             dic.Add("RoutineFrame", null); 
             dic.Add("RoutineContent", null);
             dic.Add("RoutineButton", null);

@@ -3,14 +3,15 @@ using Xamarin.Forms;
 
 namespace HairApp.Controls
 {
-    /// <summary>
-    /// For custom renderer on Android (only)
-    /// </summary>
 
     public class AddRoutineCell : ViewCell
     {
+        #region Members
         RoutineCellObject cellObject;
         XLabs.Forms.Controls.CheckBox mCheckBox;
+        #endregion
+
+        #region Properties
         public Boolean Checked
         {
             get
@@ -18,7 +19,9 @@ namespace HairApp.Controls
                 return mCheckBox.Checked;
             }
         }
+        #endregion
 
+        #region Constructor
         public AddRoutineCell(RoutineCellObject rcObject, HairAppBl.Interfaces.IHairBl hairbl)
         {
             cellObject = rcObject;
@@ -53,11 +56,13 @@ namespace HairApp.Controls
             View = frame;
 
         }
+        #endregion
 
+        #region Functions
         private void MCheckBox_CheckedChanged(object sender, XLabs.EventArgs<bool> e)
         {
             cellObject.Checked = e.Value;
         }
-
+        #endregion
     }
 }

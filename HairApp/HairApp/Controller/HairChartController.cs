@@ -10,31 +10,63 @@ namespace HairAppBl.Controller
 {
     public class HairChartController
     {
+        #region Members
         readonly List<HairLength> mHairLengths;
         Dictionary<DataPoint, HairLength> mPointHairLength;
         ChartLine mBackLength;
         ChartLine mSideLength;
         ChartLine mFrontLength;
-        public static OxyColor BackLineColor = OxyColor.FromRgb(255, 0, 0);
-        public static OxyColor SideLineColor = OxyColor.FromRgb(255, 103, 0);
-        public static OxyColor FrontLineColor = OxyColor.FromRgb(0, 0, 140);
+        static OxyColor mBackLineColor = OxyColor.FromRgb(255, 0, 0);
+        static OxyColor mFrontLineColor = OxyColor.FromRgb(255, 103, 0);
+        static OxyColor mSideBLineColor = OxyColor.FromRgb(0, 0, 140);
+        #endregion
+
+        #region Properties
+        public static OxyColor BackLineColor
+        {
+            get
+            {
+                return mBackLineColor;
+            }
+            private set{}
+        }
+
+        public static OxyColor SideLineColor
+        {
+            get
+            {
+                return mSideBLineColor;
+            }
+            private set { }
+        }
+
+        public static OxyColor FrontLineColor
+        {
+            get
+            {
+                return mFrontLineColor;
+            }
+            private set { }
+        }
+        #endregion
+
+        #region Constructor
+       
 
         public HairChartController(List<HairLength> hairLengths)
         {
-            if(hairLengths == null)
-                throw new ArgumentNullException("hairLengths");
-
             mPointHairLength = new Dictionary<DataPoint, HairLength>();
 
-            this.mHairLengths = hairLengths;
+            this.mHairLengths = hairLengths ?? throw new ArgumentNullException("hairLengths");
             mHairLengths.Sort(new HairLengthComparer());
 
             SetBackLengths();
             SetSideLengths();
             SetFrontLengths();
         }
+        #endregion
 
-
+        #region Functions
         public HairLength GetHairLengthByPoint(DataPoint point)
         {
             return mPointHairLength[point];
@@ -44,7 +76,6 @@ namespace HairAppBl.Controller
         {
             if (mPointHairLength.ContainsKey(key)) return;
             mPointHairLength.Add(key, hl);
-
         }
 
         private void SetBackLengths()
@@ -106,5 +137,6 @@ namespace HairAppBl.Controller
             return mHairLengths;
         }
 
+        #endregion
     }
 }

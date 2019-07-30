@@ -29,10 +29,9 @@ namespace HairApp.Controls
 
             mMainSessionController.DefinitionsEdited += MMainSessionController_DefinitionsEdited;
 
-            //WashdayList
             mWashDayList = new StackLayout { Orientation = StackOrientation.Vertical , HorizontalOptions = LayoutOptions.FillAndExpand };
 
-            this.Children.Add(mWashDayList);
+            Children.Add(mWashDayList);
             RefreshList();
         }
 
@@ -48,10 +47,7 @@ namespace HairApp.Controls
             var contr = new WashingDayEditorController(def, App.MainSession.GetAllDefinitions(), this.mAlarmController);
             var editor = new WashDayEditor(mMainSessionController, contr, true, mHairbl);
             Navigation.PushAsync(editor);
-
         }
-
-
 
         public void RefreshList()
         {

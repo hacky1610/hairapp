@@ -3,7 +3,7 @@ using HairAppBl.Models;
 using HairAppBl.Controller;
 using System.Collections.Generic;
 
-namespace HairAppBl.Tests
+namespace HairApp.Tests
 {
     public class WashingDayTest
     {
@@ -19,7 +19,7 @@ namespace HairAppBl.Tests
             var r = new RoutineDefinition();
             r.Name = "";
             var dic = new Dictionary<string, object>();
-            var hbl = new HairAppBl(new ConsoleLogger(),dic);
+            var hbl = new HairAppBl.HairAppBl(new HairAppBl.ConsoleLogger(),dic);
             dic.Add("RoutineFrame", null); 
             dic.Add("RoutineContent", null);
             dic.Add("RoutineButton", null);

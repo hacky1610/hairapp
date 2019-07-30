@@ -3,13 +3,14 @@ using HairAppBl.Models;
 using HairAppBl.Controller;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using HairAppBl;
 
-namespace HairAppBl.Tests
+namespace HairApp.Tests
 {
     public class WashingDayEditorTest
     {
         List<RoutineDefinition> allRoutines;
-        HairAppBl hairAppBl;
+        HairAppBl.HairAppBl  hairAppBl;
         MainSessionController msCOntroller;
 
         [SetUp]
@@ -25,7 +26,7 @@ namespace HairAppBl.Tests
             allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", ""));
 
             var dic = new Dictionary<string, object>();
-            hairAppBl = new HairAppBl(new ConsoleLogger(), dic);
+            hairAppBl = new HairAppBl.HairAppBl(new ConsoleLogger(), dic);
 
             msCOntroller = new MainSessionController(null);
 
@@ -37,7 +38,7 @@ namespace HairAppBl.Tests
         {
             var wdController = new WashingDayEditorController(new WashingDayDefinition(),allRoutines,new AlarmController(null,null,null));
 
-            HairApp.WashDayEditor d = new HairApp.WashDayEditor(msCOntroller,wdController, true, hairAppBl);
+            WashDayEditor d = new WashDayEditor(msCOntroller,wdController, true, hairAppBl);
         }
 
        
