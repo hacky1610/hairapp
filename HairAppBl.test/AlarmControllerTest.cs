@@ -70,6 +70,16 @@ namespace HairAppBl.Tests
         }
 
         [Test]
+        public void AlarmShownCanBeSet()
+        {
+            var dbMock = new DbMock();
+
+            AlarmController ac = new AlarmController(dbMock, dbMock, dbMock);
+            ac.SetAlarmShown("Foo");
+            Assert.IsTrue(ac.AlarmShown("Foo"));
+        }
+
+        [Test]
         public void WashDaysCanBeRead()
         {
             var dbMock = new DbMock();

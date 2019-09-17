@@ -173,7 +173,7 @@ namespace HairAppBl.Controller
         #endregion
 
         #region Private functions
-        private bool AlarmShown(string id)
+        public bool AlarmShown(string id)
         {
             var list = LoadAlarmHistory();
 

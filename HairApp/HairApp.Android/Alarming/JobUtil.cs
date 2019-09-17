@@ -13,6 +13,7 @@ namespace HairApp.Droid
             CreateJob(context);
         }
 
+
         private static void CreateJob(Context context)
         {
             AndroidLog.WriteLog("Init ServiceRestarter");
@@ -24,7 +25,18 @@ namespace HairApp.Droid
             builder.SetPersisted(true);
             builder.SetRequiredNetworkType(NetworkType.Any); // device should be idle
             JobScheduler jobScheduler = (JobScheduler)context.GetSystemService(Context.JobSchedulerService);
-            jobScheduler.Schedule(builder.Build());
+            var jobs = jobScheduler.AllPendingJobs.Count;
+            if(jobs == 0)
+            {
+                AndroidLog.WriteLog("Schedule");
+                jobScheduler.Schedule(builder.Build());
+            }
+            else
+            {
+                AndroidLog.WriteLog($"NO Schedule. Running jobs {jobs}");
+                jobScheduler.Schedule(builder.Build());
+
+            }
         }
     }
 }

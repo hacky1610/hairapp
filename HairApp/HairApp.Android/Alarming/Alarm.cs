@@ -22,6 +22,8 @@ namespace HairApp.Droid
             AlarmManager alarmManager = (AlarmManager)Application.Context.GetSystemService(Context.AlarmService);
 
             alarmManager.SetAndAllowWhileIdle(AlarmType.RtcWakeup, AlarmController.GetAlarmTime(), pendingIntent);
+
+            JobUtil.scheduleJob(Application.Context);
         }
 
     }
