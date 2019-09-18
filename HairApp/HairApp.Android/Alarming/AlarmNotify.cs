@@ -1,12 +1,4 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Support.V4.App;
-using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
-using HairAppBl;
-using HairAppBl.Controller;
-using Android.Graphics;
+﻿using Android.Content;
 using HairApp.Droid.Alarming;
 
 namespace HairApp.Droid

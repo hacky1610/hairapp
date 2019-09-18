@@ -1,11 +1,4 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Support.V4.App;
-using HairAppBl;
-using HairAppBl.Controller;
-using Android.Graphics;
+﻿using Android.Content;
 
 namespace HairApp.Droid
 {
@@ -24,7 +17,7 @@ namespace HairApp.Droid
 
             if (washdays.Count == 0)
             {
-                AndroidLog.WriteLog("Remineder: Tomorrow is no washing day");
+                AndroidLog.WriteLog("Reminder: Tomorrow is no washing day");
                 return;
             }
 
