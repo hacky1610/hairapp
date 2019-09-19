@@ -18,8 +18,6 @@ namespace HairApp.Droid.Controls
 {
     public class CustomBottomBarRenderer : TabbedPageRenderer
     {
-        FloatingActionButton floatingActionButton;
-        CoordinatorLayout coordinatorLayout;
 
         public CustomBottomBarRenderer(Context context) : base(context)
         {
@@ -32,14 +30,6 @@ namespace HairApp.Droid.Controls
             var bottomNavigationView = (GetChildAt(0) as RelativeLayout).GetChildAt(1) as BottomNavigationView;
             bottomNavigationView.SetBackgroundColor(Android.Graphics.Color.ParseColor("#dbb653"));
             bottomNavigationView.SetClipChildren(true);
-            return;
-
         }
-
-
-
-
-
-
     }
 }
