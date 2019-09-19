@@ -6,7 +6,7 @@ namespace HairApp.Droid.Alarming
 {
     class AlarmWorker:Worker
     {
-        Context mContext;
+        readonly Context mContext;
 
         public AlarmWorker(Context c, WorkerParameters p):base(c,p)
         {
