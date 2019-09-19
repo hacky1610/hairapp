@@ -20,7 +20,6 @@ namespace UsingResxLocalization.Android
 
         public CultureInfo GetCurrentCultureInfo()
         {
-            var netLanguage = "en";
             var androidLocale = Java.Util.Locale.Default;
             netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
 
@@ -75,7 +74,8 @@ namespace UsingResxLocalization.Android
         string ToDotnetFallbackLanguage(PlatformCulture platCulture)
         {
             Console.WriteLine(".NET Fallback Language:" + platCulture.LanguageCode);
-            var netLanguage = platCulture.LanguageCode; // use the first part of the identifier (two chars, usually);
+            // use the first part of the identifier (two chars, usually);
+            var netLanguage = platCulture.LanguageCode; 
 
             switch (platCulture.LanguageCode)
             {
