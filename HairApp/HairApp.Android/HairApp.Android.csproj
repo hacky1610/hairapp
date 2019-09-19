@@ -55,6 +55,9 @@
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Arch.Work.Runtime">
+      <Version>1.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Core.Utils">
       <Version>28.0.0.1</Version>
     </PackageReference>
@@ -70,20 +73,17 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarming\AlarmService.cs" />
+    <Compile Include="Alarming\Alarm.cs" />
+    <Compile Include="Alarming\AlarmWorker.cs" />
     <Compile Include="Alarming\Notify.cs" />
-    <Compile Include="Alarming\ServiceRestarter.cs" />
     <Compile Include="AndroidLog.cs" />
-    <Compile Include="Alarming\JobUtil.cs" />
     <Compile Include="Alarming\ReminderNotfiy.cs" />
     <Compile Include="Alarming\AlarmNotify.cs" />
-    <Compile Include="Alarming\Alarm.cs" />
     <Compile Include="Controls\CustomBottomBarRenderer.cs" />
     <Compile Include="Localize.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Alarming\StartServiceReceiver.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>

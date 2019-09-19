@@ -11,6 +11,7 @@ namespace HairAppBl.Tests
         
 
         [Test]
+        [Ignore("Ignore a test")]
         public void Init()
         {
             MainSessionController c = new MainSessionController(new Dictionary<string, object>());

@@ -11,6 +11,7 @@ using System.Globalization;
 using HairAppBl.Controller;
 using HairAppBl;
 using Plugin.CurrentActivity;
+using AndroidX.Work;
 
 namespace HairApp.Droid
 {
@@ -39,7 +40,8 @@ namespace HairApp.Droid
             //Media
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            JobUtil.scheduleJob(ApplicationContext); 
+           
+
         }
 
         protected override void OnStart()
