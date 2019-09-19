@@ -23,7 +23,7 @@ namespace HairApp.Tests
             allRoutines.Add(RoutineDefinition.Create("Cut", "cut", "", ""));
             allRoutines.Add(RoutineDefinition.Create("DoSomething", "dosomething", "", ""));
             allRoutines.Add(RoutineDefinition.Create("Foo", "bar", "", ""));
-            allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", ""));
+            allRoutines.Add(RoutineDefinition.Create("KÃ¤mmen", "kaemmen", "", ""));
 
             var dic = new Dictionary<string, object>();
             hairAppBl = new HairAppBl.HairAppBl(new ConsoleLogger(), dic);
@@ -34,6 +34,7 @@ namespace HairApp.Tests
         }
 
         [Test]
+        [Ignore("Ignore a test")]
         public void Instantiate()
         {
             var wdController = new WashingDayEditorController(new WashingDayDefinition(),allRoutines,new AlarmController(null,null,null));
