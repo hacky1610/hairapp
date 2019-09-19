@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HairApp.Dialogs;
+using System;
 using Xamarin.Forms;
 
 namespace HairApp.Controls

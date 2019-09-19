@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HairApp"
+             x:Class="HairApp.Pages.MainPage"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout VerticalOptions="FillAndExpand">
+        <ScrollView Style="{StaticResource HomePageContent}" >
+                <StackLayout>
+                <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent" IsVisible="False"/>
+                <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
+                        <StackLayout>
+                            <Label x:Name="TimeToNextCareDay" 
+                             HorizontalOptions="Center" FontSize="Medium"/>
+                            <Image x:Name="ValsImage"></Image>
+
+                        </StackLayout>
+                    </Frame>
+                    <Label x:Name="mListOfAllCareDaysLabel" Style="{StaticResource Title}"></Label>
+                    <Frame  x:Name="CareDayListFrame"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" BackgroundColor="Transparent">
+
+                    </Frame>
+                    <Frame x:Name="mInfo"  Style="{StaticResource InfoFrame}">
+                        <Label Style="{StaticResource InfoText}">Click Plus to create another care day</Label>
+                    </Frame>
+                    <ImageButton Source="add.png" BackgroundColor="Transparent" x:Name="mAddCareDayButton"  HeightRequest="50" ></ImageButton>
+
+                </StackLayout>
+            </ScrollView>
+
+
+    </StackLayout>
+
+</ContentPage>

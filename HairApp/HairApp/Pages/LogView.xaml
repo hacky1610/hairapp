@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="HairApp.Pages.LogView">
+  
+        <ScrollView>
+        <StackLayout Style="{StaticResource PageContent}">
+            <Editor x:Name="LogContent" FontSize="Small" VerticalOptions="StartAndExpand"></Editor>
+            <StackLayout Orientation="Horizontal" HeightRequest="50">
+                <Button Text="CLear" x:Name="ClearButton"/>
+                    <Button Text="Init" x:Name="Init"/>
+                <Button Text="Init Alarms" x:Name="InitAlarms"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+        
+
+</ContentPage>

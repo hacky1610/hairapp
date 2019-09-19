@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="AddRoutineDialog.xaml">
+    <EmbeddedResource Update="Dialogs\AddRoutineDialog.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\CustomTabBar.xaml">
@@ -38,43 +38,43 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="WashDayEditor.xaml">
+    <EmbeddedResource Update="Pages\WashDayEditor.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="SelectColorDialog.xaml.cs">
+    <Compile Update="Dialogs\SelectColorDialog.xaml.cs">
       <DependentUpon>SelectColorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Update="SingleRoutineEditor.xaml.cs">
+    <Compile Update="Dialogs\SingleRoutineEditor.xaml.cs">
       <DependentUpon>SingleRoutineEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Update="ChoosePictureDialog.xaml.cs">
+    <Compile Update="Dialogs\ChoosePictureDialog.xaml.cs">
       <DependentUpon>ChoosePictureDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Update="AddHairLengthDialog.xaml.cs">
+    <Compile Update="Dialogs\AddHairLengthDialog.xaml.cs">
       <DependentUpon>AddHairLengthDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Update="ChartPage.xaml.cs">
+    <Compile Update="Pages\ChartPage.xaml.cs">
       <DependentUpon>ChartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="PicturePage.xaml.cs">
+    <Compile Update="Pages\PicturePage.xaml.cs">
       <DependentUpon>PicturePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="HistoryPage.xaml.cs">
+    <Compile Update="Pages\HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="HelpPage.xaml.cs">
+    <Compile Update="Pages\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="LogView.xaml.cs">
+    <Compile Update="Pages\LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="CalendarPage.xaml.cs">
+    <Compile Update="Pages\CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="IntroPage.xaml.cs">
+    <Compile Update="Pages\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Resources\AppResources.Designer.cs">
@@ -82,10 +82,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="RoutineEditor.xaml.cs">
+    <Compile Update="Pages\RoutineEditor.xaml.cs">
       <DependentUpon>RoutineEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Update="WashDayInstance.xaml.cs">
+    <Compile Update="Pages\WashDayInstance.xaml.cs">
       <DependentUpon>WashDayInstance.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

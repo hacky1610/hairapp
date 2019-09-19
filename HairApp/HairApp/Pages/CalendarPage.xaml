@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="HairApp.Pages.CalendarPage"
+             NavigationPage.HasNavigationBar="false"
+             BackgroundColor="Transparent">
+    <StackLayout Style="{StaticResource Page}" HeightRequest="20">
+        <ContentView x:Name="NavigationContainer"/>
+        <StackLayout Style="{StaticResource PageContent}">
+
+            <ScrollView >
+                <StackLayout>
+                    <Label Text="Hair Care Calendar" Style="{StaticResource Title}"></Label>
+                    <ContentView x:Name="CalendarFrame"></ContentView>
+                    <StackLayout x:Name="PlanedWashDaysContainer" IsVisible="False">
+                        <Label Style="{StaticResource FrameTitle}" x:Name="mPlanedCareDaysLabel"></Label>
+                        <StackLayout x:Name="PlanedWashDays">
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="DoneWashDaysContainer" IsVisible="False">
+                        <Label Style="{StaticResource FrameTitle}" x:Name="mFinshedCareDaysLabel" ></Label>
+                        <StackLayout x:Name="DoneWashDays">
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+        </StackLayout>
+    </StackLayout>
+   
+</ContentPage>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HairApp.Pages.WashDayInstance"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand" BackgroundColor="Beige">
+        <ContentView x:Name="SaveButtonContainer" />
+        <ScrollView Style="{StaticResource ScrollPageContent}" VerticalOptions="FillAndExpand" BackgroundColor="AliceBlue">
+            <StackLayout Style="{StaticResource PageContent}" VerticalOptions="FillAndExpand" >
+
+            
+            <Label x:Name="mLabelTitle" 
+                Style="{StaticResource Title}" />
+            <Frame x:Name="DescriptionFrame" Style="{StaticResource FrameStyle}">
+            <Label x:Name="Description"
+                Style="{StaticResource InstanceDescription}" />
+            </Frame>
+              
+                <StackLayout x:Name="RoutineList">
+                   
+                </StackLayout>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label  x:Name="mNeededTimeLabel" Style="{StaticResource FrameTitle}"></Label>
+                        <TimePicker x:Name="UsedTime"/>
+                    </StackLayout>
+                </Frame>
+              
+
+                <Frame  Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Label Style="{StaticResource FrameTitle}">Pictures</Label>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" >
+                                <ImageButton Source="camera.png" HeightRequest="25" x:Name="takePicButton" BackgroundColor="Transparent"></ImageButton>
+                                <Label x:Name="mTakePicLabel"></Label>
+                            </StackLayout>
+                            
+                            <ScrollView Orientation="Horizontal" HorizontalOptions="StartAndExpand" x:Name="PictureListContainer">
+                                <StackLayout x:Name="PictureList"  Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="5,5,5,5"></StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button x:Name="mAddCommentButton"  Style="{StaticResource AddDescriptionButton}"/>
+                <Frame  x:Name="mCommentFrame" Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Editor x:Name="mCommentEntry" HeightRequest="150"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+ 
+</ContentPage>

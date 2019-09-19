@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="HairApp.Pages.RoutineEditor"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="SaveButtonContainer" />
+        <Label x:Name="mHeading"
+                Style="{StaticResource Heading}" />
+        <ScrollView x:Name="ScrollContainer">
+            <StackLayout Orientation="Vertical">
+            <StackLayout x:Name="RoutineList" Orientation="Vertical" Style="{StaticResource AddRoutineList}" >
+            </StackLayout >
+           
+                <ImageButton Source="add.png" BackgroundColor="Transparent" x:Name="mAddRoutineButton"  HeightRequest="50" ></ImageButton>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HairApp.Pages.IntroPage"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}">
+        <StackLayout Style="{StaticResource PageContent}">
+
+            <Label Text="Select Language"
+                Style="{StaticResource Heading}" />
+            <Button Text="French" x:Name="FrenchButton"/>
+            <Button Text="German" x:Name="GermanButton"/>
+            <Button Text="English" x:Name="EnglishButton"/>
+        </StackLayout>
+    </StackLayout>
+    
+</ContentPage>

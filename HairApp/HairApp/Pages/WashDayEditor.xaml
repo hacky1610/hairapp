@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="HairApp.Pages.WashDayEditor"
+             NavigationPage.HasNavigationBar="false">
+    <StackLayout Style="{StaticResource Page}">
+        <ContentView x:Name="SaveButtonContainer" />
+
+        <StackLayout Style="{StaticResource PageContent}" >
+      
+        <Label x:Name="mDefineYourCareDayLabel"
+                Style="{StaticResource Heading}" />
+        <ScrollView>
+            <StackLayout>
+                <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Horizontal" x:Name="titleFrame">
+                            <Frame x:Name="colorButton" Style="{StaticResource ColorFrame}" ></Frame>
+                            <Entry x:Name="WashDayNameEntry"/>
+                        </StackLayout>
+                </Frame>
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Vertical">
+                            <Label x:Name="mRoutinesLabel" ></Label>
+                            <StackLayout x:Name="RoutineList">
+                            </StackLayout>
+                            <Button x:Name="AddRoutine"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                                <Label x:Name="mScheduleLabel" HorizontalOptions="StartAndExpand"></Label>
+                                <Picker   x:Name="TypeSelection" HorizontalOptions="End" Style="{StaticResource TypeSelection}"></Picker>
+                                <ImageButton x:Name="OpenTypeButton" HorizontalOptions="End" Style="{StaticResource OpenTypeSelection}"></ImageButton>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Style="{StaticResource EditorLabel}" x:Name="mStartDateLabel"></Label>
+                                <DatePicker Style="{StaticResource EditorDatePicker}"  x:Name="StartDatePicker" ></DatePicker>
+                            </StackLayout>
+                            <StackLayout x:Name="DaylySection">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Style="{StaticResource EditorLabel}" x:Name="mDaysSelectionEveryLabel"></Label>
+                                    <Entry Style="{StaticResource EditorEntry}" x:Name="mEntryDaylyPeriod" Keyboard="Numeric"></Entry>
+                                    <Label Style="{StaticResource EditorLabel}" x:Name="mDaysSelectionDaysLabel"></Label>
+                                </StackLayout>
+                           
+                        </StackLayout>
+
+                        <StackLayout x:Name="WeeklySection">
+                            <StackLayout Orientation="Horizontal">
+                                    <Label Style="{StaticResource EditorLabel}" x:Name="mWeekSelectionEveryLabel"></Label>
+                                <Picker  x:Name="mEntryWeeklyPeriod"  Style="{StaticResource PeriodPicker}"></Picker>
+                                    <Label Style="{StaticResource EditorLabel}" x:Name="mWeekSelectionEveryWeek"></Label>
+                            </StackLayout>
+                                <FlexLayout Wrap="Wrap"
+                                JustifyContent="SpaceAround"  >
+                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxMonday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxTuesday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxWednesday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxThursday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxFriday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxSaturday"></controls:CheckBox>
+                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxSunday"></controls:CheckBox>
+                                </FlexLayout>
+                         </StackLayout>
+                            <StackLayout x:Name="MonthlySection">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Style="{StaticResource EditorLabel}" >At</Label>
+                                    <Picker   x:Name="mPickerOcurenceInMonth"  Style="{StaticResource PeriodPicker}"></Picker>
+                                    <Picker   x:Name="mPickerDayInWeek"  Style="{StaticResource PeriodPicker}"></Picker>
+                                    <Label Style="{StaticResource EditorLabel}" >every</Label>
+                                    <Entry Style="{StaticResource EditorEntry}" x:Name="mEntryMonthPeriod_1" Keyboard="Numeric"></Entry>
+                                    <Label Style="{StaticResource EditorLabel}" > month</Label>
+
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout x:Name="YearlySection">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Style="{StaticResource EditorLabel}" >Every</Label>
+                                    <Label Style="{StaticResource EditorLabel}" >Month</Label>
+                                </StackLayout>
+
+                            </StackLayout>
+
+
+                        </StackLayout>
+                </Frame>
+                    <Frame Style="{StaticResource FrameStyle}">
+                        <StackLayout>
+                            <Button x:Name="AddDescription" Style="{StaticResource AddDescriptionButton}"/>
+                            <Editor x:Name="Description" HeightRequest="150" Style="{StaticResource DescriptiontSection}"/>
+                        </StackLayout>
+                    </Frame>
+
+
+
+
+                </StackLayout>
+        </ScrollView>
+       
+    </StackLayout>
+    </StackLayout>
+</ContentPage>
