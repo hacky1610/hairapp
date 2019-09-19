@@ -26,14 +26,15 @@ namespace HairApp
         public App()
         {
             InitializeComponent();
-
+            var logger = new FileLogger();
+            logger.WriteLine("App Init");
             //Init Culture
             //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
 
             //Init Alarms
             DependencyService.Get<IAlarm>()?.Init();
 
-            BL = new HairAppBl.HairAppBl(new FileLogger(), Current.Resources);
+            BL = new HairAppBl.HairAppBl(logger, Current.Resources);
             App.MainSession = new MainSessionController(Current.Properties);
             App.MainSession.Saved += MainSession_Saved;
             Session.Register(App.MainSession);
@@ -46,6 +47,8 @@ namespace HairApp
 
             MainPage = new NavigationPage(new CustomTabBar(BL,MainSession,ac));
             ((NavigationPage)MainPage).BarBackgroundColor =  Color.FromHex((String)Current.Resources["NavColor"]);
+
+
         }
 
         public App(String washdayId) : this()

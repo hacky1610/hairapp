@@ -34,7 +34,7 @@ namespace HairApp.Droid
             XamForms.Controls.Droid.Calendar.Init();
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
 
-            myApp = new App(Intent.GetStringExtra("washday_id"));
+            myApp = new App(Intent.GetStringExtra(Alarming.Notify.WASHDAYID));
             LoadApplication(myApp);
 
             //Media

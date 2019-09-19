@@ -21,7 +21,7 @@ namespace UsingResxLocalization.Android
         public CultureInfo GetCurrentCultureInfo()
         {
             var androidLocale = Java.Util.Locale.Default;
-            netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
+            var netLanguage = AndroidToDotnetLanguage(androidLocale.ToString().Replace("_", "-"));
 
             // this gets called a lot - try/catch can be expensive so consider caching or something
             System.Globalization.CultureInfo ci = null;

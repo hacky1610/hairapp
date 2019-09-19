@@ -14,6 +14,7 @@ namespace HairApp.Droid.Alarming
         #region Members
         protected AlarmController mAlarmController;
         static readonly string CHANNEL_ID = "hairapp_notification";
+        public static readonly string WASHDAYID = "washday_id";
         #endregion
 
         #region Constructor
@@ -60,6 +61,7 @@ namespace HairApp.Droid.Alarming
             {
                 // When the user clicks the notification, SecondActivity will start up.
                 var resultIntent = new Intent(context, typeof(MainActivity));
+                resultIntent.PutExtra(WASHDAYID, washDayId);
 
                 var p = PendingIntent.GetActivity(context, DateTime.Now.Millisecond, resultIntent, PendingIntentFlags.UpdateCurrent);
 

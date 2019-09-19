@@ -64,6 +64,7 @@ namespace HairApp
 
             if (!String.IsNullOrEmpty(App.washdayToShow))
             {
+                mHairBl.Logger.WriteLine("Notify was clicked. Washday should be shown");
                 var day = App.MainSession.GetWashingDayById(App.washdayToShow);
                 var contr = new WashingDayEditorController(day, App.MainSession.GetAllDefinitions(), mAlarmController);
                 var wdInstance = contr.GetWashingDayInstance(ScheduleController.GetToday());
