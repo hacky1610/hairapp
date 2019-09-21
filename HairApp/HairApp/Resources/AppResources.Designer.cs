@@ -151,6 +151,24 @@ namespace HairApp.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die How long did you need ähnelt.
+        /// </summary>
+        internal static string ChooseTime {
+            get {
+                return ResourceManager.GetString("ChooseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Click to enter time ähnelt.
+        /// </summary>
+        internal static string ClickToEnterTime {
+            get {
+                return ResourceManager.GetString("ClickToEnterTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Date ähnelt.
         /// </summary>
         internal static string Date {
@@ -309,6 +327,15 @@ namespace HairApp.Resources {
         internal static string HairlengthStatistic {
             get {
                 return ResourceManager.GetString("HairlengthStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die hours ähnelt.
+        /// </summary>
+        internal static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         

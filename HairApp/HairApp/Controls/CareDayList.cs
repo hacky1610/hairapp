@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Linq;
 using HairApp.Resources;
+using HairApp.Pages;
 
 namespace HairApp.Controls
 {

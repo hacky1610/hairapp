@@ -288,4 +288,13 @@
   <data name="EditRoutine" xml:space="preserve">
     <value>Edit routine</value>
   </data>
+  <data name="ChooseTime" xml:space="preserve">
+    <value>How long did you need</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="ClickToEnterTime" xml:space="preserve">
+    <value>Click to enter time</value>
+  </data>
 </root>

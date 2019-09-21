@@ -9,18 +9,23 @@ using HairApp.Controls;
 using HairAppBl.Models;
 using HairApp.Resources;
 using HairApp.Dialogs;
+using HairAppBl.Interfaces;
 
 namespace HairApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WashDayInstance : ContentPage
 	{
-        private List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
-        private WashingDayInstance mInstance;
-        private WashingDayDefinition mDefinition;
-        private HairAppBl.Interfaces.IHairBl mHairbl;
+        #region Members
+        List<RoutineInstanceCell> mRoutineListControls = new List<RoutineInstanceCell>();
+        WashingDayInstance mInstance;
+        WashingDayDefinition mDefinition;
+        IHairBl mHairbl;
 
-        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance, HairAppBl.Interfaces.IHairBl hairbl)
+        #endregion
+
+        #region Constructor
+        public WashDayInstance(WashingDayDefinition definition, WashingDayInstance instance, IHairBl hairbl)
 		{
 			InitializeComponent ();
        
@@ -30,7 +35,9 @@ namespace HairApp.Pages
 
             InitFields();
         }
+        #endregion
 
+        #region Functions
         private void InitFields()
         {
             //Title
@@ -45,7 +52,7 @@ namespace HairApp.Pages
             }
 
             //Save close
-            var saveClose = new Controls.NavigationControl(AppResources.Cancel, AppResources.Save,mHairbl);
+            var saveClose = new NavigationControl(AppResources.Cancel, AppResources.Save,mHairbl);
             SaveButtonContainer.Content = saveClose.View;
 
             saveClose.RightButton.Clicked += OKButton_Clicked;
@@ -54,13 +61,19 @@ namespace HairApp.Pages
             RefreshList();
 
             //Needed Time
-            UsedTime.Time = mInstance.NeededTime;
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => {
+                var timePicker = new TimeRangePicker(mHairbl, mInstance.NeededTime);
+                timePicker.OkClicked += TimeTicker_OkClicked;
+                Navigation.PushPopupAsync(timePicker);
+            };
+            UsedTime.GestureRecognizers.Add(tapGestureRecognizer);
 
             //Comment
             mAddCommentButton.Clicked += AddComment_Clicked;
             mCommentEntry.Text = mInstance.Comment;
             mCommentFrame.IsVisible = false;
-            if (!String.IsNullOrEmpty(mInstance.Comment)) ShowComment();
+            if (!string.IsNullOrEmpty(mInstance.Comment)) ShowComment();
 
             //Take pic
             takePicButton.Clicked += TakePicture_Clicked;
@@ -73,6 +86,7 @@ namespace HairApp.Pages
             mTakePicLabel.Text = AppResources.TakePic;
             mAddCommentButton.Text = AppResources.AddComment;
             mNeededTimeLabel.Text = AppResources.NeededTime;
+            UsedTime.Text = AppResources.ClickToEnterTime;
         }
 
         private async void TakePicture_Clicked(object sender, EventArgs e)
@@ -80,6 +94,16 @@ namespace HairApp.Pages
             var choose = new ChoosePictureDialog(null);
             choose.PictureChoosen += Choose_PictureChoosen; ;
             await Navigation.PushPopupAsync(choose);
+        }
+
+        private void TimeTicker_OkClicked(object sender, TimeRangePicker.TimeSpanDialogEventArgs e)
+        {
+            mInstance.NeededTime = e.Time;
+            if(e.Time.Hours ==0 )
+                UsedTime.Text = $"{e.Time.Minutes} {AppResources.Minutes}";
+            else
+                UsedTime.Text = $"{e.Time.Hours}:{string.Format(String.Format("{0:D2}", e.Time.Minutes))} {AppResources.Hours}";
+
         }
 
         private void Choose_PictureChoosen(object sender, ChoosePictureDialog.PictureChoosenEventArgs e)
@@ -125,7 +149,7 @@ namespace HairApp.Pages
             }
 
             mInstance.Comment = mCommentEntry.Text;
-            mInstance.NeededTime = UsedTime.Time;
+            //mInstance.NeededTime = UsedTime.Time;
 
             App.MainSession.SendInstanceEdited();
 
@@ -144,18 +168,19 @@ namespace HairApp.Pages
             this.mRoutineListControls.Clear();
             foreach (var r in mInstance.Routines)
             {
-                var c = new Controls.RoutineInstanceCell(r,App.BL);
+                var c = new RoutineInstanceCell(r,App.BL);
                 this.RoutineList.Children.Add(c.View);
                 this.mRoutineListControls.Add(c);
             }
         }
+        #endregion
 
         public class WashDayInstanceEventArgs : EventArgs
         {
-            public Boolean Created { get; set; }
+            public bool Created { get; set; }
             public WashingDayInstance Instance { get; set; }
 
-            public WashDayInstanceEventArgs(WashingDayInstance instance, Boolean create)
+            public WashDayInstanceEventArgs(WashingDayInstance instance, bool create)
             {
                 this.Instance = instance;
                 this.Created = create;

@@ -29,5 +29,14 @@ namespace HairApp.Controls
 
             };
         }
+
+        public static Entry GetEntry()
+        {
+            return new Entry
+            {
+                Keyboard = Keyboard.Numeric,
+                WidthRequest = 40
+            };
+        }
     }
 }

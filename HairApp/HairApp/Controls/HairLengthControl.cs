@@ -34,9 +34,9 @@ namespace HairApp.Controls
             mHairbl = hairbl;
             mDatePicker = new DatePicker();
             mDatePicker.Date = ScheduleController.GetToday();
-            mBackEntry = GetEntry();
-            mSideEntry = GetEntry();
-            mFrontEntry = GetEntry();
+            mBackEntry = Common.GetEntry();
+            mSideEntry = Common.GetEntry();
+            mFrontEntry = Common.GetEntry();
             var takePhoto = new Button { Text = AppResources.TakePic};
             takePhoto.Clicked += TakePhoto_Clicked;
 
@@ -98,14 +98,8 @@ namespace HairApp.Controls
             }
         }
 
-        private Entry GetEntry()
-        {
-            return new Entry
-            {
-                Keyboard = Keyboard.Numeric,
-                WidthRequest = 40
-            };
-        }
+   
+        
 
         private StackLayout GetRow(Entry entry, String label)
         {

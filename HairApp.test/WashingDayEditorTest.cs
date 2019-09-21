@@ -4,6 +4,7 @@ using HairAppBl.Controller;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using HairAppBl;
+using HairApp.Pages;
 
 namespace HairApp.Tests
 {

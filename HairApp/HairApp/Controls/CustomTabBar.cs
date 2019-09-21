@@ -1,4 +1,5 @@
-﻿using HairAppBl.Controller;
+﻿using HairApp.Pages;
+using HairAppBl.Controller;
 using HairAppBl.Interfaces;
 using System;
 using Xamarin.Forms;

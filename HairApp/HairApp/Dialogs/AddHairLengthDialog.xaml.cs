@@ -1,17 +1,21 @@
 ﻿using System;
 using Rg.Plugins.Popup.Extensions;
 using HairApp.Resources;
+using HairAppBl.Interfaces;
+using HairAppBl.Models;
 
 namespace HairApp.Dialogs
 {
     public partial class AddHairLengthDialog : Rg.Plugins.Popup.Pages.PopupPage
     {
-        private HairAppBl.Interfaces.IHairBl mHairbl;
+        #region
+        IHairBl mHairbl;
         Controls.HairLengthControl mHairLengthControl;
+        bool AddNewHairLength;
         public event EventHandler<AddHairLengthDialogEventArgs> OkClicked;
-        private bool AddNewHairLength;
+        #endregion
 
-        public AddHairLengthDialog(HairAppBl.Interfaces.IHairBl hairbl,HairAppBl.Models.HairLength hl = null)
+        public AddHairLengthDialog(IHairBl hairbl,HairLength hl = null)
         {
             InitializeComponent();
             mHairbl = hairbl;

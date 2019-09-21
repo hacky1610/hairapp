@@ -3,6 +3,7 @@ using HairAppBl.Models;
 using HairAppBl.Controller;
 using System.Collections.Generic;
 using HairAppBl;
+using HairApp.Dialogs;
 
 namespace HairApp.Tests
 {
@@ -17,7 +18,7 @@ namespace HairApp.Tests
         [Test]
         public void Instantiate()
         {
-            var r = new HairApp.RoutineCellObject(new RoutineDefinition());
+            var r = new RoutineCellObject(new RoutineDefinition());
             r.Name = "";
             var dic = new Dictionary<string, object>();
             var hbl = new HairAppBl.HairAppBl(new ConsoleLogger(),dic);

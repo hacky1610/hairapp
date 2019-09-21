@@ -44,6 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dialogs\TimeRangePicker.xaml.cs">
+      <DependentUpon>TimeRangePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Dialogs\SelectColorDialog.xaml.cs">
       <DependentUpon>SelectColorDialog.xaml</DependentUpon>
     </Compile>
