@@ -16,7 +16,7 @@
                 <Frame Style="{StaticResource FrameStyle}">
                         <StackLayout Orientation="Horizontal" x:Name="titleFrame">
                             <Frame x:Name="colorButton" Style="{StaticResource ColorFrame}" ></Frame>
-                            <Entry x:Name="WashDayNameEntry"/>
+                            <Entry x:Name="WashDayNameEntry" Style="{StaticResource WashDayTitleEntry}"/>
                         </StackLayout>
                 </Frame>
                     <Frame Style="{StaticResource FrameStyle}">

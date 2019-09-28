@@ -35,7 +35,9 @@ namespace HairApp
             DependencyService.Get<IAlarm>()?.Init();
 
             BL = new HairAppBl.HairAppBl(logger, Current.Resources);
-            App.MainSession = new MainSessionController(Current.Properties);
+            var mainSessionDb = new FileDB(Constants.MainSessionStorageFile);
+
+            App.MainSession = new MainSessionController(mainSessionDb);
             App.MainSession.Saved += MainSession_Saved;
             Session.Register(App.MainSession);
             Session.Restore();

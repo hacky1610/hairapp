@@ -5,12 +5,13 @@ using Newtonsoft.Json;
 using HairAppBl.Models;
 using System.Drawing;
 using System.Linq;
+using HairAppBl.Interfaces;
 
 namespace HairAppBl.Controller
 {
     public class MainSessionController: Interfaces.ISession
     {
-        readonly IDictionary<string, object> mProperties;
+        readonly IDataBase mProperties;
         MainSession MainSession = null;
         public event EventHandler<EventArgs> DefinitionsEdited;
         public event EventHandler<EventArgs> InstanceEdited;
@@ -27,21 +28,24 @@ namespace HairAppBl.Controller
             }
         }
 
-        public MainSessionController(IDictionary<string, object> props)
+        public MainSessionController(IDataBase dataBase)
         {
-            mProperties = props;
+            mProperties = dataBase;
         }
 
         public void Restore()
         {
             var key= typeof(MainSession).ToString();
-            if (!mProperties.ContainsKey(key))
-                Init();
-            else
+            try
             {
-                string json = (string)mProperties[key];
-                MainSession = (MainSession)JsonConvert.DeserializeObject(json, typeof(MainSession));
+                MainSession = mProperties.Load<MainSession>();
             }
+            catch(Exception e)
+            {
+                Init();
+            }
+
+           
         }
 
         public void SendDefinitionsEdited()
@@ -58,9 +62,7 @@ namespace HairAppBl.Controller
 
         public void Save()
         {
-            string json = JsonConvert.SerializeObject(MainSession);
-            string key = MainSession.GetType().ToString();
-            mProperties[key] = json;
+            mProperties.Save(MainSession);
             Saved?.Invoke(this, new EventArgs());
         }
 
@@ -211,6 +213,7 @@ namespace HairAppBl.Controller
         public void Init()
         {
             MainSession = new MainSession();
+            InitRoutines();
         }
 
         public void InitRoutines()

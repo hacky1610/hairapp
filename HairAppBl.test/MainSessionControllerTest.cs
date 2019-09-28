@@ -14,7 +14,7 @@ namespace HairAppBl.Tests
         [Ignore("Ignore a test")]
         public void Init()
         {
-            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
+            MainSessionController c = new MainSessionController(new DbMock());
             c.Init();
             Assert.True(c.GetAllDefinitions().Count > 0);
         }
@@ -23,7 +23,7 @@ namespace HairAppBl.Tests
         [Test]
         public void GetWashingDayById_GetIsWorking()
         {
-            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
+            MainSessionController c = new MainSessionController(new DbMock());
             c.Init();
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();
@@ -36,7 +36,7 @@ namespace HairAppBl.Tests
         [Test]
         public void Restore_IsWorking()
         {
-            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
+            MainSessionController c = new MainSessionController(new DbMock());
             c.Init();
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();
@@ -53,7 +53,7 @@ namespace HairAppBl.Tests
         [Test]
         public void GetFutureDaysIsWorking()
         {
-            MainSessionController c = new MainSessionController(new Dictionary<string, object>());
+            MainSessionController c = new MainSessionController(new DbMock());
             c.Init();
             var days = c.GetAllWashingDays();
             var wdd = new WashingDayDefinition();

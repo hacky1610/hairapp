@@ -17,7 +17,7 @@ namespace HairAppBl.Controller
             this.dbFile = file;
         }
 
-        public void Save(Object o)
+        public void Save(object o)
         {
             string json = JsonConvert.SerializeObject(o);
             File.WriteAllText(dbFile, json);
