@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.01" package="com.companyname.HairApp" android:installLocation="auto" android:versionCode="2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.03" package="com.hacky.HairApp" android:installLocation="auto" android:versionCode="5">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<application android:label="HairApp.Android" android:icon="@mipmap/icon">
@@ -8,16 +8,8 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 			</intent-filter>
 		</receiver>
-    <receiver
-            android:name=".Droid.AlarmReceiver2"
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-        </receiver>
-    <service
-           android:name=".AlarmService"
-           android:enabled="true" >
-        </service>
+		<receiver android:name=".Droid.AlarmReceiver2" android:enabled="true" android:exported="true" android:label="RestartServiceWhenStopped"></receiver>
+		<service android:name=".AlarmService" android:enabled="true"></service>
 		<service android:name=".Droid.NotifyService" android:exported="false" />
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
