@@ -27,7 +27,7 @@ namespace HairApp.Tests
             dic.Add("RoutineButton", null);
             dic.Add("RoutineFrameSelect", null);
            
-           var c =  new HairApp.Controls.AddRoutineCell(r,hbl);
+           var c =  new Controls.AddRoutineCell(r,hbl);
             Assert.False(c.Checked);
         }
 

@@ -35,6 +35,7 @@ namespace HairApp.Droid
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
 
             myApp = new App(Intent.GetStringExtra(Alarming.Notify.WASHDAYID));
+            myApp.LoadContent();
             LoadApplication(myApp);
 
             //Media

@@ -17,12 +17,13 @@ namespace HairApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WashDayEditor : ContentPage
 	{
+        #region Members
         private WashingDayEditorController mWashingDayEditorController;
         private MainSessionController mMainSessionController;
         private List<RoutineDefinitionCell> mRoutineListControls = new List<RoutineDefinitionCell>();
         private Boolean mCreate;
         private HairAppBl.Interfaces.IHairBl mHairbl;
-
+        #endregion
 
         public WashDayEditor (MainSessionController mainSession, WashingDayEditorController wdController,Boolean create, HairAppBl.Interfaces.IHairBl hairbl)
 	    {

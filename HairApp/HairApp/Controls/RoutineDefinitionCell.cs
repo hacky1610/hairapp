@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using HairAppBl.Models;
+using HairAppBl.Interfaces;
 
 namespace HairApp.Controls
 {
@@ -23,11 +24,11 @@ namespace HairApp.Controls
         public event EventHandler<EventArgs> MovedDown;
         public event EventHandler<EventArgs> Selected;
         public event EventHandler<EventArgs> Edited;
-        private HairAppBl.Interfaces.IHairBl mHairBl;
+        private IHairBl mHairBl;
 
         public RoutineDefinition Routine { get; set; }
 
-        public RoutineDefinitionCell(RoutineDefinition routine, HairAppBl.Interfaces.IHairBl hairbl, int number)
+        public RoutineDefinitionCell(RoutineDefinition routine, IHairBl hairbl, int number)
         {
             this.mHairBl = hairbl;
             this.Routine = routine;

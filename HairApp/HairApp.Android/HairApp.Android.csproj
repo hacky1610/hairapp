@@ -39,14 +39,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <EnableProguard>true</EnableProguard>
-    <BundleAssemblies>true</BundleAssemblies>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EnableProguard>false</EnableProguard>
+    <BundleAssemblies>false</BundleAssemblies>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

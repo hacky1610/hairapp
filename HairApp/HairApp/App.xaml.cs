@@ -42,14 +42,18 @@ namespace HairApp
             Session.Register(App.MainSession);
             Session.Restore();
 
+         
+
+        }
+
+        public void LoadContent()
+        {
             var fileDb = new FileDB(Constants.SchedulesStorageFile);
             var historyfileDb = new FileDB(Constants.HistoryStorageFile);
             var settingsDb = new FileDB(Constants.SettingsStorageFile);
-            var ac = new AlarmController(fileDb, historyfileDb,settingsDb);
-
-            MainPage = new NavigationPage(new CustomTabBar(BL,MainSession,ac));
+            var ac = new AlarmController(fileDb, historyfileDb, settingsDb);
+            MainPage = new NavigationPage(new CustomTabBar(BL, MainSession, ac));
             ((NavigationPage)MainPage).BarBackgroundColor =  Color.FromHex((String)Current.Resources["NavColor"]);
-
 
         }
 

@@ -18,6 +18,7 @@ namespace HairApp.Tests
         public void SetUp()
         {
             Xamarin.Forms.Mocks.MockForms.Init();
+            Application.Current = new App();
             allRoutines = new List<RoutineDefinition>();
             allRoutines.Add(RoutineDefinition.Create("Wash", "wash", "", ""));
             allRoutines.Add(RoutineDefinition.Create("Creme", "Creme", "", ""));
@@ -27,6 +28,8 @@ namespace HairApp.Tests
             allRoutines.Add(RoutineDefinition.Create("Kämmen", "kaemmen", "", ""));
 
             var dic = new Dictionary<string, object>();
+            dic.Add("NavigationControl", null);
+
             hairAppBl = new HairAppBl.HairAppBl(new ConsoleLogger(), dic);
 
             msCOntroller = new MainSessionController(null);
@@ -35,7 +38,6 @@ namespace HairApp.Tests
         }
 
         [Test]
-        [Ignore("Ignore a test")]
         public void Instantiate()
         {
             var wdController = new WashingDayEditorController(new WashingDayDefinition(),allRoutines,new AlarmController(null,null,null));
@@ -43,7 +45,15 @@ namespace HairApp.Tests
             WashDayEditor d = new WashDayEditor(msCOntroller,wdController, true, hairAppBl);
         }
 
-       
+        [Test]
+        public void ShowDescription()
+        {
+            var wdController = new WashingDayEditorController(new WashingDayDefinition(), allRoutines, new AlarmController(null, null, null));
+
+            WashDayEditor d = new WashDayEditor(msCOntroller, wdController, true, hairAppBl);
+        }
+
+
 
     }
 }
