@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HairApp.Controls"
              x:Class="HairApp.App">
     <Application.Resources>
         <ResourceDictionary>
-            <x:String x:Key="MainColor">#fcfbf5</x:String>
-            <x:String x:Key="NavColor">#dbb653</x:String>
-            
+            <x:String x:Key="MainColor">#dbb653</x:String>
+            <x:String x:Key="MainBackGround">#e3dfd4</x:String>
+            <x:String x:Key="NavColor">#ffffff</x:String>
+            <x:String x:Key="RoutineFrameColor">#ffffff</x:String>
+  
 
             <Style x:Key="Title" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium" />
@@ -14,32 +17,26 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
+
             <Style x:Key="FrameTitle" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
-            <Style x:Key="ScrollPageContent" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
-
-            </Style>
-
             <Style x:Key="NavigationControl" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="#b69427" />
+                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
 
             </Style>
             
 
             <Style x:Key="PageContent" TargetType="StackLayout">
                 <Setter Property="Padding" Value="20,10,20,0" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
             </Style>
 
             <Style x:Key="HomePageContent" TargetType="ScrollView">
                 <Setter Property="Padding" Value="15,10,15,0" />
-                <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
-                <Setter Property="VerticalOptions" Value="FillAndExpand" />
-                
+
+
             </Style>
 
             <Style x:Key="Heading" TargetType="Label">
@@ -91,7 +88,7 @@
                 <Setter Property="CornerRadius" Value="3" />
                 <Setter Property="Padding" Value="0,10,0,10" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                <Setter Property="BackgroundColor" Value="#f7cf63" />
+                <Setter Property="BackgroundColor" Value="{StaticResource RoutineFrameColor}" />
             </Style>
 
             <Style x:Key="RoutineFrameSelect" TargetType="Frame">
@@ -119,7 +116,6 @@
 
             <!--Frame-->
             <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="OutlineColor" Value="Black" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="Padding" Value="5,5,5,5" />
@@ -192,11 +188,11 @@
             
             <!--Calendar-->
             <Style x:Key="CalendarDetailsFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="Padding" Value="5,5,5,5" />
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"
-                        />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HasShadow" Value="False"/>
             </Style>
 
             <Style x:Key="CalendarDetailsImage" TargetType="Image">

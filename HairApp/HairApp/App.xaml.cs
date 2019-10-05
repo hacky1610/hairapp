@@ -53,7 +53,7 @@ namespace HairApp
             var settingsDb = new FileDB(Constants.SettingsStorageFile);
             var ac = new AlarmController(fileDb, historyfileDb, settingsDb);
             MainPage = new NavigationPage(new CustomTabBar(BL, MainSession, ac));
-            ((NavigationPage)MainPage).BarBackgroundColor =  Color.FromHex((String)Current.Resources["NavColor"]);
+            ((NavigationPage)MainPage).BarBackgroundColor =  Color.FromHex((String)Current.Resources["MainColor"]);
 
         }
 

@@ -4,17 +4,21 @@ using Xamarin.Forms;
 using HairAppBl.Controller;
 using HairApp.Controls;
 using HairApp.Resources;
+using HairAppBl.Interfaces;
 
 namespace HairApp.Pages
 {
     public partial class MainPage : ContentPage
     {
+        #region Members
         private AlarmController mAlarmController;
         private CareDayList mCareDayList;
         public event EventHandler<EventArgs> ListRefreshed;
-        HairAppBl.Interfaces.IHairBl mHairBl;
+        IHairBl mHairBl;
+        #endregion
 
-        public MainPage(AlarmController ac, HairAppBl.Interfaces.IHairBl hairbl)
+        #region Constructor
+        public MainPage(AlarmController ac, IHairBl hairbl)
         {
             App.BL.Logger.Call("MainPage");
             InitializeComponent();
@@ -37,11 +41,12 @@ namespace HairApp.Pages
             //Resources
             mListOfAllCareDaysLabel.Text = AppResources.ListOfAllCareDays;
         }
+        #endregion
 
+        #region Functions
         private void OpenSettingsButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new LogView(App.BL.Logger));
-
         }
 
         private void MAddCareDayButton_Clicked(object sender, EventArgs e)
@@ -105,8 +110,6 @@ namespace HairApp.Pages
 
         }
 
-  
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -118,7 +121,6 @@ namespace HairApp.Pages
             {
                 TimeToNextCareDay.Text = AppResources.NoCareDay;
                 ValsImage.Source = "nocareday.jpg";
-
             }
             else 
             {
@@ -140,5 +142,6 @@ namespace HairApp.Pages
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

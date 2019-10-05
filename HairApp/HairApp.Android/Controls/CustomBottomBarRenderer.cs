@@ -28,8 +28,9 @@ namespace HairApp.Droid.Controls
         {
             base.OnElementChanged(e);
             var bottomNavigationView = (GetChildAt(0) as RelativeLayout).GetChildAt(1) as BottomNavigationView;
-            bottomNavigationView.SetBackgroundColor(Android.Graphics.Color.ParseColor("#dbb653"));
+            bottomNavigationView.SetBackgroundColor(Android.Graphics.Color.ParseColor("#ffffff"));
             bottomNavigationView.SetClipChildren(true);
+            bottomNavigationView.SetPadding(10, 10, 10, 10);
         }
     }
 }

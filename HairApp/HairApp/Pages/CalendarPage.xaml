@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:controls="clr-namespace:HairApp.Controls"
              x:Class="HairApp.Pages.CalendarPage"
              NavigationPage.HasNavigationBar="false"
              BackgroundColor="Transparent">
-    <StackLayout Style="{StaticResource Page}" HeightRequest="20">
+    <controls:GradientColorStack VerticalOptions="FillAndExpand" StartColor="{StaticResource MainColor}" EndColor="{StaticResource NavColor}">
         <ContentView x:Name="NavigationContainer"/>
         <StackLayout Style="{StaticResource PageContent}">
 
@@ -28,6 +28,6 @@
 
             </ScrollView>
         </StackLayout>
-    </StackLayout>
+    </controls:GradientColorStack>
    
 </ContentPage>

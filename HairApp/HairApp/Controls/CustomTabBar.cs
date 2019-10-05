@@ -19,10 +19,10 @@ namespace HairApp.Controls
             ToolbarItems.Add(new ToolbarItem("Settings","settingstitle.png",new Action(Foo),ToolbarItemOrder.Primary));
 
 
-            NavigationPage.SetTitleView(this, CustomTabBar.CreateTitleView(new Xamarin.Forms.Image() { Source = "title.png", HeightRequest = 43 }));
+            NavigationPage.SetTitleView(this, CreateTitleView(new Image() { Source = "title.png", HeightRequest = 43 }));
 
-            SelectedTabColor = Color.White;
-            UnselectedTabColor = Color.Gray;
+            SelectedTabColor = Color.FromHex((String)bl.Resources["MainColor"]);
+            UnselectedTabColor = Color.DarkGray;
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             var navigationPage =  new MainPage(ac,bl);
             navigationPage.IconImageSource = "home.png";
@@ -46,7 +46,6 @@ namespace HairApp.Controls
 
         public static View CreateTitleView(View view)
         {
-// view.HorizontalOptions = LayoutOptions.Fill;
             view.VerticalOptions = LayoutOptions.CenterAndExpand;
 
             var titleView = new StackLayout

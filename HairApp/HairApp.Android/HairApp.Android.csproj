@@ -87,6 +87,7 @@
     <Compile Include="AndroidLog.cs" />
     <Compile Include="Alarming\ReminderNotfiy.cs" />
     <Compile Include="Alarming\AlarmNotify.cs" />
+    <Compile Include="Common\GradientRenderer.cs" />
     <Compile Include="Common\Version.cs" />
     <Compile Include="Controls\CustomBottomBarRenderer.cs" />
     <Compile Include="Localize.cs" />

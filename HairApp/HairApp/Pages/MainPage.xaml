@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HairApp"
+             xmlns:controls="clr-namespace:HairApp.Controls"
              x:Class="HairApp.Pages.MainPage"
              NavigationPage.HasNavigationBar="false">
-    <StackLayout VerticalOptions="FillAndExpand">
+    <controls:GradientColorStack VerticalOptions="FillAndExpand" StartColor="{StaticResource MainColor}" EndColor="{StaticResource NavColor}">
         <ScrollView Style="{StaticResource HomePageContent}" >
-                <StackLayout>
+            <StackLayout>
                 <ImageButton HorizontalOptions="End" Source="settings.png" x:Name="openSettingsButton" HeightRequest="40" Margin="0,0,0,-15" BackgroundColor="Transparent" IsVisible="False"/>
                 <Frame Style="{StaticResource FrameStyle}" VerticalOptions="Start">
                         <StackLayout>
@@ -27,8 +27,6 @@
 
                 </StackLayout>
             </ScrollView>
-
-
-    </StackLayout>
+    </controls:GradientColorStack>
 
 </ContentPage>

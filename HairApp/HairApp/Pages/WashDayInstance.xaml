@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HairApp.Pages.WashDayInstance"
+             xmlns:controls="clr-namespace:HairApp.Controls"
+             
              NavigationPage.HasNavigationBar="false">
-    <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand" BackgroundColor="Beige">
+    <StackLayout Style="{StaticResource Page}" VerticalOptions="FillAndExpand">
         <ContentView x:Name="SaveButtonContainer" />
-        <ScrollView Style="{StaticResource ScrollPageContent}" VerticalOptions="FillAndExpand" BackgroundColor="AliceBlue">
+        <controls:GradientColorStack Style="{StaticResource PageContent}" StartColor="{StaticResource MainColor}" EndColor="{StaticResource NavColor}">
+
+            <ScrollView  VerticalOptions="FillAndExpand" >
             <StackLayout Style="{StaticResource PageContent}" VerticalOptions="FillAndExpand" >
 
             
@@ -50,7 +54,7 @@
                 </Frame>
             </StackLayout>
         </ScrollView>
-
+         </controls:GradientColorStack>
     </StackLayout>
  
 </ContentPage>

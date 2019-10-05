@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:controls="clr-namespace:HairApp.Controls"    
              x:Class="HairApp.Pages.HistoryPage"
              NavigationPage.HasNavigationBar="false"
              BackgroundColor="Transparent">
-    <StackLayout Style="{StaticResource Page}" >
-        <StackLayout Style="{StaticResource PageContent}">
-
+    <controls:GradientColorStack Style="{StaticResource PageContent}" StartColor="{StaticResource MainColor}" EndColor="{StaticResource NavColor}">
             <ScrollView >
                 <StackLayout>
  
@@ -21,7 +19,6 @@
                 </StackLayout>
 
             </ScrollView>
-        </StackLayout>
-    </StackLayout>
+    </controls:GradientColorStack>
    
 </ContentPage>

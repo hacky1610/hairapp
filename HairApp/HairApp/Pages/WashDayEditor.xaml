@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:controls="clr-namespace:HairApp.Controls"
+             xmlns:xLabControls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              x:Class="HairApp.Pages.WashDayEditor"
              NavigationPage.HasNavigationBar="false">
     <StackLayout Style="{StaticResource Page}">
         <ContentView x:Name="SaveButtonContainer" />
 
-        <StackLayout Style="{StaticResource PageContent}" >
-      
-        <Label x:Name="mDefineYourCareDayLabel"
+        <controls:GradientColorStack Style="{StaticResource PageContent}" StartColor="{StaticResource MainColor}" EndColor="{StaticResource NavColor}">
+
+
+            <Label x:Name="mDefineYourCareDayLabel"
                 Style="{StaticResource Heading}" />
         <ScrollView>
             <StackLayout>
@@ -56,13 +58,13 @@
                             </StackLayout>
                                 <FlexLayout Wrap="Wrap"
                                 JustifyContent="SpaceAround"  >
-                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxMonday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxTuesday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxWednesday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxThursday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxFriday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False"  x:Name="mCheckBoxSaturday"></controls:CheckBox>
-                                    <controls:CheckBox Checked="False" x:Name="mCheckBoxSunday"></controls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False"  x:Name="mCheckBoxMonday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False" x:Name="mCheckBoxTuesday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False" x:Name="mCheckBoxWednesday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False"  x:Name="mCheckBoxThursday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False"  x:Name="mCheckBoxFriday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False"  x:Name="mCheckBoxSaturday"></xLabControls:CheckBox>
+                                    <xLabControls:CheckBox Checked="False" x:Name="mCheckBoxSunday"></xLabControls:CheckBox>
                                 </FlexLayout>
                          </StackLayout>
                             <StackLayout x:Name="MonthlySection">
@@ -100,7 +102,7 @@
 
                 </StackLayout>
         </ScrollView>
-       
-    </StackLayout>
+
+        </controls:GradientColorStack>
     </StackLayout>
 </ContentPage>
