@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HairApp.Interfaces;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +17,9 @@ namespace HairApp.Pages
             ClearButton.Clicked += ClearButton_Clicked;
             Init.Clicked += Init_Clicked;
             mLogger = logger;
+
+            mVBuild.Text = (DependencyService.Get<IVersion>().GetBuild()).ToString();
+            mVersion.Text = DependencyService.Get<IVersion>().GetVersion();
         }
 
         private void Init_Clicked(object sender, EventArgs e)

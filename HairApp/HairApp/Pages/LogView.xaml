@@ -6,6 +6,8 @@
   
         <ScrollView>
         <StackLayout Style="{StaticResource PageContent}">
+            <Label x:Name="mVersion"></Label>
+            <Label x:Name="mVBuild"></Label>
             <Editor x:Name="LogContent" FontSize="Small" VerticalOptions="StartAndExpand"></Editor>
             <StackLayout Orientation="Horizontal" HeightRequest="50">
                 <Button Text="CLear" x:Name="ClearButton"/>
